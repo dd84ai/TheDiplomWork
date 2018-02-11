@@ -1,6 +1,6 @@
 ﻿namespace TheDiplomWork
 {
-    partial class SharpGLForm
+    partial class FormModernOpenGLSample
     {
         /// <summary>
         /// Required designer variable.
@@ -36,12 +36,11 @@
             // 
             this.openGLControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.openGLControl.DrawFPS = true;
+            this.openGLControl.FrameRate = 20;
             this.openGLControl.Location = new System.Drawing.Point(0, 0);
             this.openGLControl.Name = "openGLControl";
-            this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControl.RenderContextType = SharpGL.RenderContextType.FBO;
-            this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
-            this.openGLControl.Size = new System.Drawing.Size(746, 521);
+            this.openGLControl.Size = new System.Drawing.Size(624, 391);
             this.openGLControl.TabIndex = 0;
             this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
@@ -51,7 +50,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 521);
+            this.ClientSize = new System.Drawing.Size(624, 391);
             this.Controls.Add(this.openGLControl);
             this.Name = "SharpGLForm";
             this.Text = "SharpGL Form";
