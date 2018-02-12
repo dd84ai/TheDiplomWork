@@ -57,12 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CubicalMemory.cs" />
     <Compile Include="FormModernOpenGLSample.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormModernOpenGLSample.Designer.cs">
       <DependentUpon>FormModernOpenGLSample.cs</DependentUpon>
     </Compile>
+    <Compile Include="GeneralProgrammingStuff.cs" />
     <Compile Include="ManifestResourceLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
