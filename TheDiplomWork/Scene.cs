@@ -15,6 +15,11 @@ namespace TheDiplomWork
     /// </remarks>
     public class Scene
     {
+        /// <summary>
+        /// It's Mine
+        /// </summary>
+        Environment env = new Environment();
+
         //  The projection, view and model matrices.
         mat4 projectionMatrix;
         mat4 viewMatrix;

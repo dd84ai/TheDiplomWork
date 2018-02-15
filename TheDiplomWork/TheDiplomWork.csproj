@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CubicalMemory.cs" />
+    <Compile Include="Environment.cs" />
     <Compile Include="FormModernOpenGLSample.cs">
       <SubType>Form</SubType>
     </Compile>

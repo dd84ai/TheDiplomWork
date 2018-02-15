@@ -64,11 +64,10 @@ namespace TheDiplomWork
         {
             Point3D Point_of_beginning = new Point3D(Point_of_static_beginning);
 
-            int Range_of_view = Range_of_view_static;
+            public int Range_of_view = Range_of_view_static;
 
-            List<List<Chunk>> World_as_Whole = new List<List<Chunk>>();
-            List<List<Chunk>> World_as_DynamicLoaded = new List<List<Chunk>>();
-
+            public List<List<Chunk>> World_as_Whole = new List<List<Chunk>>();
+            
             //Just for you to remember. You need to know where player is 
             //to know what you have to load around him
 
@@ -90,7 +89,8 @@ namespace TheDiplomWork
 
             }
         }
+        World world = new World();
 
-            //Кубик состоит из 6 граней, квадратов.
-        }
+        //Кубик состоит из 6 граней, квадратов.
+    }
 }

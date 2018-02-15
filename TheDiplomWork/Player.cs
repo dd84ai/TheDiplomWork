@@ -17,6 +17,9 @@ namespace TheDiplomWork
 
             Point2Int Player_cubical_position = new Point2Int(0,0);
 
+            /// <summary>
+            /// Recalculate coordinates from player graphic position to chunk & cubical position.
+            /// </summary>
             void Player_recalculate_extra_positions()
             {
                 Player_chunk_position.x = (int)(Player_precise_position.x / (double)CubicalMemory.Chunk.Width);
@@ -26,6 +29,10 @@ namespace TheDiplomWork
                 Player_cubical_position.z = (int)(Player_precise_position.z / (double)CubicalMemory.Cube.rangeOfTheEdge);
                 Player_cubical_position.z = (int)(Player_precise_position.y / (double)CubicalMemory.Cube.rangeOfTheEdge);
             }
+            /// <summary>
+            /// Short link to Player_recalculate_extra_positions.
+            /// </summary>
+            void Player_rec() { Player_recalculate_extra_positions(); }
         }
 
 
