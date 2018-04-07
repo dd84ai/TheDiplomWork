@@ -13,19 +13,19 @@ namespace TheDiplomWork
 {
     class Interface
     {
-        public void Greetings()
+        public static void Greetings()
         {
             Colorator("Yay!", ConsoleColor.Yellow);
             Colorator("Designation: 8sem_TheCourseWork", ConsoleColor.Magenta);
         }
-        public void Colorator(string str, ConsoleColor color)
+        public static void Colorator(string str, ConsoleColor color)
         {
             //Red,Green,Blue,Magenta,Cyan; example: ConsoleColor.Magenta;
             Console.ForegroundColor = color; // set text color;
             Console.WriteLine(str);
             Console.ResetColor(); // reset to normal text color;
         }
-        public int Pause()
+        public static int Pause()
         {
             Colorator("Press Escape to exit.", ConsoleColor.Magenta);
 
@@ -47,7 +47,7 @@ namespace TheDiplomWork
         }
         public static string ProjectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         public static Random random = new Random();
-        public void SaySomeQuote()
+        public static void SaySomeQuote()
         {
             string TargetPath = ProjectPath + "\\" + "Music" + "\\";
 
@@ -85,7 +85,7 @@ namespace TheDiplomWork
                     Colorator("Folder does not exist!!! ", ConsoleColor.Red);
             }
         }
-        public void Time_pause(int value)
+        public static void Time_pause(int value)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();

@@ -76,6 +76,7 @@ namespace TheDiplomWork
         /// <param name="gl">The OpenGL instance.</param>
         public void Draw(OpenGL gl)
         {
+
             //  Clear the scene.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
 
