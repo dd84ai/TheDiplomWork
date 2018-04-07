@@ -6,19 +6,39 @@ using System.Threading.Tasks;
 
 namespace TheDiplomWork
 {
-    class GeneralProgrammingStuff
+    public class GeneralProgrammingStuff
     {
-        /// <summary>
-        /// I'm too lazy to write down this function for every thing I need
-        /// to initialize something in three dimensions.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="subject"></param>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        public static void TripleDimIniter<T>(ref T[][][] subject, int a, int b, int c)
+        public static List<List<List<T>>> TripleListIniter<T>(int a, int b, int c)
         {
+            List<List<List<T>>> subject;
+
+            subject = new List<List<List<T>>>();
+            for (int i = 0; i < a; i++)
+            {
+                subject.Add(new List<List<T>>());
+                for (int j = 0; j < b; j++)
+                {
+                    subject[i].Add(new List<T>(new T[c]));
+                }
+            }
+            return subject;
+        }
+        public static List<List<T>> DoubleListIniter<T>(int a, int b)
+        {
+            List<List<T>> subject;
+
+            subject = new List<List<T>>();
+            for (int i = 0; i < a; i++)
+            {
+                subject.Add(new List<T>(new T[b]));
+            }
+            return subject;
+        }
+
+        public static T[][][] TripleDimIniter<T>(int a, int b, int c)
+        {
+            T[][][] subject; //= new T subject,
+
             subject = new T[a][][];
             for (int i = 0; i < a; i++)
             {
@@ -26,6 +46,19 @@ namespace TheDiplomWork
                 for (int j = 0; j < b; j++)
                     subject[i][j] = new T[c];
             }
+
+            return subject;
+        }
+        public static T[][] DoubleDimIniter<T>(int a, int b)
+        {
+            T[][] subject;
+
+            subject = new T[a][];
+            for (int i = 0; i < a; i++)
+            {
+                subject[i] = new T[b];
+            }
+            return subject;
         }
 
         public class Point3D

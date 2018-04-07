@@ -34,11 +34,11 @@ namespace TheDiplomWork
         {
             public const int Height = 32, Width = 10, Length = 10;
 
-            Cube[][][] cubes;
+            List<List<List<Cube>>> cubes;
 
             public Chunk()
             {
-                TripleDimIniter<Cube>(ref cubes, Chunk.Height, Chunk.Width, Chunk.Length);
+                cubes = TripleListIniter<Cube>(Chunk.Height, Chunk.Width, Chunk.Length);
 
                 AlgorithmicalGround(FromHeight, ToHeight);
             }
@@ -78,15 +78,7 @@ namespace TheDiplomWork
             }
             void Initialiazing_World_as_Whole()
             {
-                for (int i = 0; i < Quantity_of_chunks; i++)
-                {
-                    World_as_Whole.Add(new List<Chunk>());
-                    for (int j = 0; j < Quantity_of_chunks; j++)
-                    {
-                        World_as_Whole[i].Add(new Chunk());
-                    }
-                }
-
+                World_as_Whole = DoubleListIniter<Chunk>(Quantity_of_chunks, Quantity_of_chunks);
             }
         }
         World world = new World();
