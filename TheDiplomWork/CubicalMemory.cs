@@ -32,7 +32,7 @@ namespace TheDiplomWork
 
         public class Chunk
         {
-            public const int Height = 32, Width = 10, Length = 10;
+            public const int Height = 32, Width = 16, Length = 16;
 
             List<List<List<Cube>>> cubes;
 
@@ -51,7 +51,7 @@ namespace TheDiplomWork
             /// <param name="toHeight"></param>
             void AlgorithmicalGround(int fromHeight, int toHeight)
             {
-                for (int i = fromHeight; i < toHeight; i++)
+                for (int i = fromHeight; i >= 0 && i < toHeight && i < Height; i++)
                     for (int j = 0; j < Width; j++)
                         for (int k = 0; k < Length; k++)
                             cubes[i][j][k].IsFilled = true;

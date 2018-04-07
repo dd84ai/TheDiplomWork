@@ -47,8 +47,8 @@ namespace TheDiplomWork
             gl.ClearColor(0.4f, 0.6f, 0.9f, 0.0f);
 
             //  Create the shader program.
-            var vertexShaderSource = ManifestResourceLoader.LoadTextFile("Shader.vert");
-            var fragmentShaderSource = ManifestResourceLoader.LoadTextFile("Shader.frag");
+            var vertexShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.vert");
+            var fragmentShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.frag");
             shaderProgram = new ShaderProgram();
             shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource, null);
             shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
