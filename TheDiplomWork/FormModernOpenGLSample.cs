@@ -64,20 +64,10 @@ namespace TheDiplomWork
         /// </summary>
         private readonly Scene scene = new Scene();
 
-        private void FormModernOpenGLSample_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //Keyboard.Wrapped_KeyPressed_Reaction(e.KeyChar);
-            Console.WriteLine(this.Name);
-        }
 
-        private void FormModernOpenGLSample_KeyUp(object sender, KeyEventArgs e)
+        private void openGLControl_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Console.WriteLine(this.Name);
-        }
-
-        private void FormModernOpenGLSample_KeyDown(object sender, KeyEventArgs e)
-        {
-            Console.WriteLine(this.Name);
+            Keyboard.Wrapped_KeyPressed_Reaction(e.KeyChar);
         }
     }
 }

@@ -46,6 +46,7 @@
             this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
             this.openGLControl.Resized += new System.EventHandler(this.openGLControl_Resized);
+            this.openGLControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.openGLControl_KeyPress);
             // 
             // FormModernOpenGLSample
             // 
@@ -55,9 +56,6 @@
             this.Controls.Add(this.openGLControl);
             this.Name = "FormModernOpenGLSample";
             this.Text = "SharpGL Form";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormModernOpenGLSample_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormModernOpenGLSample_KeyPress);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormModernOpenGLSample_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
             this.ResumeLayout(false);
 
