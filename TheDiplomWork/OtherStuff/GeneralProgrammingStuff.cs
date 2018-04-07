@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheDiplomWork
 {
-    public class GeneralProgrammingStuff
+    public class GeneralProgrammingStuff //GPS
     {
         public static List<List<List<T>>> TripleListIniter<T>(int a, int b, int c)
         {

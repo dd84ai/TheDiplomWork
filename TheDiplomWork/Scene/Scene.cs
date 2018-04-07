@@ -46,6 +46,7 @@ namespace TheDiplomWork
             //  Set a blue clear colour.
             gl.ClearColor(0.4f, 0.6f, 0.9f, 0.0f);
 
+            //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
             //  Create the shader program.
             var vertexShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.vert");
             var fragmentShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.frag");
