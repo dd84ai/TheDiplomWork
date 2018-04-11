@@ -89,7 +89,7 @@ namespace TheDiplomWork
             vertexBufferArray.Bind(gl);
 
             //  Draw the square.
-            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
+            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, Quantity_of_all_points);
 
             //  Unbind our vertex array and shader.
             vertexBufferArray.Unbind(gl);

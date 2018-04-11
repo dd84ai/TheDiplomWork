@@ -19,14 +19,12 @@ namespace TheDiplomWork
         //From 0(only current) to more than 0.
         static int Range_of_view_static = 2;
 
-        //Количество чанков в мире NxN
-        static int Quantity_of_chunks = 100;
-
-        
-
         public class Cube
         {
-            public const double rangeOfTheEdge = 1.0;
+            /// <summary>
+            /// Размеры грани одного куба.
+            /// </summary>
+            public static double rangeOfTheEdge = 1.0;
             public System.Drawing.Color color = System.Drawing.Color.Gray;
 
             public bool IsFilled = false;
@@ -34,13 +32,16 @@ namespace TheDiplomWork
 
         public class Chunk
         {
+            /// <summary>
+            /// Кол-во кубов в чанке.
+            /// </summary>
             public static int Height = 32, Width = 16, Length = 16;
 
             List<List<List<Cube>>> cubes;
 
             public Chunk()
             {
-                cubes = TripleListIniter<Cube>(Chunk.Height, Chunk.Width, Chunk.Length);
+                cubes = TripleListIniter<Cube>(Chunk.Width, Chunk.Length, Chunk.Height);
 
                 AlgorithmicalGround(FromHeight, ToHeight);
             }
@@ -70,6 +71,11 @@ namespace TheDiplomWork
             public Point3D Point_of_beginning = new Point3D(Point_of_static_beginning);
 
             public int Range_of_view = Range_of_view_static;
+
+            /// <summary>
+            /// Кол-во чанков в мире.
+            /// </summary>
+            public static int Quantity_of_chunks = 10;
 
             public List<List<Chunk>> World_as_Whole = new List<List<Chunk>>();
             
