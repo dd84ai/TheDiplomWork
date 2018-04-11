@@ -13,12 +13,11 @@ namespace TheDiplomWork
     /// This code is based on work from the OpenGL 4.x Swiftless tutorials, please see:
     /// http://www.swiftless.com/opengl4tuts.html
     /// </remarks>
-    public class Scene
+    public class Scene : ShaderedScene
     {
         /// <summary>
         /// It's Mine
         /// </summary>
-        Environment env = new Environment();
 
         //  The projection, view and model matrices.
         mat4 projectionMatrix;

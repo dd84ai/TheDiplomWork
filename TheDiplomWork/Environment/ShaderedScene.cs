@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace TheDiplomWork
 {
-    public class Environment
+    public class ShaderedScene
     {
-        CubicalMemory cub_mem = new CubicalMemory();
+        Environment env = new Environment();
 
-        Player player = new Player();
-
-        public Environment()
+        public ShaderedScene()
         {
 
         }
