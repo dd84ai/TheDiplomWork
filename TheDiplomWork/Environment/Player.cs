@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheDiplomWork
 {
-    class Player : GeneralProgrammingStuff
+    public class Player : GeneralProgrammingStuff
     {
         class Coords
         {

@@ -8,6 +8,7 @@ namespace TheDiplomWork
 {
     public class GeneralProgrammingStuff //GPS
     {
+        public static Random Rand = new Random();
         public static List<List<List<T>>> TripleListIniter<T>(int a, int b, int c)
         {
             List<List<List<T>>> subject;
@@ -95,6 +96,25 @@ namespace TheDiplomWork
             public Point3Int(Point3Int input)
             {
                 x = input.x; y = input.y; z = input.z;
+            }
+        }
+
+        public static System.Drawing.Color ColorSwitch(int choice)
+        {
+            switch (choice)
+            {
+                case 01: return System.Drawing.Color.Gold;
+                case 02: return System.Drawing.Color.Green;
+                case 03: return System.Drawing.Color.GreenYellow;
+                case 04: return System.Drawing.Color.HotPink;
+                case 05: return System.Drawing.Color.Indigo;
+                case 06: return System.Drawing.Color.Lavender;
+                case 07: return System.Drawing.Color.Orange;
+                case 08: return System.Drawing.Color.Red;
+                case 09: return System.Drawing.Color.Aqua;
+                case 10: return System.Drawing.Color.Azure;
+
+                default: return System.Drawing.Color.Gray;
             }
         }
     }

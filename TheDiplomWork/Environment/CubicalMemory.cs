@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheDiplomWork
 {
-    class CubicalMemory : GeneralProgrammingStuff
+    public class CubicalMemory : GeneralProgrammingStuff
     {
         //Flat Ground from height to height
         static int FromHeight = 8, ToHeight = 10;
@@ -20,19 +20,21 @@ namespace TheDiplomWork
         static int Range_of_view_static = 2;
 
         //Количество чанков в мире NxN
-        static int Quantity_of_chunks_static = 100;
+        static int Quantity_of_chunks = 100;
+
+        
 
         public class Cube
         {
             public const double rangeOfTheEdge = 1.0;
-            System.Drawing.Color color = System.Drawing.Color.Gray;
+            public System.Drawing.Color color = System.Drawing.Color.Gray;
 
             public bool IsFilled = false;
         }
 
         public class Chunk
         {
-            public const int Height = 32, Width = 16, Length = 16;
+            public static int Height = 32, Width = 16, Length = 16;
 
             List<List<List<Cube>>> cubes;
 
@@ -54,15 +56,18 @@ namespace TheDiplomWork
                 for (int i = fromHeight; i >= 0 && i < toHeight && i < Height; i++)
                     for (int j = 0; j < Width; j++)
                         for (int k = 0; k < Length; k++)
+                        {
                             cubes[i][j][k].IsFilled = true;
+                            cubes[i][j][k].color = ColorSwitch(Rand.Next(10));
+                        }
             }
         }
 
 
 
-        class World
+        public class World
         {
-            Point3D Point_of_beginning = new Point3D(Point_of_static_beginning);
+            public Point3D Point_of_beginning = new Point3D(Point_of_static_beginning);
 
             public int Range_of_view = Range_of_view_static;
 
@@ -71,7 +76,6 @@ namespace TheDiplomWork
             //Just for you to remember. You need to know where player is 
             //to know what you have to load around him
 
-            int Quantity_of_chunks = Quantity_of_chunks_static;
             public World()
             {
                 Initialiazing_World_as_Whole();
@@ -81,7 +85,7 @@ namespace TheDiplomWork
                 World_as_Whole = DoubleListIniter<Chunk>(Quantity_of_chunks, Quantity_of_chunks);
             }
         }
-        World world = new World();
+        public World world = new World();
 
         //Кубик состоит из 6 граней, квадратов.
     }

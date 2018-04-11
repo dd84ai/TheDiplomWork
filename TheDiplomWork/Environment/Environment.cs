@@ -8,9 +8,9 @@ namespace TheDiplomWork
 {
     public class Environment
     {
-        CubicalMemory cub_mem = new CubicalMemory();
+        public CubicalMemory cub_mem = new CubicalMemory();
 
-        Player player = new Player();
+        public Player player = new Player();
 
         public Environment()
         {
