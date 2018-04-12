@@ -18,7 +18,7 @@ namespace TheDiplomWork
         /// <summary>
         /// It's Mine
         /// </summary>
-        ShaderedScene SS = new ShaderedScene();
+        public static ShaderedScene SS = new ShaderedScene();
 
         //  The projection, view and model matrices.
         mat4 projectionMatrix;
@@ -60,9 +60,6 @@ namespace TheDiplomWork
             const float rads = (60.0f / 360.0f) * (float)Math.PI * 2.0f;
             projectionMatrix = glm.perspective(rads, width / height, 0.1f, 100.0f);
 
-            //  Create a view matrix to move us back a bit.
-            viewMatrix = glm.translate(new mat4(1.0f), new vec3(0.0f, 0.0f, -500.0f));
-
             //  Create a model matrix to make the model a little bigger.
             modelMatrix = glm.scale(new mat4(1.0f), new vec3(2.5f));
 
@@ -76,6 +73,10 @@ namespace TheDiplomWork
         /// <param name="gl">The OpenGL instance.</param>
         public void Draw(OpenGL gl)
         {
+            //  Create a view matrix to move us back a bit.
+            viewMatrix = glm.translate(new mat4(1.0f), new vec3(SS.env.player.coords.Player_precise_position.x,
+                SS.env.player.coords.Player_precise_position.y,
+                SS.env.player.coords.Player_precise_position.z));
 
             //  Clear the scene.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);

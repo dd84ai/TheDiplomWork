@@ -8,14 +8,14 @@ namespace TheDiplomWork
 {
     public class Player : GeneralProgrammingStuff
     {
-        class Coords
+        public class Coords
         {
             //По идеи данная стартовая позиция будет ровно посередине мира и немного выше.
-            Point3D Player_precise_position = new Point3D(500, 16, 500);
+            public Point3D Player_precise_position = new Point3D(0, 0, -CubicalMemory.Cube.rangeOfTheEdge*CubicalMemory.Chunk.Length*CubicalMemory.World.Quantity_of_chunks_in_root*2);
 
-            Point2Int Player_chunk_position = new Point2Int(0,0);
+            public Point2Int Player_chunk_position = new Point2Int(0,0);
 
-            Point2Int Player_cubical_position = new Point2Int(0,0);
+            public Point2Int Player_cubical_position = new Point2Int(0,0);
 
             /// <summary>
             /// Recalculate coordinates from player graphic position to chunk & cubical position.
@@ -34,6 +34,7 @@ namespace TheDiplomWork
             /// </summary>
             void Player_rec() { Player_recalculate_extra_positions(); }
         }
+        public Coords coords = new Coords();
 
 
     }

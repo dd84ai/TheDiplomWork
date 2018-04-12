@@ -7,7 +7,7 @@ namespace TheDiplomWork
 {
     public class ShaderedScene
     {
-        Environment env = new Environment();
+        public Environment env = new Environment();
 
         public float[] vertices = null;
         public float[] colors = null;
@@ -104,12 +104,12 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z);
-
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(z);
+
+                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x + 1);
@@ -124,25 +124,26 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z + 1);
 
+                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(z + 1);
+
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y + 1);
                                     listed_vertices.Add(z + 1);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
                                     //Left
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z);
-
-                                    listed_vertices.Add(x);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z + 1);
+
+                                    listed_vertices.Add(x);
+                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(z);
 
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y + 1);
@@ -168,13 +169,15 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y + 1);
                                     listed_vertices.Add(z);
 
+                                    listed_vertices.Add(x);
+                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(z + 1);
+
                                     listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y + 1);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
+                                    
 
                                     listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y + 1);
