@@ -13,11 +13,12 @@ namespace TheDiplomWork
     /// This code is based on work from the OpenGL 4.x Swiftless tutorials, please see:
     /// http://www.swiftless.com/opengl4tuts.html
     /// </remarks>
-    public class Scene : ShaderedScene
+    public class Scene
     {
         /// <summary>
         /// It's Mine
         /// </summary>
+        ShaderedScene SS = new ShaderedScene();
 
         //  The projection, view and model matrices.
         mat4 projectionMatrix;
@@ -89,7 +90,7 @@ namespace TheDiplomWork
             vertexBufferArray.Bind(gl);
 
             //  Draw the square.
-            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, Quantity_of_all_points);
+            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, SS.Quantity_of_all_points);
 
             //  Unbind our vertex array and shader.
             vertexBufferArray.Unbind(gl);
@@ -111,13 +112,13 @@ namespace TheDiplomWork
             var vertexDataBuffer = new VertexBuffer();
             vertexDataBuffer.Create(gl);
             vertexDataBuffer.Bind(gl);
-            vertexDataBuffer.SetData(gl, 0, vertices, false, 3);
+            vertexDataBuffer.SetData(gl, 0, SS.vertices, false, 3);
 
             //  Now do the same for the colour data.
             var colourDataBuffer = new VertexBuffer();
             colourDataBuffer.Create(gl);
             colourDataBuffer.Bind(gl);
-            colourDataBuffer.SetData(gl, 1, colors, false, 3);
+            colourDataBuffer.SetData(gl, 1, SS.colors, false, 3);
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);

@@ -24,6 +24,26 @@ namespace TheDiplomWork
             }
             return subject;
         }
+        public static List<List<List<CubicalMemory.Cube>>> TripleCubeIniter(int a, int b, int c)
+        {
+            List<List<List<CubicalMemory.Cube>>> subject;
+
+            subject = new List<List<List<CubicalMemory.Cube>>>();
+            for (int i = 0; i < a; i++)
+            {
+                subject.Add(new List<List<CubicalMemory.Cube>>());
+                for (int j = 0; j < b; j++)
+                {
+                    subject[i].Add(new List<CubicalMemory.Cube>());
+
+                    for (int k = 0; k < c; k++) 
+                    {
+                        subject[i][j].Add(new CubicalMemory.Cube(i, j, k));
+                    }
+                }
+            }
+            return subject;
+        }
         public static List<List<T>> DoubleListIniter<T>(int a, int b)
         {
             List<List<T>> subject;
@@ -32,6 +52,21 @@ namespace TheDiplomWork
             for (int i = 0; i < a; i++)
             {
                 subject.Add(new List<T>(new T[b]));
+            }
+            return subject;
+        }
+        public static List<List<CubicalMemory.Chunk>> DoubleChunkIniter(int a, int b)
+        {
+            List<List<CubicalMemory.Chunk>> subject;
+
+            subject = new List<List<CubicalMemory.Chunk>>();
+            for (int i = 0; i < a; i++)
+            {
+                subject.Add(new List<CubicalMemory.Chunk>());
+                for (int j = 0; j < b; j++)
+                {
+                    subject[i].Add(new CubicalMemory.Chunk(i, j));
+                }
             }
             return subject;
         }

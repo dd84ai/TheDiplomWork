@@ -28,8 +28,12 @@ namespace TheDiplomWork
             public System.Drawing.Color color = System.Drawing.Color.Gray;
 
             public bool IsFilled = false;
+            public int x, y, z;
+            public Cube(int _x, int _y, int _z)
+            {
+                x = _x; y = _y; z = _z;
+            }
         }
-
         public class Chunk
         {
             /// <summary>
@@ -37,11 +41,12 @@ namespace TheDiplomWork
             /// </summary>
             public static int Height = 32, Width = 16, Length = 16;
 
-            List<List<List<Cube>>> cubes;
-
-            public Chunk()
+            public List<List<List<Cube>>> cubes;
+            public int x, y;
+            public Chunk(int _x, int _y)
             {
-                cubes = TripleListIniter<Cube>(Chunk.Width, Chunk.Length, Chunk.Height);
+                x = _x; y = _y;
+                cubes = TripleCubeIniter(Chunk.Width, Chunk.Length, Chunk.Height);
 
                 AlgorithmicalGround(FromHeight, ToHeight);
             }
@@ -75,7 +80,7 @@ namespace TheDiplomWork
             /// <summary>
             /// Кол-во чанков в мире.
             /// </summary>
-            public static int Quantity_of_chunks = 10;
+            public static int Quantity_of_chunks_in_root = 10;
 
             public List<List<Chunk>> World_as_Whole = new List<List<Chunk>>();
             
@@ -88,7 +93,7 @@ namespace TheDiplomWork
             }
             void Initialiazing_World_as_Whole()
             {
-                World_as_Whole = DoubleListIniter<Chunk>(Quantity_of_chunks, Quantity_of_chunks);
+                World_as_Whole = DoubleChunkIniter(Quantity_of_chunks_in_root, Quantity_of_chunks_in_root);
             }
         }
         public World world = new World();
