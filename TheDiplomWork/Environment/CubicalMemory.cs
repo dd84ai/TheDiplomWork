@@ -19,13 +19,14 @@ namespace TheDiplomWork
         //From 0(only current) to more than 0.
         static int Range_of_view_static = 2;
 
+        static Random Rand = new Random();
         public class Cube
         {
             /// <summary>
             /// Размеры грани одного куба.
             /// </summary>
-            public static double rangeOfTheEdge = 1.0;
-            public System.Drawing.Color color = System.Drawing.Color.Gray;
+            public static float rangeOfTheEdge = 1.0f;
+            public System.Drawing.Color color = ColorSwitch(Rand.Next(10));
 
             public bool IsFilled = false;
             public int x, y, z;
@@ -42,10 +43,10 @@ namespace TheDiplomWork
             public static int Height = 32, Width = 16, Length = 16;
 
             public List<List<List<Cube>>> cubes;
-            public int x, y;
-            public Chunk(int _x, int _y)
+            public int x, z;
+            public Chunk(int _x, int _z)
             {
-                x = _x; y = _y;
+                x = _x; z = _z;
                 cubes = TripleCubeIniter(Chunk.Width, Chunk.Length, Chunk.Height);
 
                 AlgorithmicalGround(FromHeight, ToHeight);
@@ -59,12 +60,12 @@ namespace TheDiplomWork
             /// <param name="toHeight"></param>
             void AlgorithmicalGround(int fromHeight, int toHeight)
             {
-                for (int i = fromHeight; i >= 0 && i < toHeight && i < Height; i++)
-                    for (int j = 0; j < Width; j++)
-                        for (int k = 0; k < Length; k++)
+                for (int k = fromHeight; k >= 0 && k < toHeight && k < Height; k++)
+                    for (int i = 0; i < Width; i++)
+                        for (int j = 0; j < Length; j++)
                         {
-                            cubes[i][j][k].IsFilled = true;
-                            cubes[i][j][k].color = ColorSwitch(Rand.Next(10));
+                            cubes[i][k][j].IsFilled = true;
+                            cubes[i][k][j].color = ColorSwitch(Rand.Next(10));
                         }
             }
         }
@@ -80,7 +81,7 @@ namespace TheDiplomWork
             /// <summary>
             /// Кол-во чанков в мире.
             /// </summary>
-            public static int Quantity_of_chunks_in_root = 10;
+            public static int Quantity_of_chunks_in_root = 6;
 
             public List<List<Chunk>> World_as_Whole = new List<List<Chunk>>();
             

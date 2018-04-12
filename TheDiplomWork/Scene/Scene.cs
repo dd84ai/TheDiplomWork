@@ -61,7 +61,7 @@ namespace TheDiplomWork
             projectionMatrix = glm.perspective(rads, width / height, 0.1f, 100.0f);
 
             //  Create a view matrix to move us back a bit.
-            viewMatrix = glm.translate(new mat4(1.0f), new vec3(0.0f, 0.0f, -5.0f));
+            viewMatrix = glm.translate(new mat4(1.0f), new vec3(0.0f, 0.0f, -500.0f));
 
             //  Create a model matrix to make the model a little bigger.
             modelMatrix = glm.scale(new mat4(1.0f), new vec3(2.5f));
