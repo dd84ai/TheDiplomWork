@@ -11,7 +11,7 @@ namespace TheDiplomWork
         public class Coords
         {
             //По идеи данная стартовая позиция будет ровно посередине мира и немного выше.
-            public Point3D Player_precise_position = new Point3D(0, 0, -CubicalMemory.Cube.rangeOfTheEdge*CubicalMemory.Chunk.Length*CubicalMemory.World.Quantity_of_chunks_in_root*2);
+            public Point3D Player_precise_position = new Point3D(0, 0, -CubicalMemory.Cube.rangeOfTheEdge*CubicalMemory.Chunk.Length*CubicalMemory.World.Quantity_of_chunks_in_root* Environment.SizeView);
 
             public Point2Int Player_chunk_position = new Point2Int(0,0);
 

@@ -8,10 +8,28 @@ namespace TheDiplomWork
 {
     class Keyboard
     {
-        static float step = 10.0f;
-        public static void Wrapped_KeyPressed_Reaction(char KeyChar)
+        static float step = 0.1f;
+        public static List<char> KeysActive = new List<char>();
+
+        static DateTime start = DateTime.Now;
+        public static void DoSpecificAction(char key)
         {
-            switch (KeyChar)
+            for (int i = 0; i < 10; i++)
+                    Keyboard.Wrapped_KeyPressed_Reaction(key);
+        }
+        public static void DoAction()
+        {
+            //if ((DateTime.Now - start).TotalMilliseconds > 100)
+            //{
+            for(int i = 0; i < 10; i++)
+                foreach (var key in Keyboard.KeysActive)
+                    Keyboard.Wrapped_KeyPressed_Reaction(key);
+                //start = DateTime.Now;
+            //}
+        }
+        public static void Wrapped_KeyPressed_Reaction(char key)
+        {
+             switch (key)
             {
                 case 'm': Interface.SaySomeQuote(); break;
 
@@ -23,9 +41,9 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_precise_position.x += step; break;
                 case 'd':
                     Scene.SS.env.player.coords.Player_precise_position.x -= step; break;
-                case 'q':
+                case 'z':
                     Scene.SS.env.player.coords.Player_precise_position.y += step; break;
-                case 'e':
+                case ' ':
                     Scene.SS.env.player.coords.Player_precise_position.y -= step; break;
 
                 default: break;

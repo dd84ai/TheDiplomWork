@@ -61,7 +61,7 @@ namespace TheDiplomWork
             projectionMatrix = glm.perspective(rads, width / height, 0.1f, 100.0f);
 
             //  Create a model matrix to make the model a little bigger.
-            modelMatrix = glm.scale(new mat4(1.0f), new vec3(2.5f));
+            modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
             //  Now create the geometry for the square.
             CreateVerticesForSquare(gl);

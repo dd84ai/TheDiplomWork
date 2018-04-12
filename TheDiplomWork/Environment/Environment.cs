@@ -12,6 +12,7 @@ namespace TheDiplomWork
 
         public Player player = new Player();
 
+        public static float SizeView = 1.0f;
         public Environment()
         {
 

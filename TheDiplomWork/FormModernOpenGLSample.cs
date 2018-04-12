@@ -35,6 +35,11 @@ namespace TheDiplomWork
         /// <param name="args">The <see cref="RenderEventArgs"/> instance containing the event data.</param>
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
+            if ((Control.ModifierKeys & Keys.Shift) != 0)
+                Keyboard.DoSpecificAction('z');
+
+                Keyboard.DoAction();
+            
             //  Draw the scene.
             scene.Draw(openGLControl.OpenGL);
         }
@@ -67,7 +72,20 @@ namespace TheDiplomWork
 
         private void openGLControl_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Keyboard.Wrapped_KeyPressed_Reaction(e.KeyChar);
+            
+        }
+
+        private void openGLControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            char item = ((char)e.KeyValue).ToString().ToLower()[0];
+            if (!Keyboard.KeysActive.Contains(item))
+                Keyboard.KeysActive.Add(item);
+        }
+
+        private void openGLControl_KeyUp(object sender, KeyEventArgs e)
+        {
+            char item = ((char)e.KeyValue).ToString().ToLower()[0];
+            Keyboard.KeysActive.Remove(item);
         }
     }
 }
