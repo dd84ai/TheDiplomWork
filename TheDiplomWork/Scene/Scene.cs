@@ -103,7 +103,7 @@ namespace TheDiplomWork
         /// 
         public void Draw(OpenGL gl)
         {
-            if (!newThread.IsAlive)
+            if (SS.env.player.coords.RangedViewBool && !newThread.IsAlive)
             {
                 if (!SS.CopiedLastResult)
                 {

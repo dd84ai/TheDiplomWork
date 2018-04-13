@@ -81,7 +81,7 @@ namespace TheDiplomWork
             /// <summary>
             /// Кол-во чанков в мире.
             /// </summary>
-            public static int Quantity_of_chunks_in_root = 10;
+            public static int Quantity_of_chunks_in_root = 8;
 
             public List<List<Chunk>> World_as_Whole = new List<List<Chunk>>();
             
