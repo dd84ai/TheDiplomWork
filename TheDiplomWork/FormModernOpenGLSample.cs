@@ -33,13 +33,22 @@ namespace TheDiplomWork
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="args">The <see cref="RenderEventArgs"/> instance containing the event data.</param>
+        
+        
+        
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
-                if ((Control.ModifierKeys & Keys.Shift) != 0)
-                    Keyboard.DoSpecificAction('z');
+            if ((Control.ModifierKeys & Keys.Shift) != 0)
+                Keyboard.DoSpecificAction('z');
 
-                Keyboard.DoAction();
-            
+            Keyboard.DoAction();
+
+            if (this.ActiveControl.Focused && Mouse.MouseIsActive)
+            {
+                Mouse.DoMouse(Control.MousePosition);
+                Cursor.Position = Mouse.ReturnToCenter();
+            }
+
             //  Draw the scene.
             scene.Draw(openGLControl.OpenGL);
         }
@@ -63,6 +72,9 @@ namespace TheDiplomWork
             gl.LookAt(0, 0, 0, 0, 0, 0, 0, -1, 0);
             //  Set the modelview matrix.
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
+
+            Mouse.SetCenterCursor(new System.Drawing.Point(openGLControl.Width / 2, openGLControl.Height / 2));
+            label_CursorPlus.Location = Mouse.ReturnToCenter();
         }
         /// <summary>
         /// The scene that we are rendering.
@@ -86,6 +98,19 @@ namespace TheDiplomWork
         {
             char item = ((char)e.KeyValue).ToString().ToLower()[0];
             Keyboard.KeysActive.Remove(item);
+        }
+
+        private void openGLControl_MouseEnter(object sender, EventArgs e)
+        {
+            Mouse.MouseIsActive = true;
+            Mouse.SetOldPisition(Control.MousePosition);
+            Cursor.Hide();
+        }
+
+        private void openGLControl_MouseLeave(object sender, EventArgs e)
+        {
+            Mouse.MouseIsActive = false;
+            Cursor.Show();
         }
     }
 }

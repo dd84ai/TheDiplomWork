@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.openGLControl = new SharpGL.OpenGLControl();
+            this.label_CursorPlus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,24 +51,39 @@
             this.openGLControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.openGLControl_KeyDown);
             this.openGLControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.openGLControl_KeyPress);
             this.openGLControl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.openGLControl_KeyUp);
+            this.openGLControl.MouseEnter += new System.EventHandler(this.openGLControl_MouseEnter);
+            this.openGLControl.MouseLeave += new System.EventHandler(this.openGLControl_MouseLeave);
+            // 
+            // label_CursorPlus
+            // 
+            this.label_CursorPlus.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label_CursorPlus.AutoSize = true;
+            this.label_CursorPlus.Location = new System.Drawing.Point(289, 192);
+            this.label_CursorPlus.Name = "label_CursorPlus";
+            this.label_CursorPlus.Size = new System.Drawing.Size(13, 13);
+            this.label_CursorPlus.TabIndex = 1;
+            this.label_CursorPlus.Text = "+";
             // 
             // FormModernOpenGLSample
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 391);
+            this.Controls.Add(this.label_CursorPlus);
             this.Controls.Add(this.openGLControl);
             this.Name = "FormModernOpenGLSample";
             this.Text = "SharpGL Form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private SharpGL.OpenGLControl openGLControl;
+        private System.Windows.Forms.Label label_CursorPlus;
     }
 }
 

@@ -104,34 +104,34 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(z);
                                     
                                     //Back
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
-                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
                                     //Left
                                     listed_vertices.Add(x);
@@ -140,47 +140,47 @@ namespace TheDiplomWork
 
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
                                     //Right
-                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
                                     //Top
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
                                     //Bottom
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
@@ -188,15 +188,15 @@ namespace TheDiplomWork
 
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
-                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + 1);
+                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
                                     for (int i = 0; i < 4 * 6; i++)
                                     {

@@ -8,7 +8,7 @@ namespace TheDiplomWork
 {
     class Keyboard
     {
-        static vec4 step_vector = new vec4();
+        public static vec4 step_vector = new vec4();
         static float step = 1.0f;
         static float rotational_step = 0.05f;
         public static List<char> KeysActive = new List<char>();
@@ -27,7 +27,7 @@ namespace TheDiplomWork
                 //start = DateTime.Now;
             //}
         }
-        static void DoStep()
+        public static void DoStep()
         {
             step_vector = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * step_vector;
             Scene.SS.env.player.coords.Player_precise_position.x += step_vector.x;
