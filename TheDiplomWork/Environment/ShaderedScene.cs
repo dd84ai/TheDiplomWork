@@ -52,8 +52,10 @@ namespace TheDiplomWork
 
         List<float> listed_vertices = new List<float>();
         List<float> listed_colors = new List<float>();
+        Random Rand = new Random();
         public void Initialization()
         {
+            
             Memory_Init();
 
             listed_vertices.Clear();
@@ -210,6 +212,7 @@ namespace TheDiplomWork
 
                                     for (int i = 0; i < 4 * 6; i++)
                                     {
+                                        XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
                                         listed_colors.Add((float)XYZcube.color.R / 255);
                                         listed_colors.Add((float)XYZcube.color.G / 255);
                                         listed_colors.Add((float)XYZcube.color.B / 255);

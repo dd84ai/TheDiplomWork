@@ -85,8 +85,7 @@ namespace TheDiplomWork
             //  Create a model matrix to make the model a little bigger.
             modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
-            //  Now create the geometry for the square.
-            CreateVerticesForSquare(gl);
+            
 
             var handle = GetConsoleWindow();
             //ShowWindow(handle, SW_HIDE);
@@ -100,29 +99,24 @@ namespace TheDiplomWork
         /// 
         public void Draw(OpenGL gl)
         {
-            //Thread newThread = new Thread(Scene.DoWork);
-            //newThread.Start(42);
+            if (!newThread.IsAlive)
+            {
+                SS.CopyToReady();
 
-            //while (newThread.IsAlive) { }
-            //Start a thread that calls a parameterized instance method.
+                if (SS.env.player.coords.Player_chunk_position.x != SS.env.player.coords.Player_chunk_position_OLD.x
+                || SS.env.player.coords.Player_chunk_position.z != SS.env.player.coords.Player_chunk_position_OLD.z)
+                {
+                    newThread = new Thread(Scene.DoWork);
+                    newThread.Start(42);
+                    SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
+                    SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
+                    Console.WriteLine("Inting My");
+                }
+            }
+            else
+            {
 
-            //if (thing.IsCompleted)
-            //{
-            //    SS.CopyToReady();
-
-            //    if (SS.env.player.coords.Player_chunk_position.x != SS.env.player.coords.Player_chunk_position_OLD.x
-            //    && SS.env.player.coords.Player_chunk_position.z != SS.env.player.coords.Player_chunk_position_OLD.z)
-            //    {
-            //        thing = My();
-            //        SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
-            //        SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
-            //        Console.WriteLine("Inting My");
-            //    }
-            //}
-            //else
-            //{
-
-            //}
+            }
 
             if (SS.FirstInitialization) Draw_Wrapped(gl);
         }
@@ -134,6 +128,9 @@ namespace TheDiplomWork
 
         public void Draw_Wrapped(OpenGL gl)
         {
+            //  Now create the geometry for the square.
+            CreateVerticesForSquare(gl);
+
             //  Create a view matrix to move us back a bit.
             viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,
                 -SS.env.player.coords.Player_precise_position.y,
