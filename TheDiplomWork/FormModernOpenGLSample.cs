@@ -81,7 +81,9 @@ namespace TheDiplomWork
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
 
             Mouse.SetCenterCursor(new System.Drawing.Point(openGLControl.Width / 2, openGLControl.Height / 2));
+
             label_CursorPlus.Location = Mouse.ReturnToCenter();
+            Cursor.Position = Mouse.ReturnToCenter();
         }
         /// <summary>
         /// The scene that we are rendering.
