@@ -38,7 +38,6 @@ namespace TheDiplomWork
         
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
-            while(true)
             openGL_Draw_Wrapped();
         }
         public void openGL_Draw_Wrapped()
