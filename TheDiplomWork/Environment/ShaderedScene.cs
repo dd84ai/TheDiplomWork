@@ -14,6 +14,7 @@ namespace TheDiplomWork
         public ShaderedScene()
         {
             Initialization();
+            CopyToReady();
         }
         public int Quantity_of_total_cubes = 0;
         public int Quantity_of_values_per_point = 3;
@@ -47,12 +48,16 @@ namespace TheDiplomWork
             vertices = new float[Quantity_of_all_values];
             colors = new float[Quantity_of_all_values];
         }
-        void Initialization()
+
+        List<float> listed_vertices = new List<float>();
+        List<float> listed_colors = new List<float>();
+        public void Initialization()
         {
             Memory_Init();
 
-            List<float> listed_vertices = new List<float>();
-            List<float> listed_colors = new List<float>();
+            listed_vertices.Clear();
+            listed_colors.Clear();
+
             int counter = 0;
             float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
 
@@ -256,8 +261,15 @@ namespace TheDiplomWork
             //    }
             //Console.WriteLine("Initialization");
 
-            vertices = listed_vertices.ToArray();
-            colors = listed_colors.ToArray();
+            prepared_vertices = listed_vertices.ToArray();
+            prepared_colors = listed_colors.ToArray();
+        }
+        public float[] prepared_vertices = null;
+        public float[] prepared_colors = null;
+        public void CopyToReady()
+        {
+            vertices = prepared_vertices;
+            colors = prepared_colors;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace TheDiplomWork
             public Point3D Player_rotational_view = new Point3D(3.14f / 2f, 0, 0);
 
             public Point2Int Player_chunk_position = new Point2Int(0,0);
+            public Point2Int Player_chunk_position_OLD = new Point2Int(0, 0);
 
             public Point2Int Player_cubical_position = new Point2Int(0,0);
 

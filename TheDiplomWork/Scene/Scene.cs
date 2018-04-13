@@ -4,6 +4,8 @@ using SharpGL;
 using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Threading;
 namespace TheDiplomWork
 {
     /// <summary>
@@ -86,7 +88,43 @@ namespace TheDiplomWork
         /// Draws the scene.
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
+        /// 
+        Task<bool> thing = My();
         public void Draw(OpenGL gl)
+        {
+            //if (thing.IsCompleted)
+            //{
+            //    if (SS.env.player.coords.Player_chunk_position.x != SS.env.player.coords.Player_chunk_position_OLD.x
+            //    && SS.env.player.coords.Player_chunk_position.z != SS.env.player.coords.Player_chunk_position_OLD.z)
+            //    {
+            //        thing = My();
+            //        SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
+            //        SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
+            //        Console.WriteLine("Inting My");
+            //    }
+            //}
+            //else
+            //{
+
+            //}
+
+            Draw_Wrapped(gl);
+        }
+
+        static async Task<bool> My()
+        {
+            string message = await GetMessage(3000);
+            return true;
+        }
+
+        static Task<string> GetMessage(int time)
+        {
+            return Task.Run(() => {
+                //Thread.Sleep(time);
+                return $"zxzxz {time.ToString()}";
+            });
+        }
+        public void Draw_Wrapped(OpenGL gl)
         {
             //  Create a view matrix to move us back a bit.
             viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,
@@ -118,7 +156,6 @@ namespace TheDiplomWork
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
         }
-
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.
         /// </summary>
