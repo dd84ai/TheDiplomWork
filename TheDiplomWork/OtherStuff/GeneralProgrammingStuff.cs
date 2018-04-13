@@ -108,6 +108,12 @@ namespace TheDiplomWork
             {
                 x = input.x; y = input.y; z = input.z;
             }
+            public override string ToString()
+            {
+                return "Point3D: " + x.ToString("G2") + " ; "
+                    + y.ToString("G2") + " ; "
+                +z.ToString("G2");
+            }
         }
         public class Point2Int
         {
@@ -119,6 +125,11 @@ namespace TheDiplomWork
             public Point2Int(Point2Int input)
             {
                 x = input.x; z = input.z;
+            }
+            public override string ToString()
+            {
+                return "Point2Int: " + x.ToString("G2") + " ; "
+                + z.ToString("G2");
             }
         }
         public class Point3Int

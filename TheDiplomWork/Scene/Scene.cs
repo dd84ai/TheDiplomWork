@@ -88,9 +88,9 @@ namespace TheDiplomWork
         public void Draw(OpenGL gl)
         {
             //  Create a view matrix to move us back a bit.
-            viewMatrix = glm.translate(new mat4(1.0f), new vec3(SS.env.player.coords.Player_precise_position.x,
-                SS.env.player.coords.Player_precise_position.y,
-                SS.env.player.coords.Player_precise_position.z));
+            viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,
+                -SS.env.player.coords.Player_precise_position.y,
+                -SS.env.player.coords.Player_precise_position.z));
 
             rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
             //*glm.rotate(new mat4(1.0f), 1.0f, new vec3(SS.env.player.coords.Player_rotational_view.x,

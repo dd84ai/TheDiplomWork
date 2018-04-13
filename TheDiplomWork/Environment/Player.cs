@@ -11,8 +11,8 @@ namespace TheDiplomWork
         public class Coords
         {
             //По идеи данная стартовая позиция будет ровно посередине мира и немного выше.
-            public Point3D Player_precise_position = new Point3D(0, 0, -CubicalMemory.Cube.rangeOfTheEdge*CubicalMemory.Chunk.Length*CubicalMemory.World.Quantity_of_chunks_in_root* Environment.SizeView);
-            public Point3D Player_rotational_view = new Point3D(0, 0, 0);
+            public Point3D Player_precise_position = new Point3D(0, 0, 0);
+            public Point3D Player_rotational_view = new Point3D(3.14f / 2f, 0, 0);
 
             public Point2Int Player_chunk_position = new Point2Int(0,0);
 
@@ -21,14 +21,16 @@ namespace TheDiplomWork
             /// <summary>
             /// Recalculate coordinates from player graphic position to chunk & cubical position.
             /// </summary>
-            void Player_recalculate_extra_positions()
+            public void Player_recalculate_extra_positions()
             {
                 Player_chunk_position.x = (int)(Player_precise_position.x / (double)CubicalMemory.Chunk.Width);
                 Player_chunk_position.z = (int)(Player_precise_position.z / (double)CubicalMemory.Chunk.Length);
 
                 Player_cubical_position.x = (int)(Player_precise_position.x / (double)CubicalMemory.Cube.rangeOfTheEdge);
                 Player_cubical_position.z = (int)(Player_precise_position.z / (double)CubicalMemory.Cube.rangeOfTheEdge);
-                Player_cubical_position.z = (int)(Player_precise_position.y / (double)CubicalMemory.Cube.rangeOfTheEdge);
+
+                Player_cubical_position.x -= Player_chunk_position.x * CubicalMemory.Chunk.Width;
+                Player_cubical_position.z -= Player_chunk_position.z * CubicalMemory.Chunk.Length;
             }
             /// <summary>
             /// Short link to Player_recalculate_extra_positions.

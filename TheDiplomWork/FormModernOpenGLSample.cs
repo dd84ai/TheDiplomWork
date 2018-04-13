@@ -51,6 +51,13 @@ namespace TheDiplomWork
 
             //  Draw the scene.
             scene.Draw(openGLControl.OpenGL);
+
+            Scene.SS.env.player.coords.Player_recalculate_extra_positions();
+
+            label1_InfoTable.Text =
+                Scene.SS.env.player.coords.Player_precise_position.ToString() + "\r\n"
+                + Scene.SS.env.player.coords.Player_chunk_position.ToString() + "\r\n"
+                + Scene.SS.env.player.coords.Player_cubical_position.ToString() + "\r\n";
         }
         private void openGLControl_Resized(object sender, EventArgs e)
         {

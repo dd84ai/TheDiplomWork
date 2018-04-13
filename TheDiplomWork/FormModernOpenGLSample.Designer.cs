@@ -30,6 +30,7 @@
         {
             this.openGLControl = new SharpGL.OpenGLControl();
             this.label_CursorPlus = new System.Windows.Forms.Label();
+            this.label1_InfoTable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +65,21 @@
             this.label_CursorPlus.TabIndex = 1;
             this.label_CursorPlus.Text = "+";
             // 
+            // label1_InfoTable
+            // 
+            this.label1_InfoTable.AutoSize = true;
+            this.label1_InfoTable.Location = new System.Drawing.Point(-3, 0);
+            this.label1_InfoTable.Name = "label1_InfoTable";
+            this.label1_InfoTable.Size = new System.Drawing.Size(35, 13);
+            this.label1_InfoTable.TabIndex = 2;
+            this.label1_InfoTable.Text = "label1";
+            // 
             // FormModernOpenGLSample
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 391);
+            this.Controls.Add(this.label1_InfoTable);
             this.Controls.Add(this.label_CursorPlus);
             this.Controls.Add(this.openGLControl);
             this.Name = "FormModernOpenGLSample";
@@ -84,6 +95,7 @@
 
         private SharpGL.OpenGLControl openGLControl;
         private System.Windows.Forms.Label label_CursorPlus;
+        private System.Windows.Forms.Label label1_InfoTable;
     }
 }
 
