@@ -10,35 +10,34 @@ namespace TheDiplomWork
     {
         public LearningAsync()
         {
-            if (false)
+            if (true)
             {
-                Task<bool> thing = My();
+                // Start a thread that calls a parameterized static method.
+                Thread newThread = new Thread(LearningAsync.DoWork);
+                newThread.Start(42);
 
-                int i = 0;
-                while (!thing.IsCompleted)
-                {
-                    Thread.Sleep(1000);
-                    Console.WriteLine($"* {i * 1000}");
-                    i++;
-                }
+                while (newThread.IsAlive) { }
+                // Start a thread that calls a parameterized instance method.
+
+                newThread = new Thread(DoMoreWork);
+                newThread.Start("The answer.");
+
+                Console.ReadKey();
             }
-            //Console.ReadLine();
         }
 
-        static async Task<bool> My()
+        public static void DoWork(object data)
         {
-            string message = await GetMessage(3000);
-            Console.WriteLine(message);
-
-            return true;
+            for (int i = 0; i < 100;i++)
+            Console.WriteLine("Static thread procedure. Data='{0}'",
+                i);
+            return;
         }
 
-        static Task<string> GetMessage(int time)
+        public void DoMoreWork(object data)
         {
-            return Task.Run(() => {
-                Thread.Sleep(time);
-                return $"zxzxz {time.ToString()}";
-            });
+            Console.WriteLine("Instance thread procedure. Data='{0}'",
+                data);
         }
     }
 }

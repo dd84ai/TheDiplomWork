@@ -55,8 +55,13 @@ namespace TheDiplomWork
         /// <param name="gl">The OpenGL instance.</param>
         /// <param name="width">The width of the screen.</param>
         /// <param name="height">The height of the screen.</param>
-        public void Initialise(OpenGL gl, float width, float height)
+        public async void Initialise(OpenGL gl, float width, float height)
         {
+            Console.WriteLine("Starting My");
+
+            Console.WriteLine("Finished My");
+            SS.CopyToReady();
+
             //  Set a blue clear colour.
             gl.ClearColor(0.4f, 0.6f, 0.9f, 0.0f);
 
@@ -81,7 +86,7 @@ namespace TheDiplomWork
             CreateVerticesForSquare(gl);
 
             var handle = GetConsoleWindow();
-            ShowWindow(handle, SW_HIDE);
+            //ShowWindow(handle, SW_HIDE);
         }
 
         /// <summary>
@@ -89,11 +94,12 @@ namespace TheDiplomWork
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
         /// 
-        Task<bool> thing = My();
         public void Draw(OpenGL gl)
         {
             //if (thing.IsCompleted)
             //{
+            //    SS.CopyToReady();
+
             //    if (SS.env.player.coords.Player_chunk_position.x != SS.env.player.coords.Player_chunk_position_OLD.x
             //    && SS.env.player.coords.Player_chunk_position.z != SS.env.player.coords.Player_chunk_position_OLD.z)
             //    {
@@ -108,22 +114,9 @@ namespace TheDiplomWork
 
             //}
 
-            Draw_Wrapped(gl);
+            if (SS.FirstInitialization) Draw_Wrapped(gl);
         }
 
-        static async Task<bool> My()
-        {
-            string message = await GetMessage(3000);
-            return true;
-        }
-
-        static Task<string> GetMessage(int time)
-        {
-            return Task.Run(() => {
-                //Thread.Sleep(time);
-                return $"zxzxz {time.ToString()}";
-            });
-        }
         public void Draw_Wrapped(OpenGL gl)
         {
             //  Create a view matrix to move us back a bit.

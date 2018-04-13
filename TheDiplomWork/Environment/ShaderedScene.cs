@@ -11,6 +11,7 @@ namespace TheDiplomWork
 
         public float[] vertices = null;
         public float[] colors = null;
+
         public ShaderedScene()
         {
             Initialization();
@@ -263,13 +264,21 @@ namespace TheDiplomWork
 
             prepared_vertices = listed_vertices.ToArray();
             prepared_colors = listed_colors.ToArray();
+            CopiedLastResult = false;
         }
         public float[] prepared_vertices = null;
         public float[] prepared_colors = null;
+        public bool FirstInitialization = false;
+        bool CopiedLastResult = false;
         public void CopyToReady()
         {
-            vertices = prepared_vertices;
-            colors = prepared_colors;
+            if (!CopiedLastResult)
+            {
+                vertices = prepared_vertices;
+                colors = prepared_colors;
+                FirstInitialization = true;
+                CopiedLastResult = true;
+            }
         }
     }
 }
