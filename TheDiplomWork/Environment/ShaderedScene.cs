@@ -9,12 +9,8 @@ namespace TheDiplomWork
     {
         public Environment env = new Environment();
 
-        public float[] vertices = null;
-        public float[] colors = null;
-        public float[] prepared_vertices = null;
-        public float[] prepared_colors = null;
-        public float[] third_vertices = null;
-        public float[] third_colors = null;
+        public List<float> vertices = new List<float>();
+        public List<float> colors = new List<float>();
         public ShaderedScene()
         {
             //Initialization();
@@ -30,6 +26,9 @@ namespace TheDiplomWork
         public int Quantity_of_all_values = 0;
         void Memory_Init()
         {
+            vertices.Clear();
+            colors.Clear();
+
             Quantity_of_cubes_per_chunk =
                 CubicalMemory.Chunk.Height
                 * CubicalMemory.Chunk.Length
@@ -39,8 +38,6 @@ namespace TheDiplomWork
                 * CubicalMemory.World.Quantity_of_chunks_in_root
                 * Quantity_of_cubes_per_chunk;
 
-
-
             Quantity_of_all_values =
                 Quantity_of_total_cubes * Quantity_of_values_per_point
                 * Quantity_of_points_per_side * Quantity_of_sides_per_cube;
@@ -48,12 +45,6 @@ namespace TheDiplomWork
             Quantity_of_all_points =
                 Quantity_of_total_cubes
                 * Quantity_of_points_per_side * Quantity_of_sides_per_cube;
-
-            int Capacity = 1000000;
-            vertices = new float[Capacity];
-            colors = new float[Capacity];
-            prepared_vertices = vertices;//new float[Capacity];
-            prepared_colors = colors;//new float[Capacity];
         }
 
         Random Rand = new Random();
@@ -64,15 +55,17 @@ namespace TheDiplomWork
         }
         public void Initialization()
         {
-            
             Memory_Init();
 
-            counter = 0;
             float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
 
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
                 foreach (var XYworld in Xworld)
                 {
+                    if (Math.Abs(XYworld.x - Scene.SS.env.player.coords.Player_chunk_position.x) < Scene.SS.env.player.coords.RangeOfView
+                        && Math.Abs(XYworld.z - Scene.SS.env.player.coords.Player_chunk_position.z) < Scene.SS.env.player.coords.RangeOfView)
+                    { } else { continue; }
+
                     foreach (var Xcube in XYworld.cubes)
                         foreach (var XYcube in Xcube)
                             foreach (var XYZcube in XYcube)
@@ -114,116 +107,115 @@ namespace TheDiplomWork
                                     y *= (CubicalMemory.Cube.rangeOfTheEdge);
                                     z *= (CubicalMemory.Cube.rangeOfTheEdge);
 
-                                    int start = counter;
                                     //Front
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x );
+                                    vertices.Add(y );
+                                    vertices.Add(z );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y );
+                                    vertices.Add(z );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z );
 
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z );
                                     //Back
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x );
+                                    vertices.Add(y );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y );
+                                    vertices.Add(z + localed_range );
 
                                     //Left
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x );
+                                    vertices.Add(y );
+                                    vertices.Add(z );
 
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x );
+                                    vertices.Add(y );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z );
 
                                     //Right
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y );
+                                    vertices.Add(z );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z );
 
                                     //Top
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z );
 
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y + localed_range ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y + localed_range );
+                                    vertices.Add(z );
 
                                     //Bottom
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x );
+                                    vertices.Add(y );
+                                    vertices.Add(z );
 
-                                    prepared_vertices[counter++]=x ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x );
+                                    vertices.Add(y );
+                                    vertices.Add(z + localed_range );
 
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z + localed_range ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y );
+                                    vertices.Add(z + localed_range );
 
-                                    prepared_vertices[counter++]=x + localed_range ;
-                                    prepared_vertices[counter++]=y ;
-                                    prepared_vertices[counter++]=z ;
+                                    vertices.Add(x + localed_range );
+                                    vertices.Add(y );
+                                    vertices.Add(z );
 
-                                    counter = start;
+  
                                     for (int i = 0; i < 4 * 6; i++)
                                     {
-                                        XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
-                                        prepared_colors[counter++] = (float)XYZcube.color.R / 255;
-                                        prepared_colors[counter++] = (float)XYZcube.color.G / 255;
-                                        prepared_colors[counter++] = (float)XYZcube.color.B / 255;
+                                        //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
+                                        colors.Add((float)XYZcube.color.R / 255);
+                                        colors.Add((float)XYZcube.color.G / 255);
+                                        colors.Add((float)XYZcube.color.B / 255);
                                     }
                                     /*for (int i = 0; i < 4; i++)
                                     {
@@ -280,15 +272,8 @@ namespace TheDiplomWork
         public bool CopiedLastResult = false;
         public void CopyToReady()
         {
-            
-                third_vertices = vertices;
-                third_colors = colors;
-                vertices = prepared_vertices;
-                colors = prepared_colors;
-                prepared_vertices = third_vertices;
-                prepared_colors = third_colors;
-                Quantity_of_all_values = counter;
-                FirstInitialization = true;
+            Quantity_of_all_values = vertices.Count();
+            FirstInitialization = true;
             CopiedLastResult = true;
 
         }

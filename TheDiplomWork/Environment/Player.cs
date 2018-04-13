@@ -18,7 +18,7 @@ namespace TheDiplomWork
             public Point2Int Player_chunk_position_OLD = new Point2Int(0, 0);
 
             public Point2Int Player_cubical_position = new Point2Int(0,0);
-
+            public int RangeOfView = 2;
             /// <summary>
             /// Recalculate coordinates from player graphic position to chunk & cubical position.
             /// </summary>

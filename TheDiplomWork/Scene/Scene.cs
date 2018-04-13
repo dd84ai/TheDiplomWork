@@ -183,13 +183,13 @@ namespace TheDiplomWork
             var vertexDataBuffer = new VertexBuffer();
             vertexDataBuffer.Create(gl);
             vertexDataBuffer.Bind(gl);
-            vertexDataBuffer.SetData(gl, 0, SS.vertices, false, 3);
+            vertexDataBuffer.SetData(gl, 0, SS.vertices.ToArray(), false, 3);
 
             //  Now do the same for the colour data.
             var colourDataBuffer = new VertexBuffer();
             colourDataBuffer.Create(gl);
             colourDataBuffer.Bind(gl);
-            colourDataBuffer.SetData(gl, 1, SS.colors, false, 3);
+            colourDataBuffer.SetData(gl, 1, SS.colors.ToArray(), false, 3);
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
