@@ -29,6 +29,7 @@ namespace TheDiplomWork
         /// It's Mine
         /// </summary>
         public static ShaderedScene SS = new ShaderedScene();
+        public static LearningAsync LA = new LearningAsync();
 
         //  The projection, view and model matrices.
         mat4 projectionMatrix;

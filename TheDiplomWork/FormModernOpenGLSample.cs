@@ -38,6 +38,11 @@ namespace TheDiplomWork
         
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
+            while(true)
+            openGL_Draw_Wrapped();
+        }
+        public void openGL_Draw_Wrapped()
+        {
             if ((Control.ModifierKeys & Keys.Shift) != 0)
                 Keyboard.DoSpecificAction('z');
 

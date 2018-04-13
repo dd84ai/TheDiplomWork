@@ -59,6 +59,7 @@
             // 
             this.label_CursorPlus.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_CursorPlus.AutoSize = true;
+            this.label_CursorPlus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(153)))), ((int)(((byte)(230)))));
             this.label_CursorPlus.Location = new System.Drawing.Point(289, 192);
             this.label_CursorPlus.Name = "label_CursorPlus";
             this.label_CursorPlus.Size = new System.Drawing.Size(13, 13);
