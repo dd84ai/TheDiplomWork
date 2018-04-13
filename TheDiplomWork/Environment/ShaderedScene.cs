@@ -62,9 +62,10 @@ namespace TheDiplomWork
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
                 foreach (var XYworld in Xworld)
                 {
-                    if (Math.Abs(XYworld.x - Scene.SS.env.player.coords.Player_chunk_position.x) < Scene.SS.env.player.coords.RangeOfView
-                        && Math.Abs(XYworld.z - Scene.SS.env.player.coords.Player_chunk_position.z) < Scene.SS.env.player.coords.RangeOfView)
-                    { } else { continue; }
+                    if (Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.x - XYworld.x) < Scene.SS.env.player.coords.RangeOfView &&
+                        Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.z - XYworld.z) < Scene.SS.env.player.coords.RangeOfView)
+                    { }
+                    else continue;
 
                     foreach (var Xcube in XYworld.cubes)
                         foreach (var XYcube in Xcube)
@@ -210,7 +211,7 @@ namespace TheDiplomWork
                                     vertices.Add(z );
 
   
-                                    for (int i = 0; i < 4 * 6; i++)
+                                    for (int k = 0; k < 4 * 6; k++)
                                     {
                                         //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
                                         colors.Add((float)XYZcube.color.R / 255);
@@ -270,6 +271,10 @@ namespace TheDiplomWork
         
         public bool FirstInitialization = false;
         public bool CopiedLastResult = false;
+        public int Quantity()
+        {
+            return vertices.Count();
+        }
         public void CopyToReady()
         {
             Quantity_of_all_values = vertices.Count();
