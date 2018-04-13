@@ -52,8 +52,8 @@ namespace TheDiplomWork
             int Capacity = 1000000;
             vertices = new float[Capacity];
             colors = new float[Capacity];
-            prepared_vertices = new float[Capacity];
-            prepared_colors = new float[Capacity];
+            prepared_vertices = vertices;//new float[Capacity];
+            prepared_colors = colors;//new float[Capacity];
         }
 
         Random Rand = new Random();
@@ -277,11 +277,10 @@ namespace TheDiplomWork
         }
         
         public bool FirstInitialization = false;
-        bool CopiedLastResult = false;
+        public bool CopiedLastResult = false;
         public void CopyToReady()
         {
-            if (!CopiedLastResult)
-            {
+            
                 third_vertices = vertices;
                 third_colors = colors;
                 vertices = prepared_vertices;
@@ -290,8 +289,8 @@ namespace TheDiplomWork
                 prepared_colors = third_colors;
                 Quantity_of_all_values = counter;
                 FirstInitialization = true;
-                CopiedLastResult = true;
-            }
+            CopiedLastResult = true;
+
         }
     }
 }

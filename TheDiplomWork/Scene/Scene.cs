@@ -44,7 +44,8 @@ namespace TheDiplomWork
         const uint attributeIndexColour = 1;
 
         //  The vertex buffer array which contains the vertex and colour buffers.
-        VertexBufferArray vertexBufferArray;
+        static VertexBufferArray vertexBufferArray;
+        //VertexBufferArray vertexBufferArray2;
 
         //  The shader program for our vertex and fragment shader.
         private ShaderProgram shaderProgram;
@@ -55,8 +56,10 @@ namespace TheDiplomWork
         /// <param name="gl">The OpenGL instance.</param>
         /// <param name="width">The width of the screen.</param>
         /// <param name="height">The height of the screen.</param>
+        static OpenGL _gl;
         public async void Initialise(OpenGL gl, float width, float height)
         {
+            _gl = gl;
             Console.WriteLine("Starting My");
             newThread = new Thread(Scene.DoWork);
             newThread.Start(42);
@@ -86,7 +89,7 @@ namespace TheDiplomWork
             modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
             //  Now create the geometry for the square.
-            CreateVerticesForSquare(gl);
+            CreateVerticesForSquare();
 
             var handle = GetConsoleWindow();
             //ShowWindow(handle, SW_HIDE);
@@ -102,7 +105,11 @@ namespace TheDiplomWork
         {
             if (!newThread.IsAlive)
             {
-                SS.CopyToReady();
+                if (!SS.CopiedLastResult)
+                {
+                    SS.CopyToReady();
+                    CreateVerticesForSquare();
+                }
 
                 if (SS.env.player.coords.Player_chunk_position.x != SS.env.player.coords.Player_chunk_position_OLD.x
                 || SS.env.player.coords.Player_chunk_position.z != SS.env.player.coords.Player_chunk_position_OLD.z)
@@ -164,8 +171,9 @@ namespace TheDiplomWork
         /// Creates the geometry for the square, also creating the vertex buffer array.
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
-        private void CreateVerticesForSquare(OpenGL gl)
+        public static void CreateVerticesForSquare()
         {
+            OpenGL gl = _gl;
             //  Create the vertex array object.
             vertexBufferArray = new VertexBufferArray();
             vertexBufferArray.Create(gl);
@@ -186,6 +194,5 @@ namespace TheDiplomWork
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
         }
-
     }
 }
