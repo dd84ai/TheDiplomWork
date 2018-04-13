@@ -8,20 +8,19 @@ namespace TheDiplomWork
 {
     class Keyboard
     {
-        static float step = 0.1f;
+        static float step = 1.0f;
+        static float rotational_step = 0.05f;
         public static List<char> KeysActive = new List<char>();
 
         static DateTime start = DateTime.Now;
         public static void DoSpecificAction(char key)
         {
-            for (int i = 0; i < 10; i++)
                     Keyboard.Wrapped_KeyPressed_Reaction(key);
         }
         public static void DoAction()
         {
             //if ((DateTime.Now - start).TotalMilliseconds > 100)
             //{
-            for(int i = 0; i < 10; i++)
                 foreach (var key in Keyboard.KeysActive)
                     Keyboard.Wrapped_KeyPressed_Reaction(key);
                 //start = DateTime.Now;
@@ -45,6 +44,15 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_precise_position.y += step; break;
                 case ' ':
                     Scene.SS.env.player.coords.Player_precise_position.y -= step; break;
+
+                case 'l':
+                    Scene.SS.env.player.coords.Player_rotational_view.x += rotational_step; break;
+                case 'j':
+                    Scene.SS.env.player.coords.Player_rotational_view.x -= rotational_step; break;
+                case 'i':
+                    Scene.SS.env.player.coords.Player_rotational_view.y += rotational_step; break;
+                case 'k':
+                    Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
 
                 default: break;
             }

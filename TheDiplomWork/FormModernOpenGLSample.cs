@@ -35,8 +35,8 @@ namespace TheDiplomWork
         /// <param name="args">The <see cref="RenderEventArgs"/> instance containing the event data.</param>
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
-            if ((Control.ModifierKeys & Keys.Shift) != 0)
-                Keyboard.DoSpecificAction('z');
+                if ((Control.ModifierKeys & Keys.Shift) != 0)
+                    Keyboard.DoSpecificAction('z');
 
                 Keyboard.DoAction();
             
