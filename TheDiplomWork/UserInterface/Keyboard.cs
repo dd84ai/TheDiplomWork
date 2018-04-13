@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GlmNet;
 namespace TheDiplomWork
 {
     class Keyboard
     {
+        static vec4 step_vector = new vec4();
         static float step = 1.0f;
         static float rotational_step = 0.05f;
         public static List<char> KeysActive = new List<char>();
@@ -26,6 +27,13 @@ namespace TheDiplomWork
                 //start = DateTime.Now;
             //}
         }
+        static void DoStep()
+        {
+            step_vector = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * step_vector;
+            Scene.SS.env.player.coords.Player_precise_position.x += step_vector.x;
+            Scene.SS.env.player.coords.Player_precise_position.y += step_vector.y;
+            Scene.SS.env.player.coords.Player_precise_position.z += step_vector.z;
+        }
         public static void Wrapped_KeyPressed_Reaction(char key)
         {
              switch (key)
@@ -33,17 +41,17 @@ namespace TheDiplomWork
                 case 'm': Interface.SaySomeQuote(); break;
 
                 case 'w':
-                    Scene.SS.env.player.coords.Player_precise_position.z += step; break;
+                    step_vector.x = 0; step_vector.y = 0; step_vector.z = step; DoStep(); break;
                 case 's':
-                    Scene.SS.env.player.coords.Player_precise_position.z -= step; break;
+                    step_vector.x = 0; step_vector.y = 0; step_vector.z = -step; DoStep(); break;
                 case 'a':
-                    Scene.SS.env.player.coords.Player_precise_position.x += step; break;
+                    step_vector.x = step; step_vector.y = 0; step_vector.z = 0; DoStep(); break;
                 case 'd':
-                    Scene.SS.env.player.coords.Player_precise_position.x -= step; break;
+                    step_vector.x = -step; step_vector.y = 0; step_vector.z = 0; DoStep(); break;
                 case 'z':
-                    Scene.SS.env.player.coords.Player_precise_position.y += step; break;
+                    step_vector.x = 0; step_vector.y = step; step_vector.z = 0; DoStep(); break;
                 case ' ':
-                    Scene.SS.env.player.coords.Player_precise_position.y -= step; break;
+                    step_vector.x = 0; step_vector.y = -step; step_vector.z = 0; DoStep(); break;
 
                 case 'l':
                     Scene.SS.env.player.coords.Player_rotational_view.x += rotational_step; break;
