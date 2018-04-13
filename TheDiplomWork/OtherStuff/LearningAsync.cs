@@ -10,7 +10,7 @@ namespace TheDiplomWork
     {
         public LearningAsync()
         {
-            if (true)
+            if (false)
             {
                 // Start a thread that calls a parameterized static method.
                 Thread newThread = new Thread(LearningAsync.DoWork);

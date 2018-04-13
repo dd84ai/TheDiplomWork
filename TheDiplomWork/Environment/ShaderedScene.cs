@@ -14,8 +14,8 @@ namespace TheDiplomWork
 
         public ShaderedScene()
         {
-            Initialization();
-            CopyToReady();
+            //Initialization();
+            //CopyToReady();
         }
         public int Quantity_of_total_cubes = 0;
         public int Quantity_of_values_per_point = 3;

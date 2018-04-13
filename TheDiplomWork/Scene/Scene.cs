@@ -58,7 +58,10 @@ namespace TheDiplomWork
         public async void Initialise(OpenGL gl, float width, float height)
         {
             Console.WriteLine("Starting My");
+            newThread = new Thread(Scene.DoWork);
+            newThread.Start(42);
 
+            while (newThread.IsAlive) { }
             Console.WriteLine("Finished My");
             SS.CopyToReady();
 
@@ -89,6 +92,7 @@ namespace TheDiplomWork
             //ShowWindow(handle, SW_HIDE);
         }
 
+        Thread newThread;
         /// <summary>
         /// Draws the scene.
         /// </summary>
@@ -96,6 +100,12 @@ namespace TheDiplomWork
         /// 
         public void Draw(OpenGL gl)
         {
+            //Thread newThread = new Thread(Scene.DoWork);
+            //newThread.Start(42);
+
+            //while (newThread.IsAlive) { }
+            //Start a thread that calls a parameterized instance method.
+
             //if (thing.IsCompleted)
             //{
             //    SS.CopyToReady();
@@ -115,6 +125,11 @@ namespace TheDiplomWork
             //}
 
             if (SS.FirstInitialization) Draw_Wrapped(gl);
+        }
+        public static void DoWork(object data)
+        {
+            SS.Initialization();
+            return;
         }
 
         public void Draw_Wrapped(OpenGL gl)
