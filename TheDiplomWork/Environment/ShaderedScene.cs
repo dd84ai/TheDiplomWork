@@ -11,7 +11,10 @@ namespace TheDiplomWork
 
         public float[] vertices = null;
         public float[] colors = null;
-
+        public float[] prepared_vertices = null;
+        public float[] prepared_colors = null;
+        public float[] third_vertices = null;
+        public float[] third_colors = null;
         public ShaderedScene()
         {
             //Initialization();
@@ -46,22 +49,25 @@ namespace TheDiplomWork
                 Quantity_of_total_cubes
                 * Quantity_of_points_per_side * Quantity_of_sides_per_cube;
 
-            vertices = new float[Quantity_of_all_values];
-            colors = new float[Quantity_of_all_values];
+            int Capacity = 1000000;
+            vertices = new float[Capacity];
+            colors = new float[Capacity];
+            prepared_vertices = new float[Capacity];
+            prepared_colors = new float[Capacity];
         }
 
-        List<float> listed_vertices = new List<float>();
-        List<float> listed_colors = new List<float>();
         Random Rand = new Random();
+        int counter = 0;
+        public void plus()
+        {
+            counter++;
+        }
         public void Initialization()
         {
             
             Memory_Init();
 
-            listed_vertices.Clear();
-            listed_colors.Clear();
-
-            int counter = 0;
+            counter = 0;
             float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
 
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
@@ -74,7 +80,7 @@ namespace TheDiplomWork
                                 //if (counter % 1000 == 0)
                                 //    Console.WriteLine($"{counter}\\{Quantity_of_total_cubes}");
 
-                                counter++;
+                                
                                 //int Chunk_number =
                                 //    XYworld.y * CubicalMemory.World.Quantity_of_chunks_in_root
                                 //    + XYworld.x;
@@ -108,114 +114,116 @@ namespace TheDiplomWork
                                     y *= (CubicalMemory.Cube.rangeOfTheEdge);
                                     z *= (CubicalMemory.Cube.rangeOfTheEdge);
 
+                                    int start = counter;
                                     //Front
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z ;
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z ;
                                     //Back
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
                                     //Left
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z ;
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z ;
 
                                     //Right
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z ;
 
                                     //Top
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z ;
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y + localed_range);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y + localed_range ;
+                                    prepared_vertices[counter++]=z ;
 
                                     //Bottom
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z ;
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + localed_range);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z + localed_range ;
 
-                                    listed_vertices.Add(x + localed_range);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z);
+                                    prepared_vertices[counter++]=x + localed_range ;
+                                    prepared_vertices[counter++]=y ;
+                                    prepared_vertices[counter++]=z ;
 
+                                    counter = start;
                                     for (int i = 0; i < 4 * 6; i++)
                                     {
                                         XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
-                                        listed_colors.Add((float)XYZcube.color.R / 255);
-                                        listed_colors.Add((float)XYZcube.color.G / 255);
-                                        listed_colors.Add((float)XYZcube.color.B / 255);
+                                        prepared_colors[counter++] = (float)XYZcube.color.R / 255;
+                                        prepared_colors[counter++] = (float)XYZcube.color.G / 255;
+                                        prepared_colors[counter++] = (float)XYZcube.color.B / 255;
                                     }
                                     /*for (int i = 0; i < 4; i++)
                                     {
@@ -265,20 +273,22 @@ namespace TheDiplomWork
             //    }
             //Console.WriteLine("Initialization");
 
-            prepared_vertices = listed_vertices.ToArray();
-            prepared_colors = listed_colors.ToArray();
             CopiedLastResult = false;
         }
-        public float[] prepared_vertices = null;
-        public float[] prepared_colors = null;
+        
         public bool FirstInitialization = false;
         bool CopiedLastResult = false;
         public void CopyToReady()
         {
             if (!CopiedLastResult)
             {
+                third_vertices = vertices;
+                third_colors = colors;
                 vertices = prepared_vertices;
                 colors = prepared_colors;
+                prepared_vertices = third_vertices;
+                prepared_colors = third_colors;
+                Quantity_of_all_values = counter;
                 FirstInitialization = true;
                 CopiedLastResult = true;
             }

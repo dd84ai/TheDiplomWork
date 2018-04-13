@@ -85,7 +85,8 @@ namespace TheDiplomWork
             //  Create a model matrix to make the model a little bigger.
             modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
-            
+            //  Now create the geometry for the square.
+            CreateVerticesForSquare(gl);
 
             var handle = GetConsoleWindow();
             //ShowWindow(handle, SW_HIDE);
@@ -128,8 +129,6 @@ namespace TheDiplomWork
 
         public void Draw_Wrapped(OpenGL gl)
         {
-            //  Now create the geometry for the square.
-            CreateVerticesForSquare(gl);
 
             //  Create a view matrix to move us back a bit.
             viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,

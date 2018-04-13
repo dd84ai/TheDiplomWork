@@ -84,7 +84,8 @@ namespace TheDiplomWork
             //  Set the modelview matrix.
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
 
-            Mouse.SetCenterCursor(new System.Drawing.Point(openGLControl.Width / 2, openGLControl.Height / 2));
+            //Cursor.Position.X - Location.X - openGLControl.Location.X - 8, -Cursor.Position.Y + Location.Y + Size.Height + openGLControl.Location.Y - 30
+            Mouse.SetCenterCursor(new System.Drawing.Point(openGLControl.Location.X + openGLControl.Width / 2, openGLControl.Location.Y + openGLControl.Height / 2));
 
             label_CursorPlus.Location = Mouse.ReturnToCenter();
             Cursor.Position = Mouse.ReturnToCenter();
