@@ -63,8 +63,8 @@ namespace TheDiplomWork
                         foreach (var XYcube in Xcube)
                             foreach (var XYZcube in XYcube)
                             {
-                                if (counter % 1000 == 0)
-                                    Console.WriteLine($"{counter}\\{Quantity_of_total_cubes}");
+                                //if (counter % 1000 == 0)
+                                //    Console.WriteLine($"{counter}\\{Quantity_of_total_cubes}");
 
                                 counter++;
                                 //int Chunk_number =
@@ -100,8 +100,6 @@ namespace TheDiplomWork
                                     y *= (CubicalMemory.Cube.rangeOfTheEdge);
                                     z *= (CubicalMemory.Cube.rangeOfTheEdge);
 
-                                    
-
                                     //Front
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
@@ -110,10 +108,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
-
-                                    
-
-                                    
 
                                     listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y + localed_range);
@@ -127,8 +121,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z + localed_range);
 
-                                   
-
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z + localed_range);
@@ -140,10 +132,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z + localed_range);
-
-                                    
-
-
 
                                     //Left
                                     listed_vertices.Add(x);
@@ -156,13 +144,12 @@ namespace TheDiplomWork
 
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y + localed_range);
-
                                     listed_vertices.Add(z + localed_range);
+
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
-                                    
                                     //Right
                                     listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
@@ -180,7 +167,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
-                                    
                                     //Top
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y + localed_range);
@@ -198,7 +184,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
-                                    
                                     //Bottom
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
@@ -216,7 +201,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
-
 
                                     for (int i = 0; i < 4 * 6; i++)
                                     {

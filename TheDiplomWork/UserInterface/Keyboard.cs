@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlmNet;
+using System.Windows.Forms;
 namespace TheDiplomWork
 {
     class Keyboard
@@ -61,6 +62,9 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_rotational_view.y += rotational_step; break;
                 case 'k':
                     Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
+
+                case 'q':
+                    Application.Exit(); break;
 
                 default: break;
             }
