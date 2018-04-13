@@ -25,7 +25,7 @@ namespace TheDiplomWork
             /// <summary>
             /// Размеры грани одного куба.
             /// </summary>
-            public static float rangeOfTheEdge = 2.0f;
+            public static float rangeOfTheEdge = 1.0f;
             public System.Drawing.Color color = ColorSwitch(Rand.Next(10));
 
             public bool IsFilled = false;

@@ -54,6 +54,7 @@ namespace TheDiplomWork
             List<float> listed_vertices = new List<float>();
             List<float> listed_colors = new List<float>();
             int counter = 0;
+            float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
 
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
                 foreach (var XYworld in Xworld)
@@ -95,43 +96,54 @@ namespace TheDiplomWork
                                     float y = XYZcube.y;
                                     float z = XYworld.z * CubicalMemory.Chunk.Length + XYZcube.z;
 
-                                    x *= CubicalMemory.Cube.rangeOfTheEdge;
-                                    y *= CubicalMemory.Cube.rangeOfTheEdge;
-                                    z *= CubicalMemory.Cube.rangeOfTheEdge;
+                                    x *= (CubicalMemory.Cube.rangeOfTheEdge);
+                                    y *= (CubicalMemory.Cube.rangeOfTheEdge);
+                                    z *= (CubicalMemory.Cube.rangeOfTheEdge);
+
+                                    
 
                                     //Front
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    
+
+                                    
+
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
-                                    
                                     //Back
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + localed_range);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
-
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                   
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + localed_range);
+                                    listed_vertices.Add(z + localed_range);
+
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y + localed_range);
+                                    listed_vertices.Add(z + localed_range);
+
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y);
+                                    listed_vertices.Add(z + localed_range);
+
+                                    
+
+
 
                                     //Left
                                     listed_vertices.Add(x);
@@ -140,47 +152,53 @@ namespace TheDiplomWork
 
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + localed_range);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + localed_range);
+
+                                    listed_vertices.Add(z + localed_range);
+                                    listed_vertices.Add(x);
+                                    listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    
                                     //Right
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + localed_range);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y + localed_range);
+                                    listed_vertices.Add(z + localed_range);
+
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    
                                     //Top
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(y + localed_range);
+                                    listed_vertices.Add(z + localed_range);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y + localed_range);
+                                    listed_vertices.Add(z + localed_range);
+
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y + localed_range);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    
                                     //Bottom
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
@@ -188,15 +206,17 @@ namespace TheDiplomWork
 
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
+                                    listed_vertices.Add(z + localed_range);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
+
+                                    listed_vertices.Add(x + localed_range);
+                                    listed_vertices.Add(y);
+                                    listed_vertices.Add(z + localed_range);
+
+                                    listed_vertices.Add(x + localed_range);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x + CubicalMemory.Cube.rangeOfTheEdge);
-                                    listed_vertices.Add(y);
-                                    listed_vertices.Add(z + CubicalMemory.Cube.rangeOfTheEdge);
 
                                     for (int i = 0; i < 4 * 6; i++)
                                     {
@@ -204,6 +224,42 @@ namespace TheDiplomWork
                                         listed_colors.Add((float)XYZcube.color.G / 255);
                                         listed_colors.Add((float)XYZcube.color.B / 255);
                                     }
+                                    /*for (int i = 0; i < 4; i++)
+                                    {
+                                        listed_colors.Add((float)255 / 255);
+                                        listed_colors.Add((float)0 / 255);
+                                        listed_colors.Add((float)0 / 255);
+                                    }
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        listed_colors.Add((float)0 / 255);
+                                        listed_colors.Add((float)255 / 255);
+                                        listed_colors.Add((float)0 / 255);
+                                    }
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        listed_colors.Add((float)0 / 255);
+                                        listed_colors.Add((float)0 / 255);
+                                        listed_colors.Add((float)255 / 255);
+                                    }
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        listed_colors.Add((float)255 / 255);
+                                        listed_colors.Add((float)255 / 255);
+                                        listed_colors.Add((float)0 / 255);
+                                    }
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        listed_colors.Add((float)255 / 255);
+                                        listed_colors.Add((float)0 / 255);
+                                        listed_colors.Add((float)255 / 255);
+                                    }
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        listed_colors.Add((float)0 / 255);
+                                        listed_colors.Add((float)255 / 255);
+                                        listed_colors.Add((float)255 / 255);
+                                    }*/
                                 }
                             }
                 }
