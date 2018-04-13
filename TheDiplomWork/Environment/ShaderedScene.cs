@@ -104,10 +104,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
 
-                                    listed_vertices.Add(x);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z);
-
                                     listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z);
@@ -115,6 +111,11 @@ namespace TheDiplomWork
                                     listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y + 1);
                                     listed_vertices.Add(z);
+
+                                    listed_vertices.Add(x);
+                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(z);
+                                    
                                     //Back
                                     listed_vertices.Add(x);
                                     listed_vertices.Add(y);
@@ -154,12 +155,12 @@ namespace TheDiplomWork
                                     listed_vertices.Add(z);
 
                                     listed_vertices.Add(x + 1);
-                                    listed_vertices.Add(y + 1);
-                                    listed_vertices.Add(z);
-
-                                    listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z + 1);
+
+                                    listed_vertices.Add(x + 1);
+                                    listed_vertices.Add(y + 1);
+                                    listed_vertices.Add(z);
 
                                     listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y + 1);
@@ -176,8 +177,6 @@ namespace TheDiplomWork
                                     listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y + 1);
                                     listed_vertices.Add(z);
-
-                                    
 
                                     listed_vertices.Add(x + 1);
                                     listed_vertices.Add(y + 1);
@@ -199,7 +198,7 @@ namespace TheDiplomWork
                                     listed_vertices.Add(y);
                                     listed_vertices.Add(z + 1);
 
-                                    for (int i = 0; i < 6 * 4; i++)
+                                    for (int i = 0; i < 4 * 6; i++)
                                     {
                                         listed_colors.Add((float)XYZcube.color.R / 255);
                                         listed_colors.Add((float)XYZcube.color.G / 255);
