@@ -173,6 +173,15 @@ namespace TheDiplomWork
             //  Unbind our vertex array and shader.
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
+
+            gl.LineWidth(2.5f);
+            gl.Color(1.0, 0.0, 0.0);
+            gl.Begin(OpenGL.GL_LINES);
+            gl.Vertex(0.0, 0.0, 0.0);
+            gl.Vertex(15, 0, 0);
+            gl.End();
+
+
         }
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.

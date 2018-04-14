@@ -39,6 +39,7 @@ namespace TheDiplomWork
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
             openGL_Draw_Wrapped();
+            defaulttriangle();
         }
         public void openGL_Draw_Wrapped()
         {
@@ -78,9 +79,10 @@ namespace TheDiplomWork
 
             //  Create a perspective transformation.
 
-            gl.Perspective(60.0f, (double)openGLControl.Size.Width / (double)openGLControl.Size.Height, 0.0, 5000.0);
+            gl.Perspective(60.0f, (double)openGLControl.Size.Width / (double)openGLControl.Size.Height, 5, 100.0);
 
-            gl.LookAt(0, 0, 0, 0, 0, 0, 0, -1, 0);
+            //gl.LookAt(0, 0, 0, 0, 0, 0, 0, -1, 0);
+            gl.LookAt(-5, 5, -5, 0, 0, 0, 0, 1, 0);
             //  Set the modelview matrix.
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
 
@@ -89,6 +91,53 @@ namespace TheDiplomWork
 
             label_CursorPlus.Location = Mouse.ReturnToCenter();
             Cursor.Position = Mouse.ReturnToCenter();
+        }
+        float rotation = 0.0f;
+        private void defaulttriangle()
+        {
+            
+            //  Get the OpenGL object.
+            OpenGL gl = openGLControl.OpenGL;
+
+            //  Clear the color and depth buffer.
+            //gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+
+            //  Load the identity matrix.
+            gl.LoadIdentity();
+
+            //  Rotate around the Y axis.
+            gl.Rotate(rotation, 0.0f, 1.0f, 0.0f);
+
+            //  Draw a coloured pyramid.
+            gl.Begin(OpenGL.GL_TRIANGLES);
+            gl.Color(1.0f, 0.0f, 0.0f);
+            gl.Vertex(0.0f, 1.0f, 0.0f);
+            gl.Color(0.0f, 1.0f, 0.0f);
+            gl.Vertex(-1.0f, -1.0f, 1.0f);
+            gl.Color(0.0f, 0.0f, 1.0f);
+            gl.Vertex(1.0f, -1.0f, 1.0f);
+            gl.Color(1.0f, 0.0f, 0.0f);
+            gl.Vertex(0.0f, 1.0f, 0.0f);
+            gl.Color(0.0f, 0.0f, 1.0f);
+            gl.Vertex(1.0f, -1.0f, 1.0f);
+            gl.Color(0.0f, 1.0f, 0.0f);
+            gl.Vertex(1.0f, -1.0f, -1.0f);
+            gl.Color(1.0f, 0.0f, 0.0f);
+            gl.Vertex(0.0f, 1.0f, 0.0f);
+            gl.Color(0.0f, 1.0f, 0.0f);
+            gl.Vertex(1.0f, -1.0f, -1.0f);
+            gl.Color(0.0f, 0.0f, 1.0f);
+            gl.Vertex(-1.0f, -1.0f, -1.0f);
+            gl.Color(1.0f, 0.0f, 0.0f);
+            gl.Vertex(0.0f, 1.0f, 0.0f);
+            gl.Color(0.0f, 0.0f, 1.0f);
+            gl.Vertex(-1.0f, -1.0f, -1.0f);
+            gl.Color(0.0f, 1.0f, 0.0f);
+            gl.Vertex(-1.0f, -1.0f, 1.0f);
+            gl.End();
+
+            //  Nudge the rotation.
+            rotation += 3.0f;
         }
         /// <summary>
         /// The scene that we are rendering.
