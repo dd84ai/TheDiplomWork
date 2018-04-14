@@ -111,8 +111,8 @@ namespace TheDiplomWork
                     CreateVerticesForSquare();
                 }
 
-                if (SS.env.player.coords.Player_chunk_position.x != SS.env.player.coords.Player_chunk_position_OLD.x
-                || SS.env.player.coords.Player_chunk_position.z != SS.env.player.coords.Player_chunk_position_OLD.z)
+                if (Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > (SS.env.player.coords.RangeOfView / 2 - 1)
+                || Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > (SS.env.player.coords.RangeOfView / 2 - 1))
                 {
                     newThread = new Thread(Scene.DoWork);
                     newThread.Start(42);

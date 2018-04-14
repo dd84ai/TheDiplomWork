@@ -57,6 +57,39 @@ namespace TheDiplomWork
         {
             Memory_Init();
 
+            //FOR OG WAR
+            float special_range_x = CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width;
+            float special_range_z = CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width;
+
+            special_range_x *= (CubicalMemory.Cube.rangeOfTheEdge);
+            special_range_z *= (CubicalMemory.Cube.rangeOfTheEdge);
+
+            vertices.Add(0);
+            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
+            vertices.Add(0);
+
+            vertices.Add(0);
+            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
+            vertices.Add(0 + special_range_z);
+
+
+            vertices.Add(0 + special_range_x);
+            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
+            vertices.Add(0 + special_range_z);
+
+            vertices.Add(0 + special_range_x);
+            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
+            vertices.Add(0);
+
+            for (int k = 0; k < 4; k++)
+            {
+                //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
+                colors.Add((float)System.Drawing.Color.Gray.R / 255);
+                colors.Add((float)System.Drawing.Color.Gray.G / 255);
+                colors.Add((float)System.Drawing.Color.Gray.B / 255);
+            }
+
+
             float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
 
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
