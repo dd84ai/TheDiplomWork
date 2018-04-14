@@ -10,7 +10,7 @@ namespace TheDiplomWork
     class Keyboard
     {
         public static vec4 step_vector = new vec4();
-        static float step = 1.0f;
+        static float step = 0.25f;
         static float rotational_step = 0.05f;
         public static List<char> KeysActive = new List<char>();
 
@@ -30,10 +30,18 @@ namespace TheDiplomWork
         }
         public static void DoStep()
         {
-            step_vector = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * step_vector;
-            Scene.SS.env.player.coords.Player_precise_position.x -= step_vector.x;
-            Scene.SS.env.player.coords.Player_precise_position.y -= step_vector.y;
-            Scene.SS.env.player.coords.Player_precise_position.z -= step_vector.z;
+            for (int i = 0; i < 4; i++)
+            {
+                Wrapped_Do_Step();
+                
+            }
+        }
+        public static void Wrapped_Do_Step()
+        {
+            vec4 step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * step_vector;
+            Scene.SS.env.player.coords.Player_precise_position.x -= step_vector_extra.x;
+            Scene.SS.env.player.coords.Player_precise_position.y -= step_vector_extra.y;
+            Scene.SS.env.player.coords.Player_precise_position.z -= step_vector_extra.z;
         }
         public static void Wrapped_KeyPressed_Reaction(char key)
         {
@@ -65,6 +73,18 @@ namespace TheDiplomWork
 
                 case 'q':
                     Application.Exit(); break;
+
+                case 'r':
+                    Scene.SS.env.player.coords.Player_precise_position.Save("PlayerPosition");
+                    Scene.SS.env.player.coords.Player_rotational_view.Save("PlayerRotationalView");
+                    Application.Restart();
+                    Application.Exit(); break;
+                case 'c':
+                    Scene.SS.env.player.coords.Player_precise_position.x = Scene.SS.env.player.coords.Player_Default_position.x;
+                    Scene.SS.env.player.coords.Player_precise_position.y = Scene.SS.env.player.coords.Player_Default_position.y;
+                    Scene.SS.env.player.coords.Player_precise_position.z = Scene.SS.env.player.coords.Player_Default_position.z;
+                    Scene.SS.env.player.coords.Player_rotational_view = new GeneralProgrammingStuff.Point3D(3.14f / 2f, 0, 0);
+                    break;
 
                 default: break;
             }

@@ -15,10 +15,6 @@ namespace TheDiplomWork
         //Логично будет начинатся в углу и в низу.
         static Point3D Point_of_static_beginning = new Point3D(0, 0, 0);
 
-        //Player range of view
-        //From 0(only current) to more than 0.
-        static int Range_of_view_static = 2;
-
         static Random Rand = new Random();
         public class Cube
         {
@@ -76,12 +72,10 @@ namespace TheDiplomWork
         {
             public Point3D Point_of_beginning = new Point3D(Point_of_static_beginning);
 
-            public int Range_of_view = Range_of_view_static;
-
             /// <summary>
             /// Кол-во чанков в мире.
             /// </summary>
-            public static int Quantity_of_chunks_in_root = 8;
+            public static int Quantity_of_chunks_in_root = 16;
 
             public List<List<Chunk>> World_as_Whole = new List<List<Chunk>>();
             

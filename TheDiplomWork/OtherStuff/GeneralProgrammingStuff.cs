@@ -114,6 +114,39 @@ namespace TheDiplomWork
                     + y.ToString("G2") + " ; "
                 +z.ToString("G2");
             }
+            string Path = Interface.ProjectPath + "\\" + "Save" + "\\";
+            public void Save(string Name)
+            {
+                try
+                {
+                    using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(Path + Name + ".dat"))
+                {
+                    file.WriteLine(x.ToString("E15"));
+                    file.WriteLine(y.ToString("E15"));
+                    file.WriteLine(z.ToString("E15"));
+                }
+                }
+                catch (Exception ThrowItAway)
+                {
+                }
+            }
+            public void TryLoad(string Name)
+            {
+                try
+                {
+                    using (System.IO.StreamReader file =
+                new System.IO.StreamReader(Path + Name + ".dat"))
+                    {
+                        x = Convert.ToSingle(file.ReadLine());
+                        y = Convert.ToSingle(file.ReadLine());
+                        z = Convert.ToSingle(file.ReadLine());
+                    }
+                }
+                catch (Exception ThrowItAway)
+                {
+                }
+            }
         }
         public class Point2Int
         {

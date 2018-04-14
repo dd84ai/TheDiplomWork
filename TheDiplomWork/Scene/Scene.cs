@@ -92,7 +92,10 @@ namespace TheDiplomWork
             CreateVerticesForSquare();
 
             var handle = GetConsoleWindow();
-            //ShowWindow(handle, SW_HIDE);
+            ShowWindow(handle, SW_HIDE);
+
+            Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
+            Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
         }
 
         Thread newThread;
@@ -103,14 +106,18 @@ namespace TheDiplomWork
         /// 
         public void Draw(OpenGL gl)
         {
-            if (SS.env.player.coords.RangedViewBool && !newThread.IsAlive)
+            if (SS.env.player.coords.RangeReloader && !newThread.IsAlive)
             {
                 if (!SS.CopiedLastResult)
                 {
+                    vertexBufferArray.Delete(gl);
                     SS.CopyToReady();
                     CreateVerticesForSquare();
+                    GC.Collect();
                 }
 
+                if (SS.env.player.coords.Player_chunk_position.x >= 0 && SS.env.player.coords.Player_chunk_position.x < CubicalMemory.World.Quantity_of_chunks_in_root
+                    && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
                 if (Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > (SS.env.player.coords.RangeOfView / 2 - 1)
                 || Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > (SS.env.player.coords.RangeOfView / 2 - 1))
                 {
