@@ -143,16 +143,12 @@ namespace TheDiplomWork
 
         public void Draw_Wrapped(OpenGL gl)
         {
-
             //  Create a view matrix to move us back a bit.
             viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,
                 -SS.env.player.coords.Player_precise_position.y,
                 -SS.env.player.coords.Player_precise_position.z));
 
             rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
-            //*glm.rotate(new mat4(1.0f), 1.0f, new vec3(SS.env.player.coords.Player_rotational_view.x,
-            //SS.env.player.coords.Player_rotational_view.y,
-            //SS.env.player.coords.Player_rotational_view.z));
 
             //  Clear the scene.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
@@ -173,13 +169,6 @@ namespace TheDiplomWork
             //  Unbind our vertex array and shader.
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
-
-            //gl.LineWidth(2.5f);
-            //gl.Color(1.0, 0.0, 0.0);
-            //gl.Begin(OpenGL.GL_LINES);
-            //gl.Vertex(0.0, 0.0, 0.0);
-            //gl.Vertex(15, 0, 0);
-            //gl.End();
         }
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.
