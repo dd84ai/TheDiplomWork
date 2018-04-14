@@ -53,33 +53,151 @@ namespace TheDiplomWork
         {
             counter++;
         }
+        class Quads
+        {
+            public static void Draw_Quad_Perpendecular_to_OSx(ref List<float> vertices,
+                float start_y, float start_z,
+               float end_y, float end_z,
+               float height)
+            {
+                vertices.Add(height);
+                vertices.Add(start_y);
+                vertices.Add(start_z);
+
+                vertices.Add(height);
+                vertices.Add(start_y);
+                vertices.Add(end_z);
+
+                vertices.Add(height);
+                vertices.Add(end_y);
+                vertices.Add(end_z);
+
+                vertices.Add(height);
+                vertices.Add(end_y);
+                vertices.Add(start_z);
+            }
+            //Right
+            public static void Draw_Quad_Perpendecular_to_OSy(ref List<float> vertices,
+                float start_x, float start_z,
+               float end_x, float end_z,
+               float height)
+            {
+                vertices.Add(start_x);
+                vertices.Add(height);
+                vertices.Add(start_z);
+
+                vertices.Add(start_x);
+                vertices.Add(height);
+                vertices.Add(end_z);
+
+                vertices.Add(end_x);
+                vertices.Add(height);
+                vertices.Add(end_z);
+
+                vertices.Add(end_x);
+                vertices.Add(height);
+                vertices.Add(start_z);
+            }
+            public static void Draw_Quad_Perpendecular_to_OSz(ref List<float> vertices,
+                float start_x, float start_y,
+               float end_x, float end_y,
+               float height)
+            {
+                vertices.Add(start_x);
+                vertices.Add(start_y);
+                vertices.Add(height);
+
+                vertices.Add(end_x);
+                vertices.Add(start_y);
+                vertices.Add(height);
+
+                vertices.Add(end_x);
+                vertices.Add(end_y);
+                vertices.Add(height);
+
+                vertices.Add(start_x);
+                vertices.Add(end_y);
+                vertices.Add(height);
+            }
+            public static void Draw_Quad_Full(ref List<float> vertices,
+                float x, float y, float z, float localed_range)
+            {
+                //Front
+                Quads.Draw_Quad_Perpendecular_to_OSz
+                (ref vertices, //Where_to_write
+                x, //Start_x
+                y, //Start_z
+                x + localed_range, //End_x
+                y + localed_range, //End_z
+                z //Height
+                );
+
+                //Back
+                Quads.Draw_Quad_Perpendecular_to_OSz
+                (ref vertices, //Where_to_write
+                x, //Start_x
+                y, //Start_z
+                x + localed_range, //End_x
+                y + localed_range, //End_z
+                z + localed_range //Height
+                );
+
+                //Left
+                Quads.Draw_Quad_Perpendecular_to_OSx
+                (ref vertices, //Where_to_write
+                y, //Start_x
+                z, //Start_z
+                y + localed_range, //End_x
+                z + localed_range, //End_z
+                x //Height
+                );
+
+                //Right
+                Quads.Draw_Quad_Perpendecular_to_OSx
+                (ref vertices, //Where_to_write
+                y, //Start_x
+                z, //Start_z
+                y + localed_range, //End_x
+                z + localed_range, //End_z
+                x + localed_range //Height
+                );
+
+                //Top
+                Quads.Draw_Quad_Perpendecular_to_OSy
+                (ref vertices, //Where_to_write
+                x, //Start_x
+                z, //Start_z
+                x + localed_range, //End_x
+                z + localed_range, //End_z
+                y + localed_range //Height
+                );
+
+                //Bottom
+                Quads.Draw_Quad_Perpendecular_to_OSy
+                (ref vertices, //Where_to_write
+                x, //Start_x
+                z, //Start_z
+                x + localed_range, //End_x
+                z + localed_range, //End_z
+                y //Height
+                );
+            }
+        }
+        
         public void Initialization()
         {
             Memory_Init();
+            float x = 0, y = 0, z = 0;
 
             //FOR OG WAR
-            float special_range_x = CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width;
-            float special_range_z = CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width;
-
-            special_range_x *= (CubicalMemory.Cube.rangeOfTheEdge);
-            special_range_z *= (CubicalMemory.Cube.rangeOfTheEdge);
-
-            vertices.Add(0);
-            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
-            vertices.Add(0);
-
-            vertices.Add(0);
-            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
-            vertices.Add(0 + special_range_z);
-
-
-            vertices.Add(0 + special_range_x);
-            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
-            vertices.Add(0 + special_range_z);
-
-            vertices.Add(0 + special_range_x);
-            vertices.Add(0f * (CubicalMemory.Cube.rangeOfTheEdge));
-            vertices.Add(0);
+            Quads.Draw_Quad_Perpendecular_to_OSy
+                (ref vertices, //Where_to_write
+                0, //Start_x
+                0, //Start_z
+                0 + CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
+                0 + CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge, //End_z
+                0 //Height
+                );
 
             for (int k = 0; k < 4; k++)
             {
@@ -107,143 +225,13 @@ namespace TheDiplomWork
                                 //if (counter % 1000 == 0)
                                 //    Console.WriteLine($"{counter}\\{Quantity_of_total_cubes}");
 
-                                
-                                //int Chunk_number =
-                                //    XYworld.y * CubicalMemory.World.Quantity_of_chunks_in_root
-                                //    + XYworld.x;
-                                //int Cube_number = Chunk_number
-                                //* Quantity_of_cubes_per_chunk +
-                                //    (CubicalMemory.Chunk.Width * CubicalMemory.Chunk.Length
-                                //    * (XYZcube.z))
-                                //    + (CubicalMemory.Chunk.Width
-                                //    * (XYZcube.y))
-                                //    + XYZcube.x;
-
-                                //if (vertices[cube_number * 3 + 0] == 1
-                                //    || vertices[cube_number * 3 + 1] == 1
-                                //    || vertices[cube_number * 3 + 2] == 1)
-                                //{
-                                //    console.writeline("error");
-                                //    console.readkey();
-                                //}
-
-                                //vertices[Cube_number * 3 + 0] = 1;
-                                //vertices[Cube_number * 3 + 1] = 1;
-                                //vertices[Cube_number * 3 + 2] = 1;
-
                                 if (XYZcube.IsFilled)
                                 {
-                                    float x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;
-                                    float y = XYZcube.y;
-                                    float z = XYworld.z * CubicalMemory.Chunk.Length + XYZcube.z;
+                                    CalculateFromMaptoGraphical(XYworld, XYZcube, ref x, ref y, ref z);
 
-                                    x *= (CubicalMemory.Cube.rangeOfTheEdge);
-                                    y *= (CubicalMemory.Cube.rangeOfTheEdge);
-                                    z *= (CubicalMemory.Cube.rangeOfTheEdge);
-
-                                    //Front
-                                    vertices.Add(x );
-                                    vertices.Add(y );
-                                    vertices.Add(z );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y );
-                                    vertices.Add(z );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z );
-
-                                    vertices.Add(x );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z );
-                                    //Back
-                                    vertices.Add(x );
-                                    vertices.Add(y );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y );
-                                    vertices.Add(z + localed_range );
-
-                                    //Left
-                                    vertices.Add(x );
-                                    vertices.Add(y );
-                                    vertices.Add(z );
-
-                                    vertices.Add(x );
-                                    vertices.Add(y );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z );
-
-                                    //Right
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y );
-                                    vertices.Add(z );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z );
-
-                                    //Top
-                                    vertices.Add(x );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z );
-
-                                    vertices.Add(x );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y + localed_range );
-                                    vertices.Add(z );
-
-                                    //Bottom
-                                    vertices.Add(x );
-                                    vertices.Add(y );
-                                    vertices.Add(z );
-
-                                    vertices.Add(x );
-                                    vertices.Add(y );
-                                    vertices.Add(z + localed_range );
+                                    Quads.Draw_Quad_Full(ref vertices, x, y, z, localed_range);
 
 
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y );
-                                    vertices.Add(z + localed_range );
-
-                                    vertices.Add(x + localed_range );
-                                    vertices.Add(y );
-                                    vertices.Add(z );
-
-  
                                     for (int k = 0; k < 4 * 6; k++)
                                     {
                                         //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
@@ -251,57 +239,22 @@ namespace TheDiplomWork
                                         colors.Add((float)XYZcube.color.G / 255);
                                         colors.Add((float)XYZcube.color.B / 255);
                                     }
-                                    /*for (int i = 0; i < 4; i++)
-                                    {
-                                        listed_colors.Add((float)255 / 255);
-                                        listed_colors.Add((float)0 / 255);
-                                        listed_colors.Add((float)0 / 255);
-                                    }
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        listed_colors.Add((float)0 / 255);
-                                        listed_colors.Add((float)255 / 255);
-                                        listed_colors.Add((float)0 / 255);
-                                    }
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        listed_colors.Add((float)0 / 255);
-                                        listed_colors.Add((float)0 / 255);
-                                        listed_colors.Add((float)255 / 255);
-                                    }
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        listed_colors.Add((float)255 / 255);
-                                        listed_colors.Add((float)255 / 255);
-                                        listed_colors.Add((float)0 / 255);
-                                    }
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        listed_colors.Add((float)255 / 255);
-                                        listed_colors.Add((float)0 / 255);
-                                        listed_colors.Add((float)255 / 255);
-                                    }
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        listed_colors.Add((float)0 / 255);
-                                        listed_colors.Add((float)255 / 255);
-                                        listed_colors.Add((float)255 / 255);
-                                    }*/
                                 }
                             }
                 }
 
-            //foreach (var item in vertices)
-            //    if (item != 1)
-            //    {
-            //        Console.WriteLine("Error");
-            //        Console.ReadKey();
-            //    }
-            //Console.WriteLine("Initialization");
-
             CopiedLastResult = false;
         }
-        
+        public void CalculateFromMaptoGraphical(CubicalMemory.Chunk XYworld, CubicalMemory.Cube XYZcube, ref float x, ref float y, ref float z)
+        {
+            x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;
+            y = XYZcube.y;
+            z = XYworld.z * CubicalMemory.Chunk.Length + XYZcube.z;
+
+            x *= (CubicalMemory.Cube.rangeOfTheEdge);
+            y *= (CubicalMemory.Cube.rangeOfTheEdge);
+            z *= (CubicalMemory.Cube.rangeOfTheEdge);
+        }
         public bool FirstInitialization = false;
         public bool CopiedLastResult = false;
         public int Quantity()

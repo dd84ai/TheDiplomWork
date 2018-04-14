@@ -39,7 +39,7 @@ namespace TheDiplomWork
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
             openGL_Draw_Wrapped();
-            defaulttriangle();
+            //defaulttriangle();
         }
         public void openGL_Draw_Wrapped()
         {
