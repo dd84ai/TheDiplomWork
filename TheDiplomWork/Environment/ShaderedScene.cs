@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
+using GlmNet;
 namespace TheDiplomWork
 {
     public class ShaderedScene
@@ -89,15 +90,25 @@ namespace TheDiplomWork
             }
             static void Process_Point(float _x, float _y, float _z, OpenGL gl)
             {
-                vertices.Add(_x);
-                vertices.Add(_y);
-                vertices.Add(_z);
+                if (gl != null)
+                {
+                    gl.Vertex(_x, _y, _z);
+                }
+                else
+                {
+                    vertices.Add(_x);
+                    vertices.Add(_y);
+                    vertices.Add(_z);
+                }
             }
             public static void Draw_Quad_Full(
                 float x, float y, float z, float localed_range, OpenGL gl = null, uint GLmod = 0)
             {
                 if (gl != null)
                 {
+                    
+                    gl.Color(0.0f, 0.0f, 0.0f);
+                    gl.LoadIdentity();
                     gl.Begin(GLmod);
                 }
 
@@ -172,12 +183,24 @@ namespace TheDiplomWork
                 }
             }
         }
-        public void OpenGLDraw(OpenGL gl)
+        vec4 CalculatingThing = new vec4(0, 0, 0, 0);
+        public void OpenGLDraw(OpenGL gl,mat4 matrix_all_inclusive)
         {
             CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
                 Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
 
-            //Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_LINE_STRIP);
+            CalculatingThing.x = x;
+            CalculatingThing.y = y;
+            CalculatingThing.z = z;
+            CalculatingThing.w = 0;
+
+            CalculatingThing = matrix_all_inclusive * CalculatingThing;
+
+            x = CalculatingThing.x;
+            y = CalculatingThing.y;
+            z = CalculatingThing.z;
+
+            Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_QUADS);
         }
         float x = 0, y = 0, z = 0;
         float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
