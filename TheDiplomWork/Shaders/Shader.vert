@@ -10,7 +10,7 @@ uniform mat4 rotMatrix;
 
 void main(void) 
 {
-	gl_Position = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix * vec4(in_Position, 1.0);
+	gl_Position = (projectionMatrix *rotMatrix *  viewMatrix * modelMatrix) * vec4(in_Position, 1.0);
 
 	pass_Color = in_Color;
 }

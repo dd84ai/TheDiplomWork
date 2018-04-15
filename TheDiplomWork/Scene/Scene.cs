@@ -164,13 +164,13 @@ namespace TheDiplomWork
             vertexBufferArray.Bind(gl);
 
             //  Draw the square.
-            //gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Quantity());
+            gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Quantity());
 
             //  Unbind our vertex array and shader.
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
 
-            SS.OpenGLDraw(gl, rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * modelMatrix);
+            SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );
         }
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.

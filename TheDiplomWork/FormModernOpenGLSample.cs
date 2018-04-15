@@ -81,11 +81,10 @@ namespace TheDiplomWork
             gl.LoadIdentity();
 
             //  Create a perspective transformation.
+            gl.Perspective(60.0f, (double)openGLControl.Size.Width / (double)openGLControl.Size.Height, 0.1f, 10000.0);
 
-            gl.Perspective(60.0f, (double)openGLControl.Size.Width / (double)openGLControl.Size.Height, 5, 10000.0);
-
-            ////gl.LookAt(0, 0, 0, 0, 0, 0, 0, -1, 0);
-            gl.LookAt(-5, 5, -5, 0, 0, 0, 0, 1, 0);
+            gl.LookAt(0, 0, 5, 0, 0, 0, 0, -1, 0);
+            //gl.LookAt(-5, 5, -5, 0, 0, 0, 0, -1, 0);
             //  Set the modelview matrix.
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
 
