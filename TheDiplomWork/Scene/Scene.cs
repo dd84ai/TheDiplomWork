@@ -204,11 +204,11 @@ namespace TheDiplomWork
 
             //  Create a vertex buffer for the vertex data.
             vertexDataBuffer.Bind(gl);
-            vertexDataBuffer.SetData(gl, 0, ShaderedScene.vertices.ToArray(), false, 3);
+            vertexDataBuffer.SetData(gl, 0, ShaderedScene.vertices_arrayed, false, 3);
 
             //  Now do the same for the colour data.
             colourDataBuffer.Bind(gl);
-            colourDataBuffer.SetData(gl, 1, ShaderedScene.colors.ToArray(), false, 3);
+            colourDataBuffer.SetData(gl, 1, ShaderedScene.colors_arrayed, false, 3);
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);

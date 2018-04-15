@@ -8,6 +8,7 @@ namespace TheDiplomWork
 {
     public class CubicalMemory : GeneralProgrammingStuff
     {
+        public static int Seed = 46;
         //Flat Ground from height to height
         static int FromHeight = 8, ToHeight = 10;
 
@@ -15,7 +16,7 @@ namespace TheDiplomWork
         //Логично будет начинатся в углу и в низу.
         static Point3D Point_of_static_beginning = new Point3D(0, 0, 0);
 
-        static Random Rand = new Random();
+        static Random Rand = new Random(Seed);
         public class Cube
         {
             /// <summary>

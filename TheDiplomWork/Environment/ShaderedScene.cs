@@ -264,7 +264,11 @@ namespace TheDiplomWork
                 }
 
             CopiedLastResult = false;
+            vertices_arrayed = vertices.ToArray();
+            colors_arrayed = colors.ToArray();
         }
+        public static float[] vertices_arrayed;
+        public static float[] colors_arrayed;
         public void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {
             x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;
