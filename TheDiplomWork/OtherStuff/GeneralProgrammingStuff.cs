@@ -182,6 +182,12 @@ namespace TheDiplomWork
             {
                 x = input.x; y = input.y; z = input.z;
             }
+            public override string ToString()
+            {
+                return "Point2Int: " + x.ToString("G2") + " ; "
+                    + y.ToString("G2") + " ; "
+                + z.ToString("G2");
+            }
         }
 
         public static System.Drawing.Color ColorSwitch(int choice)

@@ -36,9 +36,14 @@ namespace TheDiplomWork
                 
             }
         }
-        public static void Wrapped_Do_Step(vec4 _step, ref GeneralProgrammingStuff.Point3D WhatToMove)
+        public static void Wrapped_Do_Step(vec4 _step, ref GeneralProgrammingStuff.Point3D WhatToMove, bool SensetivityToY = false)
         {
-            vec4 step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * _step;
+            vec4 step_vector_extra;
+
+            if (!SensetivityToY)
+            step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * _step;
+            else
+            step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, -1.0f, 0.0f)) * glm.rotate(-Scene.SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, -1.0f)) * _step; //* glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) 8* _step;
             WhatToMove.x -= step_vector_extra.x;
             WhatToMove.y -= step_vector_extra.y;
             WhatToMove.z -= step_vector_extra.z;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpGL;
 namespace TheDiplomWork
 {
     public class ShaderedScene
@@ -55,10 +56,14 @@ namespace TheDiplomWork
         }
         class Quads
         {
+            public void Add_Point(float _x, float _y, float _z)
+            {
+
+            }
             public static void Draw_Quad_Perpendecular_to_OSx(ref List<float> vertices,
                 float start_y, float start_z,
                float end_y, float end_z,
-               float height)
+               float height, OpenGL gl)
             {
                 vertices.Add(height);
                 vertices.Add(start_y);
@@ -80,7 +85,7 @@ namespace TheDiplomWork
             public static void Draw_Quad_Perpendecular_to_OSy(ref List<float> vertices,
                 float start_x, float start_z,
                float end_x, float end_z,
-               float height)
+               float height, OpenGL gl)
             {
                 vertices.Add(start_x);
                 vertices.Add(height);
@@ -101,7 +106,7 @@ namespace TheDiplomWork
             public static void Draw_Quad_Perpendecular_to_OSz(ref List<float> vertices,
                 float start_x, float start_y,
                float end_x, float end_y,
-               float height)
+               float height, OpenGL gl)
             {
                 vertices.Add(start_x);
                 vertices.Add(start_y);
@@ -120,8 +125,13 @@ namespace TheDiplomWork
                 vertices.Add(height);
             }
             public static void Draw_Quad_Full(ref List<float> vertices,
-                float x, float y, float z, float localed_range)
+                float x, float y, float z, float localed_range, OpenGL gl = null, SharpGL.Enumerations.BeginMode mod = 0)
             {
+                if (gl != null)
+                {
+                    gl.Begin(mod);
+                }
+
                 //Front
                 Quads.Draw_Quad_Perpendecular_to_OSz
                 (ref vertices, //Where_to_write
@@ -129,8 +139,8 @@ namespace TheDiplomWork
                 y, //Start_z
                 x + localed_range, //End_x
                 y + localed_range, //End_z
-                z //Height
-                );
+                z, //Height
+                gl);
 
                 //Back
                 Quads.Draw_Quad_Perpendecular_to_OSz
@@ -139,7 +149,8 @@ namespace TheDiplomWork
                 y, //Start_z
                 x + localed_range, //End_x
                 y + localed_range, //End_z
-                z + localed_range //Height
+                z + localed_range, //Height
+                gl //Height
                 );
 
                 //Left
@@ -149,7 +160,8 @@ namespace TheDiplomWork
                 z, //Start_z
                 y + localed_range, //End_x
                 z + localed_range, //End_z
-                x //Height
+                x, //Height
+                gl //Height
                 );
 
                 //Right
@@ -159,7 +171,8 @@ namespace TheDiplomWork
                 z, //Start_z
                 y + localed_range, //End_x
                 z + localed_range, //End_z
-                x + localed_range //Height
+                x + localed_range, //Height
+                gl //Height
                 );
 
                 //Top
@@ -169,7 +182,8 @@ namespace TheDiplomWork
                 z, //Start_z
                 x + localed_range, //End_x
                 z + localed_range, //End_z
-                y + localed_range //Height
+                y + localed_range, //Height
+                gl //Height
                 );
 
                 //Bottom
@@ -179,8 +193,14 @@ namespace TheDiplomWork
                 z, //Start_z
                 x + localed_range, //End_x
                 z + localed_range, //End_z
-                y //Height
+                y, //Height
+                gl //Height
                 );
+
+                if (gl != null)
+                {
+                    gl.End();
+                }
             }
         }
         
@@ -196,8 +216,8 @@ namespace TheDiplomWork
                 0, //Start_z
                 0 + CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
                 0 + CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge, //End_z
-                0 //Height
-                );
+                0, //Height
+                null);
 
             for (int k = 0; k < 4; k++)
             {

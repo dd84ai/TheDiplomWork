@@ -23,7 +23,7 @@ namespace TheDiplomWork
             public Point2Int Player_chunk_position = new Point2Int(0,0);
             public Point2Int Player_chunk_position_OLD = new Point2Int(0, 0);
 
-            public Point2Int Player_cubical_position = new Point2Int(0,0);
+            public Point3Int Player_cubical_position = new Point3Int(0,0,0);
 
             public bool RangeReloader = true;
             public int RangeOfView = 4;
@@ -36,13 +36,14 @@ namespace TheDiplomWork
             /// <summary>
             /// Recalculate coordinates from player graphic position to chunk & cubical position.
             /// </summary>
-            public void Reverse_presice_to_map_coords(Point3D _precise, ref Point2Int _chunk, ref Point2Int _cubical)
+            public void Reverse_presice_to_map_coords(Point3D _precise, ref Point2Int _chunk, ref Point3Int _cubical)
             {
                 _chunk.x = (int)((_precise.x / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Width);
                 _chunk.z = (int)((_precise.z / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Length);
 
                 _cubical.x = (int)(_precise.x / (double)CubicalMemory.Cube.rangeOfTheEdge);
                 _cubical.z = (int)(_precise.z / (double)CubicalMemory.Cube.rangeOfTheEdge);
+                _cubical.y = (int)(_precise.y / (double)CubicalMemory.Cube.rangeOfTheEdge);
 
                 _cubical.x -= _chunk.x * CubicalMemory.Chunk.Width;
                 _cubical.z -= _chunk.z * CubicalMemory.Chunk.Length;
@@ -50,14 +51,14 @@ namespace TheDiplomWork
 
             public Point3D Player_precise_lookforcube = new Point3D(0, 0, 0);
             public Point2Int Player_chunk_lookforcube = new Point2Int(0, 0);
-            public Point2Int Player_cubical_lookforcube = new Point2Int(0, 0);
+            public Point3Int Player_cubical_lookforcube = new Point3Int(0, 0, 0);
             vec4 StepForARequiedCube = new vec4(0,0, 0.25f*CubicalMemory.Cube.rangeOfTheEdge*4,0);
             
             void LookForCube()
             {
                 GeneralProgrammingStuff.Point3D.CopyToFrom(
                     ref Player_precise_lookforcube, Player_precise_position);
-                Keyboard.Wrapped_Do_Step(StepForARequiedCube, ref Player_precise_lookforcube);
+                Keyboard.Wrapped_Do_Step(StepForARequiedCube, ref Player_precise_lookforcube,true);
                 Reverse_presice_to_map_coords(Player_precise_lookforcube, ref Player_chunk_lookforcube, ref Player_cubical_lookforcube);
             }
             /// <summary>
