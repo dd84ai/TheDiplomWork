@@ -12,7 +12,7 @@ namespace TheDiplomWork
         public Environment env = new Environment();
 
         public static List<float> vertices = new List<float>();
-        public List<float> colors = new List<float>();
+        public static List<float> colors = new List<float>();
         public ShaderedScene()
         {
             //Initialization();

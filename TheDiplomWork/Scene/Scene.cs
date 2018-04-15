@@ -45,6 +45,9 @@ namespace TheDiplomWork
 
         //  The vertex buffer array which contains the vertex and colour buffers.
         static VertexBufferArray vertexBufferArray;
+
+        static VertexBuffer vertexDataBuffer;
+        static VertexBuffer colourDataBuffer;
         //VertexBufferArray vertexBufferArray2;
 
         //  The shader program for our vertex and fragment shader.
@@ -60,6 +63,7 @@ namespace TheDiplomWork
         public async void Initialise(OpenGL gl, float width, float height)
         {
             _gl = gl;
+            CreateVerticesForSquare_FirstInit();
             Console.WriteLine("Starting My");
             newThread = new Thread(Scene.DoWork);
             newThread.Start(42);
@@ -176,28 +180,39 @@ namespace TheDiplomWork
         /// Creates the geometry for the square, also creating the vertex buffer array.
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
-        public static void CreateVerticesForSquare()
+
+        public static void CreateVerticesForSquare_FirstInit()
         {
             OpenGL gl = _gl;
             //  Create the vertex array object.
             vertexBufferArray = new VertexBufferArray();
             vertexBufferArray.Create(gl);
+
+            //  Create a vertex buffer for the vertex data.
+            vertexDataBuffer = new VertexBuffer();
+            vertexDataBuffer.Create(gl);
+
+            //  Now do the same for the colour data.
+            colourDataBuffer = new VertexBuffer();
+            colourDataBuffer.Create(gl);
+        }
+        public static void CreateVerticesForSquare()
+        {
+            OpenGL gl = _gl;
+            //  Create the vertex array object.
             vertexBufferArray.Bind(gl);
 
             //  Create a vertex buffer for the vertex data.
-            var vertexDataBuffer = new VertexBuffer();
-            vertexDataBuffer.Create(gl);
             vertexDataBuffer.Bind(gl);
             vertexDataBuffer.SetData(gl, 0, ShaderedScene.vertices.ToArray(), false, 3);
 
             //  Now do the same for the colour data.
-            var colourDataBuffer = new VertexBuffer();
-            colourDataBuffer.Create(gl);
             colourDataBuffer.Bind(gl);
-            colourDataBuffer.SetData(gl, 1, SS.colors.ToArray(), false, 3);
+            colourDataBuffer.SetData(gl, 1, ShaderedScene.colors.ToArray(), false, 3);
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
+
         }
     }
 }
