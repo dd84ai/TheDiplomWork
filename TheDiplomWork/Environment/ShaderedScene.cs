@@ -10,7 +10,7 @@ namespace TheDiplomWork
     {
         public Environment env = new Environment();
 
-        public List<float> vertices = new List<float>();
+        public static List<float> vertices = new List<float>();
         public List<float> colors = new List<float>();
         public ShaderedScene()
         {
@@ -56,85 +56,54 @@ namespace TheDiplomWork
         }
         public class Quads
         {
-            public void Add_Point(float _x, float _y, float _z)
-            {
-
-            }
-            public static void Draw_Quad_Perpendecular_to_OSx(ref List<float> vertices,
+            public static void Draw_Quad_Perpendecular_to_OSx(
                 float start_y, float start_z,
                float end_y, float end_z,
                float height, OpenGL gl)
             {
-                vertices.Add(height);
-                vertices.Add(start_y);
-                vertices.Add(start_z);
-
-                vertices.Add(height);
-                vertices.Add(start_y);
-                vertices.Add(end_z);
-
-                vertices.Add(height);
-                vertices.Add(end_y);
-                vertices.Add(end_z);
-
-                vertices.Add(height);
-                vertices.Add(end_y);
-                vertices.Add(start_z);
+                Process_Point(height, start_y, start_z, gl);
+                Process_Point(height, start_y, end_z, gl);
+                Process_Point(height, end_y, end_z, gl);
+                Process_Point(height, end_y, start_z, gl);
             }
             //Right
-            public static void Draw_Quad_Perpendecular_to_OSy(ref List<float> vertices,
+            public static void Draw_Quad_Perpendecular_to_OSy(
                 float start_x, float start_z,
                float end_x, float end_z,
                float height, OpenGL gl)
             {
-                vertices.Add(start_x);
-                vertices.Add(height);
-                vertices.Add(start_z);
-
-                vertices.Add(start_x);
-                vertices.Add(height);
-                vertices.Add(end_z);
-
-                vertices.Add(end_x);
-                vertices.Add(height);
-                vertices.Add(end_z);
-
-                vertices.Add(end_x);
-                vertices.Add(height);
-                vertices.Add(start_z);
+                Process_Point(start_x, height, start_z, gl);
+                Process_Point(start_x, height, end_z, gl);
+                Process_Point(end_x, height, end_z, gl);
+                Process_Point(end_x, height, start_z, gl);
             }
-            public static void Draw_Quad_Perpendecular_to_OSz(ref List<float> vertices,
+            public static void Draw_Quad_Perpendecular_to_OSz(
                 float start_x, float start_y,
                float end_x, float end_y,
                float height, OpenGL gl)
             {
-                vertices.Add(start_x);
-                vertices.Add(start_y);
-                vertices.Add(height);
-
-                vertices.Add(end_x);
-                vertices.Add(start_y);
-                vertices.Add(height);
-
-                vertices.Add(end_x);
-                vertices.Add(end_y);
-                vertices.Add(height);
-
-                vertices.Add(start_x);
-                vertices.Add(end_y);
-                vertices.Add(height);
+                Process_Point(start_x, start_y, height, gl);
+                Process_Point(end_x, start_y, height, gl);
+                Process_Point(end_x, end_y, height, gl);
+                Process_Point(start_x, end_y, height, gl);
             }
-            public static void Draw_Quad_Full(ref List<float> vertices,
-                float x, float y, float z, float localed_range, OpenGL gl = null, SharpGL.Enumerations.BeginMode mod = 0)
+            static void Process_Point(float _x, float _y, float _z, OpenGL gl)
+            {
+                vertices.Add(_x);
+                vertices.Add(_y);
+                vertices.Add(_z);
+            }
+            public static void Draw_Quad_Full(
+                float x, float y, float z, float localed_range, OpenGL gl = null, uint GLmod = 0)
             {
                 if (gl != null)
                 {
-                    gl.Begin(mod);
+                    gl.Begin(GLmod);
                 }
 
                 //Front
                 Quads.Draw_Quad_Perpendecular_to_OSz
-                (ref vertices, //Where_to_write
+                (
                 x, //Start_x
                 y, //Start_z
                 x + localed_range, //End_x
@@ -144,7 +113,7 @@ namespace TheDiplomWork
 
                 //Back
                 Quads.Draw_Quad_Perpendecular_to_OSz
-                (ref vertices, //Where_to_write
+                (
                 x, //Start_x
                 y, //Start_z
                 x + localed_range, //End_x
@@ -155,7 +124,7 @@ namespace TheDiplomWork
 
                 //Left
                 Quads.Draw_Quad_Perpendecular_to_OSx
-                (ref vertices, //Where_to_write
+                (
                 y, //Start_x
                 z, //Start_z
                 y + localed_range, //End_x
@@ -166,7 +135,7 @@ namespace TheDiplomWork
 
                 //Right
                 Quads.Draw_Quad_Perpendecular_to_OSx
-                (ref vertices, //Where_to_write
+                (
                 y, //Start_x
                 z, //Start_z
                 y + localed_range, //End_x
@@ -177,7 +146,7 @@ namespace TheDiplomWork
 
                 //Top
                 Quads.Draw_Quad_Perpendecular_to_OSy
-                (ref vertices, //Where_to_write
+                (
                 x, //Start_x
                 z, //Start_z
                 x + localed_range, //End_x
@@ -188,7 +157,7 @@ namespace TheDiplomWork
 
                 //Bottom
                 Quads.Draw_Quad_Perpendecular_to_OSy
-                (ref vertices, //Where_to_write
+                (
                 x, //Start_x
                 z, //Start_z
                 x + localed_range, //End_x
@@ -203,18 +172,22 @@ namespace TheDiplomWork
                 }
             }
         }
-        public void OpenGLDraw()
+        public void OpenGLDraw(OpenGL gl)
         {
-            //env.player.coords.P
+            CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
+                Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
+
+            //Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_LINE_STRIP);
         }
+        float x = 0, y = 0, z = 0;
+        float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
         public void Initialization()
         {
             Memory_Init();
-            float x = 0, y = 0, z = 0;
 
             //FOR OG WAR
             Quads.Draw_Quad_Perpendecular_to_OSy
-                (ref vertices, //Where_to_write
+                (
                 0, //Start_x
                 0, //Start_z
                 0 + CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
@@ -229,9 +202,6 @@ namespace TheDiplomWork
                 colors.Add((float)System.Drawing.Color.Gray.G / 255);
                 colors.Add((float)System.Drawing.Color.Gray.B / 255);
             }
-
-
-            float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
 
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
                 foreach (var XYworld in Xworld)
@@ -252,7 +222,7 @@ namespace TheDiplomWork
                                 {
                                     CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
 
-                                    Quads.Draw_Quad_Full(ref vertices, x, y, z, localed_range);
+                                    Quads.Draw_Quad_Full(x, y, z, localed_range);
 
                                     for (int k = 0; k < 4 * 6; k++)
                                     {

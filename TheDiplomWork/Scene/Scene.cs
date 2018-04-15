@@ -170,7 +170,7 @@ namespace TheDiplomWork
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
 
-            SS.OpenGLDraw();
+            SS.OpenGLDraw(gl);
         }
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.
@@ -188,7 +188,7 @@ namespace TheDiplomWork
             var vertexDataBuffer = new VertexBuffer();
             vertexDataBuffer.Create(gl);
             vertexDataBuffer.Bind(gl);
-            vertexDataBuffer.SetData(gl, 0, SS.vertices.ToArray(), false, 3);
+            vertexDataBuffer.SetData(gl, 0, ShaderedScene.vertices.ToArray(), false, 3);
 
             //  Now do the same for the colour data.
             var colourDataBuffer = new VertexBuffer();
