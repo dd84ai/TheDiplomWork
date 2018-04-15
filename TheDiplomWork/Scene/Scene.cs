@@ -83,7 +83,7 @@ namespace TheDiplomWork
 
             //  Create a perspective projection matrix.
             const float rads = (60.0f / 360.0f) * (float)Math.PI * 2.0f;
-            projectionMatrix = glm.perspective(rads, width / height, 0.1f, 10000.0f);
+            projectionMatrix = glm.perspective(rads, width / height, 0.1f, 100.0f);
 
             //  Create a model matrix to make the model a little bigger.
             modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
@@ -170,7 +170,7 @@ namespace TheDiplomWork
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
 
-            SS.OpenGLDraw(gl, rotMatrix);//projectionMatrix * rotMatrix * viewMatrix * modelMatrix);
+            SS.OpenGLDraw(gl, rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * modelMatrix);
         }
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.

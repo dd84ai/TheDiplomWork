@@ -88,17 +88,28 @@ namespace TheDiplomWork
                 Process_Point(end_x, end_y, height, gl);
                 Process_Point(start_x, end_y, height, gl);
             }
-            static void Process_Point(float _x, float _y, float _z, OpenGL gl)
+            static void Process_Point(float x, float y, float z, OpenGL gl)
             {
                 if (gl != null)
                 {
-                    gl.Vertex(_x, _y, _z);
+                    CalculatingThing.x = x;
+                    CalculatingThing.y = y;
+                    CalculatingThing.z = z;
+                    CalculatingThing.w = 1;
+
+                    CalculatingThing = matrix_all_inclusive * CalculatingThing;
+
+                    x = CalculatingThing.x;
+                    y = CalculatingThing.y;
+                    z = CalculatingThing.z;
+
+                    gl.Vertex(x, y, z);
                 }
                 else
                 {
-                    vertices.Add(_x);
-                    vertices.Add(_y);
-                    vertices.Add(_z);
+                    vertices.Add(x);
+                    vertices.Add(y);
+                    vertices.Add(z);
                 }
             }
             public static void Draw_Quad_Full(
@@ -183,23 +194,16 @@ namespace TheDiplomWork
                 }
             }
         }
-        vec4 CalculatingThing = new vec4(0, 0, 0, 0);
-        public void OpenGLDraw(OpenGL gl,mat4 matrix_all_inclusive)
+        static vec4 CalculatingThing = new vec4(0, 0, 0, 0);
+        static mat4 matrix_all_inclusive;
+        public void OpenGLDraw(OpenGL gl,mat4 _matrix_all_inclusive)
         {
+            matrix_all_inclusive = _matrix_all_inclusive;
             CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
                 Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
 
-            //CalculatingThing.x = x;
-            //CalculatingThing.y = y;
-            //CalculatingThing.z = z;
-            CalculatingThing.w = 0;
-            CalculatingThing = new vec4(0, 0, 0, 0);
-
-            CalculatingThing = matrix_all_inclusive * CalculatingThing;
-
-            x = CalculatingThing.x;
-            y = CalculatingThing.y;
-            z = CalculatingThing.z;
+            //CalculatingThing = new vec4(0, 0, 0, 0);
+            x = 0; y = 0; z = 0;
 
             Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_QUADS);
         }
