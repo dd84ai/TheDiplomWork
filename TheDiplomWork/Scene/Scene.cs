@@ -129,7 +129,7 @@ namespace TheDiplomWork
                     newThread.Start(42);
                     SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
                     SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
-                    Console.WriteLine("Inting My");
+                    Console.WriteLine("Inеting CoThread My");
                 }
             }
             else
@@ -212,7 +212,6 @@ namespace TheDiplomWork
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
-
         }
     }
 }
