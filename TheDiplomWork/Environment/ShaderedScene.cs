@@ -186,15 +186,14 @@ namespace TheDiplomWork
         vec4 CalculatingThing = new vec4(0, 0, 0, 0);
         public void OpenGLDraw(OpenGL gl,mat4 matrix_all_inclusive)
         {
-            float x = 0, y = 0, z = 0;
             CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
                 Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
 
-            CalculatingThing.x = x;
-            CalculatingThing.y = y;
-            CalculatingThing.z = z;
+            //CalculatingThing.x = x;
+            //CalculatingThing.y = y;
+            //CalculatingThing.z = z;
             CalculatingThing.w = 0;
-            //CalculatingThing = new vec4(0, 0, 0, 0);
+            CalculatingThing = new vec4(0, 0, 0, 0);
 
             CalculatingThing = matrix_all_inclusive * CalculatingThing;
 
@@ -204,12 +203,12 @@ namespace TheDiplomWork
 
             Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_QUADS);
         }
-        
+        float x = 0, y = 0, z = 0;
         float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
         public void Initialization()
         {
             Memory_Init();
-            float x = 0, y = 0, z = 0;
+
             //FOR OG WAR
             Quads.Draw_Quad_Perpendecular_to_OSy
                 (

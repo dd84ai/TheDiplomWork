@@ -170,7 +170,7 @@ namespace TheDiplomWork
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
 
-            SS.OpenGLDraw(gl, rotMatrix * viewMatrix * modelMatrix);//projectionMatrix * rotMatrix * viewMatrix * modelMatrix);
+            SS.OpenGLDraw(gl, rotMatrix);//projectionMatrix * rotMatrix * viewMatrix * modelMatrix);
         }
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.
