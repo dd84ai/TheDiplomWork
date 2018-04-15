@@ -14,10 +14,11 @@ namespace TheDiplomWork
             public Point3D Player_precise_position = new Point3D(0, 0, 0);
 
             //public Point3D Player_Default_position = new Point3D(0, 0, 0);
-            public Point3D Player_Default_position = new Point3D(
-                (float)(((8 + 8 * CubicalMemory.Chunk.Width) * (double)CubicalMemory.Cube.rangeOfTheEdge)),
-                11.5f * CubicalMemory.Cube.rangeOfTheEdge,
-                (float)(((8 + 8 * CubicalMemory.Chunk.Length) * (double)CubicalMemory.Cube.rangeOfTheEdge)));
+            //public Point3D Player_Default_position = new Point3D(
+            //    (float)(((8 + 8 * CubicalMemory.Chunk.Width) * (double)CubicalMemory.Cube.rangeOfTheEdge)),
+            //    11.5f * CubicalMemory.Cube.rangeOfTheEdge,
+            //    (float)(((8 + 8 * CubicalMemory.Chunk.Length) * (double)CubicalMemory.Cube.rangeOfTheEdge)));
+            public Point3D Player_Default_position = new Point3D(0, 0, 0);
             public Point3D Player_rotational_view = new Point3D(3.14f / 2f, 0, 0);
 
             public Point2Int Player_chunk_position = new Point2Int(0,0);
