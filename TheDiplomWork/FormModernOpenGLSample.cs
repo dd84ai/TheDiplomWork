@@ -54,15 +54,18 @@ namespace TheDiplomWork
                 Cursor.Position = Mouse.ReturnToCenter();
             }
 
+            Scene.SS.env.player.coords.Player_recalculate_extra_positions();
+
             //  Draw the scene.
             scene.Draw(openGLControl.OpenGL);
 
-            Scene.SS.env.player.coords.Player_recalculate_extra_positions();
-
             label1_InfoTable.Text =
-                Scene.SS.env.player.coords.Player_precise_position.ToString() + "\r\n"
-                + Scene.SS.env.player.coords.Player_chunk_position.ToString() + "\r\n"
-                + Scene.SS.env.player.coords.Player_cubical_position.ToString() + "\r\n";
+                "PrecisePosition:" + Scene.SS.env.player.coords.Player_precise_position.ToString() + "\r\n"
+                + "ChunkPosition:" + Scene.SS.env.player.coords.Player_chunk_position.ToString() + "\r\n"
+                + "CubicalPosition:" + Scene.SS.env.player.coords.Player_cubical_position.ToString() + "\r\n"
+             + "PreciseLook:" + Scene.SS.env.player.coords.Player_precise_lookforcube.ToString() + "\r\n"
+             + "ChunkLook:" + Scene.SS.env.player.coords.Player_chunk_lookforcube.ToString() + "\r\n"
+             + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString();
         }
         private void openGLControl_Resized(object sender, EventArgs e)
         {

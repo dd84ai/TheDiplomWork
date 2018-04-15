@@ -10,7 +10,7 @@ namespace TheDiplomWork
     class Keyboard
     {
         public static vec4 step_vector = new vec4();
-        static float step = 0.25f * CubicalMemory.Cube.rangeOfTheEdge;
+        public static float step = 0.25f * CubicalMemory.Cube.rangeOfTheEdge;
         static float rotational_step = 0.05f;
         public static List<char> KeysActive = new List<char>();
 
@@ -28,20 +28,20 @@ namespace TheDiplomWork
                 //start = DateTime.Now;
             //}
         }
-        public static void DoStep()
+        public static void DoStep(vec4 MoveVector)
         {
             for (int i = 0; i < 4; i++)
             {
-                Wrapped_Do_Step();
+                Wrapped_Do_Step(MoveVector, ref Scene.SS.env.player.coords.Player_precise_position);
                 
             }
         }
-        public static void Wrapped_Do_Step()
+        public static void Wrapped_Do_Step(vec4 _step, ref GeneralProgrammingStuff.Point3D WhatToMove)
         {
-            vec4 step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * step_vector;
-            Scene.SS.env.player.coords.Player_precise_position.x -= step_vector_extra.x;
-            Scene.SS.env.player.coords.Player_precise_position.y -= step_vector_extra.y;
-            Scene.SS.env.player.coords.Player_precise_position.z -= step_vector_extra.z;
+            vec4 step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * _step;
+            WhatToMove.x -= step_vector_extra.x;
+            WhatToMove.y -= step_vector_extra.y;
+            WhatToMove.z -= step_vector_extra.z;
         }
         public static void Wrapped_KeyPressed_Reaction(char key)
         {
@@ -50,17 +50,17 @@ namespace TheDiplomWork
                 case 'm': Interface.SaySomeQuote(); break;
 
                 case 'w':
-                    step_vector.x = 0; step_vector.y = 0; step_vector.z = step; DoStep(); break;
+                    step_vector.x = 0; step_vector.y = 0; step_vector.z = step; DoStep(step_vector); break;
                 case 's':
-                    step_vector.x = 0; step_vector.y = 0; step_vector.z = -step; DoStep(); break;
+                    step_vector.x = 0; step_vector.y = 0; step_vector.z = -step; DoStep(step_vector); break;
                 case 'a':
-                    step_vector.x = step; step_vector.y = 0; step_vector.z = 0; DoStep(); break;
+                    step_vector.x = step; step_vector.y = 0; step_vector.z = 0; DoStep(step_vector); break;
                 case 'd':
-                    step_vector.x = -step; step_vector.y = 0; step_vector.z = 0; DoStep(); break;
+                    step_vector.x = -step; step_vector.y = 0; step_vector.z = 0; DoStep(step_vector); break;
                 case 'z':
-                    step_vector.x = 0; step_vector.y = step; step_vector.z = 0; DoStep(); break;
+                    step_vector.x = 0; step_vector.y = step; step_vector.z = 0; DoStep(step_vector); break;
                 case ' ':
-                    step_vector.x = 0; step_vector.y = -step; step_vector.z = 0; DoStep(); break;
+                    step_vector.x = 0; step_vector.y = -step; step_vector.z = 0; DoStep(step_vector); break;
 
                 case 'l':
                     Scene.SS.env.player.coords.Player_rotational_view.x += rotational_step; break;

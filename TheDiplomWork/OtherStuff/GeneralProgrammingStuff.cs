@@ -114,6 +114,12 @@ namespace TheDiplomWork
                     + y.ToString("G2") + " ; "
                 +z.ToString("G2");
             }
+            public static void CopyToFrom(ref Point3D Output,Point3D _Input)
+            {
+                Output.x = _Input.x;
+                Output.y = _Input.y;
+                Output.z = _Input.z;
+            }
             string Path = Interface.ProjectPath + "\\" + "Save" + "\\";
             public void Save(string Name)
             {
