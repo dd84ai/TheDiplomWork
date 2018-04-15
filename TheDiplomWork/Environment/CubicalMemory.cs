@@ -25,10 +25,10 @@ namespace TheDiplomWork
             public System.Drawing.Color color = ColorSwitch(Rand.Next(10));
 
             public bool IsFilled = false;
-            public int x, y, z;
+            public GeneralProgrammingStuff.Point3Int xyz = new Point3Int(0,0,0);
             public Cube(int _x, int _y, int _z)
             {
-                x = _x; y = _y; z = _z;
+                xyz.x = _x; xyz.y = _y; xyz.z = _z;
             }
         }
         public class Chunk
@@ -39,10 +39,10 @@ namespace TheDiplomWork
             public static int Height = 32, Width = 16, Length = 16;
 
             public List<List<List<Cube>>> cubes;
-            public int x, z;
+            public GeneralProgrammingStuff.Point2Int xz = new Point2Int(0,0);
             public Chunk(int _x, int _z)
             {
-                x = _x; z = _z;
+                xz.x = _x; xz.z = _z;
                 cubes = TripleCubeIniter(Chunk.Width, Chunk.Length, Chunk.Height);
 
                 AlgorithmicalGround(FromHeight, ToHeight);

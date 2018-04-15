@@ -54,7 +54,7 @@ namespace TheDiplomWork
         {
             counter++;
         }
-        class Quads
+        public class Quads
         {
             public void Add_Point(float _x, float _y, float _z)
             {
@@ -203,7 +203,10 @@ namespace TheDiplomWork
                 }
             }
         }
-        
+        public void OpenGLDraw()
+        {
+            //env.player.coords.P
+        }
         public void Initialization()
         {
             Memory_Init();
@@ -233,8 +236,8 @@ namespace TheDiplomWork
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
                 foreach (var XYworld in Xworld)
                 {
-                    if (Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.x - XYworld.x) < Scene.SS.env.player.coords.RangeOfView &&
-                        Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.z - XYworld.z) < Scene.SS.env.player.coords.RangeOfView)
+                    if (Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.x - XYworld.xz.x) < Scene.SS.env.player.coords.RangeOfView &&
+                        Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.z - XYworld.xz.z) < Scene.SS.env.player.coords.RangeOfView)
                     { }
                     else continue;
 
@@ -247,7 +250,7 @@ namespace TheDiplomWork
 
                                 if (XYZcube.IsFilled)
                                 {
-                                    CalculateFromMaptoGraphical(XYworld, XYZcube, ref x, ref y, ref z);
+                                    CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
 
                                     Quads.Draw_Quad_Full(ref vertices, x, y, z, localed_range);
 
@@ -264,7 +267,7 @@ namespace TheDiplomWork
 
             CopiedLastResult = false;
         }
-        public void CalculateFromMaptoGraphical(CubicalMemory.Chunk XYworld, CubicalMemory.Cube XYZcube, ref float x, ref float y, ref float z)
+        public void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {
             x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;
             y = XYZcube.y;
