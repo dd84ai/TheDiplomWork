@@ -28,6 +28,10 @@ namespace TheDiplomWork
                 //start = DateTime.Now;
             //}
         }
+        public static void RepeatLastStep()
+        {
+            DoStep(step_vector);
+        }
         public static void DoStep(vec4 MoveVector)
         {
             for (int i = 0; i < 4; i++)
