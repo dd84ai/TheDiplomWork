@@ -231,7 +231,6 @@ namespace TheDiplomWork
 
                                     Quads.Draw_Quad_Full(ref vertices, x, y, z, localed_range);
 
-
                                     for (int k = 0; k < 4 * 6; k++)
                                     {
                                         //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
@@ -257,16 +256,18 @@ namespace TheDiplomWork
         }
         public bool FirstInitialization = false;
         public bool CopiedLastResult = false;
+
+        int LastCount = 0;
         public int Quantity()
         {
-            return vertices.Count();
+            return LastCount;
         }
         public void CopyToReady()
         {
             Quantity_of_all_values = vertices.Count();
             FirstInitialization = true;
             CopiedLastResult = true;
-
+            LastCount = vertices.Count();
         }
     }
 }

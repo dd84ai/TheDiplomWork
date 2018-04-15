@@ -32,8 +32,8 @@ namespace TheDiplomWork
             /// </summary>
             public void Player_recalculate_extra_positions()
             {
-                Player_chunk_position.x = (int)(Player_precise_position.x / (double)CubicalMemory.Chunk.Width);
-                Player_chunk_position.z = (int)(Player_precise_position.z / (double)CubicalMemory.Chunk.Length);
+                Player_chunk_position.x = (int)((Player_precise_position.x / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Width);
+                Player_chunk_position.z = (int)((Player_precise_position.z / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Length);
 
                 Player_cubical_position.x = (int)(Player_precise_position.x / (double)CubicalMemory.Cube.rangeOfTheEdge);
                 Player_cubical_position.z = (int)(Player_precise_position.z / (double)CubicalMemory.Cube.rangeOfTheEdge);

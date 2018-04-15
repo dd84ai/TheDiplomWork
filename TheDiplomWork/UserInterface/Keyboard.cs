@@ -10,7 +10,7 @@ namespace TheDiplomWork
     class Keyboard
     {
         public static vec4 step_vector = new vec4();
-        static float step = 0.25f;
+        static float step = 0.25f * CubicalMemory.Cube.rangeOfTheEdge;
         static float rotational_step = 0.05f;
         public static List<char> KeysActive = new List<char>();
 
