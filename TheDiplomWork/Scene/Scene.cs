@@ -210,7 +210,7 @@ namespace TheDiplomWork
 
             //  Now do the same for the colour data.
             colourDataBuffer.Bind(gl);
-            colourDataBuffer.SetData(gl, 1, ShaderedScene.colors_arrayed, false, 3);
+            colourDataBuffer.SetData(gl, 1, ShaderedScene.colours_arrayed, false, 3);
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);

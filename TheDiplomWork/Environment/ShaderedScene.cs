@@ -12,7 +12,9 @@ namespace TheDiplomWork
         public Environment env = new Environment();
 
         public static List<float> vertices = new List<float>();
-        public static List<float> colors = new List<float>();
+        public static List<float> colours = new List<float>();
+        public static int vertices_count = 0;
+        public static int colours_count = 0;
         public ShaderedScene()
         {
             //Initialization();
@@ -28,8 +30,10 @@ namespace TheDiplomWork
         public int Quantity_of_all_values = 0;
         void Memory_Init()
         {
-            vertices.Clear();
-            colors.Clear();
+            //vertices.Clear();
+            //colours.Clear();
+            vertices_count = 0;
+            colours_count = 0;
 
             Quantity_of_cubes_per_chunk =
                 CubicalMemory.Chunk.Height
@@ -107,9 +111,9 @@ namespace TheDiplomWork
                 }
                 else
                 {
-                    vertices.Add(x);
-                    vertices.Add(y);
-                    vertices.Add(z);
+                    Add_Value(ref vertices, vertices_count++, x);
+                    Add_Value(ref vertices, vertices_count++, y);
+                    Add_Value(ref vertices, vertices_count++, z);
                 }
             }
             public static void Draw_Quad_Full(
@@ -117,7 +121,7 @@ namespace TheDiplomWork
             {
                 if (gl != null)
                 {
-                    
+
                     gl.Color(0.0f, 0.0f, 0.0f);
                     gl.LoadIdentity();
                     gl.Begin(GLmod);
@@ -194,6 +198,11 @@ namespace TheDiplomWork
                 }
             }
         }
+        static void Add_Value(ref List<float> list, int index, float value)
+        {
+            if (index < list.Count()) list[index] = value; 
+            else list.Add(value);
+        }
         static vec4 CalculatingThing = new vec4(0, 0, 0, 0);
         static mat4 matrix_all_inclusive;
         public void OpenGLDraw(OpenGL gl,mat4 _matrix_all_inclusive)
@@ -226,9 +235,9 @@ namespace TheDiplomWork
             for (int k = 0; k < 4; k++)
             {
                 //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
-                colors.Add((float)System.Drawing.Color.Gray.R / 255);
-                colors.Add((float)System.Drawing.Color.Gray.G / 255);
-                colors.Add((float)System.Drawing.Color.Gray.B / 255);
+                Add_Value(ref colours, colours_count++, (float)System.Drawing.Color.Gray.R / 255);
+                Add_Value(ref colours, colours_count++, (float)System.Drawing.Color.Gray.G / 255);
+                Add_Value(ref colours, colours_count++, (float)System.Drawing.Color.Gray.B / 255);
             }
 
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
@@ -255,20 +264,27 @@ namespace TheDiplomWork
                                     for (int k = 0; k < 4 * 6; k++)
                                     {
                                         //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
-                                        colors.Add((float)XYZcube.color.R / 255);
-                                        colors.Add((float)XYZcube.color.G / 255);
-                                        colors.Add((float)XYZcube.color.B / 255);
+                                        Add_Value(ref colours, colours_count++, (float)XYZcube.color.R / 255);
+                                        Add_Value(ref colours, colours_count++, (float)XYZcube.color.G / 255);
+                                        Add_Value(ref colours, colours_count++, (float)XYZcube.color.B / 255);
                                     }
                                 }
                             }
                 }
 
+            Extra_Remover(ref vertices, vertices_count);
+            Extra_Remover(ref colours, colours_count);
             CopiedLastResult = false;
             vertices_arrayed = vertices.ToArray();
-            colors_arrayed = colors.ToArray();
+            colours_arrayed = colours.ToArray();
+        }
+        public void Extra_Remover(ref List<float> list, int max_count)
+        {
+            if (max_count < list.Count())
+                list.RemoveRange(max_count, list.Count() - 1 - max_count);
         }
         public static float[] vertices_arrayed;
-        public static float[] colors_arrayed;
+        public static float[] colours_arrayed;
         public void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {
             x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;
