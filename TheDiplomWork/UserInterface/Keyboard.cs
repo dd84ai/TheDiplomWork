@@ -10,7 +10,8 @@ namespace TheDiplomWork
     class Keyboard
     {
         public static vec4 step_vector = new vec4();
-        public static float step = 0.25f * CubicalMemory.Cube.rangeOfTheEdge;
+        public static int step_multiplier = 10;
+        public static float step = 0.01f * 4f * CubicalMemory.Cube.rangeOfTheEdge;
         static float rotational_step = 0.05f;
         public static List<char> KeysActive = new List<char>();
 
@@ -34,10 +35,10 @@ namespace TheDiplomWork
         }
         public static void DoStep(vec4 MoveVector)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < step_multiplier; i++)
             {
                 Wrapped_Do_Step(MoveVector, ref Scene.SS.env.player.coords.Player_precise_position);
-                
+                //StaticAccess.FMOS.OpenGL_Draw_ReWrapped();
             }
         }
         public static void Wrapped_Do_Step(vec4 _step, ref GeneralProgrammingStuff.Point3D WhatToMove, bool SensetivityToY = false)
@@ -54,7 +55,7 @@ namespace TheDiplomWork
         }
         public static void Wrapped_KeyPressed_Reaction(char key)
         {
-             switch (key)
+            switch (key)
             {
                 case 'm': Interface.SaySomeQuote(); break;
 
@@ -93,6 +94,15 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_precise_position.y = Scene.SS.env.player.coords.Player_Default_position.y;
                     Scene.SS.env.player.coords.Player_precise_position.z = Scene.SS.env.player.coords.Player_Default_position.z;
                     Scene.SS.env.player.coords.Player_rotational_view = new GeneralProgrammingStuff.Point3D(3.14f / 2f, 0, 0);
+                    step_multiplier = 10;
+                    break;
+
+                case (char)188://','
+                    step_multiplier += 1; break;
+
+                case (char)190://'.'
+                    if (step_multiplier - 1 > 1)
+                        step_multiplier -= 1;
                     break;
 
                 default: break;

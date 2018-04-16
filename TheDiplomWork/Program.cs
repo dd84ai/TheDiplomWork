@@ -5,8 +5,13 @@ using System.Windows.Forms;
 
 namespace TheDiplomWork
 {
+    public class StaticAccess
+    {
+        public static FormModernOpenGLSample FMOS;
+    }
     static class Program
     {
+        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -15,7 +20,8 @@ namespace TheDiplomWork
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormModernOpenGLSample());
+            StaticAccess.FMOS = new FormModernOpenGLSample();
+            Application.Run(StaticAccess.FMOS);
         }
     }
 }

@@ -194,10 +194,11 @@ namespace TheDiplomWork
         {
             switch (choice)
             {
+                case 00: return System.Drawing.Color.BurlyWood;
                 case 01: return System.Drawing.Color.Gold;
                 case 02: return System.Drawing.Color.Green;
                 case 03: return System.Drawing.Color.GreenYellow;
-                case 04: return System.Drawing.Color.HotPink;
+                case 04: return System.Drawing.Color.Brown;
                 case 05: return System.Drawing.Color.Indigo;
                 case 06: return System.Drawing.Color.Lavender;
                 case 07: return System.Drawing.Color.Orange;

@@ -41,6 +41,10 @@ namespace TheDiplomWork
             openGL_Draw_Wrapped();
             //defaulttriangle();
         }
+        public void OpenGL_Draw_ReWrapped()
+        {
+            openGL_Draw_Wrapped();
+        }
         public void openGL_Draw_Wrapped()
         {
             if ((Control.ModifierKeys & Keys.Shift) != 0)
@@ -65,7 +69,8 @@ namespace TheDiplomWork
                 + "CubicalPosition:" + Scene.SS.env.player.coords.Player_cubical_position.ToString() + "\r\n"
              + "PreciseLook:" + Scene.SS.env.player.coords.Player_precise_lookforcube.ToString() + "\r\n"
              + "ChunkLook:" + Scene.SS.env.player.coords.Player_chunk_lookforcube.ToString() + "\r\n"
-             + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString();
+             + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString() + "\r\n"
+            + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2");
         }
         private void openGLControl_Resized(object sender, EventArgs e)
         {
