@@ -218,9 +218,14 @@ namespace TheDiplomWork
         }
         float x = 0, y = 0, z = 0;
         float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
+        vec3 NormalizedToXYWorld = new vec3(0, 0, 0);
+        public vec3 LastPlayerLook = new vec3(0, 0, 0);
         public void Initialization()
         {
             Memory_Init();
+            LastPlayerLook.x = Scene.SS.env.player.coords.NormalizedLook.x;
+            LastPlayerLook.y = Scene.SS.env.player.coords.NormalizedLook.y;
+            LastPlayerLook.z = Scene.SS.env.player.coords.NormalizedLook.z;
 
             //FOR OG WAR
             Quads.Draw_Quad_Perpendecular_to_OSy
@@ -248,6 +253,10 @@ namespace TheDiplomWork
                     { }
                     else continue;
 
+                    //Тэк, используем Precise look.
+                    //Дано. Точка игрока. Точка перед игроком.
+                    //Ну и допустим центр текущего чанка. ЭЭ стоп, а эти величины то пересекаются? Надеюсь да.
+
                     foreach (var Xcube in XYworld.cubes)
                         foreach (var XYcube in Xcube)
                             foreach (var XYZcube in XYcube)
@@ -259,14 +268,28 @@ namespace TheDiplomWork
                                 {
                                     CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
 
-                                    Quads.Draw_Quad_Full(x, y, z, localed_range);
+                                    //POINT OF VIEWER
+                                    NormalizedToXYWorld.x = Scene.SS.env.player.coords.Player_precise_stepback.x - x;
+                                    NormalizedToXYWorld.y = Scene.SS.env.player.coords.Player_precise_stepback.y - y;
+                                    NormalizedToXYWorld.z = Scene.SS.env.player.coords.Player_precise_stepback.z - z;
+                                    //По идеи расстояние равно шагу на который сделали
+                                    float range = GeneralProgrammingStuff.vec3_range(NormalizedToXYWorld);
+                                    GeneralProgrammingStuff.vec3_normalize(ref NormalizedToXYWorld, range);
+                                    Scene.SS.env.player.coords.LookForCube();
+                                    float scalar = GeneralProgrammingStuff.vec3_scalar(NormalizedToXYWorld, Scene.SS.env.player.coords.NormalizedLook);
+                                    //POINT OF VIEWER
 
-                                    for (int k = 0; k < 4 * 6; k++)
+                                    if (scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * Scene.SS.env.player.coords.RangeOfView)
                                     {
-                                        //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
-                                        Add_Value(ref colours, colours_count++, (float)XYZcube.color.R / 255);
-                                        Add_Value(ref colours, colours_count++, (float)XYZcube.color.G / 255);
-                                        Add_Value(ref colours, colours_count++, (float)XYZcube.color.B / 255);
+                                        Quads.Draw_Quad_Full(x, y, z, localed_range);
+
+                                        for (int k = 0; k < 4 * 6; k++)
+                                        {
+                                            //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
+                                            Add_Value(ref colours, colours_count++, (float)XYZcube.color.R / 255);
+                                            Add_Value(ref colours, colours_count++, (float)XYZcube.color.G / 255);
+                                            Add_Value(ref colours, colours_count++, (float)XYZcube.color.B / 255);
+                                        }
                                     }
                                 }
                             }

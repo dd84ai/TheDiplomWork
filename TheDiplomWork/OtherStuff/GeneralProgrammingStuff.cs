@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GlmNet;
 namespace TheDiplomWork
 {
     public class GeneralProgrammingStuff //GPS
@@ -170,6 +170,16 @@ namespace TheDiplomWork
                 return "Point2Int: " + x.ToString("G2") + " ; "
                 + z.ToString("G2");
             }
+            public static bool operator ==(Point2Int c1, Point2Int c2)
+            {
+                if (c1.x == c2.x && c1.z == c2.z) return true;
+                else return false;
+            }
+            public static bool operator !=(Point2Int c1, Point2Int c2)
+            {
+                if (c1.x != c2.x || c1.z != c2.z) return true;
+                else return false;
+            }
         }
         public class Point3Int
         {
@@ -208,6 +218,22 @@ namespace TheDiplomWork
 
                 default: return System.Drawing.Color.Gray;
             }
+        }
+        public static float vec3_range(vec3 NormalizedToXYWorld)
+        {
+            return (float)Math.Sqrt(
+                                          NormalizedToXYWorld.x * NormalizedToXYWorld.x
+                                        + NormalizedToXYWorld.y * NormalizedToXYWorld.y
+                                        + NormalizedToXYWorld.z * NormalizedToXYWorld.z);
+        }
+        public static void vec3_normalize(ref vec3 NormalizedToXYWorld, float _range)
+        {
+            float range = 1 / _range;
+            NormalizedToXYWorld.x *= range; NormalizedToXYWorld.y *= range; NormalizedToXYWorld.z *= range;
+        }
+        public static float vec3_scalar(vec3 a, vec3 b)
+        {
+            return a.x * b.x + a.y * b.y + a.z * b.z;
         }
     }
     

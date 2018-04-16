@@ -54,14 +54,36 @@ namespace TheDiplomWork
             public Point2Int Player_chunk_lookforcube = new Point2Int(0, 0);
             public Point3Int Player_cubical_lookforcube = new Point3Int(0, 0, 0);
             vec4 StepForARequiedCube = new vec4(0,0, 0.25f*CubicalMemory.Cube.rangeOfTheEdge*4,0);
-            
-            void LookForCube()
+
+            public vec3 NormalizedLook = new vec3(0,0,0);
+            public void LookForCube()
             {
                 GeneralProgrammingStuff.Point3D.CopyToFrom(
                     ref Player_precise_lookforcube, Player_precise_position);
                 Keyboard.Wrapped_Do_Step(StepForARequiedCube, ref Player_precise_lookforcube,true);
                 Reverse_presice_to_map_coords(Player_precise_lookforcube, ref Player_chunk_lookforcube, ref Player_cubical_lookforcube);
+
+                //Нормализованный взгляд
+                NormalizedLook.x = Player_precise_lookforcube.x - Player_precise_position.x;
+                NormalizedLook.y = Player_precise_lookforcube.y - Player_precise_position.y;
+                NormalizedLook.z = Player_precise_lookforcube.z - Player_precise_position.z;
+
+                //По идеи расстояние равно шагу на который сделали
+                float range = -1/(float)Math.Sqrt(
+                      NormalizedLook.x * NormalizedLook.x
+                    + NormalizedLook.y * NormalizedLook.y
+                    + NormalizedLook.z * NormalizedLook.z);
+                NormalizedLook.x *= range; NormalizedLook.y *= range; NormalizedLook.z *= range;
+
+                //Шаг назад
+                GeneralProgrammingStuff.Point3D.CopyToFrom(
+                    ref Player_precise_stepback, Player_precise_position);
+                Keyboard.Wrapped_Do_Step(StepForARequiedstepback, ref Player_precise_stepback, true);
             }
+            public Point3D Player_precise_stepback = new Point3D(0, 0, 0);
+            vec4 StepForARequiedstepback = new vec4(0, 0, -0.25f * CubicalMemory.Cube.rangeOfTheEdge * 4 * 2, 0);
+
+
             /// <summary>
             /// Short link to Player_recalculate_extra_positions.
             /// </summary>
