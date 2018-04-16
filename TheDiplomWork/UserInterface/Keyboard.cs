@@ -82,19 +82,14 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
 
                 case 'q':
+                    SavingAlgorithm();
                     Application.Exit(); break;
-
                 case 'r':
-                    Scene.SS.env.player.coords.Player_precise_position.Save("PlayerPosition");
-                    Scene.SS.env.player.coords.Player_rotational_view.Save("PlayerRotationalView");
+                    SavingAlgorithm();
                     Application.Restart();
                     Application.Exit(); break;
                 case 'c':
-                    Scene.SS.env.player.coords.Player_precise_position.x = Scene.SS.env.player.coords.Player_Default_position.x;
-                    Scene.SS.env.player.coords.Player_precise_position.y = Scene.SS.env.player.coords.Player_Default_position.y;
-                    Scene.SS.env.player.coords.Player_precise_position.z = Scene.SS.env.player.coords.Player_Default_position.z;
-                    Scene.SS.env.player.coords.Player_rotational_view = new GeneralProgrammingStuff.Point3D(3.14f / 2f, 0, 0);
-                    step_multiplier = 10;
+                    RestoringToDefaultAlgorithm();
                     break;
 
                 case (char)188://','
@@ -107,6 +102,19 @@ namespace TheDiplomWork
 
                 default: break;
             }
+        }
+        public static void SavingAlgorithm()
+        {
+            Scene.SS.env.player.coords.Player_precise_position.Save("PlayerPosition");
+            Scene.SS.env.player.coords.Player_rotational_view.Save("PlayerRotationalView");
+        }
+        public static void RestoringToDefaultAlgorithm()
+        {
+            Scene.SS.env.player.coords.Player_precise_position.x = Scene.SS.env.player.coords.Player_Default_position.x;
+            Scene.SS.env.player.coords.Player_precise_position.y = Scene.SS.env.player.coords.Player_Default_position.y;
+            Scene.SS.env.player.coords.Player_precise_position.z = Scene.SS.env.player.coords.Player_Default_position.z;
+            Scene.SS.env.player.coords.Player_rotational_view = new GeneralProgrammingStuff.Point3D(3.14f / 2f, 0, 0);
+            step_multiplier = 10;
         }
     }
 }

@@ -64,68 +64,47 @@ namespace TheDiplomWork
             public static void Draw_Quad_Perpendecular_to_OSx(
                 float start_y, float start_z,
                float end_y, float end_z,
-               float height, OpenGL gl)
+               float height, System.Drawing.Color _colour)
             {
-                Process_Point(height, start_y, start_z, gl);
-                Process_Point(height, start_y, end_z, gl);
-                Process_Point(height, end_y, end_z, gl);
-                Process_Point(height, end_y, start_z, gl);
+                Process_Point(height, start_y, start_z, _colour);
+                Process_Point(height, start_y, end_z, _colour);
+                Process_Point(height, end_y, end_z, _colour);
+                Process_Point(height, end_y, start_z, _colour);
             }
             //Right
             public static void Draw_Quad_Perpendecular_to_OSy(
                 float start_x, float start_z,
                float end_x, float end_z,
-               float height, OpenGL gl)
+               float height, System.Drawing.Color _colour)
             {
-                Process_Point(start_x, height, start_z, gl);
-                Process_Point(start_x, height, end_z, gl);
-                Process_Point(end_x, height, end_z, gl);
-                Process_Point(end_x, height, start_z, gl);
+                Process_Point(start_x, height, start_z, _colour);
+                Process_Point(start_x, height, end_z, _colour);
+                Process_Point(end_x, height, end_z, _colour);
+                Process_Point(end_x, height, start_z, _colour);
             }
             public static void Draw_Quad_Perpendecular_to_OSz(
                 float start_x, float start_y,
                float end_x, float end_y,
-               float height, OpenGL gl)
+               float height, System.Drawing.Color _colour)
             {
-                Process_Point(start_x, start_y, height, gl);
-                Process_Point(end_x, start_y, height, gl);
-                Process_Point(end_x, end_y, height, gl);
-                Process_Point(start_x, end_y, height, gl);
+                Process_Point(start_x, start_y, height, _colour);
+                Process_Point(end_x, start_y, height, _colour);
+                Process_Point(end_x, end_y, height, _colour);
+                Process_Point(start_x, end_y, height, _colour);
             }
-            static void Process_Point(float x, float y, float z, OpenGL gl)
+            static void Process_Point(float x, float y, float z, System.Drawing.Color _colour)
             {
-                if (gl != null)
-                {
-                    CalculatingThing.x = x;
-                    CalculatingThing.y = y;
-                    CalculatingThing.z = z;
-                    CalculatingThing.w = 1;
+                Add_Value(ref vertices, vertices_count++, x);
+                Add_Value(ref vertices, vertices_count++, y);
+                Add_Value(ref vertices, vertices_count++, z);
 
-                    CalculatingThing = matrix_all_inclusive * CalculatingThing;
-
-                    x = CalculatingThing.x;
-                    y = CalculatingThing.y;
-                    z = CalculatingThing.z;
-
-                    gl.Vertex(x, y, z);
-                }
-                else
-                {
-                    Add_Value(ref vertices, vertices_count++, x);
-                    Add_Value(ref vertices, vertices_count++, y);
-                    Add_Value(ref vertices, vertices_count++, z);
-                }
+                Add_Value(ref colours, colours_count++, (float)_colour.R / 255);
+                Add_Value(ref colours, colours_count++, (float)_colour.G / 255);
+                Add_Value(ref colours, colours_count++, (float)_colour.B / 255);
             }
             public static void Draw_Quad_Full(
-                float x, float y, float z, float localed_range, OpenGL gl = null, uint GLmod = 0)
+                float x, float y, float z, float localed_range, System.Drawing.Color _colour)
             {
-                if (gl != null)
-                {
-
-                    gl.Color(0.0f, 0.0f, 0.0f);
-                    gl.LoadIdentity();
-                    gl.Begin(GLmod);
-                }
 
                 //Front
                 Quads.Draw_Quad_Perpendecular_to_OSz
@@ -135,7 +114,7 @@ namespace TheDiplomWork
                 x + localed_range, //End_x
                 y + localed_range, //End_z
                 z, //Height
-                gl);
+                _colour);
 
                 //Back
                 Quads.Draw_Quad_Perpendecular_to_OSz
@@ -145,7 +124,7 @@ namespace TheDiplomWork
                 x + localed_range, //End_x
                 y + localed_range, //End_z
                 z + localed_range, //Height
-                gl //Height
+                _colour //Height
                 );
 
                 //Left
@@ -156,7 +135,7 @@ namespace TheDiplomWork
                 y + localed_range, //End_x
                 z + localed_range, //End_z
                 x, //Height
-                gl //Height
+                _colour //Height
                 );
 
                 //Right
@@ -167,7 +146,7 @@ namespace TheDiplomWork
                 y + localed_range, //End_x
                 z + localed_range, //End_z
                 x + localed_range, //Height
-                gl //Height
+                _colour //Height
                 );
 
                 //Top
@@ -178,7 +157,7 @@ namespace TheDiplomWork
                 x + localed_range, //End_x
                 z + localed_range, //End_z
                 y + localed_range, //Height
-                gl //Height
+                _colour //Height
                 );
 
                 //Bottom
@@ -189,13 +168,8 @@ namespace TheDiplomWork
                 x + localed_range, //End_x
                 z + localed_range, //End_z
                 y, //Height
-                gl //Height
+                _colour //Height
                 );
-
-                if (gl != null)
-                {
-                    gl.End();
-                }
             }
         }
         static void Add_Value(ref List<float> list, int index, float value)
@@ -214,7 +188,7 @@ namespace TheDiplomWork
             //CalculatingThing = new vec4(0, 0, 0, 0);
             x = 0; y = 0; z = 0;
 
-            Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_QUADS);
+            //Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_QUADS);
         }
         float x = 0, y = 0, z = 0;
         float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
@@ -232,18 +206,10 @@ namespace TheDiplomWork
                 (
                 0, //Start_x
                 0, //Start_z
-                0 + CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
-                0 + CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge, //End_z
+                CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
+                CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge, //End_z
                 0, //Height
-                null);
-
-            for (int k = 0; k < 4; k++)
-            {
-                //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
-                Add_Value(ref colours, colours_count++, (float)System.Drawing.Color.Gray.R / 255);
-                Add_Value(ref colours, colours_count++, (float)System.Drawing.Color.Gray.G / 255);
-                Add_Value(ref colours, colours_count++, (float)System.Drawing.Color.Gray.B / 255);
-            }
+                System.Drawing.Color.Gray);
 
             foreach (var Xworld in env.cub_mem.world.World_as_Whole)
                 foreach (var XYworld in Xworld)
@@ -281,15 +247,7 @@ namespace TheDiplomWork
 
                                     if (scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * Scene.SS.env.player.coords.RangeOfView)
                                     {
-                                        Quads.Draw_Quad_Full(x, y, z, localed_range);
-
-                                        for (int k = 0; k < 4 * 6; k++)
-                                        {
-                                            //XYZcube.color = GeneralProgrammingStuff.ColorSwitch(Rand.Next(10));
-                                            Add_Value(ref colours, colours_count++, (float)XYZcube.color.R / 255);
-                                            Add_Value(ref colours, colours_count++, (float)XYZcube.color.G / 255);
-                                            Add_Value(ref colours, colours_count++, (float)XYZcube.color.B / 255);
-                                        }
+                                        Quads.Draw_Quad_Full(x, y, z, localed_range, XYZcube.color);
                                     }
                                 }
                             }
