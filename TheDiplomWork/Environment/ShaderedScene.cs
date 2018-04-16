@@ -16,44 +16,44 @@ namespace TheDiplomWork
             //Initialization();
             //CopyToReady();
         }
-        public int Quantity_of_total_cubes = 0;
-        public int Quantity_of_values_per_point = 3;
-        public int Quantity_of_points_per_side = 4;
-        public int Quantity_of_sides_per_cube = 6;
-        public int Quantity_of_cubes_per_chunk = 0;
+        
 
-        public int Quantity_of_all_points= 0;
-        public int Quantity_of_all_values = 0;
-        void Memory_Init()
-        {
-            //vertices.Clear();
-            //colours.Clear();
-            Quantity_of_cubes_per_chunk =
-                CubicalMemory.Chunk.Height
-                * CubicalMemory.Chunk.Length
-                * CubicalMemory.Chunk.Width;
-
-            Quantity_of_total_cubes = CubicalMemory.World.Quantity_of_chunks_in_root
-                * CubicalMemory.World.Quantity_of_chunks_in_root
-                * Quantity_of_cubes_per_chunk;
-
-            Quantity_of_all_values =
-                Quantity_of_total_cubes * Quantity_of_values_per_point
-                * Quantity_of_points_per_side * Quantity_of_sides_per_cube;
-
-            Quantity_of_all_points =
-                Quantity_of_total_cubes
-                * Quantity_of_points_per_side * Quantity_of_sides_per_cube;
-        }
 
         Random Rand = new Random();
-        int counter = 0;
-        public void plus()
-        {
-            counter++;
-        }
+
         public class DataForDraw
         {
+            public int Quantity_of_total_cubes = 0;
+            public int Quantity_of_values_per_point = 3;
+            public int Quantity_of_points_per_side = 4;
+            public int Quantity_of_sides_per_cube = 6;
+            public int Quantity_of_cubes_per_chunk = 0;
+
+            public int Quantity_of_all_points = 0;
+            public int Quantity_of_all_values = 0;
+            public void Memory_Init()
+            {
+
+                //vertices.Clear();
+                //colours.Clear();
+                Quantity_of_cubes_per_chunk =
+                    CubicalMemory.Chunk.Height
+                    * CubicalMemory.Chunk.Length
+                    * CubicalMemory.Chunk.Width;
+
+                Quantity_of_total_cubes = CubicalMemory.World.Quantity_of_chunks_in_root
+                    * CubicalMemory.World.Quantity_of_chunks_in_root
+                    * Quantity_of_cubes_per_chunk;
+
+                Quantity_of_all_values =
+                    Quantity_of_total_cubes * Quantity_of_values_per_point
+                    * Quantity_of_points_per_side * Quantity_of_sides_per_cube;
+
+                Quantity_of_all_points =
+                    Quantity_of_total_cubes
+                    * Quantity_of_points_per_side * Quantity_of_sides_per_cube;
+            }
+
             public List<float> vertices = new List<float>();
             public List<float> colours = new List<float>();
             public int vertices_count = 0;
@@ -169,6 +169,29 @@ namespace TheDiplomWork
                 _colour //Height
                 );
             }
+
+            public void Extra_Remover(ref List<float> list, int max_count)
+            {
+                if (max_count < list.Count())
+                    list.RemoveRange(max_count, list.Count() - 1 - max_count);
+            }
+            public float[] vertices_arrayed;
+            public float[] colours_arrayed;
+            public bool FirstInitialization = false;
+            public bool CopiedLastResult = false;
+
+            int LastCount = 0;
+            public int Quantity()
+            {
+                return LastCount;
+            }
+            public void CopyToReady()
+            {
+                Quantity_of_all_values = vertices.Count();
+                FirstInitialization = true;
+                CopiedLastResult = true;
+                LastCount = vertices.Count();
+            }
         }
         static void Add_Value(ref List<float> list, int index, float value)
         {
@@ -188,14 +211,15 @@ namespace TheDiplomWork
 
             //Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_QUADS);
         }
+
         float x = 0, y = 0, z = 0;
         float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
         vec3 NormalizedToXYWorld = new vec3(0, 0, 0);
         public vec3 LastPlayerLook = new vec3(0, 0, 0);
-        DataForDraw Main = new DataForDraw();
+        public DataForDraw Main = new DataForDraw();
         public void Initialization()
         {
-            Memory_Init();
+            Main.Memory_Init();
             Main.vertices_count = 0;
             Main.colours_count = 0;
             LastPlayerLook.x = Scene.SS.env.player.coords.NormalizedLook.x;
@@ -253,19 +277,13 @@ namespace TheDiplomWork
                             }
                 }
 
-            Extra_Remover(ref Main.vertices, Main.vertices_count);
-            Extra_Remover(ref Main.colours, Main.colours_count);
-            CopiedLastResult = false;
-            vertices_arrayed = Main.vertices.ToArray();
-            colours_arrayed = Main.colours.ToArray();
+            Main.Extra_Remover(ref Main.vertices, Main.vertices_count);
+            Main.Extra_Remover(ref Main.colours, Main.colours_count);
+            Main.CopiedLastResult = false;
+            Main.vertices_arrayed = Main.vertices.ToArray();
+            Main.colours_arrayed = Main.colours.ToArray();
         }
-        public void Extra_Remover(ref List<float> list, int max_count)
-        {
-            if (max_count < list.Count())
-                list.RemoveRange(max_count, list.Count() - 1 - max_count);
-        }
-        public static float[] vertices_arrayed;
-        public static float[] colours_arrayed;
+        
         public void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {
             x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;
@@ -276,20 +294,6 @@ namespace TheDiplomWork
             y *= (CubicalMemory.Cube.rangeOfTheEdge);
             z *= (CubicalMemory.Cube.rangeOfTheEdge);
         }
-        public bool FirstInitialization = false;
-        public bool CopiedLastResult = false;
-
-        int LastCount = 0;
-        public int Quantity()
-        {
-            return LastCount;
-        }
-        public void CopyToReady()
-        {
-            Quantity_of_all_values = Main.vertices.Count();
-            FirstInitialization = true;
-            CopiedLastResult = true;
-            LastCount = Main.vertices.Count();
-        }
+        
     }
 }

@@ -71,7 +71,7 @@ namespace TheDiplomWork
 
             while (newThread.IsAlive) { }
             Console.WriteLine("Finished My");
-            SS.CopyToReady();
+            SS.Main.CopyToReady();
 
             //  Set a blue clear colour.
             gl.ClearColor(0.4f, 0.6f, 0.9f, 0.0f);
@@ -113,10 +113,10 @@ namespace TheDiplomWork
         {
             if (SS.env.player.coords.RangeReloader && !newThread.IsAlive)
             {
-                if (!SS.CopiedLastResult)
+                if (!SS.Main.CopiedLastResult)
                 {
                     vertexBufferArray.Delete(gl);
-                    SS.CopyToReady();
+                    SS.Main.CopyToReady();
                     CreateVerticesForSquare();
                 }
 
@@ -141,7 +141,7 @@ namespace TheDiplomWork
 
             }
 
-            if (SS.FirstInitialization) Draw_Wrapped(gl);
+            if (SS.Main.FirstInitialization) Draw_Wrapped(gl);
         }
         public static void DoWork(object data)
         {
@@ -173,7 +173,7 @@ namespace TheDiplomWork
             vertexBufferArray.Bind(gl);
 
             //  Draw the square.
-            gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Quantity());
+            gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Main.Quantity());
 
             //  Unbind our vertex array and shader.
             vertexBufferArray.Unbind(gl);
@@ -209,11 +209,11 @@ namespace TheDiplomWork
 
             //  Create a vertex buffer for the vertex data.
             vertexDataBuffer.Bind(gl);
-            vertexDataBuffer.SetData(gl, 0, ShaderedScene.vertices_arrayed, false, 3);
+            vertexDataBuffer.SetData(gl, 0, SS.Main.vertices_arrayed, false, 3);
 
             //  Now do the same for the colour data.
             colourDataBuffer.Bind(gl);
-            colourDataBuffer.SetData(gl, 1, ShaderedScene.colours_arrayed, false, 3);
+            colourDataBuffer.SetData(gl, 1, SS.Main.colours_arrayed, false, 3);
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
