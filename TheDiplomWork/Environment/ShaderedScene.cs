@@ -11,10 +11,6 @@ namespace TheDiplomWork
     {
         public Environment env = new Environment();
 
-        public static List<float> vertices = new List<float>();
-        public static List<float> colours = new List<float>();
-        public static int vertices_count = 0;
-        public static int colours_count = 0;
         public ShaderedScene()
         {
             //Initialization();
@@ -32,9 +28,6 @@ namespace TheDiplomWork
         {
             //vertices.Clear();
             //colours.Clear();
-            vertices_count = 0;
-            colours_count = 0;
-
             Quantity_of_cubes_per_chunk =
                 CubicalMemory.Chunk.Height
                 * CubicalMemory.Chunk.Length
@@ -59,9 +52,14 @@ namespace TheDiplomWork
         {
             counter++;
         }
-        public class Quads
+        public class DataForDraw
         {
-            public static void Draw_Quad_Perpendecular_to_OSx(
+            public List<float> vertices = new List<float>();
+            public List<float> colours = new List<float>();
+            public int vertices_count = 0;
+            public int colours_count = 0;
+
+            public void Draw_Quad_Perpendecular_to_OSx(
                 float start_y, float start_z,
                float end_y, float end_z,
                float height, System.Drawing.Color _colour)
@@ -72,7 +70,7 @@ namespace TheDiplomWork
                 Process_Point(height, end_y, start_z, _colour);
             }
             //Right
-            public static void Draw_Quad_Perpendecular_to_OSy(
+            public void Draw_Quad_Perpendecular_to_OSy(
                 float start_x, float start_z,
                float end_x, float end_z,
                float height, System.Drawing.Color _colour)
@@ -82,17 +80,17 @@ namespace TheDiplomWork
                 Process_Point(end_x, height, end_z, _colour);
                 Process_Point(end_x, height, start_z, _colour);
             }
-            public static void Draw_Quad_Perpendecular_to_OSz(
+            public void Draw_Quad_Perpendecular_to_OSz(
                 float start_x, float start_y,
                float end_x, float end_y,
                float height, System.Drawing.Color _colour)
             {
-                Process_Point(start_x, start_y, height, _colour);
+                Process_Point( start_x, start_y, height, _colour);
                 Process_Point(end_x, start_y, height, _colour);
                 Process_Point(end_x, end_y, height, _colour);
                 Process_Point(start_x, end_y, height, _colour);
             }
-            static void Process_Point(float x, float y, float z, System.Drawing.Color _colour)
+            void Process_Point(float x, float y, float z, System.Drawing.Color _colour)
             {
                 Add_Value(ref vertices, vertices_count++, x);
                 Add_Value(ref vertices, vertices_count++, y);
@@ -102,12 +100,12 @@ namespace TheDiplomWork
                 Add_Value(ref colours, colours_count++, (float)_colour.G / 255);
                 Add_Value(ref colours, colours_count++, (float)_colour.B / 255);
             }
-            public static void Draw_Quad_Full(
+            public void Draw_Quad_Full(
                 float x, float y, float z, float localed_range, System.Drawing.Color _colour)
             {
 
                 //Front
-                Quads.Draw_Quad_Perpendecular_to_OSz
+                Draw_Quad_Perpendecular_to_OSz
                 (
                 x, //Start_x
                 y, //Start_z
@@ -117,7 +115,7 @@ namespace TheDiplomWork
                 _colour);
 
                 //Back
-                Quads.Draw_Quad_Perpendecular_to_OSz
+                Draw_Quad_Perpendecular_to_OSz
                 (
                 x, //Start_x
                 y, //Start_z
@@ -128,7 +126,7 @@ namespace TheDiplomWork
                 );
 
                 //Left
-                Quads.Draw_Quad_Perpendecular_to_OSx
+                Draw_Quad_Perpendecular_to_OSx
                 (
                 y, //Start_x
                 z, //Start_z
@@ -139,7 +137,7 @@ namespace TheDiplomWork
                 );
 
                 //Right
-                Quads.Draw_Quad_Perpendecular_to_OSx
+                Draw_Quad_Perpendecular_to_OSx
                 (
                 y, //Start_x
                 z, //Start_z
@@ -150,7 +148,7 @@ namespace TheDiplomWork
                 );
 
                 //Top
-                Quads.Draw_Quad_Perpendecular_to_OSy
+                Draw_Quad_Perpendecular_to_OSy
                 (
                 x, //Start_x
                 z, //Start_z
@@ -161,7 +159,7 @@ namespace TheDiplomWork
                 );
 
                 //Bottom
-                Quads.Draw_Quad_Perpendecular_to_OSy
+                Draw_Quad_Perpendecular_to_OSy
                 (
                 x, //Start_x
                 z, //Start_z
@@ -194,15 +192,18 @@ namespace TheDiplomWork
         float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
         vec3 NormalizedToXYWorld = new vec3(0, 0, 0);
         public vec3 LastPlayerLook = new vec3(0, 0, 0);
+        DataForDraw Main = new DataForDraw();
         public void Initialization()
         {
             Memory_Init();
+            Main.vertices_count = 0;
+            Main.colours_count = 0;
             LastPlayerLook.x = Scene.SS.env.player.coords.NormalizedLook.x;
             LastPlayerLook.y = Scene.SS.env.player.coords.NormalizedLook.y;
             LastPlayerLook.z = Scene.SS.env.player.coords.NormalizedLook.z;
 
             //FOR OG WAR
-            Quads.Draw_Quad_Perpendecular_to_OSy
+            Main.Draw_Quad_Perpendecular_to_OSy
                 (
                 0, //Start_x
                 0, //Start_z
@@ -246,17 +247,17 @@ namespace TheDiplomWork
 
                                     if (scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * Scene.SS.env.player.coords.RangeOfView)
                                     {
-                                        Quads.Draw_Quad_Full(x, y, z, localed_range, XYZcube.color);
+                                        Main.Draw_Quad_Full(x, y, z, localed_range, XYZcube.color);
                                     }
                                 }
                             }
                 }
 
-            Extra_Remover(ref vertices, vertices_count);
-            Extra_Remover(ref colours, colours_count);
+            Extra_Remover(ref Main.vertices, Main.vertices_count);
+            Extra_Remover(ref Main.colours, Main.colours_count);
             CopiedLastResult = false;
-            vertices_arrayed = vertices.ToArray();
-            colours_arrayed = colours.ToArray();
+            vertices_arrayed = Main.vertices.ToArray();
+            colours_arrayed = Main.colours.ToArray();
         }
         public void Extra_Remover(ref List<float> list, int max_count)
         {
@@ -285,10 +286,10 @@ namespace TheDiplomWork
         }
         public void CopyToReady()
         {
-            Quantity_of_all_values = vertices.Count();
+            Quantity_of_all_values = Main.vertices.Count();
             FirstInitialization = true;
             CopiedLastResult = true;
-            LastCount = vertices.Count();
+            LastCount = Main.vertices.Count();
         }
     }
 }
