@@ -238,7 +238,6 @@ namespace TheDiplomWork
                                     NormalizedToXYWorld.x = Scene.SS.env.player.coords.Player_precise_stepback.x - x;
                                     NormalizedToXYWorld.y = Scene.SS.env.player.coords.Player_precise_stepback.y - y;
                                     NormalizedToXYWorld.z = Scene.SS.env.player.coords.Player_precise_stepback.z - z;
-                                    //По идеи расстояние равно шагу на который сделали
                                     float range = GeneralProgrammingStuff.vec3_range(NormalizedToXYWorld);
                                     GeneralProgrammingStuff.vec3_normalize(ref NormalizedToXYWorld, range);
                                     Scene.SS.env.player.coords.LookForCube();
