@@ -182,5 +182,39 @@ namespace TheDiplomWork
             Mouse.MouseIsActive = false;
             Cursor.Show();
         }
+
+        private void openGLControl_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void openGLControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button.ToString() == "Right")
+                {
+                    Scene.SS.env.cub_mem.world.World_as_Whole
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = true;
+                }
+                else if (e.Button.ToString() == "Left")
+                {
+                    Scene.SS.env.cub_mem.world.World_as_Whole
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = false;
+                }
+                Scene.RequiredRebuilding = true;
+            }
+            catch (Exception Ouch)
+            {
+                Console.WriteLine(Ouch.Message);
+            }
+        }
     }
 }

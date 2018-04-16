@@ -102,7 +102,7 @@ namespace TheDiplomWork
             Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
             Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
         }
-
+        public static bool RequiredRebuilding = false;
         Thread newThread;
         /// <summary>
         /// Draws the scene.
@@ -126,13 +126,14 @@ namespace TheDiplomWork
                 //    && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
                 //if (Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > (SS.env.player.coords.RangeOfView / 2 - 1)
                 //|| Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > (SS.env.player.coords.RangeOfView / 2 - 1))
-                if (SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD || scalar < 0.75)
+                if (SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD || scalar < 0.75 || RequiredRebuilding)
                 {
                     newThread = new Thread(Scene.DoWork);
                     newThread.Start(42);
                     SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
                     SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
                     Console.WriteLine("Inеting CoThread My");
+                    RequiredRebuilding = false;
                 }
             }
             else
