@@ -11,6 +11,9 @@ namespace TheDiplomWork
         public class Settings
         {
             //You can change here.
+            public bool ConsoleIsEnabled = true;
+
+            public bool ReloaderCauseOfChunkRare = false;
 
             public bool ReloaderCauseOfChangingChunk = true;
             public int RangeOfView = 4; //Range of chunks in every direction from you.
@@ -23,8 +26,9 @@ namespace TheDiplomWork
 
             public Settings()
             {
-                if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided)
-                    RequiredReloader = true; 
+                if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)
+                    RequiredReloader = true;
+                if (!ReloaderCauseOfChangingChunk && !ReloaderCauseOfChunkRare) RangeOfView = 9999;
             }
 
             //Changed on its own way

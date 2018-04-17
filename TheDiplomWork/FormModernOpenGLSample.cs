@@ -94,10 +94,13 @@ namespace TheDiplomWork
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
 
             //Cursor.Position.X - Location.X - openGLControl.Location.X - 8, -Cursor.Position.Y + Location.Y + Size.Height + openGLControl.Location.Y - 30
-            Mouse.SetCenterCursor(new System.Drawing.Point(openGLControl.Location.X + openGLControl.Width / 2, openGLControl.Location.Y + openGLControl.Height / 2));
-
+            SetMouseCenter();
             label_CursorPlus.Location = Mouse.ReturnToCenter();
             Cursor.Position = Mouse.ReturnToCenter();
+        }
+        public void SetMouseCenter()
+        {
+            Mouse.SetCenterCursor(new System.Drawing.Point(this.Location.X - openGLControl.Location.X - 28 + openGLControl.Width / 2, this.Location.Y + Size.Height - openGLControl.Height / 2));
         }
         float rotation = 0.0f;
         private void defaulttriangle()
@@ -215,6 +218,11 @@ namespace TheDiplomWork
             {
                 Console.WriteLine(Ouch.Message);
             }
+        }
+
+        private void FormModernOpenGLSample_LocationChanged(object sender, EventArgs e)
+        {
+            SetMouseCenter();
         }
     }
 }

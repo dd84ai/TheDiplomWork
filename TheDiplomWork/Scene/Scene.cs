@@ -97,7 +97,7 @@ namespace TheDiplomWork
             CreateVerticesForSquare();
 
             var handle = GetConsoleWindow();
-            ShowWindow(handle, SW_HIDE);
+            if (!StaticSettings.S.ConsoleIsEnabled) ShowWindow(handle, SW_HIDE);
 
             Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
             Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
@@ -121,11 +121,12 @@ namespace TheDiplomWork
 
                 float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
 
-                //if (SS.env.player.coords.Player_chunk_position.x >= 0 && SS.env.player.coords.Player_chunk_position.x < CubicalMemory.World.Quantity_of_chunks_in_root
-                //    && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
-                //if (Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > (SS.env.player.coords.RangeOfView / 2 - 1)
-                //|| Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > (SS.env.player.coords.RangeOfView / 2 - 1))
-                if ((StaticSettings.S.ReloaderCauseOfChangingChunk && SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD) 
+                if (SS.env.player.coords.Player_chunk_position.x >= 0 && SS.env.player.coords.Player_chunk_position.x < CubicalMemory.World.Quantity_of_chunks_in_root
+                    && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
+
+                if ((StaticSettings.S.ReloaderCauseOfChunkRare && (Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > (StaticSettings.S.RangeOfView / 2 - 1)
+                || Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > (StaticSettings.S.RangeOfView / 2 - 1)))
+                        ||(StaticSettings.S.ReloaderCauseOfChangingChunk && SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD) 
                     || (StaticSettings.S.RealoderCauseOfPointOfView && scalar < StaticSettings.S.PointOfViewCoefOfDifference) 
                     || (StaticSettings.S.RealoderCauseOfSunSided && SS.env.player.coords.Player_cubical_position.y != SS.env.player.coords.Player_cubical_position_OLD.y)
                     || StaticSettings.S.RealoderCauseOfBuildingBlocks)
@@ -137,7 +138,7 @@ namespace TheDiplomWork
                     SS.env.player.coords.Player_cubical_position_OLD.x = SS.env.player.coords.Player_cubical_position.x;
                     SS.env.player.coords.Player_cubical_position_OLD.y = SS.env.player.coords.Player_cubical_position.y;
                     SS.env.player.coords.Player_cubical_position_OLD.z = SS.env.player.coords.Player_cubical_position.z;
-                    Console.WriteLine("Inеting CoThread My");
+                    Console.WriteLine($"Inting My CoThread #{CounterMyCoThread++}");
                     StaticSettings.S.RealoderCauseOfBuildingBlocks = false;
                 }
             }
@@ -148,6 +149,7 @@ namespace TheDiplomWork
 
             if (SS.Main.FirstInitialization) Draw_Wrapped(gl);
         }
+        public static int CounterMyCoThread = 0;
         public static void DoWork(object data)
         {
             SS.Initialization();

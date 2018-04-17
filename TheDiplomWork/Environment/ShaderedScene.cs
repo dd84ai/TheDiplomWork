@@ -254,9 +254,9 @@ namespace TheDiplomWork
 
             int value = 0;
             if ((value = Scene.SS.env.player.coords.Player_chunk_position.x - StaticSettings.S.RangeOfView) > 0)
-                i = value;
+                i = value; else i = 0;
 
-            for (i = 0; i < env.cub_mem.world.World_as_Whole.Count() && i < Scene.SS.env.player.coords.Player_chunk_position.x + StaticSettings.S.RangeOfView; i++)
+            for (; i < env.cub_mem.world.World_as_Whole.Count() && i < Scene.SS.env.player.coords.Player_chunk_position.x + StaticSettings.S.RangeOfView; i++)
             {
                 if ((value = Scene.SS.env.player.coords.Player_chunk_position.z - StaticSettings.S.RangeOfView) > 0)
                     j = value; else j = 0;
@@ -283,9 +283,10 @@ namespace TheDiplomWork
                                     float scalar = GeneralProgrammingStuff.vec3_scalar(NormalizedToXYWorld, Scene.SS.env.player.coords.NormalizedLook);
                                     //POINT OF VIEWER
 
-                                    if (scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * StaticSettings.S.RangeOfView)
+                                    if (!StaticSettings.S.RealoderCauseOfPointOfView || scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * StaticSettings.S.RangeOfView)
                                     {
-                                        if (XYworld.xz.x == Scene.SS.env.player.coords.Player_chunk_position.x
+                                        if (!StaticSettings.S.RealoderCauseOfSunSided ||
+                                            XYworld.xz.x == Scene.SS.env.player.coords.Player_chunk_position.x
                                             && XYworld.xz.z == Scene.SS.env.player.coords.Player_chunk_position.z)
                                             Main.Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color, true);
                                         else

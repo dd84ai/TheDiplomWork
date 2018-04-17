@@ -88,6 +88,7 @@
             this.Name = "FormModernOpenGLSample";
             this.Text = "SharpGL Form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.LocationChanged += new System.EventHandler(this.FormModernOpenGLSample_LocationChanged);
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
