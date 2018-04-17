@@ -209,7 +209,7 @@ namespace TheDiplomWork
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = false;
                 }
-                Scene.RequiredRebuilding = true;
+                StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
             }
             catch (Exception Ouch)
             {

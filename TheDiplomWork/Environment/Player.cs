@@ -25,10 +25,7 @@ namespace TheDiplomWork
             public Point2Int Player_chunk_position_OLD = new Point2Int(0, 0);
 
             public Point3Int Player_cubical_position = new Point3Int(0,0,0);
-
-            public bool RangeReloader = true;
-            public int RangeOfView = 4;
-
+            public Point3Int Player_cubical_position_OLD = new Point3Int(0, 0, 0);
             public void Player_recalculate_extra_positions()
             {
                 Reverse_presice_to_map_coords(Player_precise_position, ref Player_chunk_position, ref Player_cubical_position);

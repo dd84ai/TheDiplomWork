@@ -100,11 +100,12 @@ namespace TheDiplomWork
                 Add_Value(ref colours, colours_count++, (float)_colour.G / 255);
                 Add_Value(ref colours, colours_count++, (float)_colour.B / 255);
             }
-            public void Draw_Quad_Full(
-                float x, float y, float z, float localed_range, System.Drawing.Color _colour)
+            public void Draw_Quad_Full_Sunsided(
+                float x, float y, float z, float localed_range, System.Drawing.Color _colour, bool SunSided = false)
             {
-
                 //Front
+                if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+                    new vec3(0, 0, -1)) < StaticSettings.S.SunSidedCoef)
                 Draw_Quad_Perpendecular_to_OSz
                 (
                 x, //Start_x
@@ -114,8 +115,11 @@ namespace TheDiplomWork
                 z, //Height
                 _colour);
 
+
                 //Back
-                Draw_Quad_Perpendecular_to_OSz
+                if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+                    new vec3(0, 0, 1)) < StaticSettings.S.SunSidedCoef)
+                    Draw_Quad_Perpendecular_to_OSz
                 (
                 x, //Start_x
                 y, //Start_z
@@ -126,7 +130,9 @@ namespace TheDiplomWork
                 );
 
                 //Left
-                Draw_Quad_Perpendecular_to_OSx
+                if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+                    new vec3(-1, 0, 0)) < StaticSettings.S.SunSidedCoef)
+                    Draw_Quad_Perpendecular_to_OSx
                 (
                 y, //Start_x
                 z, //Start_z
@@ -137,7 +143,9 @@ namespace TheDiplomWork
                 );
 
                 //Right
-                Draw_Quad_Perpendecular_to_OSx
+                if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+                    new vec3(1, 0, 0)) < StaticSettings.S.SunSidedCoef)
+                    Draw_Quad_Perpendecular_to_OSx
                 (
                 y, //Start_x
                 z, //Start_z
@@ -148,7 +156,9 @@ namespace TheDiplomWork
                 );
 
                 //Top
-                Draw_Quad_Perpendecular_to_OSy
+                if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+                    new vec3(0, 1, 0)) < StaticSettings.S.SunSidedCoef)
+                    Draw_Quad_Perpendecular_to_OSy
                 (
                 x, //Start_x
                 z, //Start_z
@@ -159,7 +169,9 @@ namespace TheDiplomWork
                 );
 
                 //Bottom
-                Draw_Quad_Perpendecular_to_OSy
+                if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+                    new vec3(0, -1, 0)) < StaticSettings.S.SunSidedCoef)
+                    Draw_Quad_Perpendecular_to_OSy
                 (
                 x, //Start_x
                 z, //Start_z
@@ -234,21 +246,22 @@ namespace TheDiplomWork
                 CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
                 CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge, //End_z
                 0, //Height
-                System.Drawing.Color.Gray);
+                System.Drawing.Color.Gray
+                );
 
             int i = 0;
             int j = 0;
 
             int value = 0;
-            if ((value = Scene.SS.env.player.coords.Player_chunk_position.x - Scene.SS.env.player.coords.RangeOfView) > 0)
+            if ((value = Scene.SS.env.player.coords.Player_chunk_position.x - StaticSettings.S.RangeOfView) > 0)
                 i = value;
 
-            for (i = 0; i < env.cub_mem.world.World_as_Whole.Count() && i < Scene.SS.env.player.coords.Player_chunk_position.x + Scene.SS.env.player.coords.RangeOfView; i++)
+            for (i = 0; i < env.cub_mem.world.World_as_Whole.Count() && i < Scene.SS.env.player.coords.Player_chunk_position.x + StaticSettings.S.RangeOfView; i++)
             {
-                if ((value = Scene.SS.env.player.coords.Player_chunk_position.z - Scene.SS.env.player.coords.RangeOfView) > 0)
+                if ((value = Scene.SS.env.player.coords.Player_chunk_position.z - StaticSettings.S.RangeOfView) > 0)
                     j = value; else j = 0;
 
-            for (; j < env.cub_mem.world.World_as_Whole[i].Count() && j < Scene.SS.env.player.coords.Player_chunk_position.z + Scene.SS.env.player.coords.RangeOfView; j++)
+            for (; j < env.cub_mem.world.World_as_Whole[i].Count() && j < Scene.SS.env.player.coords.Player_chunk_position.z + StaticSettings.S.RangeOfView; j++)
                 {
                     var XYworld = env.cub_mem.world.World_as_Whole[i][j];
 
@@ -270,9 +283,13 @@ namespace TheDiplomWork
                                     float scalar = GeneralProgrammingStuff.vec3_scalar(NormalizedToXYWorld, Scene.SS.env.player.coords.NormalizedLook);
                                     //POINT OF VIEWER
 
-                                    if (scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * Scene.SS.env.player.coords.RangeOfView)
+                                    if (scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * StaticSettings.S.RangeOfView)
                                     {
-                                        Main.Draw_Quad_Full(x, y, z, localed_range, XYZcube.color);
+                                        if (XYworld.xz.x == Scene.SS.env.player.coords.Player_chunk_position.x
+                                            && XYworld.xz.z == Scene.SS.env.player.coords.Player_chunk_position.z)
+                                            Main.Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color, true);
+                                        else
+                                        Main.Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color);
                                     }
                                 }
                             }

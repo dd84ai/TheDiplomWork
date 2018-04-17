@@ -102,7 +102,6 @@ namespace TheDiplomWork
             Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
             Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
         }
-        public static bool RequiredRebuilding = false;
         Thread newThread;
         /// <summary>
         /// Draws the scene.
@@ -111,7 +110,7 @@ namespace TheDiplomWork
         /// 
         public void Draw(OpenGL gl)
         {
-            if (SS.env.player.coords.RangeReloader && !newThread.IsAlive)
+            if (StaticSettings.S.RequiredReloader && !newThread.IsAlive)
             {
                 if (!SS.Main.CopiedLastResult)
                 {
@@ -126,14 +125,20 @@ namespace TheDiplomWork
                 //    && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
                 //if (Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > (SS.env.player.coords.RangeOfView / 2 - 1)
                 //|| Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > (SS.env.player.coords.RangeOfView / 2 - 1))
-                if (SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD || scalar < 0.75 || RequiredRebuilding)
+                if ((StaticSettings.S.ReloaderCauseOfChangingChunk && SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD) 
+                    || (StaticSettings.S.RealoderCauseOfPointOfView && scalar < StaticSettings.S.PointOfViewCoefOfDifference) 
+                    || (StaticSettings.S.RealoderCauseOfSunSided && SS.env.player.coords.Player_cubical_position.y != SS.env.player.coords.Player_cubical_position_OLD.y)
+                    || StaticSettings.S.RealoderCauseOfBuildingBlocks)
                 {
                     newThread = new Thread(Scene.DoWork);
                     newThread.Start(42);
                     SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
                     SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
+                    SS.env.player.coords.Player_cubical_position_OLD.x = SS.env.player.coords.Player_cubical_position.x;
+                    SS.env.player.coords.Player_cubical_position_OLD.y = SS.env.player.coords.Player_cubical_position.y;
+                    SS.env.player.coords.Player_cubical_position_OLD.z = SS.env.player.coords.Player_cubical_position.z;
                     Console.WriteLine("Inеting CoThread My");
-                    RequiredRebuilding = false;
+                    StaticSettings.S.RealoderCauseOfBuildingBlocks = false;
                 }
             }
             else
