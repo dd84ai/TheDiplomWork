@@ -236,25 +236,26 @@ namespace TheDiplomWork
                 0, //Height
                 System.Drawing.Color.Gray);
 
-            foreach (var Xworld in env.cub_mem.world.World_as_Whole)
-                foreach (var XYworld in Xworld)
-                {
-                    if (Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.x - XYworld.xz.x) < Scene.SS.env.player.coords.RangeOfView &&
-                        Math.Abs(Scene.SS.env.player.coords.Player_chunk_position.z - XYworld.xz.z) < Scene.SS.env.player.coords.RangeOfView)
-                    { }
-                    else continue;
+            int i = 0;
+            int j = 0;
 
-                    //Тэк, используем Precise look.
-                    //Дано. Точка игрока. Точка перед игроком.
-                    //Ну и допустим центр текущего чанка. ЭЭ стоп, а эти величины то пересекаются? Надеюсь да.
+            int value = 0;
+            if ((value = Scene.SS.env.player.coords.Player_chunk_position.x - Scene.SS.env.player.coords.RangeOfView) > 0)
+                i = value;
+
+            for (i = 0; i < env.cub_mem.world.World_as_Whole.Count() && i < Scene.SS.env.player.coords.Player_chunk_position.x + Scene.SS.env.player.coords.RangeOfView; i++)
+            {
+                if ((value = Scene.SS.env.player.coords.Player_chunk_position.z - Scene.SS.env.player.coords.RangeOfView) > 0)
+                    j = value; else j = 0;
+
+            for (; j < env.cub_mem.world.World_as_Whole[i].Count() && j < Scene.SS.env.player.coords.Player_chunk_position.z + Scene.SS.env.player.coords.RangeOfView; j++)
+                {
+                    var XYworld = env.cub_mem.world.World_as_Whole[i][j];
 
                     foreach (var Xcube in XYworld.cubes)
                         foreach (var XYcube in Xcube)
                             foreach (var XYZcube in XYcube)
                             {
-                                //if (counter % 1000 == 0)
-                                //    Console.WriteLine($"{counter}\\{Quantity_of_total_cubes}");
-
                                 if (XYZcube.IsFilled)
                                 {
                                     CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
@@ -276,7 +277,7 @@ namespace TheDiplomWork
                                 }
                             }
                 }
-
+            }
             Main.Extra_Remover(ref Main.vertices, Main.vertices_count);
             Main.Extra_Remover(ref Main.colours, Main.colours_count);
             Main.CopiedLastResult = false;
