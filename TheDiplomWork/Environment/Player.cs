@@ -50,16 +50,19 @@ namespace TheDiplomWork
             public Point3D Player_precise_lookforcube = new Point3D(0, 0, 0);
             public Point2Int Player_chunk_lookforcube = new Point2Int(0, 0);
             public Point3Int Player_cubical_lookforcube = new Point3Int(0, 0, 0);
-            vec4 StepForARequiedCube = new vec4(0,0, 0.1f*CubicalMemory.Cube.rangeOfTheEdge,0);
+            public Point3Int Player_cubical_lookforcube_temporal = new Point3Int(0, 0, 0);
+            public Point3Int Player_cubical_lookforcube_OLD = new Point3Int(0, 0, 0);
+
+            vec4 StepForARequiedCube = new vec4(0,0, 0.5f*CubicalMemory.Cube.rangeOfTheEdge,0);
 
             public vec3 NormalizedLook = new vec3(0,0,0);
 
             public Point3Int Player_cubical_lastbeforecolission = new Point3Int(-1, -1, -1);
             public void LookForCube()
             {
-                /*
-                bool found = false;
-                int visible_range = 10 * 5;
+                StepForARequiedCube.z = 0.5f * CubicalMemory.Cube.rangeOfTheEdge;
+                /*bool found = false;
+                int visible_range = 4 * 3;
                 for (int i = 0; i < visible_range; i++
                     )
                 {
@@ -91,11 +94,21 @@ namespace TheDiplomWork
                     }
                 }*/
 
-                StepForARequiedCube.z = 0.25f * CubicalMemory.Cube.rangeOfTheEdge;
                 GeneralProgrammingStuff.Point3D.CopyToFrom(
                 ref Player_precise_lookforcube, Player_precise_position);
                 Keyboard.Wrapped_Do_Step(StepForARequiedCube, ref Player_precise_lookforcube, true);
                 Reverse_presice_to_map_coords(Player_precise_lookforcube, ref Player_chunk_lookforcube, ref Player_cubical_lookforcube);
+
+                /*if (Player_cubical_lookforcube_temporal == Player_cubical_position)
+                {
+                    StepForARequiedCube.z = 1f * CubicalMemory.Cube.rangeOfTheEdge;
+                    GeneralProgrammingStuff.Point3D.CopyToFrom(
+                ref Player_precise_lookforcube, Player_precise_position);
+                    Keyboard.Wrapped_Do_Step(StepForARequiedCube, ref Player_precise_lookforcube, true);
+                    Reverse_presice_to_map_coords(Player_precise_lookforcube, ref Player_chunk_lookforcube, ref Player_cubical_lookforcube);
+                }
+                else
+                GeneralProgrammingStuff.Point3Int.CopyToFrom(ref Player_cubical_lookforcube, Player_cubical_lookforcube_temporal);*/
 
                 //Нормализованный взгляд
                 NormalizedLook.x = Player_precise_lookforcube.x - Player_precise_position.x;

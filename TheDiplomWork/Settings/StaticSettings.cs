@@ -24,6 +24,8 @@ namespace TheDiplomWork
             public bool RealoderCauseOfSunSided = true;
             public float SunSidedCoef = 0.25f; //It's a light side to you.
 
+            public bool GhostCubeBool = false;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)

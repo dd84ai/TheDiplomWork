@@ -204,12 +204,52 @@ namespace TheDiplomWork
                 CopiedLastResult = true;
                 LastCount = vertices.Count();
             }
+            void Add_Value(ref List<float> list, int index, float value)
+            {
+                if (index < list.Count()) list[index] = value;
+                else list.Add(value);
+            }
+            public void GhostCubeInit()
+            {
+                Memory_Init();
+                vertices_count = 0;
+                colours_count = 0;
+
+                bool found = false;
+                try
+                {
+                    bool thing = Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled;
+                    if (!thing) found = true;
+                }
+                catch (Exception e)
+                {
+                    found = false;
+                }
+
+                if (found)
+                {
+                    float x = 0, y = 0, z = 0;
+                    CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
+                        Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
+
+                    Draw_Quad_Full_Sunsided(x, y, z, localed_range, System.Drawing.Color.White, true);
+
+                }
+                Extra_Remover(ref vertices, vertices_count);
+                Extra_Remover(ref colours, colours_count);
+                CopiedLastResult = false;
+                vertices_arrayed = vertices.ToArray();
+                colours_arrayed = colours.ToArray();
+
+                CopyToReady();
+            }
         }
-        static void Add_Value(ref List<float> list, int index, float value)
-        {
-            if (index < list.Count()) list[index] = value; 
-            else list.Add(value);
-        }
+        
         static vec4 CalculatingThing = new vec4(0, 0, 0, 0);
         static mat4 matrix_all_inclusive;
         public void OpenGLDraw(OpenGL gl,mat4 _matrix_all_inclusive)
@@ -222,13 +262,16 @@ namespace TheDiplomWork
             x = 0; y = 0; z = 0;
 
             //Quads.Draw_Quad_Full(x, y, z, localed_range,gl,OpenGL.GL_QUADS);
+
         }
 
         float x = 0, y = 0, z = 0;
-        float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
+        static float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
         vec3 NormalizedToXYWorld = new vec3(0, 0, 0);
         public vec3 LastPlayerLook = new vec3(0, 0, 0);
         public DataForDraw Main = new DataForDraw();
+        public DataForDraw GhostCube = new DataForDraw();
+        
         public void Initialization()
         {
             Main.Memory_Init();
@@ -303,7 +346,7 @@ namespace TheDiplomWork
             Main.colours_arrayed = Main.colours.ToArray();
         }
         
-        public void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
+        public static void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {
             x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;
             y = XYZcube.y;

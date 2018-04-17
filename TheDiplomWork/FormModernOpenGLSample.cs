@@ -165,6 +165,8 @@ namespace TheDiplomWork
             char item = ((char)e.KeyValue).ToString().ToLower()[0];
             if (!Keyboard.KeysActive.Contains(item))
                 Keyboard.KeysActive.Add(item);
+
+            Keyboard.Wrapped_SINGLE_KeyPressed_Reaction(item);
         }
 
         private void openGLControl_KeyUp(object sender, KeyEventArgs e)

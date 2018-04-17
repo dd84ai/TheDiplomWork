@@ -18,15 +18,15 @@ namespace TheDiplomWork
         static DateTime start = DateTime.Now;
         public static void DoSpecificAction(char key)
         {
-                    Keyboard.Wrapped_KeyPressed_Reaction(key);
+            Keyboard.Wrapped_KeyPressed_Reaction(key);
         }
         public static void DoAction()
         {
             //if ((DateTime.Now - start).TotalMilliseconds > 100)
             //{
-                foreach (var key in Keyboard.KeysActive)
-                    Keyboard.Wrapped_KeyPressed_Reaction(key);
-                //start = DateTime.Now;
+            foreach (var key in Keyboard.KeysActive)
+                Keyboard.Wrapped_KeyPressed_Reaction(key);
+            //start = DateTime.Now;
             //}
         }
         public static void RepeatLastStep()
@@ -46,12 +46,24 @@ namespace TheDiplomWork
             vec4 step_vector_extra;
 
             if (!SensetivityToY)
-            step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * _step;
+                step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) * _step;
             else
-            step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, -1.0f, 0.0f)) * glm.rotate(-Scene.SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, -1.0f)) * _step; //* glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) 8* _step;
+                step_vector_extra = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(Scene.SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, -1.0f, 0.0f)) * glm.rotate(-Scene.SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, -1.0f)) * _step; //* glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f)) 8* _step;
             WhatToMove.x -= step_vector_extra.x;
             WhatToMove.y -= step_vector_extra.y;
             WhatToMove.z -= step_vector_extra.z;
+        }
+        public static void Wrapped_SINGLE_KeyPressed_Reaction(char key)
+        {
+            switch (key)
+            {
+
+                case 'g':
+                    StaticSettings.S.GhostCubeBool = !StaticSettings.S.GhostCubeBool;
+                    break;
+
+                default: break;
+            }
         }
         public static void Wrapped_KeyPressed_Reaction(char key)
         {

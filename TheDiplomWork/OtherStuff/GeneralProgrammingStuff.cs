@@ -198,6 +198,12 @@ namespace TheDiplomWork
                     + y.ToString("G2") + " ; "
                 + z.ToString("G2");
             }
+            public static void CopyToFrom(ref Point3Int Output, Point3Int _Input)
+            {
+                Output.x = _Input.x;
+                Output.y = _Input.y;
+                Output.z = _Input.z;
+            }
             public static bool operator ==(Point3Int c1, Point3Int c2)
             {
                 if (c1.x == c2.x && c1.z == c2.z && c1.y == c2.y) return true;
