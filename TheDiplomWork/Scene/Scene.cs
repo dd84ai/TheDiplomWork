@@ -44,8 +44,8 @@ namespace TheDiplomWork
         const uint attributeIndexColour = 1;
 
         //  The vertex buffer array which contains the vertex and colour buffers.
-        SceneInfo SI_main;
-        SceneInfo SI_ghost;
+        static SceneInfo SI_main;
+        static SceneInfo SI_ghost;
 
         //VertexBufferArray vertexBufferArray2;
 
@@ -59,11 +59,14 @@ namespace TheDiplomWork
         /// <param name="width">The width of the screen.</param>
         /// <param name="height">The height of the screen.</param>
         static OpenGL _gl;
+        Thread newThread;
+        Thread newThread_ghost;
         public async void Initialise(OpenGL gl, float width, float height)
         {
             _gl = gl;
             SI_main = new SceneInfo(gl);
             SI_ghost = new SceneInfo(gl);
+            newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
             newThread = new Thread(Scene.DoWork);
@@ -103,7 +106,7 @@ namespace TheDiplomWork
             Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
             SaveAndLoad.Load("default");
         }
-        Thread newThread;
+        
         /// <summary>
         /// Draws the scene.
         /// </summary>
@@ -115,16 +118,23 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Player_cubical_lookforcube !=
                 Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD)
             {
-                
-                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
-                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
-                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
 
-                SS.GhostCube.initialization();
-                SI_ghost.CreateVerticesForSquare(ref SS.GhostCube);
+                if (!SS.GhostCube.CopiedLastResult)
+                {
+                    SS.GhostCube.CopyToReady();
+                    SI_ghost.CreateVerticesForSquare(ref SS.GhostCube);
+                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
+                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
+                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
+                }
+                else if (!newThread_ghost.IsAlive && !DoWork_ghost_IsAlive)
+                {
+                    newThread_ghost = new Thread(Scene.DoWork_ghost);
+                    newThread_ghost.Start(46);
+                }
             }
 
-            if (StaticSettings.S.RequiredReloader && !newThread.IsAlive)
+            if (StaticSettings.S.RequiredReloader && !newThread.IsAlive && !DoWork_IsAlive)
             {
                 if (!SS.Main.CopiedLastResult)
                 {
@@ -164,13 +174,24 @@ namespace TheDiplomWork
             if (SS.Main.FirstInitialization) Draw_Wrapped(gl);
         }
         public static int CounterMyCoThread = 0;
+        public static bool DoWork_IsAlive = false;
         public static void DoWork(object data)
         {
+            DoWork_IsAlive = true;
             Scene.SS.env.player.coords.LastPlayerLook.x = Scene.SS.env.player.coords.NormalizedLook.x;
             Scene.SS.env.player.coords.LastPlayerLook.y = Scene.SS.env.player.coords.NormalizedLook.y;
             Scene.SS.env.player.coords.LastPlayerLook.z = Scene.SS.env.player.coords.NormalizedLook.z;
             SS.Main.initialization();
+            DoWork_IsAlive = false;
             //GC.Collect();
+            return;
+        }
+        public static bool DoWork_ghost_IsAlive = false;
+        public static void DoWork_ghost(object data)
+        {
+            DoWork_ghost_IsAlive = true;
+            SS.GhostCube.initialization();
+            DoWork_ghost_IsAlive = false;
             return;
         }
 

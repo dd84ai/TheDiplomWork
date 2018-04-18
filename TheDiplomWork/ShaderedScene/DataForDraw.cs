@@ -19,6 +19,7 @@ namespace TheDiplomWork
         public int Quantity_of_all_values = 0;
         public void Memory_Init()
         {
+            Initialization_in_process = true;
             Quantity_of_cubes_per_chunk =
                 CubicalMemory.Chunk.Height
                 * CubicalMemory.Chunk.Length
@@ -173,7 +174,7 @@ namespace TheDiplomWork
         public float[] vertices_arrayed;
         public float[] colours_arrayed;
         public bool FirstInitialization = false;
-        public bool CopiedLastResult = false;
+        public bool CopiedLastResult = true;
 
         int LastCount = 0;
         public int Quantity()
@@ -186,6 +187,7 @@ namespace TheDiplomWork
             FirstInitialization = true;
             CopiedLastResult = true;
             LastCount = vertices.Count();
+            Initialization_in_process = false;
         }
         void Add_Value(ref List<float> list, int index, float value)
         {
@@ -193,6 +195,8 @@ namespace TheDiplomWork
             else list.Add(value);
         }
         protected float x = 0, y = 0, z = 0;
+
+        public bool Initialization_in_process = false;
         public virtual void initialization()
         { }
     }

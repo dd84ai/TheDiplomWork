@@ -43,8 +43,6 @@ namespace TheDiplomWork
             CopiedLastResult = false;
             vertices_arrayed = vertices.ToArray();
             colours_arrayed = colours.ToArray();
-
-            CopyToReady();
         }
     }
     class DataForDraw_Main : DataForDraw

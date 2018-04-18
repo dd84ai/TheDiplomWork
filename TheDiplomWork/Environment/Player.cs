@@ -39,12 +39,15 @@ namespace TheDiplomWork
                 _chunk.x = (int)((_precise.x / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Width);
                 _chunk.z = (int)((_precise.z / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Length);
 
-                _cubical.x = (int)(_precise.x / (double)CubicalMemory.Cube.rangeOfTheEdge);
-                _cubical.z = (int)(_precise.z / (double)CubicalMemory.Cube.rangeOfTheEdge);
+                int x = (int)(_precise.x / (double)CubicalMemory.Cube.rangeOfTheEdge);
+                int z = (int)(_precise.z / (double)CubicalMemory.Cube.rangeOfTheEdge);
                 _cubical.y = (int)(_precise.y / (double)CubicalMemory.Cube.rangeOfTheEdge);
 
-                _cubical.x -= _chunk.x * CubicalMemory.Chunk.Width;
-                _cubical.z -= _chunk.z * CubicalMemory.Chunk.Length;
+                x -= _chunk.x * CubicalMemory.Chunk.Width;
+                z -= _chunk.z * CubicalMemory.Chunk.Length;
+
+                _cubical.x = x;
+                _cubical.z = z;
             }
 
             public Point3D Player_precise_lookforcube = new Point3D(0, 0, 0);
@@ -53,7 +56,7 @@ namespace TheDiplomWork
             public Point3Int Player_cubical_lookforcube_temporal = new Point3Int(0, 0, 0);
             public Point3Int Player_cubical_lookforcube_OLD = new Point3Int(0, 0, 0);
 
-            vec4 StepForARequiedCube = new vec4(0,0, 0.5f*CubicalMemory.Cube.rangeOfTheEdge,0);
+            vec4 StepForARequiedCube = new vec4(0,0, 1.5f*CubicalMemory.Cube.rangeOfTheEdge,0);
 
             public vec3 NormalizedLook = new vec3(0,0,0);
             public vec3 LastPlayerLook = new vec3(0, 0, 0);
@@ -61,7 +64,7 @@ namespace TheDiplomWork
             public Point3Int Player_cubical_lastbeforecolission = new Point3Int(-1, -1, -1);
             public void LookForCube()
             {
-                StepForARequiedCube.z = 0.5f * CubicalMemory.Cube.rangeOfTheEdge;
+                //StepForARequiedCube.z = 0.5f * CubicalMemory.Cube.rangeOfTheEdge;
                 /*bool found = false;
                 int visible_range = 4 * 3;
                 for (int i = 0; i < visible_range; i++
