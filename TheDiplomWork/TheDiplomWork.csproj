@@ -67,7 +67,8 @@
     <Compile Include="Environment\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
     <Compile Include="ShaderedScene\DataForDraw.cs" />
-    <Compile Include="ShaderedScene\DataForDraw_heirs.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_ghost.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_Main.cs" />
     <Compile Include="ShaderedScene\ShaderedScene.cs" />
     <Compile Include="FormModernOpenGLSample.cs">
       <SubType>Form</SubType>

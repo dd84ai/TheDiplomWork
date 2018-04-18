@@ -199,5 +199,19 @@ namespace TheDiplomWork
         public bool Initialization_in_process = false;
         public virtual void initialization()
         { }
+        public void START_initialization()
+        {
+            Memory_Init();
+            vertices_count = 0;
+            colours_count = 0;
+        }
+        public void END_initialization()
+        {
+            Extra_Remover(ref vertices, vertices_count);
+            Extra_Remover(ref colours, colours_count);
+            CopiedLastResult = false;
+            vertices_arrayed = vertices.ToArray();
+            colours_arrayed = colours.ToArray();
+        }
     }
 }

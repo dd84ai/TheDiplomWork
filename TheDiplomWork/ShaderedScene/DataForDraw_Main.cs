@@ -6,45 +6,6 @@ using System.Threading.Tasks;
 using GlmNet;
 namespace TheDiplomWork
 {
-    class DataForDraw_Ghost : DataForDraw
-    {
-        public override void initialization()
-        {
-            Memory_Init();
-            vertices_count = 0;
-            colours_count = 0;
-
-            bool found = false;
-            try
-            {
-                bool thing = Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled;
-                if (!thing) found = true;
-            }
-            catch (Exception e)
-            {
-                found = false;
-            }
-
-            if (found)
-            {
-                ShaderedScene.CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
-                    Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
-
-                Draw_Quad_Full_Sunsided(x, y, z, localed_range, System.Drawing.Color.White, true);
-
-            }
-            Extra_Remover(ref vertices, vertices_count);
-            Extra_Remover(ref colours, colours_count);
-            CopiedLastResult = false;
-            vertices_arrayed = vertices.ToArray();
-            colours_arrayed = colours.ToArray();
-        }
-    }
     class DataForDraw_Main : DataForDraw
     {
         static vec4 CalculatingThing = new vec4(0, 0, 0, 0);
@@ -52,9 +13,7 @@ namespace TheDiplomWork
 
         public override void initialization()
         {
-            Memory_Init();
-            vertices_count = 0;
-            colours_count = 0;
+            START_initialization();
 
             //FOR OG WAR
             Draw_Quad_Perpendecular_to_OSy
@@ -116,11 +75,7 @@ namespace TheDiplomWork
                             }
                 }
             }
-            Extra_Remover(ref vertices, vertices_count);
-            Extra_Remover(ref colours, colours_count);
-            CopiedLastResult = false;
-            vertices_arrayed = vertices.ToArray();
-            colours_arrayed = colours.ToArray();
+            END_initialization();
         }
     }
 }
