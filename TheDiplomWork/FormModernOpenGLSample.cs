@@ -15,6 +15,7 @@ namespace TheDiplomWork
         public FormModernOpenGLSample()
         {
             InitializeComponent();
+            CF = new CalculatorFont(openGLControl);
         }
 
         /// <summary>
@@ -73,7 +74,10 @@ namespace TheDiplomWork
             + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2");
 
             if (StaticSettings.S.GhostCubeBool) GraphicalOverlap.draw_GO_square(openGLControl, 20, 20, GraphicalOverlap.GO_color);
+
+            CF.Ultimate_DrawText(20, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString());
         }
+        CalculatorFont CF;
         private void openGLControl_Resized(object sender, EventArgs e)
         {
             //  TODO: Set the projection matrix here.
@@ -254,10 +258,22 @@ namespace TheDiplomWork
 
         private void openGLControl_MouseScroller(object sender, MouseEventArgs e)
         {
-            GraphicalOverlap.GO_color_choice_number++;
-            if (GraphicalOverlap.GO_color_choice_number > GeneralProgrammingStuff.ColorSwitch_Quantity - 1)
-                GraphicalOverlap.GO_color_choice_number = 0;
-            GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_color_choice_number);
+            if (e.Delta > 0)
+            GraphicalOverlap.GO_interface_item_choice++;
+            else
+                GraphicalOverlap.GO_interface_item_choice--;
+
+            if (GraphicalOverlap.GO_interface_item_choice > GeneralProgrammingStuff.ColorSwitch_Quantity)
+                GraphicalOverlap.GO_interface_item_choice = 0;
+            if (GraphicalOverlap.GO_interface_item_choice < 0)
+                GraphicalOverlap.GO_interface_item_choice = GeneralProgrammingStuff.ColorSwitch_Quantity;
+
+            GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_interface_item_choice - 1);
+
+            if (GraphicalOverlap.GO_interface_item_choice == 0)
+                StaticSettings.S.GhostCubeBool = false;
+            else StaticSettings.S.GhostCubeBool = true;
+
             GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
         }
     }

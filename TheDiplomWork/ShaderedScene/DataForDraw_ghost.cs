@@ -21,7 +21,7 @@ namespace TheDiplomWork
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled;
-                if (!thing) found = true;
+                found = true;
             }
             catch (Exception e)
             {

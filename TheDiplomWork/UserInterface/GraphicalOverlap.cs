@@ -13,7 +13,7 @@ namespace TheDiplomWork
     {
         public static int size = 20;
         public static System.Drawing.Color GO_color = System.Drawing.Color.Aqua;
-        public static int GO_color_choice_number = 0;
+        public static int GO_interface_item_choice = 0;
         public static bool Rebuilding_is_required_cause_of_GO_color_changed_color = false;
         public static void draw_GO_square(OpenGLControl openGLControl, int x_from, int y_from, System.Drawing.Color _color)
         {
@@ -47,7 +47,7 @@ namespace TheDiplomWork
         {
             public GO_initer()
             {
-                GO_color = GeneralProgrammingStuff.ColorSwitch(GO_color_choice_number);
+                GO_color = System.Drawing.Color.Aqua;
             }
         }
         static GO_initer go_initer = new GO_initer();
