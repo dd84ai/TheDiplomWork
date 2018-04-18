@@ -71,6 +71,8 @@ namespace TheDiplomWork
              + "ChunkLook:" + Scene.SS.env.player.coords.Player_chunk_lookforcube.ToString() + "\r\n"
              + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString() + "\r\n"
             + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2");
+
+            if (StaticSettings.S.GhostCubeBool) GraphicalOverlap.draw_GO_square(openGLControl, 20, 20, GraphicalOverlap.GO_color);
         }
         private void openGLControl_Resized(object sender, EventArgs e)
         {
@@ -86,10 +88,13 @@ namespace TheDiplomWork
             gl.LoadIdentity();
 
             //  Create a perspective transformation.
-            gl.Perspective(60.0f, (double)openGLControl.Size.Width / (double)openGLControl.Size.Height, 0.1f, 10000.0);
+            //gl.Perspective(60.0f, (double)openGLControl.Size.Width / (double)openGLControl.Size.Height, 0.1f, 10000.0);
 
-            gl.LookAt(0, 0, 5, 0, 0, 0, 0, -1, 0);
+            //gl.LookAt(0, 0, 5, 0, 0, 0, 0, -1, 0);
             //gl.LookAt(-5, 5, -5, 0, 0, 0, 0, -1, 0);
+            gl.Ortho2D(0, openGLControl.Width, 0, openGLControl.Height);
+            gl.Viewport(0, 0, openGLControl.Width, openGLControl.Height);
+            
             //  Set the modelview matrix.
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
 
@@ -196,25 +201,45 @@ namespace TheDiplomWork
         {
             try
             {
-                if (e.Button.ToString() == "Right")
+                if (StaticSettings.S.GhostCubeBool)
                 {
-                    Scene.SS.env.cub_mem.world.World_as_Whole
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = true;
+                    if (e.Button.ToString() == "Right")
+                    {
+                        Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = true;
+                        Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
+                    }
+                    else if (e.Button.ToString() == "Left")
+                    {
+                        Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = false;
+                        Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color_default;
+                    }
+                    StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                 }
-                else if (e.Button.ToString() == "Left")
-                {
-                    Scene.SS.env.cub_mem.world.World_as_Whole
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = false;
-                }
-                StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
             }
             catch (Exception Ouch)
             {
@@ -225,6 +250,15 @@ namespace TheDiplomWork
         private void FormModernOpenGLSample_LocationChanged(object sender, EventArgs e)
         {
             SetMouseCenter();
+        }
+
+        private void openGLControl_MouseScroller(object sender, MouseEventArgs e)
+        {
+            GraphicalOverlap.GO_color_choice_number++;
+            if (GraphicalOverlap.GO_color_choice_number > GeneralProgrammingStuff.ColorSwitch_Quantity - 1)
+                GraphicalOverlap.GO_color_choice_number = 0;
+            GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_color_choice_number);
+            GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
         }
     }
 }

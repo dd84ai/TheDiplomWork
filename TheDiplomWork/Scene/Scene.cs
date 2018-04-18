@@ -115,8 +115,11 @@ namespace TheDiplomWork
         public void Draw(OpenGL gl)
         {
             if (StaticSettings.S.GhostCubeBool && 
-                Scene.SS.env.player.coords.Player_cubical_lookforcube !=
-                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD)
+                (Scene.SS.env.player.coords.Player_cubical_lookforcube !=
+                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD
+                || GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color
+                )
+                )
             {
 
                 if (!SS.GhostCube.CopiedLastResult)

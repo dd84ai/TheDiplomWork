@@ -216,6 +216,7 @@ namespace TheDiplomWork
             }
         }
 
+        public static int ColorSwitch_Quantity = 13;
         public static System.Drawing.Color ColorSwitch(int choice)
         {
             switch (choice)
@@ -231,7 +232,8 @@ namespace TheDiplomWork
                 case 08: return System.Drawing.Color.Red;
                 case 09: return System.Drawing.Color.Aqua;
                 case 10: return System.Drawing.Color.Azure;
-
+                case 11: return System.Drawing.Color.White;
+                case 12: return System.Drawing.Color.Black;
                 default: return System.Drawing.Color.Gray;
             }
         }

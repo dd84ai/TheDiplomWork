@@ -79,6 +79,7 @@
     <Compile Include="OtherStuff\LearningAsync.cs" />
     <Compile Include="Scene\SceneInfo.cs" />
     <Compile Include="Settings\StaticSettings.cs" />
+    <Compile Include="UserInterface\GraphicalOverlap.cs" />
     <Compile Include="UserInterface\Keyboard.cs" />
     <Compile Include="ManifestResourceLoader.cs" />
     <Compile Include="OtherStuff\GeneralProgrammingStuff.cs" />

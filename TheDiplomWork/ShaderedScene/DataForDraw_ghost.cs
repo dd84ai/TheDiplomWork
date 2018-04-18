@@ -33,7 +33,7 @@ namespace TheDiplomWork
                 ShaderedScene.CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
                     Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
 
-                Draw_Quad_Full_Sunsided(x, y, z, localed_range, System.Drawing.Color.White, true);
+                Draw_Quad_Full_Sunsided(x, y, z, localed_range, GraphicalOverlap.GO_color, true);
 
             }
 
