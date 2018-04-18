@@ -65,6 +65,7 @@
     <Compile Include="Environment\CubicalMemory.cs" />
     <Compile Include="Environment\Environment.cs" />
     <Compile Include="Environment\Player.cs" />
+    <Compile Include="Environment\SaveAndLoad.cs" />
     <Compile Include="Environment\ShaderedScene.cs" />
     <Compile Include="FormModernOpenGLSample.cs">
       <SubType>Form</SubType>

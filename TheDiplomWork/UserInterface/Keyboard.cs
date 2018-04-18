@@ -119,6 +119,7 @@ namespace TheDiplomWork
         {
             Scene.SS.env.player.coords.Player_precise_position.Save("PlayerPosition");
             Scene.SS.env.player.coords.Player_rotational_view.Save("PlayerRotationalView");
+            SaveAndLoad.Save("default");
         }
         public static void RestoringToDefaultAlgorithm()
         {

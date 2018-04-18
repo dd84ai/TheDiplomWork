@@ -105,6 +105,7 @@ namespace TheDiplomWork
 
             Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
             Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
+            SaveAndLoad.Load("default");
         }
         Thread newThread;
         /// <summary>

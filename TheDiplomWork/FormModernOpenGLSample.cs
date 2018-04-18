@@ -214,6 +214,12 @@ namespace TheDiplomWork
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = false;
                 }
+                Scene.SS.env.cub_mem.world.World_as_Whole
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].Changed = true;
                 StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
             }
             catch (Exception Ouch)

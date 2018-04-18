@@ -24,7 +24,7 @@ namespace TheDiplomWork
             /// </summary>
             public static float rangeOfTheEdge = 1.0f;
             public System.Drawing.Color color = ColorSwitch(Rand.Next(10));
-
+            public bool Changed = false;
             public bool IsFilled = false;
             public GeneralProgrammingStuff.Point3Int xyz = new Point3Int(0,0,0);
             public Cube(int _x, int _y, int _z)
@@ -38,7 +38,6 @@ namespace TheDiplomWork
             /// Кол-во кубов в чанке.
             /// </summary>
             public static int Height = 32, Width = 16, Length = 16;
-
             public List<List<List<Cube>>> cubes;
             public GeneralProgrammingStuff.Point2Int xz = new Point2Int(0,0);
             public Chunk(int _x, int _z)

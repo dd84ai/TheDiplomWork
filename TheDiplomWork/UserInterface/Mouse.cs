@@ -20,7 +20,7 @@ namespace TheDiplomWork
         {
             CenterCursor = Position;
         }
-        static float MouseRotateDecreaser = 0.01f;
+        static float MouseRotateDecreaser = 0.004f;
         public static void DoMouse(System.Drawing.Point Position)
         {
             Scene.SS.env.player.coords.Player_rotational_view.x += (float)(Position.X - OldPosition.X) * MouseRotateDecreaser;
