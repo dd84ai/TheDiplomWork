@@ -56,6 +56,7 @@ namespace TheDiplomWork
             vec4 StepForARequiedCube = new vec4(0,0, 0.5f*CubicalMemory.Cube.rangeOfTheEdge,0);
 
             public vec3 NormalizedLook = new vec3(0,0,0);
+            public vec3 LastPlayerLook = new vec3(0, 0, 0);
 
             public Point3Int Player_cubical_lastbeforecolission = new Point3Int(-1, -1, -1);
             public void LookForCube()

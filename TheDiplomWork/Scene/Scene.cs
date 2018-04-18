@@ -44,15 +44,9 @@ namespace TheDiplomWork
         const uint attributeIndexColour = 1;
 
         //  The vertex buffer array which contains the vertex and colour buffers.
-        static VertexBufferArray vertexBufferArray;
-        static VertexBufferArray vertexBufferArray_ghost;
-        //static VertexBufferArray vertexBufferArray_swapped;
+        SceneInfo SI_main;
+        SceneInfo SI_ghost;
 
-        static VertexBuffer vertexDataBuffer;
-        static VertexBuffer colourDataBuffer;
-
-        static VertexBuffer vertexDataBuffer_ghost;
-        static VertexBuffer colourDataBuffer_ghost;
         //VertexBufferArray vertexBufferArray2;
 
         //  The shader program for our vertex and fragment shader.
@@ -68,7 +62,9 @@ namespace TheDiplomWork
         public async void Initialise(OpenGL gl, float width, float height)
         {
             _gl = gl;
-            CreateVerticesForSquare_FirstInit();
+            SI_main = new SceneInfo(gl);
+            SI_ghost = new SceneInfo(gl);
+
             Console.WriteLine("Starting My");
             newThread = new Thread(Scene.DoWork);
             newThread.Start(42);
@@ -98,7 +94,7 @@ namespace TheDiplomWork
             modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
             //  Now create the geometry for the square.
-            CreateVerticesForSquare(ref vertexBufferArray, ref vertexDataBuffer, ref colourDataBuffer, ref SS.Main);
+            SI_main.CreateVerticesForSquare(ref SS.Main);
 
             var handle = GetConsoleWindow();
             if (!StaticSettings.S.ConsoleIsEnabled) ShowWindow(handle, SW_HIDE);
@@ -124,20 +120,20 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                 Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
 
-                SS.GhostCube.GhostCubeInit();
-                CreateVerticesForSquare(ref vertexBufferArray_ghost, ref vertexDataBuffer_ghost, ref colourDataBuffer_ghost, ref SS.GhostCube);
+                SS.GhostCube.initialization();
+                SI_ghost.CreateVerticesForSquare(ref SS.GhostCube);
             }
 
             if (StaticSettings.S.RequiredReloader && !newThread.IsAlive)
             {
                 if (!SS.Main.CopiedLastResult)
                 {
-                    vertexBufferArray.Delete(gl);
+                    SI_main.vertexBufferArray.Delete(gl);
                     SS.Main.CopyToReady();
-                    CreateVerticesForSquare(ref vertexBufferArray, ref vertexDataBuffer, ref colourDataBuffer, ref SS.Main);
+                    SI_main.CreateVerticesForSquare(ref SS.Main);
                 }
 
-                float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
+                float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
 
                 if (SS.env.player.coords.Player_chunk_position.x >= 0 && SS.env.player.coords.Player_chunk_position.x < CubicalMemory.World.Quantity_of_chunks_in_root
                     && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
@@ -170,7 +166,10 @@ namespace TheDiplomWork
         public static int CounterMyCoThread = 0;
         public static void DoWork(object data)
         {
-            SS.Initialization();
+            Scene.SS.env.player.coords.LastPlayerLook.x = Scene.SS.env.player.coords.NormalizedLook.x;
+            Scene.SS.env.player.coords.LastPlayerLook.y = Scene.SS.env.player.coords.NormalizedLook.y;
+            Scene.SS.env.player.coords.LastPlayerLook.z = Scene.SS.env.player.coords.NormalizedLook.z;
+            SS.Main.initialization();
             //GC.Collect();
             return;
         }
@@ -195,19 +194,19 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
             //  Bind the out vertex array.
-            vertexBufferArray.Bind(gl);
+            SI_main.vertexBufferArray.Bind(gl);
             //  Draw the square.
             gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Main.Quantity());
             //  Unbind our vertex array and shader.
-            vertexBufferArray.Unbind(gl);
+            SI_main.vertexBufferArray.Unbind(gl);
 
             if (StaticSettings.S.GhostCubeBool)
             {
-                vertexBufferArray_ghost.Bind(gl);
+                SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
                 gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.GhostCube.Quantity());
                 //  Unbind our vertex array and shader.
-                vertexBufferArray_ghost.Unbind(gl);
+                SI_ghost.vertexBufferArray.Unbind(gl);
             }
             shaderProgram.Unbind(gl);
 
@@ -218,50 +217,5 @@ namespace TheDiplomWork
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
 
-        public static void CreateVerticesForSquare_FirstInit()
-        {
-            OpenGL gl = _gl;
-            //  Create the vertex array object.
-            vertexBufferArray = new VertexBufferArray();
-            vertexBufferArray.Create(gl);
-
-            //  Create a vertex buffer for the vertex data.
-            vertexDataBuffer = new VertexBuffer();
-            vertexDataBuffer.Create(gl);
-
-            //  Now do the same for the colour data.
-            colourDataBuffer = new VertexBuffer();
-            colourDataBuffer.Create(gl);
-
-            vertexBufferArray_ghost = new VertexBufferArray();
-            vertexBufferArray_ghost.Create(gl);
-
-            //  Create a vertex buffer for the vertex data.
-            vertexDataBuffer_ghost = new VertexBuffer();
-            vertexDataBuffer_ghost.Create(gl);
-
-            //  Now do the same for the colour data.
-            colourDataBuffer_ghost = new VertexBuffer();
-            colourDataBuffer_ghost.Create(gl);
-        }
-        public static void CreateVerticesForSquare(ref VertexBufferArray _vertexBufferArray, ref VertexBuffer _vertexDataBuffer, ref VertexBuffer _colourDataBuffer, ref ShaderedScene.DataForDraw Data)
-        {
-            OpenGL gl = _gl;
-            //  Create the vertex array object.
-            _vertexBufferArray.Bind(gl);
-
-            //  Create a vertex buffer for the vertex data.
-            _vertexDataBuffer.Bind(gl);
-            _vertexDataBuffer.SetData(gl, 0, Data.vertices_arrayed, false, 3);
-
-            //  Now do the same for the colour data.
-            _colourDataBuffer.Bind(gl);
-            _colourDataBuffer.SetData(gl, 1, Data.colours_arrayed, false, 3);
-
-            //  Unbind the vertex array, we've finished specifying data for it.
-            _vertexBufferArray.Unbind(gl);
-            _vertexDataBuffer.Unbind(gl);
-            _colourDataBuffer.Unbind(gl);
-        }
     }
 }
