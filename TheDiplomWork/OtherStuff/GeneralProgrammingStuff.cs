@@ -8,7 +8,7 @@ namespace TheDiplomWork
 {
     public class GeneralProgrammingStuff //GPS
     {
-        public static Random Rand = new Random();
+        public static Random Rand_GPS = new Random();
         public static List<List<List<T>>> TripleListIniter<T>(int a, int b, int c)
         {
             List<List<List<T>>> subject;

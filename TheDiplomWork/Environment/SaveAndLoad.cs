@@ -28,14 +28,16 @@ namespace TheDiplomWork
                     using (StreamWriter outputFile = new StreamWriter(FinalPath
                 + $"chunk_{XYworld.xz.x}_{XYworld.xz.z}.dat"))
                     {
-
+                        
                         foreach (var Xcube in XYworld.cubes)
                         {
                             foreach (var XYcube in Xcube)
                             {
                                 foreach (var XYZcube in XYcube)
                                 {
-                                    if (XYZcube.Changed)
+
+                                    if (XYZcube.IsFilled != XYZcube.IsFilled_Default
+                                    || XYZcube.color != XYZcube.color_default)
                                     {
                                         outputFile.WriteLine(XYZcube.xyz.x + ";" +
                                             XYZcube.xyz.y + ";" +
@@ -44,6 +46,7 @@ namespace TheDiplomWork
                                             XYZcube.color.Name.ToString());
                                         //System.Drawing.Color.FromName();
                                     }
+
                                 }
                             }
                         }
@@ -77,7 +80,6 @@ namespace TheDiplomWork
                                 k = Convert.ToInt32(splitted[2]);
                                 XYworld.cubes[i][j][k].IsFilled = Convert.ToBoolean(splitted[3]);
                                 XYworld.cubes[i][j][k].color = System.Drawing.Color.FromName(splitted[4]);
-                                XYworld.cubes[i][j][k].Changed = true;
                             }
                         }
                     }//Foreachworldend
