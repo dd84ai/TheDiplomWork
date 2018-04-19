@@ -11,7 +11,7 @@ namespace TheDiplomWork
         public class Settings
         {
             //You can change here.
-            public bool ConsoleIsEnabled = true;
+            public bool ConsoleIsEnabled = false;
 
             public bool ReloaderCauseOfChunkRare = false;
 
@@ -24,8 +24,6 @@ namespace TheDiplomWork
             public bool RealoderCauseOfSunSided = true;
             public float SunSidedCoef = 0.25f; //It's a light side to you.
 
-            public bool GhostCubeBool = false;
-
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)
@@ -37,6 +35,8 @@ namespace TheDiplomWork
             public bool RequiredReloader = false;
 
             public bool RealoderCauseOfBuildingBlocks = false;
+
+            public bool GhostCubeBool = false;
         }
         public static Settings S = new Settings();
     }

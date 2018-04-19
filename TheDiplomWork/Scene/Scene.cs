@@ -61,6 +61,8 @@ namespace TheDiplomWork
         static OpenGL _gl;
         Thread newThread;
         Thread newThread_ghost;
+        public bool ShadersInitializated = true;
+        public string ShadersWereNotInitializatedMessage = "";
         public async void Initialise(OpenGL gl, float width, float height)
         {
             _gl = gl;
@@ -81,14 +83,16 @@ namespace TheDiplomWork
 
             //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
             //  Create the shader program.
-            var vertexShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.vert");
-            var fragmentShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.frag");
-            shaderProgram = new ShaderProgram();
-            shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource, null);
-            shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
-            shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
-            shaderProgram.AssertValid(gl);
-
+            try
+            {
+                var vertexShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.vert");
+                var fragmentShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.frag");
+                shaderProgram = new ShaderProgram();
+                shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource, null);
+                shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
+                shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
+                shaderProgram.AssertValid(gl);
+            
             //  Create a perspective projection matrix.
             const float rads = (60.0f / 360.0f) * (float)Math.PI * 2.0f;
             projectionMatrix = glm.perspective(rads, width / height, 0.1f, 10000.0f);
@@ -105,6 +109,13 @@ namespace TheDiplomWork
             Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
             Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
             SaveAndLoad.Load("default");
+
+            }
+            catch (Exception ShadersMessageError)
+            {
+                ShadersInitializated = false;
+                ShadersWereNotInitializatedMessage = ShadersMessageError.Message;
+            }
         }
         
         /// <summary>
@@ -213,8 +224,9 @@ namespace TheDiplomWork
             //  Bind the shader, set the matrices.
             shaderProgram.Bind(gl);
             shaderProgram.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
-            shaderProgram.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
             shaderProgram.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
+
+            shaderProgram.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
             //  Bind the out vertex array.
@@ -232,8 +244,8 @@ namespace TheDiplomWork
                 //  Unbind our vertex array and shader.
                 SI_ghost.vertexBufferArray.Unbind(gl);
             }
-            shaderProgram.Unbind(gl);
 
+            shaderProgram.Unbind(gl);
             //SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );
         }
         /// <summary>
@@ -241,5 +253,10 @@ namespace TheDiplomWork
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
 
+
+        public void Scene_Form_Closing(OpenGL gl)
+        {
+            
+        }
     }
 }

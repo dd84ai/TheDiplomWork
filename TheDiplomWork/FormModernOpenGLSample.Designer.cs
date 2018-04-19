@@ -49,7 +49,6 @@
             this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
             this.openGLControl.Resized += new System.EventHandler(this.openGLControl_Resized);
-            this.openGLControl.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseScroller);
             this.openGLControl.Click += new System.EventHandler(this.openGLControl_Click);
             this.openGLControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.openGLControl_KeyDown);
             this.openGLControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.openGLControl_KeyPress);
@@ -57,6 +56,7 @@
             this.openGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseDown);
             this.openGLControl.MouseEnter += new System.EventHandler(this.openGLControl_MouseEnter);
             this.openGLControl.MouseLeave += new System.EventHandler(this.openGLControl_MouseLeave);
+            this.openGLControl.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseScroller);
             // 
             // label_CursorPlus
             // 
@@ -89,6 +89,7 @@
             this.Name = "FormModernOpenGLSample";
             this.Text = "SharpGL Form";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormModernOpenGLSample_FormClosing);
             this.LocationChanged += new System.EventHandler(this.FormModernOpenGLSample_LocationChanged);
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
             this.ResumeLayout(false);

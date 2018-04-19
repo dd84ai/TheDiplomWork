@@ -749,7 +749,7 @@ namespace TheDiplomWork
             gl = openGLControl.OpenGL;
         }
         //Мысленно здесь класс функций калькуляторного шрифта заканчивается
-        public void Ultimate_DrawText(int _x, int _y, System.Drawing.Color _colour, float _fontsize, string phrase)
+        public void Ultimate_DrawText(int _x, int _y, System.Drawing.Color _colour, float _fontsize, string phrase, OpenGLControl center_aligned = null)
         {
             //openGLControl.OpenGL.DrawText(x, y, r, g, b, "TimesNewRoman", fontsize, phrase);
 
@@ -768,6 +768,12 @@ namespace TheDiplomWork
 
             phrase = phrase.ToLower();
             static_step = fontsize * 8 / 10;
+
+            if (center_aligned != null)
+            {
+                x = (int)(((double)center_aligned.Width / 2) - ((double)phrase.Length * static_step / 2));
+            }
+
             //fontsize
             foreach (var symbol in phrase)
             {

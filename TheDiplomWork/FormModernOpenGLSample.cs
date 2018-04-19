@@ -44,7 +44,16 @@ namespace TheDiplomWork
         }
         public void OpenGL_Draw_ReWrapped()
         {
-            openGL_Draw_Wrapped();
+            if (scene.ShadersInitializated)
+                openGL_Draw_Wrapped();
+            else
+            {
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "WARNING!", openGLControl);
+
+                //Center = OpenGLcontrol.Width/2 - (string.Length)*step/2
+                CF.Ultimate_DrawText(20, openGLControl.Height/2, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "Please, check compatibility with OpenGL 2.1", openGLControl);
+            }
         }
         public void openGL_Draw_Wrapped()
         {
@@ -275,6 +284,11 @@ namespace TheDiplomWork
             else StaticSettings.S.GhostCubeBool = true;
 
             GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
+        }
+
+        private void FormModernOpenGLSample_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            scene.Scene_Form_Closing(openGLControl.OpenGL);
         }
     }
 }
