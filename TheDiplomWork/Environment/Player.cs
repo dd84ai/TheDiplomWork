@@ -12,6 +12,7 @@ namespace TheDiplomWork
         {
             //По идеи данная стартовая позиция будет ровно посередине мира и немного выше.
             public Point3D Player_precise_position = new Point3D(0, 0, 0);
+            public Point3D Player_precise_position_realToPreventEscapes = new Point3D(0, 0, 0);
 
             //public Point3D Player_Default_position = new Point3D(0, 0, 0);
             public Point3D Player_Default_position = new Point3D(
@@ -30,6 +31,34 @@ namespace TheDiplomWork
             {
                 Reverse_presice_to_map_coords(Player_precise_position, ref Player_chunk_position, ref Player_cubical_position);
                 LookForCube();
+
+                if (!StaticSettings.S.FlyMod) TryToFallDown();
+                //Keyboard.Wrapped_KeyPressed_Reaction('x');
+            }
+
+            public void TryToFallDown()
+            {
+                try
+                {
+                    if (!Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_position.x]
+                                [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_position.x]
+                                [Scene.SS.env.player.coords.Player_cubical_position.y - 2]
+                                [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled)
+                    {
+                        Player_precise_position.y -= 0.1f;
+                    }
+                    else
+                    {
+                        //Player_precise_position.y -= 0.1f;
+                    }
+                    {
+
+                    }
+                }
+                catch (Exception Error)
+                { }
             }
             /// <summary>
             /// Recalculate coordinates from player graphic position to chunk & cubical position.
@@ -56,7 +85,7 @@ namespace TheDiplomWork
             public Point3Int Player_cubical_lookforcube_temporal = new Point3Int(0, 0, 0);
             public Point3Int Player_cubical_lookforcube_OLD = new Point3Int(0, 0, 0);
 
-            vec4 StepForARequiedCube = new vec4(0,0, 1.5f*CubicalMemory.Cube.rangeOfTheEdge,0);
+            vec4 StepForARequiedCube = new vec4(0,0, 2.5f*CubicalMemory.Cube.rangeOfTheEdge,0);
 
             public vec3 NormalizedLook = new vec3(0,0,0);
             public vec3 LastPlayerLook = new vec3(0, 0, 0);

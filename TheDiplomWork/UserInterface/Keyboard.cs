@@ -33,13 +33,47 @@ namespace TheDiplomWork
         {
             DoStep(step_vector);
         }
-        public static void DoStep(vec4 MoveVector)
+        public static void DoStep_Real(vec4 MoveVector)
         {
             for (int i = 0; i < step_multiplier * Ctrl_RUN_IS_ACTIVATED; i++)
             {
                 Wrapped_Do_Step(MoveVector, ref Scene.SS.env.player.coords.Player_precise_position);
                 //StaticAccess.FMOS.OpenGL_Draw_ReWrapped();
             }
+        }
+        public static void DoStep(vec4 MoveVector)
+        {
+            DoStep_Real(MoveVector);
+
+            //float a = CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge;
+            //float b = (float)CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge;
+            Scene.SS.env.player.coords.Player_recalculate_extra_positions();
+
+            try
+            {
+                if (Scene.SS.env.player.coords.Player_precise_position.x < 0
+                    || Scene.SS.env.player.coords.Player_precise_position.y < 0
+                    || Scene.SS.env.player.coords.Player_precise_position.z < 0
+                    || Scene.SS.env.player.coords.Player_precise_position.x > ((float)CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge)
+                    || Scene.SS.env.player.coords.Player_precise_position.z > ((float)CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge)
+                    || Scene.SS.env.player.coords.Player_precise_position.y > ((float)CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge)
+                    || Scene.SS.env.cub_mem.world.World_as_Whole
+                                    [Scene.SS.env.player.coords.Player_chunk_position.x]
+                                    [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
+                                    [Scene.SS.env.player.coords.Player_cubical_position.x]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.y - 1]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled)
+                {
+                    MoveVector.x = -MoveVector.x;
+                    MoveVector.y = -MoveVector.y;
+                    MoveVector.z = -MoveVector.z;
+
+                    DoStep_Real(MoveVector);
+                }
+            }
+            catch (Exception E)
+            { }
+            //Player_precise_position_realToPreventEscapes
         }
         public static int Ctrl_RUN_IS_ACTIVATED = 1;
         public static void Wrapped_Do_Step(vec4 _step, ref GeneralProgrammingStuff.Point3D WhatToMove, bool SensetivityToY = false)
@@ -63,6 +97,19 @@ namespace TheDiplomWork
                     StaticSettings.S.GhostCubeBool = !StaticSettings.S.GhostCubeBool;
                     break;
 
+                case 'f':
+                    StaticSettings.S.FlyMod = !StaticSettings.S.FlyMod;
+                    break;
+
+                case ' ':
+                    if (!StaticSettings.S.FlyMod)
+                    {
+                        Ctrl_RUN_IS_ACTIVATED = 50;
+                        step_vector.x = 0; step_vector.y = -step * 1.3f; step_vector.z = 0; DoStep(step_vector);
+                        Ctrl_RUN_IS_ACTIVATED = 1;
+                    }
+                    break;
+
                 default: break;
             }
         }
@@ -81,9 +128,13 @@ namespace TheDiplomWork
                 case 'd':
                     step_vector.x = -step; step_vector.y = 0; step_vector.z = 0; DoStep(step_vector); break;
                 case 'z':
-                    step_vector.x = 0; step_vector.y = step; step_vector.z = 0; DoStep(step_vector); break;
+                    step_vector.x = 0; step_vector.y = step*1.3f; step_vector.z = 0; DoStep(step_vector); break;
+                case 'x':
+                    step_vector.x = 0; step_vector.y = step * 0.1f; step_vector.z = 0; DoStep(step_vector); break;
                 case ' ':
-                    step_vector.x = 0; step_vector.y = -step; step_vector.z = 0; DoStep(step_vector); break;
+                    if (StaticSettings.S.FlyMod)
+                    { step_vector.x = 0; step_vector.y = -step * 1.3f; step_vector.z = 0; DoStep(step_vector); }
+                    break; 
 
                 case 'l':
                     Scene.SS.env.player.coords.Player_rotational_view.x += rotational_step; break;
@@ -141,7 +192,7 @@ namespace TheDiplomWork
             Scene.SS.env.player.coords.Player_precise_position.y = Scene.SS.env.player.coords.Player_Default_position.y;
             Scene.SS.env.player.coords.Player_precise_position.z = Scene.SS.env.player.coords.Player_Default_position.z;
             Scene.SS.env.player.coords.Player_rotational_view = new GeneralProgrammingStuff.Point3D(3.14f / 2f, 0, 0);
-            step_multiplier = 10;
+            step_multiplier = 5;
         }
     }
 }

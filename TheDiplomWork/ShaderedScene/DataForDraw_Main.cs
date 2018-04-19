@@ -22,7 +22,7 @@ namespace TheDiplomWork
                 0, //Start_z
                 CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
                 CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge, //End_z
-                0, //Height
+                -1, //Height
                 System.Drawing.Color.Gray
                 );
 

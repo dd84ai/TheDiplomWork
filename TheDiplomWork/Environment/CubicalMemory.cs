@@ -52,7 +52,7 @@ namespace TheDiplomWork
             public Chunk(int _x, int _z)
             {
                 xz.x = _x; xz.z = _z;
-                cubes = TripleCubeIniter(Chunk.Width, Chunk.Length, Chunk.Height);
+                cubes = TripleCubeIniter(Chunk.Width, Chunk.Height, Chunk.Length);
 
                 AlgorithmicalGround(FromHeight, ToHeight);
 
