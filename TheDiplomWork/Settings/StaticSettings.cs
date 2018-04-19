@@ -26,6 +26,8 @@ namespace TheDiplomWork
 
             public bool FlyMod = true;
 
+            public bool PhantomMod = false;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)

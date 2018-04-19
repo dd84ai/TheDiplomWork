@@ -57,12 +57,12 @@ namespace TheDiplomWork
                     || Scene.SS.env.player.coords.Player_precise_position.x > ((float)CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge)
                     || Scene.SS.env.player.coords.Player_precise_position.z > ((float)CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge)
                     || Scene.SS.env.player.coords.Player_precise_position.y > ((float)CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge)
-                    || Scene.SS.env.cub_mem.world.World_as_Whole
+                    || (!StaticSettings.S.PhantomMod && Scene.SS.env.cub_mem.world.World_as_Whole
                                     [Scene.SS.env.player.coords.Player_chunk_position.x]
                                     [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
                                     [Scene.SS.env.player.coords.Player_cubical_position.x]
                                     [Scene.SS.env.player.coords.Player_cubical_position.y - 1]
-                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled)
+                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled))
                 {
                     MoveVector.x = -MoveVector.x;
                     MoveVector.y = -MoveVector.y;
@@ -99,6 +99,10 @@ namespace TheDiplomWork
 
                 case 'f':
                     StaticSettings.S.FlyMod = !StaticSettings.S.FlyMod;
+                    break;
+
+                case 'p':
+                    StaticSettings.S.PhantomMod = !StaticSettings.S.PhantomMod;
                     break;
 
                 case ' ':
