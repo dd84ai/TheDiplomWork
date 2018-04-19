@@ -82,9 +82,11 @@ namespace TheDiplomWork
              + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString() + "\r\n"
             + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2");
 
-            if (StaticSettings.S.GhostCubeBool) GraphicalOverlap.draw_GO_square(openGLControl, 20, 20, GraphicalOverlap.GO_color);
+            //if (StaticSettings.S.GhostCubeBool)
+            for (int i = GraphicalOverlap.Start_Shift; i <= GraphicalOverlap.End_Max; i++)
+                GraphicalOverlap.draw_GO_square(openGLControl, 20 + i*30, 20,20, GeneralProgrammingStuff.ColorSwitch(i-GraphicalOverlap.Start_Shift));
 
-            CF.Ultimate_DrawText(20, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString());
+            CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString());
         }
         CalculatorFont CF;
         private void openGLControl_Resized(object sender, EventArgs e)
@@ -272,12 +274,12 @@ namespace TheDiplomWork
             else
                 GraphicalOverlap.GO_interface_item_choice--;
 
-            if (GraphicalOverlap.GO_interface_item_choice > GeneralProgrammingStuff.ColorSwitch_Quantity)
+            if (GraphicalOverlap.GO_interface_item_choice > GraphicalOverlap.End_Max)
                 GraphicalOverlap.GO_interface_item_choice = 0;
             if (GraphicalOverlap.GO_interface_item_choice < 0)
-                GraphicalOverlap.GO_interface_item_choice = GeneralProgrammingStuff.ColorSwitch_Quantity;
+                GraphicalOverlap.GO_interface_item_choice = GraphicalOverlap.End_Max;
 
-            GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_interface_item_choice - 1);
+            GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_interface_item_choice - GraphicalOverlap.Start_Shift);
 
             if (GraphicalOverlap.GO_interface_item_choice == 0)
                 StaticSettings.S.GhostCubeBool = false;

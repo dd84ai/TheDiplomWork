@@ -227,11 +227,11 @@ namespace TheDiplomWork
                 case 03: return System.Drawing.Color.GreenYellow;
                 case 04: return System.Drawing.Color.Brown;
                 case 05: return System.Drawing.Color.Indigo;
-                case 06: return System.Drawing.Color.Lavender;
+                case 06: return System.Drawing.Color.Purple;
                 case 07: return System.Drawing.Color.Orange;
                 case 08: return System.Drawing.Color.Red;
                 case 09: return System.Drawing.Color.Aqua;
-                case 10: return System.Drawing.Color.Azure;
+                case 10: return System.Drawing.Color.Blue;
                 case 11: return System.Drawing.Color.White;
                 case 12: return System.Drawing.Color.Black;
                 default: return System.Drawing.Color.Gray;

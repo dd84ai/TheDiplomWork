@@ -72,7 +72,7 @@ namespace TheDiplomWork
                         for (int j = 0; j < Length; j++)
                         {
                             cubes[i][k][j].IsFilled = true;
-                            cubes[i][k][j].color = ColorSwitch(Rand.Next(10));
+                            cubes[i][k][j].color = ColorSwitch(Rand.Next(11));
                         }
             }
         }

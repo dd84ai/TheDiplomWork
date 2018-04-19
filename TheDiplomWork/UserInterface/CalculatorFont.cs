@@ -761,7 +761,7 @@ namespace TheDiplomWork
             //  Load the identity matrix.
             gl.LoadIdentity();
             gl.Color((float)_colour.R/255, (float)_colour.G / 255, (float)_colour.B / 255, 1.0f); //Must have, weirdness!
-            gl.LineWidth(1.0f);
+            gl.LineWidth(2.0f);
             gl.Begin(OpenGL.GL_LINES);
 
             fontsize = _fontsize;
