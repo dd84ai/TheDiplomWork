@@ -61,11 +61,13 @@ namespace TheDiplomWork
         static OpenGL _gl;
         Thread newThread;
         Thread newThread_ghost;
-        public bool ShadersInitializated = true;
+        public static bool ShadersInitializated = true;
         public string ShadersWereNotInitializatedMessage = "";
         public async void Initialise(OpenGL gl, float width, float height)
         {
-            _gl = gl;
+            try
+            {
+                _gl = gl;
             SI_main = new SceneInfo(gl);
             SI_ghost = new SceneInfo(gl);
             newThread_ghost = new Thread(Scene.DoWork_ghost);
@@ -83,8 +85,7 @@ namespace TheDiplomWork
 
             //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
             //  Create the shader program.
-            try
-            {
+            
                 var vertexShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.vert");
                 var fragmentShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.frag");
                 shaderProgram = new ShaderProgram();
@@ -92,30 +93,32 @@ namespace TheDiplomWork
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
-            
-            //  Create a perspective projection matrix.
-            const float rads = (60.0f / 360.0f) * (float)Math.PI * 2.0f;
-            projectionMatrix = glm.perspective(rads, width / height, 0.1f, 10.0f);
-
-            //  Create a model matrix to make the model a little bigger.
-            modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
-
-            //  Now create the geometry for the square.
-            SI_main.CreateVerticesForSquare(ref SS.Main);
-
-            var handle = GetConsoleWindow();
-            if (!StaticSettings.S.ConsoleIsEnabled) ShowWindow(handle, SW_HIDE);
-
-            Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
-            Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
-            SaveAndLoad.Load("default");
-
             }
             catch (Exception ShadersMessageError)
             {
                 ShadersInitializated = false;
                 ShadersWereNotInitializatedMessage = ShadersMessageError.Message;
             }
+            if (ShadersInitializated)
+            {
+                //  Create a perspective projection matrix.
+                const float rads = (60.0f / 360.0f) * (float)Math.PI * 2.0f;
+                projectionMatrix = glm.perspective(rads, width / height, 0.1f, 10.0f);
+
+                //  Create a model matrix to make the model a little bigger.
+                modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
+
+                //  Now create the geometry for the square.
+                SI_main.CreateVerticesForSquare(ref SS.Main);
+
+                var handle = GetConsoleWindow();
+                if (!StaticSettings.S.ConsoleIsEnabled) ShowWindow(handle, SW_HIDE);
+
+                Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
+                Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
+                SaveAndLoad.Load("default");
+            }
+            
         }
         
         /// <summary>

@@ -39,20 +39,26 @@ namespace TheDiplomWork
         
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
-            openGL_Draw_Wrapped();
+            OpenGL_Draw_ReWrapped();
             //defaulttriangle();
         }
         public void OpenGL_Draw_ReWrapped()
         {
-            if (scene.ShadersInitializated)
+            if (Scene.ShadersInitializated)
                 openGL_Draw_Wrapped();
             else
             {
-                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "WARNING!", 2.0f, openGLControl);
+                //  Clear the scene.
+                openGLControl.OpenGL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
+
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2 + 60, System.Drawing.Color.Red, 14, "WARNING!", 2.0f, openGLControl);
 
                 //Center = OpenGLcontrol.Width/2 - (string.Length)*step/2
-                CF.Ultimate_DrawText(20, openGLControl.Height/2, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, 2.0f, openGLControl);
-                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "Please, check compatibility with OpenGL 2.1", 2.0f, openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height/2 + 20, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, 2.0f, openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2 - 20, System.Drawing.Color.Red, 14, "Please, check compatibility with OpenGL 2.1", 2.0f, openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2 - 60, System.Drawing.Color.Red, 14, "Press any key to exit", 2.0f, openGLControl);
+
+                
             }
         }
         public void openGL_Draw_Wrapped()
@@ -185,6 +191,8 @@ namespace TheDiplomWork
 
         private void openGLControl_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!Scene.ShadersInitializated) Application.Exit();
+
             if (e.Control) Keyboard.Ctrl_RUN_IS_ACTIVATED = 4;
 
             char item = ((char)e.KeyValue).ToString().ToLower()[0];
