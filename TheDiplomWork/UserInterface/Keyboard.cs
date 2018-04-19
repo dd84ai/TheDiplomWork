@@ -115,6 +115,19 @@ namespace TheDiplomWork
 
                 default: break;
             }
+
+            if (key >= '0' && key <= '9')
+            {
+                try
+                {
+                    int Number = key - '0' + GraphicalOverlap.Start_Shift - 1;
+                    GraphicalOverlap.Graphical_OverLap_Logic(Number);
+                }
+                catch (Exception Error)
+                {
+                    Console.WriteLine(Error.Message);
+                }
+            }
         }
         public static void SavingAlgorithm()
         {

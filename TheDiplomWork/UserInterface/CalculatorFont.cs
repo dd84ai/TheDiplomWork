@@ -749,7 +749,7 @@ namespace TheDiplomWork
             gl = openGLControl.OpenGL;
         }
         //Мысленно здесь класс функций калькуляторного шрифта заканчивается
-        public void Ultimate_DrawText(int _x, int _y, System.Drawing.Color _colour, float _fontsize, string phrase, OpenGLControl center_aligned = null)
+        public void Ultimate_DrawText(int _x, int _y, System.Drawing.Color _colour, float _fontsize, string phrase, float LineWidth, OpenGLControl center_aligned = null)
         {
             //openGLControl.OpenGL.DrawText(x, y, r, g, b, "TimesNewRoman", fontsize, phrase);
 
@@ -761,7 +761,7 @@ namespace TheDiplomWork
             //  Load the identity matrix.
             gl.LoadIdentity();
             gl.Color((float)_colour.R/255, (float)_colour.G / 255, (float)_colour.B / 255, 1.0f); //Must have, weirdness!
-            gl.LineWidth(2.0f);
+            gl.LineWidth(LineWidth);
             gl.Begin(OpenGL.GL_LINES);
 
             fontsize = _fontsize;

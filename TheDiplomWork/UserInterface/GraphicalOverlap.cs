@@ -16,6 +16,23 @@ namespace TheDiplomWork
         public static int Start_Shift = 1;
         public static int End_Max = GeneralProgrammingStuff.ColorSwitch_Quantity - 1 + Start_Shift;
         public static bool Rebuilding_is_required_cause_of_GO_color_changed_color = false;
+        public static void Graphical_OverLap_Logic(int choice)
+        {
+            GraphicalOverlap.GO_interface_item_choice = choice;
+
+            if (GraphicalOverlap.GO_interface_item_choice > GraphicalOverlap.End_Max)
+                GraphicalOverlap.GO_interface_item_choice = 0;
+            if (GraphicalOverlap.GO_interface_item_choice < 0)
+                GraphicalOverlap.GO_interface_item_choice = GraphicalOverlap.End_Max;
+
+            GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_interface_item_choice - GraphicalOverlap.Start_Shift);
+
+            if (GraphicalOverlap.GO_interface_item_choice == 0)
+                StaticSettings.S.GhostCubeBool = false;
+            else StaticSettings.S.GhostCubeBool = true;
+
+            GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
+        }
         public static void draw_GO_square(OpenGLControl openGLControl, int x_from, int y_from, int size, System.Drawing.Color _color)
         {
             //x_from -= mouse.ShiftedPosition.x;

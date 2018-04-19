@@ -48,11 +48,11 @@ namespace TheDiplomWork
                 openGL_Draw_Wrapped();
             else
             {
-                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "WARNING!", openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "WARNING!", 2.0f, openGLControl);
 
                 //Center = OpenGLcontrol.Width/2 - (string.Length)*step/2
-                CF.Ultimate_DrawText(20, openGLControl.Height/2, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, openGLControl);
-                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "Please, check compatibility with OpenGL 2.1", openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height/2, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, 2.0f, openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2, System.Drawing.Color.Red, 14, "Please, check compatibility with OpenGL 2.1", 2.0f, openGLControl);
             }
         }
         public void openGL_Draw_Wrapped()
@@ -86,12 +86,12 @@ namespace TheDiplomWork
             for (int i = GraphicalOverlap.Start_Shift; i <= GraphicalOverlap.End_Max; i++)
                 GraphicalOverlap.draw_GO_square(openGLControl, 20 + i*30, 20,20, GeneralProgrammingStuff.ColorSwitch(i-GraphicalOverlap.Start_Shift));
 
-            CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString());
+            CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString(), 3.0f);
 
             
-            CF.Ultimate_DrawText(openGLControl.Width/2 - FontSizeTargetPointer/4, openGLControl.Height/2- FontSizeTargetPointer/2, System.Drawing.Color.White, FontSizeTargetPointer, "+");
+            CF.Ultimate_DrawText(openGLControl.Width/2 - FontSizeTargetPointer/4, openGLControl.Height/2- FontSizeTargetPointer/2, System.Drawing.Color.White, FontSizeTargetPointer, "+",4.0f);
         }
-        static int FontSizeTargetPointer = 30;
+        static int FontSizeTargetPointer = 40;
         CalculatorFont CF;
         private void openGLControl_Resized(object sender, EventArgs e)
         {
@@ -278,24 +278,12 @@ namespace TheDiplomWork
         private void openGLControl_MouseScroller(object sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
-            GraphicalOverlap.GO_interface_item_choice++;
+                GraphicalOverlap.GO_interface_item_choice++;
             else
                 GraphicalOverlap.GO_interface_item_choice--;
 
-            if (GraphicalOverlap.GO_interface_item_choice > GraphicalOverlap.End_Max)
-                GraphicalOverlap.GO_interface_item_choice = 0;
-            if (GraphicalOverlap.GO_interface_item_choice < 0)
-                GraphicalOverlap.GO_interface_item_choice = GraphicalOverlap.End_Max;
-
-            GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_interface_item_choice - GraphicalOverlap.Start_Shift);
-
-            if (GraphicalOverlap.GO_interface_item_choice == 0)
-                StaticSettings.S.GhostCubeBool = false;
-            else StaticSettings.S.GhostCubeBool = true;
-
-            GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
+            GraphicalOverlap.Graphical_OverLap_Logic(GraphicalOverlap.GO_interface_item_choice);
         }
-
         private void FormModernOpenGLSample_FormClosing(object sender, FormClosingEventArgs e)
         {
             scene.Scene_Form_Closing(openGLControl.OpenGL);
