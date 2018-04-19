@@ -105,8 +105,12 @@ namespace TheDiplomWork
                     StaticSettings.S.PhantomMod = !StaticSettings.S.PhantomMod;
                     break;
 
+                case 'h':
+                    StaticSettings.S.HelpInfoForPlayer = !StaticSettings.S.HelpInfoForPlayer;
+                    break;
+
                 case ' ':
-                    if (!StaticSettings.S.FlyMod)
+                    if (!StaticSettings.S.FlyMod && Player.JumpCounter > Player.JumpMax - 1)
                     {
                         Player.JumpState = true;
                         Player.JumpCounter = 0;

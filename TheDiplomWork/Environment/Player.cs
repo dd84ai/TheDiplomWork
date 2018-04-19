@@ -42,10 +42,10 @@ namespace TheDiplomWork
             }
             public void TryToJump()
             {
-                if (JumpState && Player.JumpCounter < 16)
+                if (JumpState && Player.JumpCounter < Player.JumpMax)
                 {
                     Player.JumpCounter++;
-                    Player_precise_position.y += 0.14f;
+                    Player_precise_position.y += 0.15f;
                 }
                 else Player.JumpState = false;
             }
@@ -60,7 +60,7 @@ namespace TheDiplomWork
                                 [Scene.SS.env.player.coords.Player_cubical_position.y - 2]
                                 [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled)
                     {
-                        Player_precise_position.y -= 0.05f;
+                        Player_precise_position.y -= 0.1f;
                     }
                     else
                     {
@@ -185,6 +185,7 @@ namespace TheDiplomWork
         public Coords coords = new Coords();
 
         public static bool JumpState = false;
-        public static int JumpCounter = 0;
+        public static int JumpMax = 30;
+        public static int JumpCounter = JumpMax;
     }
 }

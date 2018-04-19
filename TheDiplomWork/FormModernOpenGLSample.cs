@@ -79,23 +79,37 @@ namespace TheDiplomWork
             //  Draw the scene.
             scene.Draw(openGLControl.OpenGL);
 
-            label1_InfoTable.Text =
-                "PrecisePosition:" + Scene.SS.env.player.coords.Player_precise_position.ToString() + "\r\n"
+            //if (StaticSettings.S.GhostCubeBool)
+            for (int i = GraphicalOverlap.Start_Shift; i <= GraphicalOverlap.End_Max; i++)
+                GraphicalOverlap.draw_GO_square(openGLControl, 20 + i*30, 20,20, GeneralProgrammingStuff.ColorSwitch(i-GraphicalOverlap.Start_Shift));
+
+            CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString(), 3.0f);
+            
+            CF.Ultimate_DrawText(openGLControl.Width/2 - FontSizeTargetPointer/4, openGLControl.Height/2- FontSizeTargetPointer/2, System.Drawing.Color.White, FontSizeTargetPointer, "+",4.0f);
+
+            if (StaticSettings.S.HelpInfoForPlayer)
+            {
+                label1_InfoTable.Visible = false;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 1, System.Drawing.Color.Gold, 10, "|F| - Fly Mod: " + StaticSettings.S.FlyMod, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 2, System.Drawing.Color.LimeGreen, 10, "|P| - Phantom Mod: " + StaticSettings.S.PhantomMod, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 3, System.Drawing.Color.White, 10, "|G| - Ghost Cube Mod: " + StaticSettings.S.GhostCubeBool, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 4, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f);
+            }
+            else
+            {
+                label1_InfoTable.Visible = true;
+                label1_InfoTable.Text = info_table();
+            }
+        }
+        public string info_table()
+        {
+            return "PrecisePosition:" + Scene.SS.env.player.coords.Player_precise_position.ToString() + "\r\n"
                 + "ChunkPosition:" + Scene.SS.env.player.coords.Player_chunk_position.ToString() + "\r\n"
                 + "CubicalPosition:" + Scene.SS.env.player.coords.Player_cubical_position.ToString() + "\r\n"
              + "PreciseLook:" + Scene.SS.env.player.coords.Player_precise_lookforcube.ToString() + "\r\n"
              + "ChunkLook:" + Scene.SS.env.player.coords.Player_chunk_lookforcube.ToString() + "\r\n"
              + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString() + "\r\n"
             + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2");
-
-            //if (StaticSettings.S.GhostCubeBool)
-            for (int i = GraphicalOverlap.Start_Shift; i <= GraphicalOverlap.End_Max; i++)
-                GraphicalOverlap.draw_GO_square(openGLControl, 20 + i*30, 20,20, GeneralProgrammingStuff.ColorSwitch(i-GraphicalOverlap.Start_Shift));
-
-            CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString(), 3.0f);
-
-            
-            CF.Ultimate_DrawText(openGLControl.Width/2 - FontSizeTargetPointer/4, openGLControl.Height/2- FontSizeTargetPointer/2, System.Drawing.Color.White, FontSizeTargetPointer, "+",4.0f);
         }
         static int FontSizeTargetPointer = 40;
         CalculatorFont CF;

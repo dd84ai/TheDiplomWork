@@ -28,6 +28,10 @@ namespace TheDiplomWork
 
             public bool PhantomMod = false;
 
+            //public bool SystemInfo = false;
+
+            public bool HelpInfoForPlayer = true;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)
