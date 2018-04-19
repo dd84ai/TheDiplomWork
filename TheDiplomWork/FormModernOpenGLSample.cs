@@ -87,7 +87,11 @@ namespace TheDiplomWork
                 GraphicalOverlap.draw_GO_square(openGLControl, 20 + i*30, 20,20, GeneralProgrammingStuff.ColorSwitch(i-GraphicalOverlap.Start_Shift));
 
             CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString());
+
+            
+            CF.Ultimate_DrawText(openGLControl.Width/2 - FontSizeTargetPointer/4, openGLControl.Height/2- FontSizeTargetPointer/2, System.Drawing.Color.White, FontSizeTargetPointer, "+");
         }
+        static int FontSizeTargetPointer = 30;
         CalculatorFont CF;
         private void openGLControl_Resized(object sender, EventArgs e)
         {
@@ -115,7 +119,6 @@ namespace TheDiplomWork
 
             //Cursor.Position.X - Location.X - openGLControl.Location.X - 8, -Cursor.Position.Y + Location.Y + Size.Height + openGLControl.Location.Y - 30
             SetMouseCenter();
-            label_CursorPlus.Location = Mouse.ReturnToCenter();
             Cursor.Position = Mouse.ReturnToCenter();
         }
         public void SetMouseCenter()
@@ -182,6 +185,8 @@ namespace TheDiplomWork
 
         private void openGLControl_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Control) Keyboard.Ctrl_RUN_IS_ACTIVATED = 4;
+
             char item = ((char)e.KeyValue).ToString().ToLower()[0];
             if (!Keyboard.KeysActive.Contains(item))
                 Keyboard.KeysActive.Add(item);
@@ -193,6 +198,9 @@ namespace TheDiplomWork
         {
             char item = ((char)e.KeyValue).ToString().ToLower()[0];
             Keyboard.KeysActive.Remove(item);
+
+            if (Keyboard.KeysActive.Count==0)
+            Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
         }
 
         private void openGLControl_MouseEnter(object sender, EventArgs e)

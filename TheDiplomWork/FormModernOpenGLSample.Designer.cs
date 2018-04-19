@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.openGLControl = new SharpGL.OpenGLControl();
-            this.label_CursorPlus = new System.Windows.Forms.Label();
             this.label1_InfoTable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
@@ -58,17 +57,6 @@
             this.openGLControl.MouseLeave += new System.EventHandler(this.openGLControl_MouseLeave);
             this.openGLControl.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseScroller);
             // 
-            // label_CursorPlus
-            // 
-            this.label_CursorPlus.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label_CursorPlus.AutoSize = true;
-            this.label_CursorPlus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(153)))), ((int)(((byte)(230)))));
-            this.label_CursorPlus.Location = new System.Drawing.Point(289, 192);
-            this.label_CursorPlus.Name = "label_CursorPlus";
-            this.label_CursorPlus.Size = new System.Drawing.Size(13, 13);
-            this.label_CursorPlus.TabIndex = 1;
-            this.label_CursorPlus.Text = "+";
-            // 
             // label1_InfoTable
             // 
             this.label1_InfoTable.AutoSize = true;
@@ -84,7 +72,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 391);
             this.Controls.Add(this.label1_InfoTable);
-            this.Controls.Add(this.label_CursorPlus);
             this.Controls.Add(this.openGLControl);
             this.Name = "FormModernOpenGLSample";
             this.Text = "SharpGL Form";
@@ -100,7 +87,6 @@
         #endregion
 
         private SharpGL.OpenGLControl openGLControl;
-        private System.Windows.Forms.Label label_CursorPlus;
         private System.Windows.Forms.Label label1_InfoTable;
     }
 }

@@ -35,12 +35,13 @@ namespace TheDiplomWork
         }
         public static void DoStep(vec4 MoveVector)
         {
-            for (int i = 0; i < step_multiplier; i++)
+            for (int i = 0; i < step_multiplier * Ctrl_RUN_IS_ACTIVATED; i++)
             {
                 Wrapped_Do_Step(MoveVector, ref Scene.SS.env.player.coords.Player_precise_position);
                 //StaticAccess.FMOS.OpenGL_Draw_ReWrapped();
             }
         }
+        public static int Ctrl_RUN_IS_ACTIVATED = 1;
         public static void Wrapped_Do_Step(vec4 _step, ref GeneralProgrammingStuff.Point3D WhatToMove, bool SensetivityToY = false)
         {
             vec4 step_vector_extra;
