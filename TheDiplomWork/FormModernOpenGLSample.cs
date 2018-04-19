@@ -83,7 +83,7 @@ namespace TheDiplomWork
             for (int i = GraphicalOverlap.Start_Shift; i <= GraphicalOverlap.End_Max; i++)
                 GraphicalOverlap.draw_GO_square(openGLControl, 20 + i*30, 20,20, GeneralProgrammingStuff.ColorSwitch(i-GraphicalOverlap.Start_Shift));
 
-            CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.Black, 14, GraphicalOverlap.GO_interface_item_choice.ToString(), 3.0f);
+            CF.Ultimate_DrawText(20 +GraphicalOverlap.GO_interface_item_choice*30, 50, System.Drawing.Color.White, 14, GraphicalOverlap.GO_interface_item_choice.ToString(), 3.0f);
             
             CF.Ultimate_DrawText(openGLControl.Width/2 - FontSizeTargetPointer/4, openGLControl.Height/2- FontSizeTargetPointer/2, System.Drawing.Color.White, FontSizeTargetPointer, "+",4.0f);
 
