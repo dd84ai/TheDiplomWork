@@ -32,10 +32,23 @@ namespace TheDiplomWork
                 Reverse_presice_to_map_coords(Player_precise_position, ref Player_chunk_position, ref Player_cubical_position);
                 LookForCube();
 
-                if (!StaticSettings.S.FlyMod) TryToFallDown();
+                if (!StaticSettings.S.FlyMod) 
+                {
+                    TryToFallDown();
+                    TryToJump();
+                    //step_vector.x = 0; step_vector.y = -step * 1.3f; step_vector.z = 0; DoStep(step_vector);
+                }
                 //Keyboard.Wrapped_KeyPressed_Reaction('x');
             }
-
+            public void TryToJump()
+            {
+                if (JumpState && Player.JumpCounter < 16)
+                {
+                    Player.JumpCounter++;
+                    Player_precise_position.y += 0.14f;
+                }
+                else Player.JumpState = false;
+            }
             public void TryToFallDown()
             {
                 try
@@ -47,7 +60,7 @@ namespace TheDiplomWork
                                 [Scene.SS.env.player.coords.Player_cubical_position.y - 2]
                                 [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled)
                     {
-                        Player_precise_position.y -= 0.1f;
+                        Player_precise_position.y -= 0.05f;
                     }
                     else
                     {
@@ -171,6 +184,7 @@ namespace TheDiplomWork
         }
         public Coords coords = new Coords();
 
-
+        public static bool JumpState = false;
+        public static int JumpCounter = 0;
     }
 }

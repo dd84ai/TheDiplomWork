@@ -108,9 +108,8 @@ namespace TheDiplomWork
                 case ' ':
                     if (!StaticSettings.S.FlyMod)
                     {
-                        Ctrl_RUN_IS_ACTIVATED = 50;
-                        step_vector.x = 0; step_vector.y = -step * 1.3f; step_vector.z = 0; DoStep(step_vector);
-                        Ctrl_RUN_IS_ACTIVATED = 1;
+                        Player.JumpState = true;
+                        Player.JumpCounter = 0;
                     }
                     break;
 
