@@ -26,7 +26,7 @@ namespace TheDiplomWork
 
             public bool FlyMod = true;
 
-            public bool PhantomMod = true;
+            public bool PhantomMod = false;
 
             //public bool SystemInfo = false;
 
