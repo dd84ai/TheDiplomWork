@@ -62,6 +62,12 @@ namespace TheDiplomWork
                                     [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
                                     [Scene.SS.env.player.coords.Player_cubical_position.x]
                                     [Scene.SS.env.player.coords.Player_cubical_position.y - 1]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled)
+                                    || (!StaticSettings.S.PhantomMod && Scene.SS.env.cub_mem.world.World_as_Whole
+                                    [Scene.SS.env.player.coords.Player_chunk_position.x]
+                                    [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
+                                    [Scene.SS.env.player.coords.Player_cubical_position.x]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.y]
                                     [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled))
                 {
                     MoveVector.x = -MoveVector.x;
