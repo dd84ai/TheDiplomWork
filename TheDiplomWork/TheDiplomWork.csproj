@@ -7,7 +7,7 @@
     <ProjectGuid>{CEC29149-50AC-4C20-92D1-086C3E729CD4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>TheDiplomWork</RootNamespace>
-    <AssemblyName>TheDiplomWork</AssemblyName>
+    <AssemblyName>The Cubes</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Environment\CubicalMemory.cs" />
     <Compile Include="Environment\Environment.cs" />
-    <Compile Include="Environment\Player.cs" />
+    <Compile Include="WorldObjects\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
     <Compile Include="ShaderedScene\DataForDraw.cs" />
     <Compile Include="ShaderedScene\DataForDraw_ghost.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="UserInterface\Mouse.cs" />
+    <Compile Include="WorldObjects\Sun.cs" />
     <EmbeddedResource Include="FormModernOpenGLSample.resx">
       <DependentUpon>FormModernOpenGLSample.cs</DependentUpon>
     </EmbeddedResource>

@@ -63,19 +63,22 @@ namespace TheDiplomWork
         }
         public void openGL_Draw_Wrapped()
         {
-            if ((Control.ModifierKeys & Keys.Shift) != 0)
-                Keyboard.DoSpecificAction('z');
-
-            Keyboard.DoAction();
-
-            if (this.ActiveControl.Focused && Mouse.MouseIsActive)
+            if (this.ActiveControl.Focused)
             {
-                Mouse.DoMouse(Control.MousePosition);
-                Cursor.Position = Mouse.ReturnToCenter();
+                if ((Control.ModifierKeys & Keys.Shift) != 0)
+                    Keyboard.DoSpecificAction('z');
+
+                Keyboard.DoAction();
+
+                if (Mouse.MouseIsActive)
+                {
+                    Mouse.DoMouse(Control.MousePosition);
+                    Cursor.Position = Mouse.ReturnToCenter();
+                }
+
+                Scene.SS.env.player.coords.Player_recalculate_extra_positions();
+
             }
-
-            Scene.SS.env.player.coords.Player_recalculate_extra_positions();
-
             //  Draw the scene.
             scene.Draw(openGLControl.OpenGL);
 

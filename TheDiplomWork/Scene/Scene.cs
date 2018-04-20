@@ -128,6 +128,7 @@ namespace TheDiplomWork
         /// 
         public void Draw(OpenGL gl)
         {
+            //Призрачным куб.
             if (StaticSettings.S.GhostCubeBool && 
                 (Scene.SS.env.player.coords.Player_cubical_lookforcube !=
                 Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD
