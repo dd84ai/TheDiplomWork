@@ -8,7 +8,7 @@ namespace TheDiplomWork
 {
     public partial class DataForDraw
     {
-        protected static float localed_range = CubicalMemory.Cube.rangeOfTheEdge * 9 / 10;
+        protected static float localed_range = CubicalMemory.Cube.rangeOfTheEdge;
         public int Quantity_of_total_cubes = 0;
         public int Quantity_of_values_per_point = 3;
         public int Quantity_of_points_per_side = 4;
@@ -48,10 +48,10 @@ namespace TheDiplomWork
            float end_y, float end_z,
            float height, System.Drawing.Color _colour)
         {
-            Process_Point(height, start_y, start_z, _colour);
-            Process_Point(height, start_y, end_z, _colour);
-            Process_Point(height, end_y, end_z, _colour);
-            Process_Point(height, end_y, start_z, _colour);
+            Process_Point(height, start_y, start_z, _colour,0);
+            Process_Point(height, start_y, end_z, _colour, 1);
+            Process_Point(height, end_y, end_z, _colour, 2);
+            Process_Point(height, end_y, start_z, _colour, 3);
         }
         //Right
         public void Draw_Quad_Perpendecular_to_OSy(
@@ -59,26 +59,38 @@ namespace TheDiplomWork
            float end_x, float end_z,
            float height, System.Drawing.Color _colour)
         {
-            Process_Point(start_x, height, start_z, _colour);
-            Process_Point(start_x, height, end_z, _colour);
-            Process_Point(end_x, height, end_z, _colour);
-            Process_Point(end_x, height, start_z, _colour);
+            Process_Point(start_x, height, start_z, _colour, 0);
+            Process_Point(start_x, height, end_z, _colour, 1);
+            Process_Point(end_x, height, end_z, _colour, 2);
+            Process_Point(end_x, height, start_z, _colour, 3);
         }
         public void Draw_Quad_Perpendecular_to_OSz(
             float start_x, float start_y,
            float end_x, float end_y,
            float height, System.Drawing.Color _colour)
         {
-            Process_Point(start_x, start_y, height, _colour);
-            Process_Point(end_x, start_y, height, _colour);
-            Process_Point(end_x, end_y, height, _colour);
-            Process_Point(start_x, end_y, height, _colour);
+            Process_Point(start_x, start_y, height, _colour, 0);
+            Process_Point(end_x, start_y, height, _colour, 1);
+            Process_Point(end_x, end_y, height, _colour, 2);
+            Process_Point(start_x, end_y, height, _colour, 3);
         }
-        void Process_Point(float x, float y, float z, System.Drawing.Color _colour)
+        void Process_Point(float x, float y, float z, System.Drawing.Color _colour, int number)
         {
             Add_Value(ref vertices, vertices_count++, x);
             Add_Value(ref vertices, vertices_count++, y);
             Add_Value(ref vertices, vertices_count++, z);
+
+            if (StaticSettings.S.GradientLightEffect && number == 0)
+                _colour = System.Drawing.Color.FromArgb(
+                    (_colour.R * 3 + 255) / 4,
+                    (_colour.G * 3 + 255) / 4,
+                    (_colour.B * 3 + 255) / 4);
+
+            if (StaticSettings.S.GradientLightEffect && number == 2)
+                _colour = System.Drawing.Color.FromArgb(
+                    (_colour.R * 7 + 0) / 8,
+                    (_colour.G * 7 + 0) / 8,
+                    (_colour.B * 7 + 0) / 8);
 
             Add_Value(ref colours, colours_count++, (float)_colour.R / 255);
             Add_Value(ref colours, colours_count++, (float)_colour.G / 255);

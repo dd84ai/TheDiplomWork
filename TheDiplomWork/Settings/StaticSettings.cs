@@ -28,6 +28,8 @@ namespace TheDiplomWork
 
             public bool PhantomMod = false;
 
+            public bool GradientLightEffect = true;
+
             //public bool SystemInfo = false;
 
             public bool HelpInfoForPlayer = true;
