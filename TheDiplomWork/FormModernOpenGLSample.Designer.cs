@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormModernOpenGLSample));
             this.openGLControl = new SharpGL.OpenGLControl();
             this.label1_InfoTable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
@@ -73,8 +74,9 @@
             this.ClientSize = new System.Drawing.Size(624, 391);
             this.Controls.Add(this.label1_InfoTable);
             this.Controls.Add(this.openGLControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormModernOpenGLSample";
-            this.Text = "SharpGL Form";
+            this.Text = "The Diplom Work";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormModernOpenGLSample_FormClosing);
             this.LocationChanged += new System.EventHandler(this.FormModernOpenGLSample_LocationChanged);
