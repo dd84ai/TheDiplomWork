@@ -97,10 +97,10 @@ namespace TheDiplomWork
             Add_Value(ref colours, colours_count++, (float)_colour.B / 255);
         }
         public void Draw_Quad_Full_Sunsided(
-            float x, float y, float z, float localed_range, System.Drawing.Color _colour, bool SunSided = false)
+            float x, float y, float z, float localed_range, System.Drawing.Color _colour, bool SunSided_DRAWFULL = false)
         {
             //Front
-            if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+            if (SunSided_DRAWFULL || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
                 new vec3(0, 0, -1)) < StaticSettings.S.SunSidedCoef)
                 Draw_Quad_Perpendecular_to_OSz
                 (
@@ -113,7 +113,7 @@ namespace TheDiplomWork
 
 
             //Back
-            if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+            if (SunSided_DRAWFULL || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
                 new vec3(0, 0, 1)) < StaticSettings.S.SunSidedCoef)
                 Draw_Quad_Perpendecular_to_OSz
             (
@@ -126,7 +126,7 @@ namespace TheDiplomWork
             );
 
             //Left
-            if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+            if (SunSided_DRAWFULL || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
                 new vec3(-1, 0, 0)) < StaticSettings.S.SunSidedCoef)
                 Draw_Quad_Perpendecular_to_OSx
             (
@@ -139,7 +139,7 @@ namespace TheDiplomWork
             );
 
             //Right
-            if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+            if (SunSided_DRAWFULL || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
                 new vec3(1, 0, 0)) < StaticSettings.S.SunSidedCoef)
                 Draw_Quad_Perpendecular_to_OSx
             (
@@ -152,7 +152,7 @@ namespace TheDiplomWork
             );
 
             //Top
-            if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+            if (SunSided_DRAWFULL || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
                 new vec3(0, 1, 0)) < StaticSettings.S.SunSidedCoef)
                 Draw_Quad_Perpendecular_to_OSy
             (
@@ -165,7 +165,7 @@ namespace TheDiplomWork
             );
 
             //Bottom
-            if (SunSided || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
+            if (SunSided_DRAWFULL || -GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.NormalizedLook,
                 new vec3(0, -1, 0)) < StaticSettings.S.SunSidedCoef)
                 Draw_Quad_Perpendecular_to_OSy
             (

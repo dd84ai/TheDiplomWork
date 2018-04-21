@@ -100,7 +100,7 @@ namespace TheDiplomWork
             {
 
                 case 'g':
-                    StaticSettings.S.GhostCubeBool = !StaticSettings.S.GhostCubeBool;
+                    StaticSettings.S.GhostCube_Add_in_Data_For_Draw = !StaticSettings.S.GhostCube_Add_in_Data_For_Draw;
                     break;
 
                 case 'f':

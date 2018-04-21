@@ -116,8 +116,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Shaders\Shader.frag" />
-    <None Include="Shaders\Shader.vert" />
+    <None Include="Shaders\Main\Shader.frag" />
+    <None Include="Shaders\Main\Shader.vert" />
+    <None Include="Shaders\Secondary\Shader.frag" />
+    <None Include="Shaders\Secondary\Shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

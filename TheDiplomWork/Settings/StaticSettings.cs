@@ -46,7 +46,9 @@ namespace TheDiplomWork
 
             public bool RealoderCauseOfBuildingBlocks = false;
 
-            public bool GhostCubeBool = false;
+            //Enabling Vertex Array
+            public bool Secondary_SceneInfo_is_Activated = true;
+            public bool GhostCube_Add_in_Data_For_Draw = false;
         }
         public static Settings S = new Settings();
     }

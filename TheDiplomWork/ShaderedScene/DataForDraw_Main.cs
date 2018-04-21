@@ -67,7 +67,7 @@ namespace TheDiplomWork
                                         if (!StaticSettings.S.RealoderCauseOfSunSided ||
                                             XYworld.xz.x == Scene.SS.env.player.coords.Player_chunk_position.x
                                             && XYworld.xz.z == Scene.SS.env.player.coords.Player_chunk_position.z)
-                                            Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color, true);
+                                            Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color, true); //Вроде обычный куб.
                                         else
                                             Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color);
                                     }

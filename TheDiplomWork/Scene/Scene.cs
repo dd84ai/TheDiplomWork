@@ -51,6 +51,7 @@ namespace TheDiplomWork
 
         //  The shader program for our vertex and fragment shader.
         private ShaderProgram shaderProgram;
+        private ShaderProgram shaderProgram_secondary;
 
         /// <summary>
         /// Initialises the scene.
@@ -86,13 +87,22 @@ namespace TheDiplomWork
             //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
             //  Create the shader program.
             
-                var vertexShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.vert");
-                var fragmentShaderSource = ManifestResourceLoader.LoadTextFile("Shaders\\Shader.frag");
+                var vertexShaderSource = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.vert");
+                var fragmentShaderSource = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
                 shaderProgram = new ShaderProgram();
                 shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource, null);
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
+
+                var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
+                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
+                shaderProgram_secondary = new ShaderProgram();
+                shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, null);
+                shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
+                shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
+                shaderProgram_secondary.AssertValid(gl);
+
             }
             catch (Exception ShadersMessageError)
             {
@@ -129,7 +139,7 @@ namespace TheDiplomWork
         public void Draw(OpenGL gl)
         {
             //Призрачным куб.
-            if (StaticSettings.S.GhostCubeBool && 
+            if (StaticSettings.S.Secondary_SceneInfo_is_Activated && 
                 (Scene.SS.env.player.coords.Player_cubical_lookforcube !=
                 Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD
                 || GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color
@@ -240,23 +250,31 @@ namespace TheDiplomWork
             //  Unbind our vertex array and shader.
             SI_main.vertexBufferArray.Unbind(gl);
 
-            if (StaticSettings.S.GhostCubeBool)
+            shaderProgram.Unbind(gl);
+            if (StaticSettings.S.Secondary_SceneInfo_is_Activated)
             {
+                shaderProgram_secondary.Bind(gl);
+
+                shaderProgram_secondary.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
+                shaderProgram_secondary.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
+
+                shaderProgram_secondary.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
+                shaderProgram_secondary.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
+
                 SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
                 gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.GhostCube.Quantity());
                 //  Unbind our vertex array and shader.
                 SI_ghost.vertexBufferArray.Unbind(gl);
+                shaderProgram_secondary.Unbind(gl);
             }
-
-            shaderProgram.Unbind(gl);
+            
             //SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );
         }
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
-
 
         public void Scene_Form_Closing(OpenGL gl)
         {

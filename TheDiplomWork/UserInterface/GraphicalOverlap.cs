@@ -28,8 +28,8 @@ namespace TheDiplomWork
             GraphicalOverlap.GO_color = GeneralProgrammingStuff.ColorSwitch(GraphicalOverlap.GO_interface_item_choice - GraphicalOverlap.Start_Shift);
 
             if (GraphicalOverlap.GO_interface_item_choice == 0)
-                StaticSettings.S.GhostCubeBool = false;
-            else StaticSettings.S.GhostCubeBool = true;
+                StaticSettings.S.GhostCube_Add_in_Data_For_Draw = false;
+            else StaticSettings.S.GhostCube_Add_in_Data_For_Draw = true;
 
             GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
         }
