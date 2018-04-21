@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GlmNet;
 namespace TheDiplomWork
 {
-    class DataForDraw_Main : DataForDraw
+    class DataForDraw_Main : DataForDraw_without_angles
     {
         static vec4 CalculatingThing = new vec4(0, 0, 0, 0);
         vec3 NormalizedToXYWorld = new vec3(0, 0, 0);
@@ -64,12 +64,12 @@ namespace TheDiplomWork
 
                                     if (!StaticSettings.S.RealoderCauseOfPointOfView || scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * StaticSettings.S.RangeOfView)
                                     {
-                                        if (!StaticSettings.S.RealoderCauseOfSunSided ||
-                                            XYworld.xz.x == Scene.SS.env.player.coords.Player_chunk_position.x
-                                            && XYworld.xz.z == Scene.SS.env.player.coords.Player_chunk_position.z)
-                                            Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color, true); //Вроде обычный куб.
-                                        else
-                                            Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color);
+                                        //if (!StaticSettings.S.RealoderCauseOfSunSided ||
+                                        //    XYworld.xz.x == Scene.SS.env.player.coords.Player_chunk_position.x
+                                        //    && XYworld.xz.z == Scene.SS.env.player.coords.Player_chunk_position.z)
+                                        //    Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color, true); //Вроде обычный куб.
+                                        //else
+                                            Draw_Quad_Full_Sunsided_not_angled(x, y, z, localed_range, XYZcube.color);
                                     }
                                 }
                             }

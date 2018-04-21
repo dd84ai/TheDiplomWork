@@ -68,8 +68,10 @@
     <Compile Include="Environment\CubicalMemory.cs" />
     <Compile Include="Environment\Environment.cs" />
     <Compile Include="Scene\ModifiedShader.cs" />
+    <Compile Include="Scene\SceneInfo_Main.cs" />
     <Compile Include="Scene\SceneInfo_Secondary.cs" />
     <Compile Include="ShaderedScene\DataForDraw_angled.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
     <Compile Include="WorldObjects\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
     <Compile Include="ShaderedScene\DataForDraw.cs" />

@@ -45,13 +45,13 @@ namespace TheDiplomWork
         const uint attributeIndexColour = 1;
 
         //  The vertex buffer array which contains the vertex and colour buffers.
-        static SceneInfo SI_main;
+        static SceneInfo_Main SI_main;
         static SceneInfo_Secondary SI_ghost;
 
         //VertexBufferArray vertexBufferArray2;
 
         //  The shader program for our vertex and fragment shader.
-        private ShaderProgram shaderProgram;
+        private ModifiedShaderProgram shaderProgram;
         private ModifiedShaderProgram shaderProgram_secondary;
 
         /// <summary>
@@ -69,45 +69,12 @@ namespace TheDiplomWork
 
         //Создание шейдеров более in Old Fashioned Way чтобы использовать Geomtry Shader
         //https://www.codeproject.com/Articles/1167387/OpenGL-with-OpenTK-in-Csharp-Part-Compiling-Shader
-        private void CompileShaders(OpenGL GL)
-        {
-            var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
-            var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
-
-            var vertexShader = GL.CreateShader(OpenGL.GL_VERTEX_SHADER);
-            GL.ShaderSource(vertexShader,
-            vertexShaderSource_2);
-            GL.CompileShader(vertexShader);
-
-            var fragmentShader = GL.CreateShader(OpenGL.GL_FRAGMENT_SHADER);
-            GL.ShaderSource(fragmentShader,
-            fragmentShaderSource_2);
-            GL.CompileShader(fragmentShader);
-
-            program = GL.CreateProgram();
-            GL.AttachShader(program, vertexShader);
-            GL.AttachShader(program, fragmentShader);
-            GL.LinkProgram(program);
-
-            GL.DetachShader(program, vertexShader);
-            GL.DetachShader(program, fragmentShader);
-            GL.DeleteShader(vertexShader);
-            GL.DeleteShader(fragmentShader);
-            //return program;
-        }
-        uint program = 0;
-        private uint _vertexArray;
-        ~Scene()
-        {
-            //_gl.DeleteProgram(program);
-
-        }
         public void Initialise(OpenGL gl, float width, float height)
         {
             try
             {
                 _gl = gl;
-            SI_main = new SceneInfo(gl);
+            SI_main = new SceneInfo_Main(gl);
             SI_ghost = new SceneInfo_Secondary(gl);
             newThread_ghost = new Thread(Scene.DoWork_ghost);
 
@@ -122,27 +89,24 @@ namespace TheDiplomWork
             //  Set a blue clear colour.
             gl.ClearColor(0.4f, 0.6f, 0.9f, 0.0f);
 
-            //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
-            //  Create the shader program.
-            
-                var vertexShaderSource = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.vert");
-                var fragmentShaderSource = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
-                shaderProgram = new ShaderProgram();
-                shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource, null);
+                //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
+                //  Create the shader program.
+
+                var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.vert");
+                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
+                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
+                shaderProgram = new ModifiedShaderProgram();
+                shaderProgram.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
 
-                var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
-                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
-                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
+                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
+                fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
+                geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
+
                 shaderProgram_secondary = new ModifiedShaderProgram();
                 shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
-
-                //SharpGL.Shaders.Shader shade = new Shader();
-                //shade.Create(gl, OpenGL.GL_GEOMETRY_SHADER, geometryShaderSource_2);
-                //gl.AttachShader(shaderProgram.ShaderProgramObject, shade.ShaderObject);
-
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram_secondary.AssertValid(gl);
@@ -194,7 +158,7 @@ namespace TheDiplomWork
                 modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
                 //  Now create the geometry for the square.
-                SI_main.CreateVerticesForSquare(ref SS.Main);
+                SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
 
                 var handle = GetConsoleWindow();
                 if (!StaticSettings.S.ConsoleIsEnabled) ShowWindow(handle, SW_HIDE);
@@ -243,7 +207,7 @@ namespace TheDiplomWork
                 {
                     SI_main.vertexBufferArray.Delete(gl);
                     SS.Main.CopyToReady();
-                    SI_main.CreateVerticesForSquare(ref SS.Main);
+                    SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
                 }
 
                 float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
@@ -321,7 +285,7 @@ namespace TheDiplomWork
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
             //  Draw the square.
-            gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Main.Quantity());
+            gl.DrawArrays(OpenGL.GL_LINES_ADJACENCY, 0, SS.Main.Quantity());
             //  Unbind our vertex array and shader.
             SI_main.vertexBufferArray.Unbind(gl);
 
