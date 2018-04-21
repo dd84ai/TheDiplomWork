@@ -21,7 +21,7 @@ namespace TheDiplomWork
             public bool RealoderCauseOfPointOfView = true;
             public float PointOfViewCoefOfDifference = 0.85f; // How Much Unchanged Point Of View.
 
-            public bool RealoderCauseOfSunSided = true;
+            public bool RealoderCauseOfSunSided = false;
             public float SunSidedCoef = 0.25f; //It's a light side to you.
 
             public bool FlyMod = true;
