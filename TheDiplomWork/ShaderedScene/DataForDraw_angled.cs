@@ -38,7 +38,9 @@ namespace TheDiplomWork
             float _x, float _y, float _z, float localed_range, System.Drawing.Color _colour, float _angled_x, float _angled_y, float _angled_z, bool SunSided_DRAWFULL = false)
         {
             angled_x = _angled_x; angled_y = _angled_y; angled_z = _angled_z;
-            Draw_Quad_Full_Sunsided(_x, _y, _z, localed_range, _colour, SunSided_DRAWFULL);
+            //Draw_Quad_Full_Sunsided(_x, _y, _z, localed_range, _colour, SunSided_DRAWFULL);
+            Process_Point(_x, _y, _z, _colour, 1);
+            Process_Point(_x + localed_range, _y + localed_range, _z + localed_range, _colour, 1);
         }
         public override void Process_Point(float _x, float _y, float _z, System.Drawing.Color _colour, int number)
         {

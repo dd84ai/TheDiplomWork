@@ -52,7 +52,7 @@ namespace TheDiplomWork
 
         //  The shader program for our vertex and fragment shader.
         private ShaderProgram shaderProgram;
-        private ShaderProgram shaderProgram_secondary;
+        private ModifiedShaderProgram shaderProgram_secondary;
 
         /// <summary>
         /// Initialises the scene.
@@ -69,6 +69,39 @@ namespace TheDiplomWork
 
         //Создание шейдеров более in Old Fashioned Way чтобы использовать Geomtry Shader
         //https://www.codeproject.com/Articles/1167387/OpenGL-with-OpenTK-in-Csharp-Part-Compiling-Shader
+        private void CompileShaders(OpenGL GL)
+        {
+            var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
+            var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
+
+            var vertexShader = GL.CreateShader(OpenGL.GL_VERTEX_SHADER);
+            GL.ShaderSource(vertexShader,
+            vertexShaderSource_2);
+            GL.CompileShader(vertexShader);
+
+            var fragmentShader = GL.CreateShader(OpenGL.GL_FRAGMENT_SHADER);
+            GL.ShaderSource(fragmentShader,
+            fragmentShaderSource_2);
+            GL.CompileShader(fragmentShader);
+
+            program = GL.CreateProgram();
+            GL.AttachShader(program, vertexShader);
+            GL.AttachShader(program, fragmentShader);
+            GL.LinkProgram(program);
+
+            GL.DetachShader(program, vertexShader);
+            GL.DetachShader(program, fragmentShader);
+            GL.DeleteShader(vertexShader);
+            GL.DeleteShader(fragmentShader);
+            //return program;
+        }
+        uint program = 0;
+        private uint _vertexArray;
+        ~Scene()
+        {
+            //_gl.DeleteProgram(program);
+
+        }
         public void Initialise(OpenGL gl, float width, float height)
         {
             try
@@ -103,19 +136,44 @@ namespace TheDiplomWork
                 var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
                 var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
                 var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
-                shaderProgram_secondary = new ShaderProgram();
-                shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, null);
+                shaderProgram_secondary = new ModifiedShaderProgram();
+                shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
+
+                //SharpGL.Shaders.Shader shade = new Shader();
+                //shade.Create(gl, OpenGL.GL_GEOMETRY_SHADER, geometryShaderSource_2);
+                //gl.AttachShader(shaderProgram.ShaderProgramObject, shade.ShaderObject);
+
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram_secondary.AssertValid(gl);
 
+
+                //CompileShaders(gl);
+
+
+                //gl.BindBuffer(,)
+                //gl.GenVertexArrays(1, _vertexArray);
+                //gl.BindVertexArray(_vertexArray);
+
+                //var meow = shaderProgram.ShaderProgramObject;
+
                 
-                //uint program = gl.CreateProgram();
+                
+                //shaderProgram
+
+                //uint program = shaderProgram.ShaderProgramObject;
                 //uint shader = gl.CreateShader(OpenGL.GL_GEOMETRY_SHADER);
                 //gl.ShaderSource(shader, geometryShaderSource_2);
                 //gl.CompileShader(shader);
+
+                //if (shaderProgram.GetLinkStatus(gl) == false)
+                //{
+                //    Console.WriteLine(string.Format($"Failed to compile shader with ID {0}.\n{shaderProgram.GetInfoLog(gl)}"));
+                //    Console.ReadKey();
+                //}
+
                 //gl.AttachShader(program, shader);
-                
+
 
             }
             catch (ShaderCompilationException ShadersMessageError)
@@ -277,10 +335,10 @@ namespace TheDiplomWork
 
                 shaderProgram_secondary.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
-
+                
                 SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
-                gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Secondary.Quantity());
+                gl.DrawArrays(OpenGL.GL_LINES, 0, SS.Secondary.Quantity());
                 //  Unbind our vertex array and shader.
                 SI_ghost.vertexBufferArray.Unbind(gl);
                 shaderProgram_secondary.Unbind(gl);

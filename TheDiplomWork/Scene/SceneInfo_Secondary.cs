@@ -59,6 +59,8 @@ namespace TheDiplomWork
             colourDataBuffer.Unbind(gl);
             centerDataBuffer.Unbind(gl);
             anglesDataBuffer.Unbind(gl);
+
+
         }
     }
 }
