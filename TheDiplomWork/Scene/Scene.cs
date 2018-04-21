@@ -338,7 +338,7 @@ namespace TheDiplomWork
                 
                 SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
-                gl.DrawArrays(OpenGL.GL_LINES, 0, SS.Secondary.Quantity());
+                gl.DrawArrays(OpenGL.GL_LINES_ADJACENCY, 0, SS.Secondary.Quantity());
                 //  Unbind our vertex array and shader.
                 SI_ghost.vertexBufferArray.Unbind(gl);
                 shaderProgram_secondary.Unbind(gl);
