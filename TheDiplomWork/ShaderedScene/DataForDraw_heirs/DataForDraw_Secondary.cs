@@ -16,7 +16,7 @@ namespace TheDiplomWork
             Draw_Quad_Full_Sunsided_angled(Scene.SS.env.player.coords.Player_precise_position.x,
                 Scene.SS.env.player.coords.Player_precise_position.y + localed_range * 100,
                 Scene.SS.env.player.coords.Player_precise_position.z,
-                localed_range * 10, System.Drawing.Color.Gold, 0, 0, 0, true);
+                localed_range * 10, System.Drawing.Color.Gold, 0.5f, 0.5f, 0.5f, true);
 
             //Ghost Cube
             if (StaticSettings.S.GhostCube_Add_in_Data_For_Draw)
@@ -63,7 +63,7 @@ namespace TheDiplomWork
                     ShaderedScene.CalculateFromMaptoGraphical(Scene.SS.env.player.coords.Player_chunk_lookforcube,
                         Scene.SS.env.player.coords.Player_cubical_lookforcube, ref x, ref y, ref z);
 
-                    Draw_Quad_Full_Sunsided(x, y, z, localed_range, result, true);
+                    Draw_Quad_Full_Sunsided_angled(x, y, z, localed_range, result, 0.5f, 0.5f, 0.5f, true);
 
                 }
             }

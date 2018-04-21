@@ -51,7 +51,7 @@ namespace TheDiplomWork
             centerDataBuffer.SetData(gl, 2, Data.center_arrayed, false, 3);
 
             anglesDataBuffer.Bind(gl);
-            anglesDataBuffer.SetData(gl, 3, Data.colours_arrayed, false, 3);
+            anglesDataBuffer.SetData(gl, 3, Data.angles_arrayed, false, 3);
 
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
