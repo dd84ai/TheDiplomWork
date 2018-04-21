@@ -65,7 +65,10 @@ namespace TheDiplomWork
         Thread newThread_ghost;
         public static bool ShadersInitializated = true;
         public string ShadersWereNotInitializatedMessage = "";
-        System.Collections.Generic.Dictionary<uint, string> dict = new System.Collections.Generic.Dictionary<uint,string>();
+        //System.Collections.Generic.Dictionary<uint, string> dict = new System.Collections.Generic.Dictionary<uint,string>();
+
+        //Создание шейдеров более in Old Fashioned Way чтобы использовать Geomtry Shader
+        //https://www.codeproject.com/Articles/1167387/OpenGL-with-OpenTK-in-Csharp-Part-Compiling-Shader
         public void Initialise(OpenGL gl, float width, float height)
         {
             try
@@ -99,11 +102,20 @@ namespace TheDiplomWork
 
                 var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
                 var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
+                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
                 shaderProgram_secondary = new ShaderProgram();
                 shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, null);
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram_secondary.AssertValid(gl);
+
+                
+                //uint program = gl.CreateProgram();
+                //uint shader = gl.CreateShader(OpenGL.GL_GEOMETRY_SHADER);
+                //gl.ShaderSource(shader, geometryShaderSource_2);
+                //gl.CompileShader(shader);
+                //gl.AttachShader(program, shader);
+                
 
             }
             catch (ShaderCompilationException ShadersMessageError)
