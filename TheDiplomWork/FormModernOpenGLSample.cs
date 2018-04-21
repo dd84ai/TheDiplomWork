@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using SharpGL;
-
 namespace TheDiplomWork
 {
     /// <summary>
@@ -26,7 +25,9 @@ namespace TheDiplomWork
         private void openGLControl_OpenGLInitialized(object sender, EventArgs e)
         {
             //  Initialise the scene.
-            scene.Initialise(openGLControl.OpenGL, Width, Height);
+
+                scene.Initialise(openGLControl.OpenGL, Width, Height);
+
         }
 
         /// <summary>
@@ -48,6 +49,8 @@ namespace TheDiplomWork
                 openGL_Draw_Wrapped();
             else
             {
+                Application.Exit();
+
                 //  Clear the scene.
                 openGLControl.OpenGL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
 

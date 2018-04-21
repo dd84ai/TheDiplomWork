@@ -9,11 +9,17 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 rotMatrix;
-
+vec3 DeCenter()
+{
+	return in_Position - in_Center;
+}
 void main(void) 
 {
-	gl_Position = (projectionMatrix *rotMatrix *  viewMatrix * modelMatrix) * 
-	vec4(in_Position, 1.0);
+	vec3 Changed_Position = DeCenter();
+	vec4 Rotated_Position = vec4(Changed_Position, 1.0);
+	Rotated_Position = Rotated_Position;
+	
+	gl_Position = (projectionMatrix *rotMatrix *  viewMatrix * modelMatrix) * Rotated_Position;
 
 	pass_Color = in_Color;
 }

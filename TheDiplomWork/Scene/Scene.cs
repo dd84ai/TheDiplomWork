@@ -6,6 +6,7 @@ using SharpGL.VertexBuffers;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Forms;
 namespace TheDiplomWork
 {
     /// <summary>
@@ -64,7 +65,8 @@ namespace TheDiplomWork
         Thread newThread_ghost;
         public static bool ShadersInitializated = true;
         public string ShadersWereNotInitializatedMessage = "";
-        public async void Initialise(OpenGL gl, float width, float height)
+        System.Collections.Generic.Dictionary<uint, string> dict = new System.Collections.Generic.Dictionary<uint,string>();
+        public void Initialise(OpenGL gl, float width, float height)
         {
             try
             {
@@ -104,11 +106,14 @@ namespace TheDiplomWork
                 shaderProgram_secondary.AssertValid(gl);
 
             }
-            catch (Exception ShadersMessageError)
+            catch (ShaderCompilationException ShadersMessageError)
             {
                 ShadersInitializated = false;
-                ShadersWereNotInitializatedMessage = ShadersMessageError.Message;
+                ShadersWereNotInitializatedMessage = ShadersMessageError.CompilerOutput;
+                MessageBox.Show(ShadersWereNotInitializatedMessage);
+                //Environment.Exit(123);
             }
+
             if (ShadersInitializated)
             {
                 //  Create a perspective projection matrix.
@@ -128,7 +133,7 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
                 SaveAndLoad.Load("default");
             }
-            
+
         }
         
         /// <summary>
