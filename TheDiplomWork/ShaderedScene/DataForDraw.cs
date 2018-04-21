@@ -74,7 +74,7 @@ namespace TheDiplomWork
             Process_Point(end_x, end_y, height, _colour, 2);
             Process_Point(start_x, end_y, height, _colour, 3);
         }
-        void Process_Point(float x, float y, float z, System.Drawing.Color _colour, int number)
+        public virtual void Process_Point(float x, float y, float z, System.Drawing.Color _colour, int number)
         {
             Add_Value(ref vertices, vertices_count++, x);
             Add_Value(ref vertices, vertices_count++, y);
@@ -96,7 +96,7 @@ namespace TheDiplomWork
             Add_Value(ref colours, colours_count++, (float)_colour.G / 255);
             Add_Value(ref colours, colours_count++, (float)_colour.B / 255);
         }
-        public void Draw_Quad_Full_Sunsided(
+        public virtual void Draw_Quad_Full_Sunsided(
             float x, float y, float z, float localed_range, System.Drawing.Color _colour, bool SunSided_DRAWFULL = false)
         {
             //Front
@@ -193,7 +193,7 @@ namespace TheDiplomWork
         {
             return LastCount;
         }
-        public void CopyToReady()
+        public virtual void CopyToReady()
         {
             Quantity_of_all_values = vertices.Count();
             FirstInitialization = true;
@@ -201,7 +201,7 @@ namespace TheDiplomWork
             LastCount = vertices.Count();
             Initialization_in_process = false;
         }
-        void Add_Value(ref List<float> list, int index, float value)
+        public void Add_Value(ref List<float> list, int index, float value)
         {
             if (index < list.Count()) list[index] = value;
             else list.Add(value);
@@ -211,13 +211,21 @@ namespace TheDiplomWork
         public bool Initialization_in_process = false;
         public virtual void initialization()
         { }
-        public void START_initialization()
+        public virtual void START_initialization()
+        {
+            START_initialization_wrapped();
+        }
+        public void START_initialization_wrapped()
         {
             Memory_Init();
             vertices_count = 0;
             colours_count = 0;
         }
-        public void END_initialization()
+        public virtual void END_initialization()
+        {
+            END_initialization_wrapped();
+        }
+        public void END_initialization_wrapped()
         {
             Extra_Remover(ref vertices, vertices_count);
             Extra_Remover(ref colours, colours_count);

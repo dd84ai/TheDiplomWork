@@ -45,7 +45,7 @@ namespace TheDiplomWork
 
         //  The vertex buffer array which contains the vertex and colour buffers.
         static SceneInfo SI_main;
-        static SceneInfo SI_ghost;
+        static SceneInfo_Secondary SI_ghost;
 
         //VertexBufferArray vertexBufferArray2;
 
@@ -70,7 +70,7 @@ namespace TheDiplomWork
             {
                 _gl = gl;
             SI_main = new SceneInfo(gl);
-            SI_ghost = new SceneInfo(gl);
+            SI_ghost = new SceneInfo_Secondary(gl);
             newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
@@ -147,10 +147,10 @@ namespace TheDiplomWork
                 )
             {
 
-                if (!SS.GhostCube.CopiedLastResult)
+                if (!SS.Secondary.CopiedLastResult)
                 {
-                    SS.GhostCube.CopyToReady();
-                    SI_ghost.CreateVerticesForSquare(ref SS.GhostCube);
+                    SS.Secondary.CopyToReady();
+                    SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
@@ -218,7 +218,7 @@ namespace TheDiplomWork
         public static void DoWork_ghost(object data)
         {
             DoWork_ghost_IsAlive = true;
-            SS.GhostCube.initialization();
+            SS.Secondary.initialization();
             DoWork_ghost_IsAlive = false;
             return;
         }
@@ -263,7 +263,7 @@ namespace TheDiplomWork
 
                 SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
-                gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.GhostCube.Quantity());
+                gl.DrawArrays(OpenGL.GL_QUADS, 0, SS.Secondary.Quantity());
                 //  Unbind our vertex array and shader.
                 SI_ghost.vertexBufferArray.Unbind(gl);
                 shaderProgram_secondary.Unbind(gl);

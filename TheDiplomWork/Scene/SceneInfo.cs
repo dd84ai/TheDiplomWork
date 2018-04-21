@@ -13,13 +13,17 @@ namespace TheDiplomWork
         public VertexBufferArray vertexBufferArray;
         public VertexBuffer vertexDataBuffer;
         public VertexBuffer colourDataBuffer;
-        OpenGL gl;
+        public OpenGL gl;
         public SceneInfo(OpenGL _gl)
         {
             gl = _gl;
             CreateVerticesForSquare_FirstInit();
         }
-        public void CreateVerticesForSquare_FirstInit()
+        public virtual void CreateVerticesForSquare_FirstInit()
+        {
+            CreateVerticesForSquare_FirstInit_wrapped();
+        }
+        public void CreateVerticesForSquare_FirstInit_wrapped()
         {
             //  Create the vertex array object.
             vertexBufferArray = new VertexBufferArray();
@@ -33,7 +37,7 @@ namespace TheDiplomWork
             colourDataBuffer = new VertexBuffer();
             colourDataBuffer.Create(gl);
         }
-        public void CreateVerticesForSquare(ref DataForDraw Data)
+        public virtual void CreateVerticesForSquare(ref DataForDraw Data)
         {
             //  Create the vertex array object.
             vertexBufferArray.Bind(gl);

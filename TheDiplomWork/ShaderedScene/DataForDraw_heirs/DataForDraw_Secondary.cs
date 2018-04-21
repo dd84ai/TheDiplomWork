@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace TheDiplomWork
 {
-    class DataForDraw_Ghost : DataForDraw
+    class DataForDraw_Secondary : DataForDraw_angled
     {
         public override void initialization()
         {
             START_initialization();
 
             //Sun
-            Draw_Quad_Full_Sunsided(Scene.SS.env.player.coords.Player_precise_position.x,
+            Draw_Quad_Full_Sunsided_angled(Scene.SS.env.player.coords.Player_precise_position.x,
                 Scene.SS.env.player.coords.Player_precise_position.y + localed_range * 100,
                 Scene.SS.env.player.coords.Player_precise_position.z,
-                localed_range * 10, System.Drawing.Color.Gold, true);
+                localed_range * 10, System.Drawing.Color.Gold, 0, 0, 0, true);
 
             //Ghost Cube
             if (StaticSettings.S.GhostCube_Add_in_Data_For_Draw)
