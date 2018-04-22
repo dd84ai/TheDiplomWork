@@ -283,7 +283,7 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
             //Player Position and Local Range in First Row.
-            PlayerAndLocaledRangeAndSun = new mat4(new vec4(0, 0, 0, CubicalMemory.Cube.rangeOfTheEdge)
+            PlayerAndLocaledRangeAndSun = new mat4(new vec4(0, 0, 0, 1)
                 , new vec4(0, 0, 0, 0)
                 , new vec4(0, 0, 0, 0)
                 , new vec4(0, 0, 0, 0));

@@ -187,5 +187,7 @@ namespace TheDiplomWork
         public static bool JumpState = false;
         public static int JumpMax = 30;
         public static int JumpCounter = JumpMax;
+
+        public vec3 NormalizedToXYWorld = new vec3(0, 0, 0);
     }
 }

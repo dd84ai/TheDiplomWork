@@ -9,7 +9,6 @@ namespace TheDiplomWork
     class DataForDraw_Main : DataForDraw_without_angles
     {
         static vec4 CalculatingThing = new vec4(0, 0, 0, 0);
-        vec3 NormalizedToXYWorld = new vec3(0, 0, 0);
 
         public override void initialization()
         {
@@ -53,13 +52,13 @@ namespace TheDiplomWork
                                     ShaderedScene.CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
 
                                     //POINT OF VIEWER
-                                    NormalizedToXYWorld.x = Scene.SS.env.player.coords.Player_precise_stepback.x - x;
-                                    NormalizedToXYWorld.y = Scene.SS.env.player.coords.Player_precise_stepback.y - y;
-                                    NormalizedToXYWorld.z = Scene.SS.env.player.coords.Player_precise_stepback.z - z;
-                                    float range = GeneralProgrammingStuff.vec3_range(NormalizedToXYWorld);
-                                    GeneralProgrammingStuff.vec3_normalize(ref NormalizedToXYWorld, range);
+                                    Scene.SS.env.player.NormalizedToXYWorld.x = Scene.SS.env.player.coords.Player_precise_stepback.x - x;
+                                    Scene.SS.env.player.NormalizedToXYWorld.y = Scene.SS.env.player.coords.Player_precise_stepback.y - y;
+                                    Scene.SS.env.player.NormalizedToXYWorld.z = Scene.SS.env.player.coords.Player_precise_stepback.z - z;
+                                    float range = GeneralProgrammingStuff.vec3_range(Scene.SS.env.player.NormalizedToXYWorld);
+                                    GeneralProgrammingStuff.vec3_normalize(ref Scene.SS.env.player.NormalizedToXYWorld, range);
                                     Scene.SS.env.player.coords.LookForCube();
-                                    float scalar = GeneralProgrammingStuff.vec3_scalar(NormalizedToXYWorld, Scene.SS.env.player.coords.NormalizedLook);
+                                    float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.NormalizedToXYWorld, Scene.SS.env.player.coords.NormalizedLook);
                                     //POINT OF VIEWER
 
                                     if (!StaticSettings.S.RealoderCauseOfPointOfView || scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * StaticSettings.S.RangeOfView)
