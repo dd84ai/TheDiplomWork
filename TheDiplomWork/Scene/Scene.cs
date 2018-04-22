@@ -39,14 +39,14 @@ namespace TheDiplomWork
         mat4 viewMatrix;
         mat4 modelMatrix;
         mat4 rotMatrix;
-
+        mat4 PlayerAndLocaledRangeAndSun = new mat4(new vec4(0, 0, 0, 0), new vec4(0, 0, 0, 0), new vec4(0, 0, 0, 0), new vec4(0, 0, 0, 0));
         //  Constants that specify the attribute indexes.
         const uint attributeIndexPosition = 0;
         const uint attributeIndexColour = 1;
 
         //  The vertex buffer array which contains the vertex and colour buffers.
         static SceneInfo_Main SI_main;
-        static SceneInfo_Secondary SI_ghost;
+        static SceneInfo_Main SI_ghost;
 
         //VertexBufferArray vertexBufferArray2;
 
@@ -75,7 +75,7 @@ namespace TheDiplomWork
             {
                 _gl = gl;
             SI_main = new SceneInfo_Main(gl);
-            SI_ghost = new SceneInfo_Secondary(gl);
+            SI_ghost = new SceneInfo_Main(gl);
             newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
@@ -101,7 +101,7 @@ namespace TheDiplomWork
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
 
-                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
+                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.vert");
                 fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
                 geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
 
@@ -189,7 +189,7 @@ namespace TheDiplomWork
                 if (!SS.Secondary.CopiedLastResult)
                 {
                     SS.Secondary.CopyToReady();
-                    SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
+                    SI_ghost.CreateVerticesForSquare_not_angled(ref SS.Secondary);
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
@@ -282,10 +282,17 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
+            //Player Position and Local Range in First Row.
+            PlayerAndLocaledRangeAndSun = new mat4(new vec4(0, 0, 0, CubicalMemory.Cube.rangeOfTheEdge)
+                , new vec4(0, 0, 0, 0)
+                , new vec4(0, 0, 0, 0)
+                , new vec4(0, 0, 0, 0));
+            shaderProgram.SetUniformMatrix4(gl, "PlayerAndLocaledRangeAndSun", PlayerAndLocaledRangeAndSun.to_array());
+
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
             //  Draw the square.
-            gl.DrawArrays(OpenGL.GL_LINES_ADJACENCY, 0, SS.Main.Quantity());
+            gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Main.Quantity());
             //  Unbind our vertex array and shader.
             SI_main.vertexBufferArray.Unbind(gl);
 
@@ -302,7 +309,7 @@ namespace TheDiplomWork
                 
                 SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
-                gl.DrawArrays(OpenGL.GL_LINES_ADJACENCY, 0, SS.Secondary.Quantity());
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity());
                 //  Unbind our vertex array and shader.
                 SI_ghost.vertexBufferArray.Unbind(gl);
                 shaderProgram_secondary.Unbind(gl);
