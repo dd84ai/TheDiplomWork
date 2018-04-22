@@ -152,7 +152,7 @@ namespace TheDiplomWork
             {
                 //  Create a perspective projection matrix.
                 const float rads = (60.0f / 360.0f) * (float)Math.PI * 2.0f;
-                projectionMatrix = glm.perspective(rads, width / height, 0.1f, 10.0f);
+                projectionMatrix = glm.perspective(rads, width / height, 0.1f, 1000.0f);
 
                 //  Create a model matrix to make the model a little bigger.
                 modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));

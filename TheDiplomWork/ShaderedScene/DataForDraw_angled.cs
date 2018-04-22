@@ -50,9 +50,9 @@ namespace TheDiplomWork
             Add_Value(ref vertices, vertices_count++, _y);
             Add_Value(ref vertices, vertices_count++, _z);
 
-            Add_Value(ref center, center_count++, x + localed_range / 2);
-            Add_Value(ref center, center_count++, y + localed_range / 2);
-            Add_Value(ref center, center_count++, z + localed_range / 2);
+            Add_Value(ref center, center_count++, _x + localed_range / 2);
+            Add_Value(ref center, center_count++, _y + localed_range / 2);
+            Add_Value(ref center, center_count++, _z + localed_range / 2);
 
             Add_Value(ref angles, angles_count++, angled_x);
             Add_Value(ref angles, angles_count++, angled_y);
