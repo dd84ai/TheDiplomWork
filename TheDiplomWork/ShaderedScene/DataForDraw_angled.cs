@@ -58,6 +58,8 @@ namespace TheDiplomWork
             Add_Value(ref angles, angles_count++, angled_y);
             Add_Value(ref angles, angles_count++, angled_z);
 
+            //Console.WriteLine(angled_x + ";" + angled_y + ";" + angled_z);
+
             Add_Value(ref colours, colours_count++, (float)_colour.R / 255);
             Add_Value(ref colours, colours_count++, (float)_colour.G / 255);
             Add_Value(ref colours, colours_count++, (float)_colour.B / 255);

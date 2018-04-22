@@ -13,51 +13,40 @@ uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 rotMatrix;
 uniform mat4 PlayerAndLocaledRangeAndSun;
-mat4 Rotator;
-vec4 Center;
-vec4 DeCenter(in vec4 input)
-{
-	return input - vec4(in_Center,1.0);
-}
-vec4 ReCenter(in vec4 input)
-{
-	return input + vec4(in_Center,1.0);
-}
+mat3 Rotator;
+vec3 Angles;
 void PrepareRotator()
 {
-	mat4 RotateX = mat4(vec4(1,0,0,0),
-	vec4(0,cos(in_Angles.x),-sin(in_Angles.x),0),
-	vec4(0,sin(in_Angles.x),cos(in_Angles.x),0),
-	vec4(0,0,0,1));
+	mat3 RotateX = mat3(vec3(1,0,0),
+	vec3(0,cos(Angles.x),-sin(Angles.x)),
+	vec3(0,sin(Angles.x),cos(Angles.x)));
 
-	mat4 RotateY = mat4(vec4(cos(in_Angles.y),0,sin(in_Angles.y),0),
-	vec4(0,1,0,0),
-	vec4(-sin(in_Angles.y),0,cos(in_Angles.y),0),
-	vec4(0,0,0,1));
+	mat3 RotateY = mat3(vec3(cos(Angles.y),0,sin(Angles.y)),
+	vec3(0,1,0),
+	vec3(-sin(Angles.y),0,cos(Angles.y)));
 
-	mat4 RotateZ = mat4(vec4(cos(in_Angles.z),-sin(in_Angles.z),0,0),
-	vec4(sin(in_Angles.z),cos(in_Angles.z),0,0),
-	vec4(0,0,1,0),
-	vec4(0,0,0,1));
+	mat3 RotateZ = mat3(vec3(cos(Angles.z),-sin(Angles.z),0),
+	vec3(sin(Angles.z),cos(Angles.z),0),
+	vec3(0,0,1));
 	Rotator = RotateX * RotateY * RotateZ;
 }
-vec4 Rotated_Position(vec4 input_vec)
+vec4 Rotated_Position(vec3 input_vec)
 {
 	
-	return ReCenter(DeCenter(input_vec) * Rotator);
+	return vec4((input_vec * Rotator + in_Position + vec3(0.5,0.5,0.5)),1.0);
 }
 void main(void) 
 {
-	Center = vec4(in_Position,1.0) + vec4(0.5,0.5,0.5,0.0);
-	vec4 begin = vec4(in_Position,1.0);
+	vec3 begin = vec3(-0.5,-0.5,-0.5);
+	Angles = vec3(0,0,0);
 	PrepareRotator();
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
 
-	vertex_x_out = Transform * Rotated_Position(begin + vec4(1,0,0,0));
-	vertex_y_out = Transform * Rotated_Position(begin + vec4(0,1,0,0));
-	vertex_z_out = Transform * Rotated_Position(begin + vec4(0,0,1,0));
+	vertex_x_out = Transform * (Rotated_Position(begin + vec3(1,0,0)));
+	vertex_y_out = Transform * (Rotated_Position(begin + vec3(0,1,0)));
+	vertex_z_out = Transform * (Rotated_Position(begin + vec3(0,0,1)));
 
-	gl_Position = Transform * Rotated_Position(begin);
+	gl_Position = Transform * (Rotated_Position(begin));
 
 	pass_Color = in_Color;
 }

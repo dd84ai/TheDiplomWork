@@ -13,12 +13,12 @@ namespace TheDiplomWork
             //You can change here.
             public bool ConsoleIsEnabled = false;
 
-            public bool ReloaderCauseOfChunkRare = true;
+            public bool ReloaderCauseOfChunkRare = false;
 
-            public bool ReloaderCauseOfChangingChunk = false;
+            public bool ReloaderCauseOfChangingChunk = true;
             public int RangeOfView = 3; //Range of chunks in every direction from you.
 
-            public bool RealoderCauseOfPointOfView = false;
+            public bool RealoderCauseOfPointOfView = true;
             public float PointOfViewCoefOfDifference = 0.85f; // How Much Unchanged Point Of View.
 
             public bool RealoderCauseOfSunSided = false;

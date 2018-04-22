@@ -39,7 +39,9 @@ namespace TheDiplomWork
         mat4 viewMatrix;
         mat4 modelMatrix;
         mat4 rotMatrix;
-        mat4 PlayerAndLocaledRangeAndSun = new mat4(new vec4(0, 0, 0, 0), new vec4(0, 0, 0, 0), new vec4(0, 0, 0, 0), new vec4(0, 0, 0, 0));
+        mat3 PlayerAndLocaledRangeAndSun = new mat3(new vec3(0, 0, 0), new vec3(0, 0, 0), new vec3(0, 0, 0));
+        vec3 playerpreciseposition = new vec3(0, 0, 0);
+        vec3 playerpreciseposition_stepback = new vec3(0, 0, 0);
         //  Constants that specify the attribute indexes.
         const uint attributeIndexPosition = 0;
         const uint attributeIndexColour = 1;
@@ -282,17 +284,20 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
-            //Player Position and Local Range in First Row.
-            PlayerAndLocaledRangeAndSun = new mat4(new vec4(0, 0, 0, 1)
-                , new vec4(0, 0, 0, 0)
-                , new vec4(0, 0, 0, 0)
-                , new vec4(0, 0, 0, 0));
-            shaderProgram.SetUniformMatrix4(gl, "PlayerAndLocaledRangeAndSun", PlayerAndLocaledRangeAndSun.to_array());
+            //vec3 playerpreciseposition = new vec3(Scene.SS.env.player.coords.Player_precise_position.x, Scene.SS.env.player.coords.Player_precise_position.y, Scene.SS.env.player.coords.Player_precise_position.z);
+            //vec3 playerpreciseposition_stepback = new vec3(Scene.SS.env.player.coords.Player_precise_stepback.x, Scene.SS.env.player.coords.Player_precise_stepback.y, Scene.SS.env.player.coords.Player_precise_stepback.z);
+
+            //PlayerAndLocaledRangeAndSun = new mat3(
+            //    playerpreciseposition, playerpreciseposition_stepback, new vec3(0,0,0)
+            //    );
+            //shaderProgram.SetUniformMatrix3(gl, "PlayerAndLocaledRangeAndSun", PlayerAndLocaledRangeAndSun.to_array());
+            //shaderProgram.SetUniformMatrix4(gl, "playerpreciseposition", playerpreciseposition.to_array());
+            //shaderProgram.SetUniformMatrix4(gl, "playerpreciseposition_stepback", playerpreciseposition_stepback.to_array());
 
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
             //  Draw the square.
-            gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Main.Quantity());
+            gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Main.Quantity()/3);
             //  Unbind our vertex array and shader.
             SI_main.vertexBufferArray.Unbind(gl);
 
@@ -309,7 +314,7 @@ namespace TheDiplomWork
                 
                 SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
-                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity());
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity()/3);
                 //  Unbind our vertex array and shader.
                 SI_ghost.vertexBufferArray.Unbind(gl);
                 shaderProgram_secondary.Unbind(gl);

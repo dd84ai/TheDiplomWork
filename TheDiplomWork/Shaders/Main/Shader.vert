@@ -10,8 +10,6 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 rotMatrix;
-uniform mat4 PlayerAndLocaledRangeAndSun;
-
 void main(void) 
 {
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
