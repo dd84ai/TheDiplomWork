@@ -20,7 +20,7 @@ namespace TheDiplomWork
         Random Rand = new Random();
 
         public DataForDraw_without_angles Main = new DataForDraw_Main();
-        public DataForDraw_without_angles Secondary = new DataForDraw_Main();
+        public DataForDraw_angled Secondary = new DataForDraw_Secondary();
         public static void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {
             x = XYworld.x * CubicalMemory.Chunk.Width + XYZcube.x;

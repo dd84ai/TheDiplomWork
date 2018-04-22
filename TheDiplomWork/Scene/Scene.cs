@@ -46,7 +46,7 @@ namespace TheDiplomWork
 
         //  The vertex buffer array which contains the vertex and colour buffers.
         static SceneInfo_Main SI_main;
-        static SceneInfo_Main SI_ghost;
+        static SceneInfo_Secondary SI_ghost;
 
         //VertexBufferArray vertexBufferArray2;
 
@@ -75,7 +75,7 @@ namespace TheDiplomWork
             {
                 _gl = gl;
             SI_main = new SceneInfo_Main(gl);
-            SI_ghost = new SceneInfo_Main(gl);
+            SI_ghost = new SceneInfo_Secondary(gl);
             newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
@@ -101,7 +101,7 @@ namespace TheDiplomWork
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
 
-                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.vert");
+                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
                 fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
                 geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
 
@@ -189,7 +189,7 @@ namespace TheDiplomWork
                 if (!SS.Secondary.CopiedLastResult)
                 {
                     SS.Secondary.CopyToReady();
-                    SI_ghost.CreateVerticesForSquare_not_angled(ref SS.Secondary);
+                    SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
