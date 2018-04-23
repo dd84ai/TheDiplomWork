@@ -17,99 +17,110 @@ out vec3 f_Color;
 vec3 color[8];
 vec4 point[8];
 
+uniform mat3 sunMatrix;
 float min_light = 0.1;
+vec3 MainLight(float vector)
+{
+	if (sun_vector[0].y > 0) return min(sun_vector[0].y,vector) * vec3(0.9,0.9,0.9) + vec3(0.1,0.1,0.1);
+	else return min(-sun_vector[0].y,-vector) * vec3(0.1,0.2,0.4) + vec3(0.1,0.1,0.1);
+}
+vec3 TheLight(float vector)
+{
+	return max(MainLight(vector),vec3(sunMatrix[2].x));
+}
+
 void Front()
 {
-	f_Color = color[0] * max(min_light,min(sun_vector[0].y,-sun_vector[0].z));  // 1
+	f_Color = color[0] * TheLight(-sun_vector[0].z);  // 1
     gl_Position = gl_in[0].gl_Position;
 	EmitVertex();
-	f_Color = color[2] * max(min_light,min(sun_vector[0].y,-sun_vector[0].z));  // 2
+	f_Color = color[2] * TheLight(-sun_vector[0].z);  // 2
 	gl_Position = point[2];
     EmitVertex();
-	f_Color = color[1] * max(min_light,min(sun_vector[0].y,-sun_vector[0].z));  // 3
+	f_Color = color[1] * TheLight(-sun_vector[0].z);  // 3
 	gl_Position = point[1];
     EmitVertex();
-	f_Color = color[4] * max(min_light,min(sun_vector[0].y,-sun_vector[0].z));  // 4
+	f_Color = color[4] * TheLight(-sun_vector[0].z);  // 4
 	gl_Position = point[4];
 	EmitVertex();
 	EndPrimitive();
 }
 void Back()
 {
-	f_Color = color[3] * max(min_light,min(sun_vector[0].y,sun_vector[0].z));  // 1
+	f_Color = color[3] * TheLight(sun_vector[0].z);  // 1
     gl_Position = point[3];
 	EmitVertex();
-	f_Color = color[5] * max(min_light,min(sun_vector[0].y,sun_vector[0].z));  // 2
+	f_Color = color[5] * TheLight(sun_vector[0].z);  // 2
 	gl_Position = point[5];
     EmitVertex();
-	f_Color = color[6] * max(min_light,min(sun_vector[0].y,sun_vector[0].z));  // 3
+	f_Color = color[6] * TheLight(sun_vector[0].z);  // 3
 	gl_Position = point[6];
     EmitVertex();
-	f_Color = color[7] * max(min_light,min(sun_vector[0].y,sun_vector[0].z));  // 4
+	f_Color = color[7] * TheLight(sun_vector[0].z);  // 4
 	gl_Position = point[7];
 	EmitVertex();
 	EndPrimitive();
 }
 void Left()
 {
-	f_Color = color[0] * max(min_light,min(sun_vector[0].y,-sun_vector[0].x));  // 1
+	f_Color = color[0] * TheLight(-sun_vector[0].x);  // 1
     gl_Position = gl_in[0].gl_Position;
 	EmitVertex();
-	f_Color = color[2] * max(min_light,min(sun_vector[0].y,-sun_vector[0].x));  // 2
+	f_Color = color[2] * TheLight(-sun_vector[0].x);  // 2
 	gl_Position = point[2];
     EmitVertex();
-	f_Color = color[3] * max(min_light,min(sun_vector[0].y,-sun_vector[0].x));  // 3
+	f_Color = color[3] * TheLight(-sun_vector[0].x);  // 3
 	gl_Position = point[3];
     EmitVertex();
-	f_Color = color[6] * max(min_light,min(sun_vector[0].y,-sun_vector[0].x));  // 4
+	f_Color = color[6] * TheLight(-sun_vector[0].x);  // 4
 	gl_Position = point[6];
 	EmitVertex();
 	EndPrimitive();
 }
 void Right()
 {
-	f_Color = color[1] * max(min_light,min(sun_vector[0].y,sun_vector[0].x));  // 1
+	f_Color = color[1] * TheLight(sun_vector[0].x);  // 1
     gl_Position = point[1];
 	EmitVertex();
-	f_Color = color[4] * max(min_light,min(sun_vector[0].y,sun_vector[0].x));  // 2
+	f_Color = color[4] * TheLight(sun_vector[0].x);  // 2
 	gl_Position = point[4];
     EmitVertex();
-	f_Color = color[5] * max(min_light,min(sun_vector[0].y,sun_vector[0].x));  // 3
+	f_Color = color[5] * TheLight(sun_vector[0].x);  // 3
 	gl_Position = point[5];
     EmitVertex();
-	f_Color = color[7] * max(min_light,min(sun_vector[0].y,sun_vector[0].x));  // 4
+	f_Color = color[7] * TheLight(sun_vector[0].x);  // 4
 	gl_Position = point[7];
 	EmitVertex();
 	EndPrimitive();
 }
 void Top()
 {
-	f_Color = color[2] * max(min_light,sun_vector[0].y);  // 1
+	f_Color = color[2] * TheLight(sun_vector[0].y);  // 1
     gl_Position = point[2];
 	EmitVertex();
-	f_Color = color[4] * max(min_light,sun_vector[0].y);  // 2
+	f_Color = color[4] * TheLight(sun_vector[0].y);  // 2
 	gl_Position = point[4];
     EmitVertex();
-	f_Color = color[6] * max(min_light,sun_vector[0].y);  // 3
+	f_Color = color[6] * TheLight(sun_vector[0].y);  // 3
 	gl_Position = point[6];
     EmitVertex();
-	f_Color = color[7] * max(min_light,sun_vector[0].y);  // 4
+	f_Color = color[7] * TheLight(sun_vector[0].y);  // 4
 	gl_Position = point[7];
 	EmitVertex();
 	EndPrimitive();
 }
 void Bottom()
 {
-	f_Color = color[0] * max(min_light,min(sun_vector[0].y,-sun_vector[0].y));  // 1
+	f_Color = color[0] * TheLight(-sun_vector[0].y);  // 1
     gl_Position = gl_in[0].gl_Position;
 	EmitVertex();
-	f_Color = color[1] * max(min_light,min(sun_vector[0].y,-sun_vector[0].y));  // 2
+	f_Color = color[1] * TheLight(-sun_vector[0].y);  // 2
 	gl_Position = point[1];
     EmitVertex();
-	f_Color = color[3] * max(min_light,min(sun_vector[0].y,-sun_vector[0].y));  // 3
+	f_Color = color[3] * TheLight(-sun_vector[0].y);  // 3
 	gl_Position = point[3];
     EmitVertex();
-	f_Color = color[5] * max(min_light,min(sun_vector[0].y,-sun_vector[0].y));  // 4
+	f_Color = color[5] * TheLight(-sun_vector[0].y);  // 4
 	gl_Position = point[5];
 	EmitVertex();
 	EndPrimitive();
@@ -138,7 +149,7 @@ void main()
 	color[6] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[7] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
 
-	if (pointofview[0] > 0.4)
+	if (pointofview[0] > 0.4 || sunMatrix[2].y > 0.5)
 	{
 	if (scalar_sides[0].z > SunSidedCoef) Front();
 	else Back();
@@ -146,11 +157,5 @@ void main()
 	else Right();
 	if (scalar_sides[0].y > SunSidedCoef) Bottom();
 	else Top();
-	//Front();
-	//Back();
-	//Left();
-	//Right();
-	//Bottom();
-	//Top();
 	}
 }  

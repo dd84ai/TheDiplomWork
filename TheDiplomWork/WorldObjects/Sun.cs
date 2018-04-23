@@ -16,6 +16,8 @@ namespace TheDiplomWork
             public vec3 player_stepback = new vec3();
 
             public int Time = 0;
+            public static float Sun_Height = 100.0f;
+            public static float Sun_Time_Decreaser = 100000;
 
             //public mat4 sunMatrix = new mat4();
             //Так как солнце влияет на основную модель. Значит логично строить его там. Чего не хватает?

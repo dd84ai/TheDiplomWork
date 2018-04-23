@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GlmNet;
 namespace TheDiplomWork
 {
     class StaticSettings
@@ -34,12 +34,18 @@ namespace TheDiplomWork
 
             public bool HelpInfoForPlayer = true;
 
+            public bool SunEnabled = false;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)
                     RequiredReloader = true;
                 if (!ReloaderCauseOfChangingChunk && !ReloaderCauseOfChunkRare) RangeOfView = 9999;
+
+                if (!SunEnabled) SunStatus = new vec3(1.0f, 1.0f, 1.0f);
+                else SunStatus = new vec3(0, 0, 0);
             }
+            public vec3 SunStatus = new vec3(0, 0, 0);
 
             //Changed on its own way
             public bool RequiredReloader = false;
