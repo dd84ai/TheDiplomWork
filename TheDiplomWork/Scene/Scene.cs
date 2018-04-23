@@ -41,9 +41,7 @@ namespace TheDiplomWork
         mat4 rotMatrix;
         mat3 playerMatrix;
         mat3 sunMatrix;
-        mat3 PlayerAndLocaledRangeAndSun = new mat3(new vec3(0, 0, 0), new vec3(0, 0, 0), new vec3(0, 0, 0));
-        vec3 playerpreciseposition = new vec3(0, 0, 0);
-        vec3 playerpreciseposition_stepback = new vec3(0, 0, 0);
+    
         //  Constants that specify the attribute indexes.
         const uint attributeIndexPosition = 0;
         const uint attributeIndexColour = 1;
@@ -52,8 +50,6 @@ namespace TheDiplomWork
         static SceneInfo_Main SI_main;
         static SceneInfo_Secondary SI_ghost;
         static SceneInfo_Secondary SI_sunandmoon;
-
-        //VertexBufferArray vertexBufferArray2;
 
         //  The shader program for our vertex and fragment shader.
         private ModifiedShaderProgram shaderProgram;
@@ -125,34 +121,6 @@ namespace TheDiplomWork
                 shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
                 shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
                 shaderProgram_secondary.AssertValid(gl);
-
-                //CompileShaders(gl);
-
-
-                //gl.BindBuffer(,)
-                //gl.GenVertexArrays(1, _vertexArray);
-                //gl.BindVertexArray(_vertexArray);
-
-                //var meow = shaderProgram.ShaderProgramObject;
-
-
-
-                //shaderProgram
-
-                //uint program = shaderProgram.ShaderProgramObject;
-                //uint shader = gl.CreateShader(OpenGL.GL_GEOMETRY_SHADER);
-                //gl.ShaderSource(shader, geometryShaderSource_2);
-                //gl.CompileShader(shader);
-
-                //if (shaderProgram.GetLinkStatus(gl) == false)
-                //{
-                //    Console.WriteLine(string.Format($"Failed to compile shader with ID {0}.\n{shaderProgram.GetInfoLog(gl)}"));
-                //    Console.ReadKey();
-                //}
-
-                //gl.AttachShader(program, shader);
-
-
             }
             catch (ShaderCompilationException ShadersMessageError)
             {
@@ -334,15 +302,6 @@ namespace TheDiplomWork
 
             playerMatrix = new mat3(playerMatrix_veced);
             shaderProgram.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
-            //vec3 playerpreciseposition = new vec3(Scene.SS.env.player.coords.Player_precise_position.x, Scene.SS.env.player.coords.Player_precise_position.y, Scene.SS.env.player.coords.Player_precise_position.z);
-            //vec3 playerpreciseposition_stepback = new vec3(Scene.SS.env.player.coords.Player_precise_stepback.x, Scene.SS.env.player.coords.Player_precise_stepback.y, Scene.SS.env.player.coords.Player_precise_stepback.z);
-
-            //PlayerAndLocaledRangeAndSun = new mat3(
-            //    playerpreciseposition, playerpreciseposition_stepback, new vec3(0,0,0)
-            //    );
-            //shaderProgram.SetUniformMatrix3(gl, "PlayerAndLocaledRangeAndSun", PlayerAndLocaledRangeAndSun.to_array());
-            //shaderProgram.SetUniformMatrix4(gl, "playerpreciseposition", playerpreciseposition.to_array());
-            //shaderProgram.SetUniformMatrix4(gl, "playerpreciseposition_stepback", playerpreciseposition_stepback.to_array());
 
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
@@ -365,18 +324,6 @@ namespace TheDiplomWork
                 SI_ghost.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
                 SI_ghost.vertexBufferArray.Unbind(gl);
-
-                
-
-                
-
-                //shaderProgram_sunandmoon.Bind(gl);
-
-                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
-                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
-                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
-                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
-                //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
                 sunMatrix = new mat3(new vec3((float)Sun.S.Time,(float)+DataForDraw.localed_range * 100,(float)-DataForDraw.localed_range * 100),
                     new vec3((float)Sun.S.Time),
