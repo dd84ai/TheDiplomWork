@@ -124,7 +124,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="Shaders\Main\Shader.c" />
+    <Content Include="Shaders\Main\Main.c" />
     <None Include="Shaders\Main\Shader.frag" />
     <None Include="Shaders\Main\Shader.geom" />
     <Content Include="Shaders\AdvancedVertexShader\Header_plus.c" />

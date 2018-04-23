@@ -100,7 +100,7 @@ namespace TheDiplomWork
 
                 var Header = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Header.c");
                 var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.c");
-                var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.c");
+                var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.c");
 
                 var vertexShaderSource = Header + Cuter + Main;
 
