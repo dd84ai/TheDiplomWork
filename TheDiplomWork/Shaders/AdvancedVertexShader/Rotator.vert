@@ -1,7 +1,6 @@
 ﻿
 mat3 Rotator;
-vec3 Angles;
-void PrepareRotator()
+void PrepareRotator(vec3 Angles)
 {
 	mat3 RotateX = mat3(vec3(1,0,0),
 	vec3(0,cos(Angles.x),-sin(Angles.x)),
@@ -19,4 +18,8 @@ void PrepareRotator()
 vec3 Rotated_Position(vec3 input_vec)
 {
 	return (input_vec * Rotator);
+}
+vec3 Rotated_Around(vec3 input_vec, vec3 shift)
+{
+	return (input_vec + shift) * Rotator;
 }

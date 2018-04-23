@@ -98,7 +98,10 @@ namespace TheDiplomWork
                 var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.vert");
                 var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
 
-                var vertexShaderSource = Header + Cuter + Main;
+                var vertexShaderSource = 
+                    Header + 
+                    Cuter + 
+                    Main;
 
                 var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
                 var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
@@ -108,11 +111,14 @@ namespace TheDiplomWork
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
 
-                var Header_plus = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Header_plus.vert");
                 var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.vert");
                 var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.vert");
 
-                var vertexShaderSource2 = Header + Header_plus + Cuter + Rotator + Adv_main;
+                var vertexShaderSource2 = 
+                    Header + 
+                    Cuter + 
+                    Rotator + 
+                    Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
                 shaderProgram_secondary.Create(gl, vertexShaderSource2, fragmentShaderSource_2, geometryShaderSource_2, null);
@@ -157,26 +163,29 @@ namespace TheDiplomWork
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
         /// 
-        DateTime start = DateTime.Now;
+        static DateTime start = DateTime.Now;
+        static TimeSpan timeItTook = DateTime.Now - start;
         public bool Every10SecondsAction = true;
         public int TimeRange = 3;
+        public int TimeCount = 0;
         public void Draw(OpenGL gl)
         {
+            timeItTook = DateTime.Now - start;
+            if (timeItTook.Seconds > (float)TimeRange * TimeCount)
+            {
+                //start = DateTime.Now;
+                Every10SecondsAction = true;
+                Sun.S.Time = timeItTook.Seconds;
+                TimeCount++;
+            }
+            else Every10SecondsAction = false;
+
             if (Every10SecondsAction)
             {
                 SS.SunAndMoon.initialization();
                 SS.SunAndMoon.CopyToReady();
                 SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
             }
-
-            TimeSpan timeItTook = DateTime.Now - start;
-            if (timeItTook.Seconds > TimeRange)
-            {
-                start = DateTime.Now;
-                Every10SecondsAction = true;
-                Sun.S.Time += TimeRange;
-            }
-            else Every10SecondsAction = false;
 
             //Призрачным куб.
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated && 
@@ -321,12 +330,17 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
+                sunMatrix = new mat3(new vec3(0),
+                    new vec3(0),
+                    new vec3(0));
+                shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+
                 SI_ghost.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
                 SI_ghost.vertexBufferArray.Unbind(gl);
 
-                sunMatrix = new mat3(new vec3((float)Sun.S.Time,(float)+DataForDraw.localed_range * 100,(float)-DataForDraw.localed_range * 100),
-                    new vec3((float)Sun.S.Time),
+                sunMatrix = new mat3(new vec3(0,0, (float)timeItTook.TotalMilliseconds / 10000),
+                    new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3((float)Sun.S.Time));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());

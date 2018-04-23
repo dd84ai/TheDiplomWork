@@ -10,17 +10,25 @@ namespace TheDiplomWork
     {
         
         public static mat4 SunRotator = glm.rotate((float)Sun.S.Time / 10, new vec3(0, 1, 0));
+
         public override void initialization()
         {
             START_initialization();
             vec4 Position;
 
             Position = new vec4(Scene.SS.env.player.coords.Player_precise_position.x,
-                Scene.SS.env.player.coords.Player_precise_position.y + localed_range * 100,
+                Scene.SS.env.player.coords.Player_precise_position.y,
                 Scene.SS.env.player.coords.Player_precise_position.z,1.0f);
 
-            SunRotator = glm.rotate((float)Sun.S.Time / 10, new vec3(1, 0, 0)) * glm.rotate((float)Sun.S.Time / 10, new vec3(0, 1, 0));
-            Position = SunRotator * Position;
+            //vec4 Zeroed = new vec4(0,
+            //    +localed_range * 20,
+            //    0, 1.0f); 
+
+            //SunRotator = glm.rotate(0, new vec3(1, 0, 0)) * glm.rotate((float)Sun.S.Time / 10, new vec3(0, 1, 0));
+
+            //Zeroed = SunRotator * Zeroed;
+
+            //Position = Zeroed + Position;
 
             //Sun
             Draw_Quad_Full_Sunsided_angled(

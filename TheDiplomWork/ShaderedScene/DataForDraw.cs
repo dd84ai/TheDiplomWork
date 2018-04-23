@@ -80,18 +80,6 @@ namespace TheDiplomWork
             Add_Value(ref vertices, vertices_count++, y);
             Add_Value(ref vertices, vertices_count++, z);
 
-            if (StaticSettings.S.GradientLightEffect && number == 0)
-                _colour = System.Drawing.Color.FromArgb(
-                    (_colour.R * 3 + 255) / 4,
-                    (_colour.G * 3 + 255) / 4,
-                    (_colour.B * 3 + 255) / 4);
-
-            if (StaticSettings.S.GradientLightEffect && number == 2)
-                _colour = System.Drawing.Color.FromArgb(
-                    (_colour.R * 7 + 0) / 8,
-                    (_colour.G * 7 + 0) / 8,
-                    (_colour.B * 7 + 0) / 8);
-
             Add_Value(ref colours, colours_count++, (float)_colour.R / 255);
             Add_Value(ref colours, colours_count++, (float)_colour.G / 255);
             Add_Value(ref colours, colours_count++, (float)_colour.B / 255);

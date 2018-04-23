@@ -40,17 +40,12 @@ namespace TheDiplomWork
         {
             angled_x = _angled_x; angled_y = _angled_y; angled_z = _angled_z;
             shift.x = _s_x; shift.y = _s_y; shift.z = _s_z;
-            //Draw_Quad_Full_Sunsided(_x, _y, _z, localed_range, _colour, SunSided_DRAWFULL);
+
             Process_Point(_x, _y, _z, _colour, 1);
-            //Process_Point(_x + localed_range, _y, _z, _colour, 1);
-            //Process_Point(_x, _y + localed_range, _z , _colour, 1);
-            //Process_Point(_x, _y, _z + localed_range, _colour, 1);
         }
         public override void Process_Point(float _x, float _y, float _z, System.Drawing.Color _colour, int number)
         {
-            Add_Value(ref vertices, vertices_count++, _x);
-            Add_Value(ref vertices, vertices_count++, _y);
-            Add_Value(ref vertices, vertices_count++, _z);
+            base.Process_Point(_x, _y, _z, _colour, number);
 
             Add_Value(ref center, center_count++, _x + localed_range / 2 + shift.x);
             Add_Value(ref center, center_count++, _y + localed_range / 2 + shift.y);
@@ -59,12 +54,6 @@ namespace TheDiplomWork
             Add_Value(ref angles, angles_count++, angled_x);
             Add_Value(ref angles, angles_count++, angled_y);
             Add_Value(ref angles, angles_count++, angled_z);
-
-            //Console.WriteLine(angled_x + ";" + angled_y + ";" + angled_z);
-
-            Add_Value(ref colours, colours_count++, (float)_colour.R / 255);
-            Add_Value(ref colours, colours_count++, (float)_colour.G / 255);
-            Add_Value(ref colours, colours_count++, (float)_colour.B / 255);
         }
     }
 }

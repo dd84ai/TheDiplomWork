@@ -127,7 +127,6 @@
     <None Include="Shaders\Main\Main.vert" />
     <None Include="Shaders\Main\Shader.frag" />
     <None Include="Shaders\Main\Shader.geom" />
-    <None Include="Shaders\AdvancedVertexShader\Header_plus.vert" />
     <None Include="Shaders\AdvancedVertexShader\Rotator.vert" />
     <None Include="Shaders\AdvancedVertexShader\Adv_main.vert" />
   </ItemGroup>
