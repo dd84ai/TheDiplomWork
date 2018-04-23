@@ -40,7 +40,7 @@
 
 void main(void) 
 {
-	Cuter();
+	Cuter_without_angles();
 
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
 
