@@ -80,7 +80,6 @@ namespace TheDiplomWork
                 }
 
                 Scene.SS.env.player.coords.Player_recalculate_extra_positions();
-
             }
             //  Draw the scene.
             scene.Draw(openGLControl.OpenGL);

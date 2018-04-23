@@ -27,7 +27,7 @@ void main(void)
 	//POINT OF VIEW
 	vec3 VectoredLook = normalize(playerMatrix[1] - playerMatrix[0]);
 	vec3 VectoredToCube = normalize(playerMatrix[1] - in_Position);
-	pointofview = VectoredLook.x * VectoredToCube.x + VectoredLook.y * VectoredToCube.y + VectoredLook.z * VectoredToCube.z;
+	pointofview = dot(VectoredLook, VectoredToCube);
 
 	//PREPARE ROTATOR
 	vec3 begin = vec3(-0.5,-0.5,-0.5);
