@@ -15,6 +15,8 @@ namespace TheDiplomWork
             public vec3 player_look = new vec3();
             public vec3 player_stepback = new vec3();
 
+            public int Time = 0;
+
             //public mat4 sunMatrix = new mat4();
             //Так как солнце влияет на основную модель. Значит логично строить его там. Чего не хватает?
             //[0] x,y,z - position, w - rotate angle?

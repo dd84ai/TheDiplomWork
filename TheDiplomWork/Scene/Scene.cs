@@ -98,39 +98,33 @@ namespace TheDiplomWork
                 //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
                 //  Create the shader program.
 
-                var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.vert");
+                var Header = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Header.c");
+                var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.c");
+                var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.c");
+
+                var vertexShaderSource = Header + Cuter + Main;
+
                 var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
                 var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
                 shaderProgram = new ModifiedShaderProgram();
-                shaderProgram.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
+                shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
 
-                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
-                fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
-                geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
+                var Header_plus = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Header_plus.c");
+                var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.c");
+                var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.c");
+
+                var vertexShaderSource2 = Header + Header_plus + Cuter + Rotator + Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
-                shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
+                shaderProgram_secondary.Create(gl, vertexShaderSource2, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
                 shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
                 shaderProgram_secondary.AssertValid(gl);
-
-                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\SunAndMoon\Shader.vert");
-                fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
-                geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
-
-                shaderProgram_sunandmoon = new ModifiedShaderProgram();
-                shaderProgram_sunandmoon.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
-                shaderProgram_sunandmoon.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
-                shaderProgram_sunandmoon.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
-                shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
-                shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
-                shaderProgram_sunandmoon.AssertValid(gl);
-
 
                 //CompileShaders(gl);
 
@@ -212,7 +206,7 @@ namespace TheDiplomWork
             {
                 start = DateTime.Now;
                 Every10SecondsAction = true;
-                DataForDraw_SunAndMoon.Time += TimeRange;
+                Sun.S.Time += TimeRange;
             }
             else Every10SecondsAction = false;
 
@@ -374,25 +368,28 @@ namespace TheDiplomWork
 
                 
 
-                shaderProgram_secondary.Unbind(gl);
+                
 
-                shaderProgram_sunandmoon.Bind(gl);
+                //shaderProgram_sunandmoon.Bind(gl);
 
-                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
-                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
-                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
-                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
-                shaderProgram_sunandmoon.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
+                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
+                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
+                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
+                //shaderProgram_sunandmoon.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
+                //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
-                shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
-                sunMatrix = new mat3(new vec3((float)DataForDraw_SunAndMoon.Time),
-                    new vec3((float)DataForDraw_SunAndMoon.Time),
-                    new vec3((float)DataForDraw_SunAndMoon.Time));
+                sunMatrix = new mat3(new vec3((float)Sun.S.Time,(float)+DataForDraw.localed_range * 100,(float)-DataForDraw.localed_range * 100),
+                    new vec3((float)Sun.S.Time),
+                    new vec3((float)Sun.S.Time));
+                shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+                //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
 
                 SI_sunandmoon.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.SunAndMoon.Quantity() / 3);
                 SI_sunandmoon.vertexBufferArray.Unbind(gl);
-                shaderProgram_sunandmoon.Unbind(gl);
+                //shaderProgram_sunandmoon.Unbind(gl);
+
+                shaderProgram_secondary.Unbind(gl);
             }
             
             //SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );

@@ -101,6 +101,8 @@
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="UserInterface\Mouse.cs" />
     <Compile Include="WorldObjects\Sun.cs" />
+    <Content Include="Shaders\VertexShaderElements\Cuter.c" />
+    <Content Include="Shaders\VertexShaderElements\Header.c" />
     <EmbeddedResource Include="FormModernOpenGLSample.resx">
       <DependentUpon>FormModernOpenGLSample.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,11 +124,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Shaders\Main\Shader.vert" />
+    <Content Include="Shaders\Main\Shader.c" />
     <None Include="Shaders\Main\Shader.frag" />
     <None Include="Shaders\Main\Shader.geom" />
-    <None Include="Shaders\Secondary\Shader.vert" />
-    <None Include="Shaders\SunAndMoon\Shader.vert" />
+    <Content Include="Shaders\AdvancedVertexShader\Header_plus.c" />
+    <Content Include="Shaders\AdvancedVertexShader\Rotator.c" />
+    <Content Include="Shaders\AdvancedVertexShader\Adv_main.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -8,7 +8,7 @@ namespace TheDiplomWork
 {
     public partial class DataForDraw
     {
-        protected static float localed_range = CubicalMemory.Cube.rangeOfTheEdge;
+        public static float localed_range = CubicalMemory.Cube.rangeOfTheEdge;
         public int Quantity_of_total_cubes = 0;
         public int Quantity_of_values_per_point = 3;
         public int Quantity_of_points_per_side = 4;

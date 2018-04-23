@@ -8,8 +8,8 @@ namespace TheDiplomWork
 {
     public class DataForDraw_SunAndMoon : DataForDraw_angled
     {
-        public static int Time = 0;
-        public static mat4 SunRotator = glm.rotate((float) Time / 100, new vec3(1, 0, 0)) * glm.rotate((float) Time / 100, new vec3(0, 1, 0));
+        
+        public static mat4 SunRotator = glm.rotate((float)Sun.S.Time / 10, new vec3(0, 1, 0));
         public override void initialization()
         {
             START_initialization();
@@ -19,7 +19,7 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Player_precise_position.y + localed_range * 100,
                 Scene.SS.env.player.coords.Player_precise_position.z,1.0f);
 
-            SunRotator = glm.rotate((float)Time / 100, new vec3(1, 0, 0)) * glm.rotate((float)Time / 100, new vec3(0, 1, 0));
+            SunRotator = glm.rotate((float)Sun.S.Time / 10, new vec3(1, 0, 0)) * glm.rotate((float)Sun.S.Time / 10, new vec3(0, 1, 0));
             Position = SunRotator * Position;
 
             //Sun
