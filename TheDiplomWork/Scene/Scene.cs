@@ -94,9 +94,9 @@ namespace TheDiplomWork
                 //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
                 //  Create the shader program.
 
-                var Header = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Header.c");
-                var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.c");
-                var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.c");
+                var Header = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Header.vert");
+                var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.vert");
+                var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
 
                 var vertexShaderSource = Header + Cuter + Main;
 
@@ -108,9 +108,9 @@ namespace TheDiplomWork
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
 
-                var Header_plus = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Header_plus.c");
-                var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.c");
-                var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.c");
+                var Header_plus = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Header_plus.vert");
+                var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.vert");
+                var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.vert");
 
                 var vertexShaderSource2 = Header + Header_plus + Cuter + Rotator + Adv_main;
 
@@ -118,8 +118,8 @@ namespace TheDiplomWork
                 shaderProgram_secondary.Create(gl, vertexShaderSource2, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
-                shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
-                shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
+                //shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
+                //shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
                 shaderProgram_secondary.AssertValid(gl);
             }
             catch (ShaderCompilationException ShadersMessageError)
