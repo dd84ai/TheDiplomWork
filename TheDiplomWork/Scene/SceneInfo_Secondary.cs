@@ -14,6 +14,7 @@ namespace TheDiplomWork
     {
         public VertexBuffer shiftedcenterDataBuffer;
         public VertexBuffer anglesDataBuffer;
+        public VertexBuffer sizeDataBuffer;
         public SceneInfo_Secondary(OpenGL _gl) : base(_gl)
         {
         }
@@ -29,6 +30,11 @@ namespace TheDiplomWork
             //  Now do the same for the colour data.
             anglesDataBuffer = new VertexBuffer();
             anglesDataBuffer.Create(gl);
+
+            //  Now do the same for the colour data.
+            sizeDataBuffer = new VertexBuffer();
+            sizeDataBuffer.Create(gl);
+            
         }
         public override void CreateVerticesForSquare(ref DataForDraw Data)
         {
@@ -54,12 +60,16 @@ namespace TheDiplomWork
             anglesDataBuffer.Bind(gl);
             anglesDataBuffer.SetData(gl, 3, Data.angles_arrayed, false, 3);
 
+            sizeDataBuffer.Bind(gl);
+            sizeDataBuffer.SetData(gl, 4, Data.angles_arrayed, false, 3);
+
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
             vertexDataBuffer.Unbind(gl);
             colourDataBuffer.Unbind(gl);
             shiftedcenterDataBuffer.Unbind(gl);
             anglesDataBuffer.Unbind(gl);
+            sizeDataBuffer.Unbind(gl);
 
 
         }

@@ -98,6 +98,9 @@ namespace TheDiplomWork
                 var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.vert");
                 var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
 
+                var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.vert");
+                var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.vert");
+
                 var vertexShaderSource = 
                     Header + 
                     Cuter + 
@@ -111,9 +114,6 @@ namespace TheDiplomWork
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
 
-                var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.vert");
-                var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.vert");
-
                 var vertexShaderSource2 = 
                     Header + 
                     Cuter + 
@@ -124,8 +124,9 @@ namespace TheDiplomWork
                 shaderProgram_secondary.Create(gl, vertexShaderSource2, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
-                //shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
-                //shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
+                shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
+                shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
+                shaderProgram_secondary.BindAttributeLocation(gl, 4, "in_Size");
                 shaderProgram_secondary.AssertValid(gl);
             }
             catch (ShaderCompilationException ShadersMessageError)
@@ -339,8 +340,8 @@ namespace TheDiplomWork
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
                 SI_ghost.vertexBufferArray.Unbind(gl);
 
-                sunMatrix = new mat3(new vec3(0,0, (float)timeItTook.TotalMilliseconds / 10000),
-                    new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
+                sunMatrix = new mat3(new vec3(-(float)timeItTook.TotalMilliseconds / 10000, 0,0),
+                    new vec3(0, 0, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3((float)Sun.S.Time));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
