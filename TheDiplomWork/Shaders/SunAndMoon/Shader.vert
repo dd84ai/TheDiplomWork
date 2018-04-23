@@ -17,6 +17,7 @@ uniform mat4 modelMatrix;
 uniform mat4 rotMatrix;
 
 uniform mat3 playerMatrix;
+uniform mat3 sunMatrix;
 out float pointofview;
 
 mat3 Rotator;

@@ -10,6 +10,7 @@ namespace TheDiplomWork
     {
         public class LocalSun
         {
+            //А что это тут делает? А потому что имеет общую суть с солнцем.
             public vec3 player_pos = new vec3();
             public vec3 player_look = new vec3();
             public vec3 player_stepback = new vec3();

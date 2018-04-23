@@ -71,6 +71,7 @@
     <Compile Include="Scene\SceneInfo_Main.cs" />
     <Compile Include="Scene\SceneInfo_Secondary.cs" />
     <Compile Include="ShaderedScene\DataForDraw_angled.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_SunAndMoon.cs" />
     <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
     <Compile Include="WorldObjects\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
@@ -125,6 +126,7 @@
     <None Include="Shaders\Main\Shader.frag" />
     <None Include="Shaders\Main\Shader.geom" />
     <None Include="Shaders\Secondary\Shader.vert" />
+    <None Include="Shaders\SunAndMoon\Shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

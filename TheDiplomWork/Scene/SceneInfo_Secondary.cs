@@ -12,7 +12,7 @@ namespace TheDiplomWork
 {
     public class SceneInfo_Secondary : SceneInfo
     {
-        public VertexBuffer centerDataBuffer;
+        public VertexBuffer shiftedcenterDataBuffer;
         public VertexBuffer anglesDataBuffer;
         public SceneInfo_Secondary(OpenGL _gl) : base(_gl)
         {
@@ -23,8 +23,8 @@ namespace TheDiplomWork
             CreateVerticesForSquare_FirstInit_wrapped();
 
             //  Now do the same for the colour data.
-            centerDataBuffer = new VertexBuffer();
-            centerDataBuffer.Create(gl);
+            shiftedcenterDataBuffer = new VertexBuffer();
+            shiftedcenterDataBuffer.Create(gl);
 
             //  Now do the same for the colour data.
             anglesDataBuffer = new VertexBuffer();
@@ -48,8 +48,8 @@ namespace TheDiplomWork
             colourDataBuffer.Bind(gl);
             colourDataBuffer.SetData(gl, 1, Data.colours_arrayed, false, 3);
 
-            centerDataBuffer.Bind(gl);
-            centerDataBuffer.SetData(gl, 2, Data.center_arrayed, false, 3);
+            shiftedcenterDataBuffer.Bind(gl);
+            shiftedcenterDataBuffer.SetData(gl, 2, Data.center_arrayed, false, 3);
 
             anglesDataBuffer.Bind(gl);
             anglesDataBuffer.SetData(gl, 3, Data.angles_arrayed, false, 3);
@@ -58,7 +58,7 @@ namespace TheDiplomWork
             vertexBufferArray.Unbind(gl);
             vertexDataBuffer.Unbind(gl);
             colourDataBuffer.Unbind(gl);
-            centerDataBuffer.Unbind(gl);
+            shiftedcenterDataBuffer.Unbind(gl);
             anglesDataBuffer.Unbind(gl);
 
 

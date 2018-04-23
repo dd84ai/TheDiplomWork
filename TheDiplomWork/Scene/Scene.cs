@@ -51,13 +51,14 @@ namespace TheDiplomWork
         //  The vertex buffer array which contains the vertex and colour buffers.
         static SceneInfo_Main SI_main;
         static SceneInfo_Secondary SI_ghost;
+        static SceneInfo_Secondary SI_sunandmoon;
 
         //VertexBufferArray vertexBufferArray2;
 
         //  The shader program for our vertex and fragment shader.
         private ModifiedShaderProgram shaderProgram;
         private ModifiedShaderProgram shaderProgram_secondary;
-
+        private ModifiedShaderProgram shaderProgram_sunandmoon;
         /// <summary>
         /// Initialises the scene.
         /// </summary>
@@ -80,6 +81,7 @@ namespace TheDiplomWork
                 _gl = gl;
             SI_main = new SceneInfo_Main(gl);
             SI_ghost = new SceneInfo_Secondary(gl);
+            SI_sunandmoon = new SceneInfo_Secondary(gl);
             newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
@@ -113,7 +115,21 @@ namespace TheDiplomWork
                 shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
+                shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
+                shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
                 shaderProgram_secondary.AssertValid(gl);
+
+                vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\SunAndMoon\Shader.vert");
+                fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
+                geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
+
+                shaderProgram_sunandmoon = new ModifiedShaderProgram();
+                shaderProgram_sunandmoon.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
+                shaderProgram_sunandmoon.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
+                shaderProgram_sunandmoon.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
+                shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
+                shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
+                shaderProgram_sunandmoon.AssertValid(gl);
 
 
                 //CompileShaders(gl);
@@ -125,8 +141,8 @@ namespace TheDiplomWork
 
                 //var meow = shaderProgram.ShaderProgramObject;
 
-                
-                
+
+
                 //shaderProgram
 
                 //uint program = shaderProgram.ShaderProgramObject;
@@ -173,18 +189,39 @@ namespace TheDiplomWork
             }
 
         }
-        
+
         /// <summary>
         /// Draws the scene.
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
         /// 
+        DateTime start = DateTime.Now;
+        public bool Every10SecondsAction = true;
+        public int TimeRange = 3;
         public void Draw(OpenGL gl)
         {
+            if (Every10SecondsAction)
+            {
+                SS.SunAndMoon.initialization();
+                SS.SunAndMoon.CopyToReady();
+                SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
+            }
+
+            TimeSpan timeItTook = DateTime.Now - start;
+            if (timeItTook.Seconds > TimeRange)
+            {
+                start = DateTime.Now;
+                Every10SecondsAction = true;
+                DataForDraw_SunAndMoon.Time += TimeRange;
+            }
+            else Every10SecondsAction = false;
+
             //Призрачным куб.
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated && 
-                (Scene.SS.env.player.coords.Player_cubical_lookforcube !=
-                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD
+                (
+                (StaticSettings.S.GhostCube_Add_in_Data_For_Draw &&
+                Scene.SS.env.player.coords.Player_cubical_lookforcube !=
+                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD)
                 || GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color
                 )
                 )
@@ -202,6 +239,8 @@ namespace TheDiplomWork
                 {
                     newThread_ghost = new Thread(Scene.DoWork_ghost);
                     newThread_ghost.Start(46);
+                    Console.WriteLine("Ghost Inited");
+                    GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = false;
                 }
             }
 
@@ -325,17 +364,35 @@ namespace TheDiplomWork
 
                 shaderProgram_secondary.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
-
                 shaderProgram_secondary.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
                 SI_ghost.vertexBufferArray.Bind(gl);
-                //  Draw the square.
-                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity()/3);
-                //  Unbind our vertex array and shader.
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
                 SI_ghost.vertexBufferArray.Unbind(gl);
+
+                
+
                 shaderProgram_secondary.Unbind(gl);
+
+                shaderProgram_sunandmoon.Bind(gl);
+
+                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
+                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
+                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
+                shaderProgram_sunandmoon.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
+                shaderProgram_sunandmoon.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
+
+                shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+                sunMatrix = new mat3(new vec3((float)DataForDraw_SunAndMoon.Time),
+                    new vec3((float)DataForDraw_SunAndMoon.Time),
+                    new vec3((float)DataForDraw_SunAndMoon.Time));
+
+                SI_sunandmoon.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.SunAndMoon.Quantity() / 3);
+                SI_sunandmoon.vertexBufferArray.Unbind(gl);
+                shaderProgram_sunandmoon.Unbind(gl);
             }
             
             //SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );
