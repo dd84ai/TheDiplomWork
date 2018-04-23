@@ -121,10 +121,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Shaders\Main\Shader.frag" />
     <None Include="Shaders\Main\Shader.vert" />
-    <None Include="Shaders\Secondary\Shader.frag" />
-    <None Include="Shaders\Secondary\Shader.geom" />
+    <None Include="Shaders\Main\Shader.frag" />
+    <None Include="Shaders\Main\Shader.geom" />
     <None Include="Shaders\Secondary\Shader.vert" />
   </ItemGroup>
   <ItemGroup>

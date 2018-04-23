@@ -97,8 +97,8 @@ namespace TheDiplomWork
                 //  Create the shader program.
 
                 var vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.vert");
-                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
-                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
+                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
+                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
                 shaderProgram = new ModifiedShaderProgram();
                 shaderProgram.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
@@ -106,8 +106,8 @@ namespace TheDiplomWork
                 shaderProgram.AssertValid(gl);
 
                 vertexShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.vert");
-                fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.frag");
-                geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Secondary\Shader.geom");
+                fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
+                geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
                 shaderProgram_secondary.Create(gl, vertexShaderSource_2, fragmentShaderSource_2, geometryShaderSource_2, null);

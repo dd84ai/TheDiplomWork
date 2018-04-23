@@ -8,6 +8,8 @@ in vec4 vertex_z_out[];
 in vec3 pass_Color[];
 in float pointofview[];
 
+in vec3 scalar_sides[];
+
 out vec3 f_Color;
 
 vec3 color[8];
@@ -109,6 +111,7 @@ void Bottom()
 	EmitVertex();
 	EndPrimitive();
 }
+float SunSidedCoef = 0;
 void main()
 {	
 	vec4 vectorx = vertex_x_out[0] - gl_in[0].gl_Position;
@@ -118,10 +121,10 @@ void main()
 	point[1] = gl_in[0].gl_Position + vectorx;
 	point[2] = gl_in[0].gl_Position + vectory;
 	point[3] = gl_in[0].gl_Position + vectorz;
-	point[4] = gl_in[0].gl_Position + vectorx + vectory;
-	point[5] = gl_in[0].gl_Position + vectorx + vectorz;
-	point[6] = gl_in[0].gl_Position + vectorz + vectory;
-	point[7] = gl_in[0].gl_Position + vectorx + vectory + vectorz;
+	point[4] = point[1] + vectory;
+	point[5] = point[1] + vectorz;
+	point[6] = point[3] + vectory;
+	point[7] = point[4] + vectorz;
 
 	color[0] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[1] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
@@ -132,13 +135,19 @@ void main()
 	color[6] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[7] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
 
-	if (pointofview[0] > 0.6)
+	if (pointofview[0] > 0.4)
 	{
-	Front();
-	Back();
-	Left();
-	Right();
-	Top();
-	Bottom();
+	if (scalar_sides[0].z > SunSidedCoef) Front();
+	else Back();
+	if (scalar_sides[0].x > SunSidedCoef) Left();
+	else Right();
+	if (scalar_sides[0].y > SunSidedCoef) Bottom();
+	else Top();
+	//Front();
+	//Back();
+	//Left();
+	//Right();
+	//Bottom();
+	//Top();
 	}
 }  

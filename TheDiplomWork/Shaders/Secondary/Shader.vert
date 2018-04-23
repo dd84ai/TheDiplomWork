@@ -8,6 +8,9 @@ out vec3 pass_Color;
 out vec4 vertex_x_out;
 out vec4 vertex_y_out;
 out vec4 vertex_z_out;
+
+out vec3 scalar_sides;
+
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
@@ -34,28 +37,43 @@ void PrepareRotator()
 	vec3(0,0,1));
 	Rotator = RotateX * RotateY * RotateZ;
 }
-vec4 Rotated_Position(vec3 input_vec)
+vec4 Shifted_Position(vec3 input_vec)
 {
-	
-	return vec4((input_vec * Rotator + in_Position + vec3(0.5,0.5,0.5)),1.0);
+	return vec4((input_vec + in_Position + vec3(0.5,0.5,0.5)),1.0);
 }
+vec3 Rotated_Position(vec3 input_vec)
+{
+	return (input_vec * Rotator);
+}
+
 void main(void) 
 {
-	float range;
+	//POINT OF VIEW
 	vec3 VectoredLook = normalize(playerMatrix[1] - playerMatrix[0]);
 	vec3 VectoredToCube = normalize(playerMatrix[1] - in_Position);
 	pointofview = VectoredLook.x * VectoredToCube.x + VectoredLook.y * VectoredToCube.y + VectoredLook.z * VectoredToCube.z;
 
+	//PREPARE ROTATOR
 	vec3 begin = vec3(-0.5,-0.5,-0.5);
 	Angles = vec3(0,0,0);
 	PrepareRotator();
+
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
 
-	vertex_x_out = Transform * (Rotated_Position(begin + vec3(1,0,0)));
-	vertex_y_out = Transform * (Rotated_Position(begin + vec3(0,1,0)));
-	vertex_z_out = Transform * (Rotated_Position(begin + vec3(0,0,1)));
+	//PLAYER SIDED
+	vec3 vector_side_x_out = Rotated_Position(vec3(1,0,0));
+	vec3 vector_side_y_out = Rotated_Position(vec3(0,1,0));
+	vec3 vector_side_z_out = Rotated_Position(vec3(0,0,1));
+	vec3 VectorFromPlayerToCube = - VectoredToCube;
+	scalar_sides.x = vector_side_x_out.x * VectorFromPlayerToCube.x + vector_side_x_out.y * VectorFromPlayerToCube.y + vector_side_x_out.z * VectorFromPlayerToCube.z;
+	scalar_sides.y = vector_side_y_out.x * VectorFromPlayerToCube.x + vector_side_y_out.y * VectorFromPlayerToCube.y + vector_side_y_out.z * VectorFromPlayerToCube.z;
+	scalar_sides.z = vector_side_z_out.x * VectorFromPlayerToCube.x + vector_side_z_out.y * VectorFromPlayerToCube.y + vector_side_z_out.z * VectorFromPlayerToCube.z;
 
-	gl_Position = Transform * (Rotated_Position(begin));
+	vertex_x_out = Transform * (Shifted_Position(Rotated_Position(begin + vec3(1,0,0))));
+	vertex_y_out = Transform * (Shifted_Position(Rotated_Position(begin + vec3(0,1,0))));
+	vertex_z_out = Transform * (Shifted_Position(Rotated_Position(begin + vec3(0,0,1))));
+
+	gl_Position = Transform * (Shifted_Position(Rotated_Position(begin)));
 
 	pass_Color = in_Color;
 }
