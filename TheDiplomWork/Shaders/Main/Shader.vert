@@ -11,15 +11,13 @@ uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 rotMatrix;
 
-uniform mat3 sunMatrix;
+uniform mat3 playerMatrix;
 out float pointofview;
 void main(void) 
 {
-	float range;
-	vec3 playerpos = vec3(sunMatrix[0].xyz);
-	vec3 playerpos_look = sunMatrix[1].xyz;//vec3(sunMatrix[0].y,sunMatrix[1].y,sunMatrix[2].y);
-	vec3 VectoredLook = normalize(playerpos_look - playerpos);
-	vec3 VectoredToCube = normalize(playerpos_look - in_Position);
+	float range;;
+	vec3 VectoredLook = normalize(playerMatrix[1] - playerMatrix[0]);
+	vec3 VectoredToCube = normalize(playerMatrix[1] - in_Position);
 	pointofview = VectoredLook.x * VectoredToCube.x + VectoredLook.y * VectoredToCube.y + VectoredLook.z * VectoredToCube.z;
 
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
