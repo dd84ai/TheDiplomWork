@@ -23,3 +23,5 @@ vec4 Shifted_Position(vec3 input_vec)
 //Угол ноль.
 vec3 begin = vec3(-0.5, -0.5, -0.5);
 
+uniform mat3 sunMatrix;
+

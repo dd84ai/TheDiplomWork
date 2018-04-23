@@ -41,7 +41,9 @@ namespace TheDiplomWork
         mat4 rotMatrix;
         mat3 playerMatrix;
         mat3 sunMatrix;
-    
+        mat3 zeroMatrix = new mat3(new vec3(0),
+                    new vec3(0),
+                    new vec3(0));
         //  Constants that specify the attribute indexes.
         const uint attributeIndexPosition = 0;
         const uint attributeIndexColour = 1;
@@ -96,14 +98,18 @@ namespace TheDiplomWork
 
                 var Header = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Header.vert");
                 var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.vert");
+                var Sun = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Sun.vert");
                 var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
 
                 var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.vert");
                 var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.vert");
 
+
                 var vertexShaderSource = 
                     Header + 
-                    Cuter + 
+                    Cuter +
+                    Rotator +
+                    Sun +
                     Main;
 
                 var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
@@ -117,7 +123,8 @@ namespace TheDiplomWork
                 var vertexShaderSource2 = 
                     Header + 
                     Cuter + 
-                    Rotator + 
+                    Rotator +
+                    Sun +
                     Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
@@ -313,6 +320,11 @@ namespace TheDiplomWork
             playerMatrix = new mat3(playerMatrix_veced);
             shaderProgram.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
+            sunMatrix = new mat3(new vec3(-(float)timeItTook.TotalMilliseconds / 10000, 0, 0),
+                    new vec3(0, DataForDraw.localed_range * 50, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
+                    new vec3(1.0f, 1.0f, 1.0f));
+            shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
             //  Draw the square.
@@ -331,18 +343,12 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
-                sunMatrix = new mat3(new vec3(0),
-                    new vec3(0),
-                    new vec3(0));
-                shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+                shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", zeroMatrix.to_array());
 
                 SI_ghost.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
                 SI_ghost.vertexBufferArray.Unbind(gl);
 
-                sunMatrix = new mat3(new vec3(-(float)timeItTook.TotalMilliseconds / 10000, 0,0),
-                    new vec3(0, 0, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3((float)Sun.S.Time));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
 

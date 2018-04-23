@@ -1,9 +1,8 @@
 ﻿//#include <Header.vert>
-//#include <Header_plus.vert>
 //#include <Cuter.vert>
 //#include <Rotator.vert>
+//#include <Sun.vert>
 
-uniform mat3 sunMatrix;
 void Cuter_PlayerSidedAdvanced()
 {
 	//PLAYER SIDED
@@ -19,6 +18,7 @@ void main(void)
 {
 	//PREPARE ROTATOR
 	PrepareRotator(vec3(sunMatrix[0]));
+	PrepareSun();
 
 	Cuter_PointOfView();
 	Cuter_PlayerSidedAdvanced();

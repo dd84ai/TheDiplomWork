@@ -1,5 +1,4 @@
-﻿
-mat3 Rotator;
+﻿mat3 Rotator;
 void PrepareRotator(vec3 Angles)
 {
 	mat3 RotateX = mat3(vec3(1,0,0),

@@ -130,6 +130,7 @@
     <None Include="Shaders\Main\Shader.geom" />
     <None Include="Shaders\AdvancedVertexShader\Rotator.vert" />
     <None Include="Shaders\AdvancedVertexShader\Adv_main.vert" />
+    <None Include="Shaders\VertexShaderElements\Sun.vert" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

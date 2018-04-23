@@ -1,8 +1,13 @@
 ﻿//#include <Header.vert>
 //#include <Cuter.vert>
+//#include <Rotator.vert>
+//#include <Sun.vert>
 
 void main(void) 
 {
+	PrepareRotator(vec3(sunMatrix[0]));
+	PrepareSun();
+
 	Cuter_without_angles();
 
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
