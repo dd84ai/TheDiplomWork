@@ -218,8 +218,8 @@ namespace TheDiplomWork
                 if (SS.env.player.coords.Player_chunk_position.x >= 0 && SS.env.player.coords.Player_chunk_position.x < CubicalMemory.World.Quantity_of_chunks_in_root
                     && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
 
-                if ((StaticSettings.S.ReloaderCauseOfChunkRare && (Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > (StaticSettings.S.RangeOfView / 2 - 1)
-                || Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > (StaticSettings.S.RangeOfView / 2 - 1)))
+                if ((StaticSettings.S.ReloaderCauseOfChunkRare && ((float)Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > ((float)StaticSettings.S.RangeOfView / 2)
+                || (float)Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > ((float)StaticSettings.S.RangeOfView / 2)))
                         ||(StaticSettings.S.ReloaderCauseOfChangingChunk && SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD) 
                     || (StaticSettings.S.RealoderCauseOfPointOfView && scalar < StaticSettings.S.PointOfViewCoefOfDifference) 
                     || (StaticSettings.S.RealoderCauseOfSunSided && SS.env.player.coords.Player_cubical_position.y != SS.env.player.coords.Player_cubical_position_OLD.y)
@@ -327,7 +327,8 @@ namespace TheDiplomWork
 
                 shaderProgram_secondary.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
-                
+                shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+
                 SI_ghost.vertexBufferArray.Bind(gl);
                 //  Draw the square.
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity()/3);

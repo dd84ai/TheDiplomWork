@@ -12,9 +12,13 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 rotMatrix;
-uniform mat4 PlayerAndLocaledRangeAndSun;
+
+uniform mat3 sunMatrix;
+out float pointofview;
+
 mat3 Rotator;
 vec3 Angles;
+
 void PrepareRotator()
 {
 	mat3 RotateX = mat3(vec3(1,0,0),
@@ -37,6 +41,13 @@ vec4 Rotated_Position(vec3 input_vec)
 }
 void main(void) 
 {
+	float range;
+	vec3 playerpos = vec3(sunMatrix[0].xyz);
+	vec3 playerpos_look = sunMatrix[1].xyz;//vec3(sunMatrix[0].y,sunMatrix[1].y,sunMatrix[2].y);
+	vec3 VectoredLook = normalize(playerpos_look - playerpos);
+	vec3 VectoredToCube = normalize(playerpos_look - in_Position);
+	pointofview = VectoredLook.x * VectoredToCube.x + VectoredLook.y * VectoredToCube.y + VectoredLook.z * VectoredToCube.z;
+
 	vec3 begin = vec3(-0.5,-0.5,-0.5);
 	Angles = vec3(0,0,0);
 	PrepareRotator();
