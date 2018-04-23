@@ -115,7 +115,8 @@ namespace TheDiplomWork
              + "PreciseLook:" + Scene.SS.env.player.coords.Player_precise_lookforcube.ToString() + "\r\n"
              + "ChunkLook:" + Scene.SS.env.player.coords.Player_chunk_lookforcube.ToString() + "\r\n"
              + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString() + "\r\n"
-            + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2");
+            + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2") + "\r\n"
+            + "Step_multiplier:" + Scene.SS.env.player.coords.Player_precise_stepback.ToString();
         }
         static int FontSizeTargetPointer = 40;
         CalculatorFont CF;

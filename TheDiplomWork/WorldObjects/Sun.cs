@@ -8,9 +8,13 @@ namespace TheDiplomWork
 {
     class Sun
     {
-        class LocalSun
+        public class LocalSun
         {
-            public mat4 sunMatrix = new mat4();
+            public vec3 player_pos = new vec3();
+            public vec3 player_look = new vec3();
+            public vec3 player_stepback = new vec3();
+
+            //public mat4 sunMatrix = new mat4();
             //Так как солнце влияет на основную модель. Значит логично строить его там. Чего не хватает?
             //[0] x,y,z - position, w - rotate angle?
             //[1]r,g,b - it's own brightness, w - shared brightness
@@ -27,6 +31,6 @@ namespace TheDiplomWork
              * время?Так то чеез него выразить ротэйтор сразу в шейдер.
              */
         }
-        static LocalSun S = new LocalSun();
+        public static LocalSun S = new LocalSun();
     }
 }

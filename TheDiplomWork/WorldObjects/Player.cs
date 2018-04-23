@@ -30,6 +30,9 @@ namespace TheDiplomWork
             public void Player_recalculate_extra_positions()
             {
                 Reverse_presice_to_map_coords(Player_precise_position, ref Player_chunk_position, ref Player_cubical_position);
+                Sun.S.player_pos.x = Player_precise_position.x;
+                Sun.S.player_pos.y = Player_precise_position.y;
+                Sun.S.player_pos.z = Player_precise_position.z;
                 LookForCube();
 
                 if (!StaticSettings.S.FlyMod) 
@@ -145,6 +148,10 @@ namespace TheDiplomWork
                 Keyboard.Wrapped_Do_Step(StepForARequiedCube, ref Player_precise_lookforcube, true);
                 Reverse_presice_to_map_coords(Player_precise_lookforcube, ref Player_chunk_lookforcube, ref Player_cubical_lookforcube);
 
+                Sun.S.player_look.x = Player_precise_lookforcube.x;
+                Sun.S.player_look.y = Player_precise_lookforcube.y;
+                Sun.S.player_look.z = Player_precise_lookforcube.z;
+
                 /*if (Player_cubical_lookforcube_temporal == Player_cubical_position)
                 {
                     StepForARequiedCube.z = 1f * CubicalMemory.Cube.rangeOfTheEdge;
@@ -172,6 +179,10 @@ namespace TheDiplomWork
                 GeneralProgrammingStuff.Point3D.CopyToFrom(
                     ref Player_precise_stepback, Player_precise_position);
                 Keyboard.Wrapped_Do_Step(StepForARequiedstepback, ref Player_precise_stepback, true);
+
+                Sun.S.player_stepback.x = Player_precise_stepback.x;
+                Sun.S.player_stepback.y = Player_precise_stepback.y;
+                Sun.S.player_stepback.z = Player_precise_stepback.z;
             }
             public Point3D Player_precise_stepback = new Point3D(0, 0, 0);
             vec4 StepForARequiedstepback = new vec4(0, 0, -0.25f * CubicalMemory.Cube.rangeOfTheEdge * 4 * 2, 0);

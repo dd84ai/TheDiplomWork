@@ -110,9 +110,9 @@ namespace TheDiplomWork
             }
             public override string ToString()
             {
-                return "Point3D: " + x.ToString("G2") + " ; "
-                    + y.ToString("G2") + " ; "
-                +z.ToString("G2");
+                return "Point3D: " + x.ToString("G3") + " ; "
+                    + y.ToString("G3") + " ; "
+                +z.ToString("G3");
             }
             public static void CopyToFrom(ref Point3D Output,Point3D _Input)
             {

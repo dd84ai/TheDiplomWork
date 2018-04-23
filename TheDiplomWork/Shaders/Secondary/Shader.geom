@@ -6,7 +6,7 @@ in vec4 vertex_x_out[];
 in vec4 vertex_y_out[];
 in vec4 vertex_z_out[];
 in vec3 pass_Color[];
-
+in float pointofview[];
 
 out vec3 f_Color;
 
@@ -132,11 +132,13 @@ void main()
 	color[6] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[7] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
 
+	if (pointofview[0] > 0.6)
+	{
 	Front();
 	Back();
 	Left();
 	Right();
 	Top();
 	Bottom();
-	
+	}
 }  

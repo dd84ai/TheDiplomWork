@@ -39,6 +39,7 @@ namespace TheDiplomWork
         mat4 viewMatrix;
         mat4 modelMatrix;
         mat4 rotMatrix;
+        mat3 sunMatrix;
         mat3 PlayerAndLocaledRangeAndSun = new mat3(new vec3(0, 0, 0), new vec3(0, 0, 0), new vec3(0, 0, 0));
         vec3 playerpreciseposition = new vec3(0, 0, 0);
         vec3 playerpreciseposition_stepback = new vec3(0, 0, 0);
@@ -263,7 +264,7 @@ namespace TheDiplomWork
             DoWork_ghost_IsAlive = false;
             return;
         }
-
+        vec3[] sunMatrix_veced = new vec3[3];
         public void Draw_Wrapped(OpenGL gl)
         {
             //  Create a view matrix to move us back a bit.
@@ -284,6 +285,21 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
+            sunMatrix_veced[0] = new vec3(Sun.S.player_pos.x, Sun.S.player_pos.y, Sun.S.player_pos.z);
+            sunMatrix_veced[1] = new vec3(Sun.S.player_stepback.x, Sun.S.player_stepback.y, Sun.S.player_stepback.z);
+            sunMatrix_veced[2] = new vec3(Sun.S.player_look.x, Sun.S.player_look.y, Sun.S.player_look.z);
+
+            //float temper = 0;
+            //for (int i = 0; i < 3; i++)
+            //    for (int j = i; j < 3; j++)
+            //    {
+            //        temper = sunMatrix_veced[j][i];
+            //        sunMatrix_veced[j][i] = sunMatrix_veced[i][j];
+            //        sunMatrix_veced[j][i] = temper;
+            //    }
+
+            sunMatrix = new mat3(sunMatrix_veced);
+            shaderProgram.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
             //vec3 playerpreciseposition = new vec3(Scene.SS.env.player.coords.Player_precise_position.x, Scene.SS.env.player.coords.Player_precise_position.y, Scene.SS.env.player.coords.Player_precise_position.z);
             //vec3 playerpreciseposition_stepback = new vec3(Scene.SS.env.player.coords.Player_precise_stepback.x, Scene.SS.env.player.coords.Player_precise_stepback.y, Scene.SS.env.player.coords.Player_precise_stepback.z);
 
