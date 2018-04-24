@@ -99,8 +99,7 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 2, System.Drawing.Color.LimeGreen, 10, "|P| - Phantom Mod: " + StaticSettings.S.PhantomMod, 2.0f);
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 3, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f);
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 4, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Sun.S.Time_Speed, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 5, System.Drawing.Color.Purple, 10, "|M| - Music: " + Interface.Player_is_online, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 6, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 5, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f);
             }
             else
             {
