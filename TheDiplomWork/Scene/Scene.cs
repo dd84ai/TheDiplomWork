@@ -180,6 +180,14 @@ namespace TheDiplomWork
             TimeSpan timeItTook = (DateTime.Now - start);
             Sun.S.Time += timeItTook.TotalMilliseconds * Sun.S.Time_Speed;
             start = DateTime.Now;
+
+            if (Every10SecondsAction)
+            {
+                SS.SunAndMoon.initialization();
+                SS.SunAndMoon.CopyToReady();
+                SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
+            }
+
             if (timeItTook.Seconds > (float)TimeRange * TimeCount)
             {
                 //start = DateTime.Now;
@@ -189,12 +197,7 @@ namespace TheDiplomWork
             }
             else Every10SecondsAction = false;
 
-            if (Every10SecondsAction)
-            {
-                SS.SunAndMoon.initialization();
-                SS.SunAndMoon.CopyToReady();
-                SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
-            }
+            
 
             if (!SS.Secondary.CopiedLastResult)
             {
