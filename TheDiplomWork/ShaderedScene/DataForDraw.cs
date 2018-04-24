@@ -176,7 +176,7 @@ namespace TheDiplomWork
         public bool FirstInitialization = false;
         public bool CopiedLastResult = true;
 
-        int LastCount = 0;
+        public int LastCount = 0;
         public int Quantity()
         {
             return LastCount;

@@ -62,6 +62,7 @@ namespace TheDiplomWork
                 }
             }
             END_initialization();
+            base.LastCount = vertices.Count();
         }
     }
 }

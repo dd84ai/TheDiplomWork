@@ -219,7 +219,6 @@ namespace TheDiplomWork
                     newThread_ghost = new Thread(Scene.DoWork_ghost);
                     newThread_ghost.Start(46);
                     Console.WriteLine("Ghost Inited");
-                    GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = false;
                 }
             }
 
@@ -281,6 +280,7 @@ namespace TheDiplomWork
             DoWork_ghost_IsAlive = true;
             SS.Secondary.initialization();
             DoWork_ghost_IsAlive = false;
+            GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
             return;
         }
         vec3[] playerMatrix_veced = new vec3[3];
