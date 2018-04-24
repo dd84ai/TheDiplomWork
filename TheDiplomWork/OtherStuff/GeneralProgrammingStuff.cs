@@ -135,7 +135,14 @@ namespace TheDiplomWork
                 }
                 catch (Exception ThrowItAway)
                 {
+                    Console.WriteLine($"{ThrowItAway.Message}");
                 }
+            }
+            string ReplaceDecimalSeparator(string inp)
+            {
+                inp = inp.Replace(",", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                inp = inp.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+                return inp;
             }
             public void TryLoad(string Name)
             {
@@ -144,13 +151,14 @@ namespace TheDiplomWork
                     using (System.IO.StreamReader file =
                 new System.IO.StreamReader(Path + Name + ".dat"))
                     {
-                        x = Convert.ToSingle(file.ReadLine());
-                        y = Convert.ToSingle(file.ReadLine());
-                        z = Convert.ToSingle(file.ReadLine());
+                        x = Convert.ToSingle(ReplaceDecimalSeparator(file.ReadLine()));
+                        y = Convert.ToSingle(ReplaceDecimalSeparator(file.ReadLine()));
+                        z = Convert.ToSingle(ReplaceDecimalSeparator(file.ReadLine()));
                     }
                 }
                 catch (Exception ThrowItAway)
                 {
+                    Console.WriteLine($"{ThrowItAway.Message}");
                 }
             }
         }
@@ -179,6 +187,19 @@ namespace TheDiplomWork
             {
                 if (c1.x != c2.x || c1.z != c2.z) return true;
                 else return false;
+            }
+            public override bool Equals(Object obj)
+            {
+                // Check for null values and compare run-time types.
+                if (obj == null || GetType() != obj.GetType())
+                    return false;
+
+                Point2Int p = (Point2Int)obj;
+                return (x == p.x) && (z == p.z);
+            }
+            public override int GetHashCode()
+            {
+                return x ^ z;
             }
         }
         public class Point3Int
@@ -213,6 +234,19 @@ namespace TheDiplomWork
             {
                 if (c1.x != c2.x || c1.z != c2.z || c1.y != c2.y) return true;
                 else return false;
+            }
+            public override bool Equals(Object obj)
+            {
+                // Check for null values and compare run-time types.
+                if (obj == null || GetType() != obj.GetType())
+                    return false;
+
+                Point3Int p = (Point3Int)obj;
+                return (x == p.x) && (z == p.z) && (y == p.y);
+            }
+            public override int GetHashCode()
+            {
+                return x ^ z ^ y;
             }
         }
 

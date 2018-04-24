@@ -39,7 +39,6 @@ namespace TheDiplomWork
                 }
             }
 
-            return 0;
         }
         public static void Pause_One_Time()
         {

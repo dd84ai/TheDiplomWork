@@ -56,7 +56,6 @@ namespace TheDiplomWork
         //  The shader program for our vertex and fragment shader.
         private ModifiedShaderProgram shaderProgram;
         private ModifiedShaderProgram shaderProgram_secondary;
-        private ModifiedShaderProgram shaderProgram_sunandmoon;
         /// <summary>
         /// Initialises the scene.
         /// </summary>
