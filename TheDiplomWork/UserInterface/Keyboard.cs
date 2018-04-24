@@ -157,6 +157,8 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_rotational_view.y += rotational_step; break;
                 case 'k':
                     Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
+                case 't':
+                    Sun.S.Time_Speed = 10.0; break;
 
                 case 'q':
                     SavingAlgorithm();

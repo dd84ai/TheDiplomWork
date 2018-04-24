@@ -229,6 +229,7 @@ namespace TheDiplomWork
 
             if (Keyboard.KeysActive.Count==0)
             Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
+            Sun.S.Time_Speed = 1.0;
         }
 
         private void openGLControl_MouseEnter(object sender, EventArgs e)
