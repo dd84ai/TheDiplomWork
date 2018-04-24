@@ -172,7 +172,7 @@ namespace TheDiplomWork
         /// 
         static DateTime start = DateTime.Now;
         public bool Every10SecondsAction = true;
-        public int TimeRange = 60;
+        public int TimeRange = 3;
         public int TimeCount = 0;
         public static  bool ExtraAction = false;
         public void Draw(OpenGL gl)
