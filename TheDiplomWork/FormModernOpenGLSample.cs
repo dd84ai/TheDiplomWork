@@ -97,9 +97,9 @@ namespace TheDiplomWork
                 label1_InfoTable.Visible = false;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 1, System.Drawing.Color.Gold, 10, "|F| - Fly Mod: " + StaticSettings.S.FlyMod, 2.0f);
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 2, System.Drawing.Color.LimeGreen, 10, "|P| - Phantom Mod: " + StaticSettings.S.PhantomMod, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 3, System.Drawing.Color.WhiteSmoke, 10, "|G| - Ghost Cube Mod: " + StaticSettings.S.GhostCube_Add_in_Data_For_Draw, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 4, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 5, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Sun.S.Time_Speed, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 3, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 4, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Sun.S.Time_Speed, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 5, System.Drawing.Color.Purple, 10, "|M| - Music: " + Interface.Player_is_online, 2.0f);
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 6, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f);
             }
             else
@@ -210,9 +210,10 @@ namespace TheDiplomWork
         {
             
         }
-
+        public static bool AnyKeyPressed = false;
         private void openGLControl_KeyDown(object sender, KeyEventArgs e)
         {
+            
             if (!Scene.ShadersInitializated) Application.Exit();
 
             if (e.Control) Keyboard.Ctrl_RUN_IS_ACTIVATED = 4;
@@ -221,7 +222,9 @@ namespace TheDiplomWork
             if (!Keyboard.KeysActive.Contains(item))
                 Keyboard.KeysActive.Add(item);
 
-            Keyboard.Wrapped_SINGLE_KeyPressed_Reaction(item);
+
+            if (!AnyKeyPressed) Keyboard.Wrapped_SINGLE_KeyPressed_Reaction(item);
+            AnyKeyPressed = true;
         }
 
         private void openGLControl_KeyUp(object sender, KeyEventArgs e)
@@ -229,9 +232,11 @@ namespace TheDiplomWork
             char item = ((char)e.KeyValue).ToString().ToLower()[0];
             Keyboard.KeysActive.Remove(item);
 
-            if (Keyboard.KeysActive.Count==0)
+            if (Keyboard.KeysActive.Count==0 || !e.Control)
             Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
             Sun.S.Time_Speed = 1.0;
+            AnyKeyPressed = false;
+            if (item == 't') Interface.SaySoundEffect("Blorp");
         }
 
         private void openGLControl_MouseEnter(object sender, EventArgs e)
@@ -259,6 +264,7 @@ namespace TheDiplomWork
                 {
                     if (e.Button.ToString() == "Right")
                     {
+                        Interface.SaySoundEffect("BlockPlacement");
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
@@ -274,6 +280,7 @@ namespace TheDiplomWork
                     }
                     else if (e.Button.ToString() == "Left")
                     {
+                        Interface.SaySoundEffect("BlockRemovement");
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes

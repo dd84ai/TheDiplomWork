@@ -22,7 +22,7 @@ float min_light = 0.1;
 vec3 MainLight(float vector)
 {
 	if (sun_vector[0].y > 0) return min(sun_vector[0].y,vector) * vec3(0.9,0.9,0.9) + vec3(0.1,0.1,0.1);
-	else return min(-sun_vector[0].y,-vector) * vec3(0.1,0.2,0.4) + vec3(0.1,0.1,0.1);
+	else return min(-sun_vector[0].y,-vector) * vec3(0.1,0.5,0.6) + vec3(0.1,0.1,0.1);
 }
 vec3 TheLight(float vector)
 {

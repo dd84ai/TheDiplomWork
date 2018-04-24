@@ -96,6 +96,7 @@ namespace TheDiplomWork
         }
         public static void Wrapped_SINGLE_KeyPressed_Reaction(char key)
         {
+            
             switch (key)
             {
 
@@ -105,10 +106,16 @@ namespace TheDiplomWork
 
                 case 'f':
                     StaticSettings.S.FlyMod = !StaticSettings.S.FlyMod;
+                    if (StaticSettings.S.FlyMod)
+                        Speech.ls.synthesizer.SpeakAsync("Fly Mod Activated");
+                    else Speech.ls.synthesizer.SpeakAsync("Fly Mod Deactivated");
                     break;
 
                 case 'p':
                     StaticSettings.S.PhantomMod = !StaticSettings.S.PhantomMod;
+                    if (StaticSettings.S.PhantomMod)
+                        Speech.ls.synthesizer.SpeakAsync("Phantom Mod Activated");
+                    else Speech.ls.synthesizer.SpeakAsync("Phantom Mod Deactivated");
                     break;
 
                 case 'h':
@@ -116,8 +123,16 @@ namespace TheDiplomWork
                     break;
 
                 case 'y':
-                    if (StaticSettings.S.SunStatus.x > 0.5) StaticSettings.S.SunStatus = new vec3(0, 0, 0);
-                    else StaticSettings.S.SunStatus = new vec3(1, 1, 1);
+                    if (StaticSettings.S.SunStatus.x > 0.5)
+                    {
+                        Speech.ls.synthesizer.SpeakAsync("Sun Activated");
+                        StaticSettings.S.SunStatus = new vec3(0, 0, 0);
+                    }
+                    else
+                    {
+                        Speech.ls.synthesizer.SpeakAsync("Sun Deactivated");
+                        StaticSettings.S.SunStatus = new vec3(1, 1, 1);
+                    }
                     break;
 
                 case ' ':
@@ -128,6 +143,25 @@ namespace TheDiplomWork
                     }
                     break;
 
+                case 't':
+                    Interface.SaySoundEffect("Blorp");
+                    Sun.S.Time_Speed = 40.0; break;
+
+                case 'q':
+                    SavingAlgorithm();
+                    Application.Exit(); break;
+                case 'r':
+                    Speech.ls.synthesizer.Speak("Reactivating");
+                    SavingAlgorithm();
+                    Application.Restart();
+                    Application.Exit(); break;
+                case 'c':
+                    Speech.ls.synthesizer.SpeakAsync("Restoring to default");
+                    RestoringToDefaultAlgorithm();
+                    break;
+
+                case 'm': Interface.SaySomeQuote(); break;
+
                 default: break;
             }
         }
@@ -135,7 +169,6 @@ namespace TheDiplomWork
         {
             switch (key)
             {
-                case 'm': Interface.SaySomeQuote(); break;
 
                 case 'w':
                     step_vector.x = 0; step_vector.y = 0; step_vector.z = step; DoStep(step_vector); break;
@@ -162,19 +195,6 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_rotational_view.y += rotational_step; break;
                 case 'k':
                     Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
-                case 't':
-                    Sun.S.Time_Speed = 40.0; break;
-
-                case 'q':
-                    SavingAlgorithm();
-                    Application.Exit(); break;
-                case 'r':
-                    SavingAlgorithm();
-                    Application.Restart();
-                    Application.Exit(); break;
-                case 'c':
-                    RestoringToDefaultAlgorithm();
-                    break;
 
                 case (char)188://','
                     step_multiplier += 1; break;

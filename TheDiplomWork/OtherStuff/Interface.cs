@@ -46,8 +46,11 @@ namespace TheDiplomWork
         }
         public static string ProjectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         public static Random random = new Random();
+        public static WMPLib.WindowsMediaPlayer Player = new WMPLib.WindowsMediaPlayer();
+        public static bool Player_is_online = false;
         public static void SaySomeQuote()
         {
+            
             string TargetPath = ProjectPath + "\\" + "Music" + "\\";
 
             if (Directory.Exists(@TargetPath))
@@ -56,26 +59,61 @@ namespace TheDiplomWork
                 // Process the list of files found in the directory.
                 var fileEntries = Directory.GetFiles(TargetPath);
 
-                int Choice = random.Next(1, fileEntries.Count());
-                if (fileEntries.Count() != 0 && fileEntries[Choice].Contains(".wav"))
+                int Choice = random.Next(0, fileEntries.Count()-1);
+                if (fileEntries.Count() != 0)
                     if (true)
                     {
-                        //Colorator("Activating music file: " + fileEntries[Choice], ConsoleColor.Yellow);
-                        System.Media.SoundPlayer sp = new System.Media.SoundPlayer(fileEntries[Choice]);
                         try
                         {
-                            sp.Play();
+                            Player_is_online = true;
+                            //Colorator("Activating music file: " + fileEntries[Choice], ConsoleColor.Yellow);
+                            Player.URL = fileEntries[Choice];
+                            Player.settings.volume = 20;
+                            Player.controls.play();
+                            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(fileEntries[Choice]);
+                            //sp.Play();
                             string[] spliited = fileEntries[Choice].Split('\\');
                             Colorator("Music file " + spliited[spliited.Count() - 1] + " has been activated. ", ConsoleColor.Green);
                         }
                         catch (Exception)
                         {
                             Console.WriteLine();
-                            for (int i = 0; i < 3; i++)
-                                Colorator("Music file " + fileEntries[Choice] + " is not found!!! ", ConsoleColor.Red);
+                            for (int i = 0; i < 1; i++)
+                                Colorator("Music file " + fileEntries[Choice] + " can't be activated!!! ", ConsoleColor.Red);
                         }
 
                     }
+            }
+            else
+            {
+                Console.WriteLine();
+                for (int i = 0; i < 3; i++)
+                    Colorator("Folder does not exist!!! ", ConsoleColor.Red);
+            }
+        }
+        public static System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
+        public static void SaySoundEffect(string Name)
+        {
+            string TargetPath = ProjectPath + "\\" + "Sounds" + "\\";
+
+            if (Directory.Exists(@TargetPath))
+            {
+
+                // Process the list of files found in the directory.
+                        try
+                        {
+                            sp.SoundLocation = TargetPath + Name + ".wav";
+                    //if (sp.)
+                    sp.Play();
+                    Colorator("Music file " + TargetPath + Name + ".wav" + " has been activated. ", ConsoleColor.Green);
+                        }
+                        catch (Exception Er)
+                        {
+                            Console.WriteLine();
+                            for (int i = 0; i < 1; i++)
+                                Colorator("Music file " + TargetPath + Name + ".wav" + " can't be activated!!! ", ConsoleColor.Red);
+                        }
+                
             }
             else
             {
