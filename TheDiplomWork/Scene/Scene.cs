@@ -174,6 +174,7 @@ namespace TheDiplomWork
         public bool Every10SecondsAction = true;
         public int TimeRange = 60;
         public int TimeCount = 0;
+        public static  bool ExtraAction = false;
         public void Draw(OpenGL gl)
         {
             TimeSpan timeItTook = (DateTime.Now - start);
@@ -195,6 +196,11 @@ namespace TheDiplomWork
                 SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
             }
 
+            if (!SS.Secondary.CopiedLastResult)
+            {
+                SS.Secondary.CopyToReady();
+                SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
+            }
             //Призрачным куб.
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated && 
                 (
@@ -202,24 +208,22 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Player_cubical_lookforcube !=
                 Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD)
                 || GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color
+                || ExtraAction
                 )
                 )
             {
 
-                if (!SS.Secondary.CopiedLastResult)
+                
+                if (!newThread_ghost.IsAlive && !DoWork_ghost_IsAlive)
                 {
-                    SS.Secondary.CopyToReady();
-                    SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
-                }
-                else if (!newThread_ghost.IsAlive && !DoWork_ghost_IsAlive)
-                {
                     newThread_ghost = new Thread(Scene.DoWork_ghost);
                     newThread_ghost.Start(46);
                     Console.WriteLine("Ghost Inited");
                 }
+                GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = false;
             }
 
             if (StaticSettings.S.RequiredReloader && !newThread.IsAlive && !DoWork_IsAlive)
@@ -252,7 +256,7 @@ namespace TheDiplomWork
                     SS.env.player.coords.Player_cubical_position_OLD.z = SS.env.player.coords.Player_cubical_position.z;
                     Console.WriteLine($"Inting My CoThread #{CounterMyCoThread++}");
                     StaticSettings.S.RealoderCauseOfBuildingBlocks = false;
-                }
+                    }
             }
             else
             {
@@ -280,7 +284,7 @@ namespace TheDiplomWork
             DoWork_ghost_IsAlive = true;
             SS.Secondary.initialization();
             DoWork_ghost_IsAlive = false;
-            GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
+            if (!ExtraAction) ExtraAction = true; else ExtraAction = false;
             return;
         }
         vec3[] playerMatrix_veced = new vec3[3];
