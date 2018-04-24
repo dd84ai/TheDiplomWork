@@ -34,7 +34,7 @@ namespace TheDiplomWork
 
             public bool HelpInfoForPlayer = true;
 
-            public bool SunEnabled = true;
+            public bool SunEnabled = false;
 
             public Settings()
             {
