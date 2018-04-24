@@ -115,6 +115,11 @@ namespace TheDiplomWork
                     StaticSettings.S.HelpInfoForPlayer = !StaticSettings.S.HelpInfoForPlayer;
                     break;
 
+                case 'y':
+                    if (StaticSettings.S.SunStatus.x > 0.5) StaticSettings.S.SunStatus = new vec3(0, 0, 0);
+                    else StaticSettings.S.SunStatus = new vec3(1, 1, 1);
+                    break;
+
                 case ' ':
                     if (!StaticSettings.S.FlyMod && Player.JumpCounter > Player.JumpMax - 1)
                     {
@@ -158,7 +163,7 @@ namespace TheDiplomWork
                 case 'k':
                     Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
                 case 't':
-                    Sun.S.Time_Speed = 10.0; break;
+                    Sun.S.Time_Speed = 40.0; break;
 
                 case 'q':
                     SavingAlgorithm();
