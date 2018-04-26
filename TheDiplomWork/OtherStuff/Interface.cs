@@ -13,6 +13,18 @@ namespace TheDiplomWork
 {
     class Interface
     {
+        public static bool Inited = false;
+        public Interface()
+        {
+            
+            
+        }
+        public static bool IsReadyToPlay()
+        {
+            Interface.Player = new WMPLib.WindowsMediaPlayer();
+            Interface.Inited = true;
+            return true;
+        }
         public static void Greetings()
         {
             Colorator("Yay!", ConsoleColor.Yellow);
@@ -35,7 +47,7 @@ namespace TheDiplomWork
                 {
                     case 'r': return 42;
                     case 'q': return 46;
-                    default: SaySomeQuote(); break;
+                    //default: PlayTheMusic(); break;
                 }
             }
 
@@ -46,9 +58,9 @@ namespace TheDiplomWork
         }
         public static string ProjectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         public static Random random = new Random();
-        public static WMPLib.WindowsMediaPlayer Player = new WMPLib.WindowsMediaPlayer();
+        public static WMPLib.WindowsMediaPlayer Player;
         public static bool Player_is_online = false;
-        public static void SaySomeQuote()
+        public static void PlayTheMusic()
         {
             
             string TargetPath = ProjectPath + "\\" + "Music" + "\\";
@@ -68,7 +80,7 @@ namespace TheDiplomWork
                             Player_is_online = true;
                             //Colorator("Activating music file: " + fileEntries[Choice], ConsoleColor.Yellow);
                             Player.URL = fileEntries[Choice];
-                            Player.settings.volume = 20;
+                            Player.settings.volume = 50;
                             Player.controls.play();
                             //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(fileEntries[Choice]);
                             //sp.Play();
@@ -78,8 +90,7 @@ namespace TheDiplomWork
                         catch (Exception)
                         {
                             Console.WriteLine();
-                            for (int i = 0; i < 1; i++)
-                                Colorator("Music file " + fileEntries[Choice] + " can't be activated!!! ", ConsoleColor.Red);
+                            Colorator("Music file " + fileEntries[Choice] + " can't be activated!!! ", ConsoleColor.Red);
                         }
 
                     }
@@ -87,8 +98,7 @@ namespace TheDiplomWork
             else
             {
                 Console.WriteLine();
-                for (int i = 0; i < 3; i++)
-                    Colorator("Folder does not exist!!! ", ConsoleColor.Red);
+                Colorator("Folder does not exist!!! ", ConsoleColor.Red);
             }
         }
         public static System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
@@ -110,16 +120,14 @@ namespace TheDiplomWork
                         catch (Exception Er)
                         {
                             Console.WriteLine();
-                            for (int i = 0; i < 1; i++)
-                                Colorator("Music file " + TargetPath + Name + ".wav" + " can't be activated!!! ", ConsoleColor.Red);
+                            Colorator("Music file " + TargetPath + Name + ".wav" + " can't be activated!!! ", ConsoleColor.Red);
                         }
                 
             }
             else
             {
                 Console.WriteLine();
-                for (int i = 0; i < 3; i++)
-                    Colorator("Folder does not exist!!! ", ConsoleColor.Red);
+                Colorator("Folder does not exist!!! ", ConsoleColor.Red);
             }
         }
         public static void Time_pause(int value)

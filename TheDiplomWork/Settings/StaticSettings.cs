@@ -36,6 +36,8 @@ namespace TheDiplomWork
 
             public bool SunEnabled = false;
 
+            public bool MusicIsEnabled = false;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)

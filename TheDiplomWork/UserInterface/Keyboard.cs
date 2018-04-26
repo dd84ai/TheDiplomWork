@@ -160,7 +160,7 @@ namespace TheDiplomWork
                     RestoringToDefaultAlgorithm();
                     break;
 
-                //case 'm': Interface.SaySomeQuote(); break;
+                case 'm': Interface.PlayTheMusic(); break;
 
                 default: break;
             }

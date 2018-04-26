@@ -139,6 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico.ico" />
+    <Content Include="Music\BackgroundMusic.mp3" />
+    <Content Include="Sounds\BlockPlacement.wav" />
+    <Content Include="Sounds\BlockRemovement.wav" />
+    <Content Include="Sounds\Blorp.wav" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WMPLib">
@@ -151,8 +155,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sounds\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

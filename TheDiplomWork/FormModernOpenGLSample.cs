@@ -15,6 +15,9 @@ namespace TheDiplomWork
         {
             InitializeComponent();
             CF = new CalculatorFont(openGLControl);
+
+            if (Interface.IsReadyToPlay() && StaticSettings.S.MusicIsEnabled)
+                Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('m');
         }
 
         /// <summary>
@@ -324,6 +327,7 @@ namespace TheDiplomWork
         private void FormModernOpenGLSample_FormClosing(object sender, FormClosingEventArgs e)
         {
             scene.Scene_Form_Closing(openGLControl.OpenGL);
+            Interface.Player.close();
         }
     }
 }
