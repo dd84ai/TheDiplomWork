@@ -62,15 +62,23 @@ namespace TheDiplomWork
                 double DawnAndSunset = 0;
                 if (TimeFrom0to2 > 0.25 && TimeFrom0to2 < 0.75)
                 {
-                    DawnAndSunset = Math.Abs(TimeFrom0to2 - 0.5);
+                    DawnAndSunset = (0.25 - Math.Abs(TimeFrom0to2 - 0.5)) * 2;
+
+                    r += (DawnAndSunset) * ((double)231 / 255);
+                    g += (DawnAndSunset) * ((double)216 / 255);
+                    b += (DawnAndSunset) * ((double)205 / 255);
                 }
                 else if (TimeFrom0to2 > 1.25 && TimeFrom0to2 < 1.75)
                 {
+                    DawnAndSunset = (0.25 - Math.Abs(TimeFrom0to2 - 1.5)) * 2;
 
+                    r += (DawnAndSunset) * ((double)0.99);
+                    g += (DawnAndSunset) * ((double)0.37);
+                    b += (DawnAndSunset) * ((double)0.33);
                 }
 
 
-                    gl.ClearColor((float)r, (float)g, (float)b, 1.0f);
+                gl.ClearColor((float)r, (float)g, (float)b, 1.0f);
             }
         }
         public static localtime time = new localtime();
