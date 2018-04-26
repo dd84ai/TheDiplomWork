@@ -91,6 +91,7 @@ namespace TheDiplomWork
 
             //  Set a blue clear colour.
             gl.ClearColor(0.4f, 0.6f, 0.9f, 0.0f);
+                
 
                 //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
                 //  Create the shader program.
@@ -303,6 +304,8 @@ namespace TheDiplomWork
 
             //  Clear the scene.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
+
+            Time.time.GetSkyColor(gl);
 
             //  Bind the shader, set the matrices.
             shaderProgram.Bind(gl);
