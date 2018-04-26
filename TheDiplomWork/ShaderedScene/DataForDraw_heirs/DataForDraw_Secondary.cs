@@ -28,7 +28,7 @@ namespace TheDiplomWork
                     found = true;
 
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     found = false;
                 }

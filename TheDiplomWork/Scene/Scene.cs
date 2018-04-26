@@ -186,6 +186,9 @@ namespace TheDiplomWork
                 SS.SunAndMoon.initialization();
                 SS.SunAndMoon.CopyToReady();
                 SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
+
+                if (StaticSettings.S.MusicIsEnabled)
+                    Music.wmp_player.PlayTheMusic_Checker();
             }
 
             if (timeItTook.Seconds > (float)TimeRange * TimeCount)
@@ -224,7 +227,6 @@ namespace TheDiplomWork
                     Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
                     newThread_ghost = new Thread(Scene.DoWork_ghost);
                     newThread_ghost.Start(46);
-                    Console.WriteLine("Ghost Inited");
                 }
                 GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = false;
             }

@@ -36,7 +36,7 @@ namespace TheDiplomWork
 
             public bool SunEnabled = false;
 
-            public bool MusicIsEnabled = false;
+            public bool MusicIsEnabled = true;
 
             public Settings()
             {

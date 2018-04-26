@@ -16,8 +16,10 @@ namespace TheDiplomWork
             InitializeComponent();
             CF = new CalculatorFont(openGLControl);
 
-            if (Interface.IsReadyToPlay() && StaticSettings.S.MusicIsEnabled)
-                Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('m');
+            //if (Interface.IsReadyToPlay() && StaticSettings.S.MusicIsEnabled)
+
+            Music.Initialize();
+            //Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('m');
         }
 
         /// <summary>
@@ -63,8 +65,6 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height/2 + 20, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, 2.0f, openGLControl);
                 CF.Ultimate_DrawText(20, openGLControl.Height / 2 - 20, System.Drawing.Color.Red, 14, "Please, check compatibility with OpenGL 2.1", 2.0f, openGLControl);
                 CF.Ultimate_DrawText(20, openGLControl.Height / 2 - 60, System.Drawing.Color.Red, 14, "Press any key to exit", 2.0f, openGLControl);
-
-                
             }
         }
         public void openGL_Draw_Wrapped()
@@ -98,11 +98,16 @@ namespace TheDiplomWork
             if (StaticSettings.S.HelpInfoForPlayer)
             {
                 label1_InfoTable.Visible = false;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 1, System.Drawing.Color.Gold, 10, "|F| - Fly Mod: " + StaticSettings.S.FlyMod, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 2, System.Drawing.Color.LimeGreen, 10, "|P| - Phantom Mod: " + StaticSettings.S.PhantomMod, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 3, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 4, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Sun.S.Time_Speed, 2.0f);
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 5, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f);
+                int place = 1;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 1, System.Drawing.Color.Gold, 10, "|F| - Fly Mod: " + StaticSettings.S.FlyMod, 2.0f);
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Gold, 10, "|M| - Music: " + Music.wmp_player.PlayerTime() + " " + Music.wmp_player.PlayerSongName(), 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Cyan, 10, "|N| - Next Song: ", 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.LimeGreen, 10, "|P| - Phantom Mod: " + StaticSettings.S.PhantomMod, 2.0f);  place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Sun.S.Time_Speed, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f); place++;
+
+
             }
             else
             {
@@ -238,7 +243,7 @@ namespace TheDiplomWork
             Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
             Sun.S.Time_Speed = 1.0;
             AnyKeyPressed = false;
-            if (item == 't') Interface.SaySoundEffect("Blorp");
+            if (item == 't') Music.wav_player.SaySoundEffect("Blorp");
         }
 
         private void openGLControl_MouseEnter(object sender, EventArgs e)
@@ -266,7 +271,7 @@ namespace TheDiplomWork
                 {
                     if (e.Button.ToString() == "Right")
                     {
-                        Interface.SaySoundEffect("BlockPlacement");
+                        Music.wav_player.SaySoundEffect("BlockPlacement");
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
@@ -282,7 +287,7 @@ namespace TheDiplomWork
                     }
                     else if (e.Button.ToString() == "Left")
                     {
-                        Interface.SaySoundEffect("BlockRemovement");
+                        Music.wav_player.SaySoundEffect("BlockRemovement");
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
@@ -327,7 +332,7 @@ namespace TheDiplomWork
         private void FormModernOpenGLSample_FormClosing(object sender, FormClosingEventArgs e)
         {
             scene.Scene_Form_Closing(openGLControl.OpenGL);
-            Interface.Player.close();
+            Music.wmp_player.Player.close();
         }
     }
 }

@@ -77,7 +77,7 @@ namespace TheDiplomWork
                     DoStep_Real(MoveVector);
                 }
             }
-            catch (Exception E)
+            catch (Exception)
             { }
             //Player_precise_position_realToPreventEscapes
         }
@@ -144,7 +144,7 @@ namespace TheDiplomWork
                     break;
 
                 case 't':
-                    Interface.SaySoundEffect("Blorp");
+                    Music.wav_player.SaySoundEffect("Blorp");
                     Sun.S.Time_Speed = 40.0; break;
 
                 case 'q':
@@ -160,7 +160,8 @@ namespace TheDiplomWork
                     RestoringToDefaultAlgorithm();
                     break;
 
-                case 'm': Interface.PlayTheMusic(); break;
+                case 'm': Music.wmp_player.PlayTheMusic(); break;
+                case 'n': Music.wmp_player.PlayTheMusic_NextSong(); break;
 
                 default: break;
             }

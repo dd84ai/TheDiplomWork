@@ -73,7 +73,7 @@ namespace TheDiplomWork
 
                     }
                 }
-                catch (Exception Error)
+                catch (Exception)
                 { }
             }
             /// <summary>

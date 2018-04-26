@@ -74,6 +74,7 @@
     <Compile Include="ShaderedScene\DataForDraw_angled.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_SunAndMoon.cs" />
     <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
+    <Compile Include="UserInterface\Music.cs" />
     <Compile Include="UserInterface\Speech.cs" />
     <Compile Include="WorldObjects\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
@@ -139,7 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico.ico" />
-    <Content Include="Music\BackgroundMusic.mp3" />
     <Content Include="Sounds\BlockPlacement.wav" />
     <Content Include="Sounds\BlockRemovement.wav" />
     <Content Include="Sounds\Blorp.wav" />
@@ -155,6 +155,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Music\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
