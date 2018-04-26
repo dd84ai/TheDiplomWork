@@ -178,7 +178,7 @@ namespace TheDiplomWork
         public void Draw(OpenGL gl)
         {
             TimeSpan timeItTook = (DateTime.Now - start);
-            Sun.S.Time += timeItTook.TotalMilliseconds * Sun.S.Time_Speed;
+            Time.time.TimeIncrease(timeItTook.TotalMilliseconds * Time.time.Time_Speed);
             start = DateTime.Now;
 
             if (Every10SecondsAction)
@@ -195,7 +195,6 @@ namespace TheDiplomWork
             {
                 //start = DateTime.Now;
                 Every10SecondsAction = true;
-                Sun.S.Time = timeItTook.Seconds;
                 TimeCount++;
             }
             else Every10SecondsAction = false;
@@ -329,7 +328,7 @@ namespace TheDiplomWork
             playerMatrix = new mat3(playerMatrix_veced);
             shaderProgram.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
-            sunMatrix = new mat3(new vec3(-(float)Sun.S.Time / Sun.LocalSun.Sun_Time_Decreaser, 0, 0),
+            sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3(StaticSettings.S.SunStatus.x,0,0));
             shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
@@ -352,7 +351,7 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
-                sunMatrix = new mat3(new vec3(-(float)Sun.S.Time / Sun.LocalSun.Sun_Time_Decreaser, 0, 0),
+                sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3(StaticSettings.S.SunStatus.x, 0, 1.0f));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
@@ -361,7 +360,7 @@ namespace TheDiplomWork
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
                 SI_ghost.vertexBufferArray.Unbind(gl);
 
-                sunMatrix = new mat3(new vec3(-(float)Sun.S.Time / Sun.LocalSun.Sun_Time_Decreaser, 0, 0),
+                sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3(1.0f, 1.0f, 0.0f));
                 //Второе значений 3 строки отключает Point Of view если больше 0.5 в геом шейдере.

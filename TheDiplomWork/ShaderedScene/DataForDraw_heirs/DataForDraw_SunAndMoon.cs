@@ -9,7 +9,7 @@ namespace TheDiplomWork
     public class DataForDraw_SunAndMoon : DataForDraw_angled
     {
         
-        public static mat4 SunRotator = glm.rotate((float)Sun.S.Time / 10, new vec3(0, 1, 0));
+        public static mat4 SunRotator = glm.rotate(0, new vec3(0, 1, 0));
 
         public override void initialization()
         {

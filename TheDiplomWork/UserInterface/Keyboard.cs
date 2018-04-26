@@ -145,7 +145,7 @@ namespace TheDiplomWork
 
                 case 't':
                     Music.wav_player.SaySoundEffect("Blorp");
-                    Sun.S.Time_Speed = 40.0; break;
+                    Time.time.Time_Speed = 40.0; break;
 
                 case 'q':
                     SavingAlgorithm();

@@ -104,6 +104,7 @@
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="UserInterface\Mouse.cs" />
     <Compile Include="WorldObjects\Sun.cs" />
+    <Compile Include="WorldObjects\Time.cs" />
     <None Include="Shaders\AdvancedVertexShader\Sizer.vert" />
     <None Include="Shaders\VertexShaderElements\Cuter.vert" />
     <None Include="Shaders\VertexShaderElements\Header.vert" />

@@ -104,10 +104,9 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Cyan, 10, "|N| - Next Song: ", 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.LimeGreen, 10, "|P| - Phantom Mod: " + StaticSettings.S.PhantomMod, 2.0f);  place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Sun.S.Time_Speed, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Time.time.Time_Speed, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f); place++;
-
-
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
             }
             else
             {
@@ -241,7 +240,7 @@ namespace TheDiplomWork
 
             if (Keyboard.KeysActive.Count==0 || !e.Control)
             Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
-            Sun.S.Time_Speed = 1.0;
+            Time.time.Time_Speed = 1.0;
             AnyKeyPressed = false;
             if (item == 't') Music.wav_player.SaySoundEffect("Blorp");
         }
