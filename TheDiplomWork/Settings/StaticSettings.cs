@@ -11,7 +11,7 @@ namespace TheDiplomWork
         public class Settings
         {
             //You can change here.
-            public bool ConsoleIsEnabled = true;
+            public bool ConsoleIsEnabled = false;
 
             public bool ReloaderCauseOfChunkRare = true;
 
