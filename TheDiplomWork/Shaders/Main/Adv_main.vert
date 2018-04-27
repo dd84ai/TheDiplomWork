@@ -7,7 +7,7 @@ vec4 Processed(vec3 inp)
 {
 	if (sunMatrix[2].z < 0.5)
 	{
-		return Shifted_Position(Translate(Rotated_Around(inp,in_Center),playerMatrix[0]));
+		return Shifted_Position(Translate(Rotated_Around(Expander(inp),in_Center),vec3(playerMatrix[0].x,0,playerMatrix[0].z)));
 	}
 	else 
 	{

@@ -18,7 +18,7 @@ namespace TheDiplomWork
             //Sun
             Draw_Quad_Full_Sunsided_angled(
                 0,
-                0,
+                localed_range * 10,
                 0,
 
                 0,
@@ -30,7 +30,7 @@ namespace TheDiplomWork
             //Moon
             Draw_Quad_Full_Sunsided_angled(
                 0,
-                0,
+                localed_range * 10,
                 0,
 
                 0,

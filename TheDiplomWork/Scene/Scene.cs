@@ -101,7 +101,6 @@ namespace TheDiplomWork
                 var Sun = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Sun.vert");
                 var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Rotator.vert");
                 var Translation = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Translation.vert");
-                var Expander = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Translation.vert");
                 var Sizer = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Sizer.vert");
 
                 var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
@@ -129,6 +128,7 @@ namespace TheDiplomWork
                     Cuter + 
                     Sun +
                     Translation + 
+                    Sizer + 
                     Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();

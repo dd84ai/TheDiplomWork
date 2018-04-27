@@ -151,7 +151,9 @@ void main()
 	color[6] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[7] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
 
-	if ((range[0] < 48 && pointofview[0] > 0.4) || sunMatrix[2].y > 0.5)
+	if (!(sunMatrix[2].y > 0.5))
+	{
+	if ((range[0] < 48 && pointofview[0] > 0.4))
 	{
 	if (scalar_sides[0].z > SunSidedCoef) Front();
 	else Back();
@@ -159,5 +161,15 @@ void main()
 	else Right();
 	if (scalar_sides[0].y > SunSidedCoef) Bottom();
 	else Top();
+	}
+	}
+	else
+	{
+	Front();
+	Back();
+	Left();
+	Right();
+	Bottom();
+	Top();
 	}
 }  

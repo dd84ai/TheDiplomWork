@@ -239,11 +239,16 @@ namespace TheDiplomWork
             char item = ((char)e.KeyValue).ToString().ToLower()[0];
             Keyboard.KeysActive.Remove(item);
 
-            if (Keyboard.KeysActive.Count==0 || !e.Control)
-            Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
-            Time.time.Time_Speed = 1.0;
+            if (Keyboard.KeysActive.Count == 0 || !e.Control)
+            {
+                Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
+            }
             AnyKeyPressed = false;
-            if (item == 't') Music.wav_player.SaySoundEffect("Blorp");
+            if (item == 't')
+            {
+                Music.wav_player.SaySoundEffect("Blorp");
+                Time.time.Time_Speed = 1.0;
+            }
         }
 
         private void openGLControl_MouseEnter(object sender, EventArgs e)
