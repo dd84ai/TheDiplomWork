@@ -12,7 +12,7 @@ namespace TheDiplomWork
         {
             double Time = 0;
             public double Time_Speed = 1.0;
-            public float Sun_Time_Decreaser = 100000;
+            public float Sun_Time_Decreaser = 200000;
             public double GetTotalRadianTime()
             {
                 return Time / Sun_Time_Decreaser;

@@ -16,7 +16,7 @@ namespace TheDiplomWork
             public bool ReloaderCauseOfChunkRare = true;
 
             public bool ReloaderCauseOfChangingChunk = false;
-            public int RangeOfView = 3; //Range of chunks in every direction from you.
+            public int RangeOfView = 5; //Range of chunks in every direction from you.
 
             public bool RealoderCauseOfPointOfView = false;
             public float PointOfViewCoefOfDifference = 0.85f; // How Much Unchanged Point Of View.

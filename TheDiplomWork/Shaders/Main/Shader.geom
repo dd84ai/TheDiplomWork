@@ -12,6 +12,8 @@ in vec3 sun_vector[];
 
 in vec3 scalar_sides[];
 
+in float range[];
+
 out vec3 f_Color;
 
 vec3 color[8];
@@ -149,7 +151,7 @@ void main()
 	color[6] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[7] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
 
-	if (pointofview[0] > 0.4 || sunMatrix[2].y > 0.5)
+	if ((range[0] < 48 && pointofview[0] > 0.4) || sunMatrix[2].y > 0.5)
 	{
 	if (scalar_sides[0].z > SunSidedCoef) Front();
 	else Back();
