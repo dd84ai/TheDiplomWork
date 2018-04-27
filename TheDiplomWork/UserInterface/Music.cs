@@ -77,6 +77,7 @@ namespace TheDiplomWork
                 }
             }
             public int LastChoice = -1;
+            public int volumepower = 100;
             public void StartTheMusic()
             {
                 string TargetPath = ProjectPath + "\\" + "Music" + "\\";
@@ -103,8 +104,8 @@ namespace TheDiplomWork
                                 Player.URL = fileEntries[Choice];
 
                                 SetLastSong(fileEntries[Choice]);
-
-                                Player.settings.volume = 50;
+                                
+                                Player.settings.volume = volumepower;
                                 Player.settings.playCount = 1;
                                 Player.controls.play();
                                 //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(fileEntries[Choice]);
@@ -133,6 +134,8 @@ namespace TheDiplomWork
             public System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
             public void SaySoundEffect(string Name)
             {
+                
+
                 string TargetPath = ProjectPath + "\\" + "Sounds" + "\\";
 
                 if (Directory.Exists(@TargetPath))
@@ -142,6 +145,7 @@ namespace TheDiplomWork
                     try
                     {
                         sp.SoundLocation = TargetPath + Name + ".wav";
+                        
                         //if (sp.)
                         sp.Play();
                         Interface.Colorator("Music file " + TargetPath + Name + ".wav" + " has been activated. ", ConsoleColor.Green);
