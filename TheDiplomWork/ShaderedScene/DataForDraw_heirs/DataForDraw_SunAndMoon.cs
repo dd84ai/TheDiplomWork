@@ -17,9 +17,9 @@ namespace TheDiplomWork
 
             //Sun
             Draw_Quad_Full_Sunsided_angled(
-                Scene.SS.env.player.coords.Player_precise_position.x,
-                Scene.SS.env.player.coords.Player_precise_position.y,
-                Scene.SS.env.player.coords.Player_precise_position.z,
+                0,
+                0,
+                0,
 
                 0,
                  +localed_range * Sun.LocalSun.Sun_Height,
@@ -29,9 +29,9 @@ namespace TheDiplomWork
 
             //Moon
             Draw_Quad_Full_Sunsided_angled(
-                Sun.S.player_pos.x,
-                Sun.S.player_pos.y,
-                Sun.S.player_pos.z,
+                0,
+                0,
+                0,
 
                 0,
                  -localed_range * Sun.LocalSun.Sun_Height,

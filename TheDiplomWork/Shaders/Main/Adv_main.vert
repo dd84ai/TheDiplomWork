@@ -5,7 +5,14 @@
 
 vec4 Processed(vec3 inp)
 {
-	return Shifted_Position(Rotated_Around(inp,in_Center));
+	if (sunMatrix[2].z < 0.5)
+	{
+		return Shifted_Position(Translate(Rotated_Around(inp,in_Center),playerMatrix[0]));
+	}
+	else 
+	{
+		return Shifted_Position(inp);
+	}
 }
 void main(void) 
 {

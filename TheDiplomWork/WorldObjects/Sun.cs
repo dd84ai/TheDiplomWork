@@ -15,7 +15,7 @@ namespace TheDiplomWork
             public vec3 player_look = new vec3();
             public vec3 player_stepback = new vec3();
 
-            public static float Sun_Height = 100.0f;
+            public static float Sun_Height = 40.0f;
         }
         public static LocalSun S = new LocalSun();
     }

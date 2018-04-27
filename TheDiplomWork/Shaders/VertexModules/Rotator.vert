@@ -20,6 +20,5 @@ vec3 Rotated_Position(vec3 input_vec)
 }
 vec3 Rotated_Around(vec3 input_vec, vec3 shift)
 {
-	if (sunMatrix[2].z < 0.5) return (input_vec + shift) * Rotator;
-	else return input_vec;
+	return (input_vec + shift) * Rotator;
 }
