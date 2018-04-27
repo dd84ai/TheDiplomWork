@@ -3,17 +3,6 @@
 //#include <Rotator.vert>
 //#include <Sun.vert>
 
-void Cuter_PlayerSidedAdvanced()
-{
-	//PLAYER SIDED
-	vec3 vector_side_x_out = Rotated_Around(vec3(1, 0, 0),in_Center);
-	vec3 vector_side_y_out = Rotated_Around(vec3(0, 1, 0),in_Center);
-	vec3 vector_side_z_out = Rotated_Around(vec3(0, 0, 1),in_Center);
-	vec3 VectorFromPlayerToCube = -VectoredToCube;
-	scalar_sides.x = dot(vector_side_x_out, VectorFromPlayerToCube);
-	scalar_sides.y = dot(vector_side_y_out, VectorFromPlayerToCube);
-	scalar_sides.z = dot(vector_side_z_out, VectorFromPlayerToCube);
-}
 void main(void) 
 {
 	//PREPARE ROTATOR

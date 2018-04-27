@@ -106,9 +106,9 @@ namespace TheDiplomWork
 
 
                 var vertexShaderSource = 
-                    Header + 
-                    Cuter +
+                    Header +
                     Rotator +
+                    Cuter +
                     Sun +
                     Main;
 
@@ -121,9 +121,9 @@ namespace TheDiplomWork
                 shaderProgram.AssertValid(gl);
 
                 var vertexShaderSource2 = 
-                    Header + 
-                    Cuter + 
+                    Header +
                     Rotator +
+                    Cuter + 
                     Sun +
                     Adv_main;
 

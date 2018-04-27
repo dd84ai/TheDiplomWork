@@ -68,9 +68,9 @@ namespace TheDiplomWork
                     g += (DawnAndSunset) * ((double)216 / 255);
                     b += (DawnAndSunset) * ((double)205 / 255);
                 }
-                else if (TimeFrom0to2 > 1.25 && TimeFrom0to2 < 1.75)
+                else if (TimeFrom0to2 > 1.26 && TimeFrom0to2 < 1.77)
                 {
-                    DawnAndSunset = (0.25 - Math.Abs(TimeFrom0to2 - 1.5)) * 2;
+                    DawnAndSunset = (0.25 - Math.Abs(TimeFrom0to2 - 1.505)) * 2;
 
                     r += (DawnAndSunset) * ((double)0.99);
                     g += (DawnAndSunset) * ((double)0.37);
