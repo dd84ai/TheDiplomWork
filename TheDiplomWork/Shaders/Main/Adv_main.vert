@@ -5,15 +5,16 @@
 
 vec4 Processed(vec3 inp)
 {
-	return Shifted_Position(inp);
+	return Shifted_Position(Rotated_Around(inp,in_Center));
 }
 void main(void) 
 {
 	PrepareRotator(vec3(sunMatrix[0]));
 	PrepareSun();
 
-	Cuter_without_angles();
-
+	Cuter_PointOfView();
+	Cuter_PlayerSidedAdvanced();
+	
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
 
 	vertex_x_out = Transform * Processed(begin + vec3(1,0,0));

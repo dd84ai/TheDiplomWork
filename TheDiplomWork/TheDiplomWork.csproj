@@ -105,9 +105,9 @@
     <Compile Include="UserInterface\Mouse.cs" />
     <Compile Include="WorldObjects\Sun.cs" />
     <Compile Include="WorldObjects\Time.cs" />
-    <None Include="Shaders\AdvancedVertexShader\Sizer.vert" />
-    <None Include="Shaders\VertexShaderElements\Cuter.vert" />
-    <None Include="Shaders\VertexShaderElements\Header.vert" />
+    <None Include="Shaders\VertexModules\Sizer.vert" />
+    <None Include="Shaders\VertexModules\Cuter.vert" />
+    <None Include="Shaders\VertexModules\Header.vert" />
     <EmbeddedResource Include="FormModernOpenGLSample.resx">
       <DependentUpon>FormModernOpenGLSample.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,11 +130,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Shaders\Main\Main.vert" />
-    <None Include="Shaders\Main\Shader.frag" />
-    <None Include="Shaders\Main\Shader.geom" />
-    <None Include="Shaders\AdvancedVertexShader\Rotator.vert" />
-    <None Include="Shaders\AdvancedVertexShader\Adv_main.vert" />
-    <None Include="Shaders\VertexShaderElements\Sun.vert" />
+    <None Include="Shaders\OtherShaders\Shader.frag" />
+    <None Include="Shaders\OtherShaders\Shader.geom" />
+    <None Include="Shaders\VertexModules\Rotator.vert" />
+    <None Include="Shaders\Main\Adv_main.vert" />
+    <None Include="Shaders\VertexModules\Sun.vert" />
+    <None Include="Shaders\VertexModules\Translation.vert" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

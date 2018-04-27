@@ -1,5 +1,4 @@
-﻿
-uniform mat3 playerMatrix;
+﻿uniform mat3 playerMatrix;
 out float pointofview;
 out vec3 scalar_sides;
 out float range;

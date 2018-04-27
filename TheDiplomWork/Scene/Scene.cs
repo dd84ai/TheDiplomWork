@@ -96,13 +96,16 @@ namespace TheDiplomWork
                 //gl.Hint(OpenGL.WGL_CONTEXT_DEBUG_BIT_ARB, OpenGL.GL_TRUE);
                 //  Create the shader program.
 
-                var Header = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Header.vert");
-                var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Cuter.vert");
-                var Sun = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexShaderElements\Sun.vert");
-                var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
+                var Header = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Header.vert");
+                var Cuter = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Cuter.vert");
+                var Sun = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Sun.vert");
+                var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Rotator.vert");
+                var Translation = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Translation.vert");
+                var Expander = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Translation.vert");
+                var Sizer = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Sizer.vert");
 
-                var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Rotator.vert");
-                var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\AdvancedVertexShader\Adv_main.vert");
+                var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
+                var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Adv_main.vert");
 
 
                 var vertexShaderSource = 
@@ -112,8 +115,8 @@ namespace TheDiplomWork
                     Sun +
                     Main;
 
-                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.frag");
-                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Shader.geom");
+                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\Shader.frag");
+                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\Shader.geom");
                 shaderProgram = new ModifiedShaderProgram();
                 shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource_2, geometryShaderSource_2, null);
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
@@ -125,6 +128,7 @@ namespace TheDiplomWork
                     Rotator +
                     Cuter + 
                     Sun +
+                    Translation + 
                     Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
