@@ -14,6 +14,8 @@ void main(void)
 
 	Cuter_without_angles();
 
+	if (range < 48 && pointofview > 0.4)
+	{
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
 
 	vertex_x_out = Transform * Processed(begin + vec3(1,0,0));
@@ -23,4 +25,10 @@ void main(void)
 	gl_Position = Transform * Processed(begin);
 
 	pass_Color = in_Color;
+	}
+	else
+	{
+		gl_Position = vec4(0,0,0,0);
+		pass_Color = vec3(0,0,0);
+	}
 }

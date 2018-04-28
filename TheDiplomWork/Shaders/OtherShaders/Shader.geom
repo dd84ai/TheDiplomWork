@@ -128,8 +128,8 @@ void Bottom()
 	EndPrimitive();
 }
 float SunSidedCoef = 0;
-void main()
-{	
+void Compressed()
+{
 	vec4 vectorx = vertex_x_out[0] - gl_in[0].gl_Position;
 	vec4 vectory = vertex_y_out[0] - gl_in[0].gl_Position;
 	vec4 vectorz = vertex_z_out[0] - gl_in[0].gl_Position;
@@ -150,21 +150,25 @@ void main()
 	color[5] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[6] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
 	color[7] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
-
+}
+void main()
+{	
 	if (!(sunMatrix[2].y > 0.5))
 	{
-	if ((range[0] < 48 && pointofview[0] > 0.4))
-	{
-	if (scalar_sides[0].z > SunSidedCoef) Front();
-	else Back();
-	if (scalar_sides[0].x > SunSidedCoef) Left();
-	else Right();
-	if (scalar_sides[0].y > SunSidedCoef) Bottom();
-	else Top();
-	}
+		if ((range[0] < 48 && pointofview[0] > 0.4))
+		{
+		Compressed();
+		if (scalar_sides[0].z > SunSidedCoef) Front();
+		else Back();
+		if (scalar_sides[0].x > SunSidedCoef) Left();
+		else Right();
+		if (scalar_sides[0].y > SunSidedCoef) Bottom();
+		else Top();
+		}
 	}
 	else
 	{
+	Compressed();
 	Front();
 	Back();
 	Left();
