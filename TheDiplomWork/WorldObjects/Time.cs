@@ -26,6 +26,15 @@ namespace TheDiplomWork
             {
                 return ((GetTotalRadianTime() + Math.PI) % (Math.PI * 2)) / Math.PI;
             }
+            int TotalReadlSeconds = 0;
+            public int GetTotalSeconds()
+            {
+                return TotalReadlSeconds;
+            }
+            public void SetTotalSeconds(int inp)
+            {
+                TotalReadlSeconds = inp;
+            }
             public string GetDayTime()
             {
                 double value = TimeViaRadianAngle();

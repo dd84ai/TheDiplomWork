@@ -166,6 +166,10 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Player_precise_position.TryLoad("PlayerPosition");
                 Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
                 SaveAndLoad.Load("default");
+
+                SS.SunAndMoon.initialization();
+                SS.SunAndMoon.CopyToReady();
+                SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
             }
 
         }
@@ -176,6 +180,7 @@ namespace TheDiplomWork
         /// <param name="gl">The OpenGL instance.</param>
         /// 
         static DateTime start = DateTime.Now;
+        static DateTime start_independent = DateTime.Now;
         public bool Every10SecondsAction = true;
         public int TimeRange = 3;
         public int TimeCount = 0;
@@ -183,20 +188,17 @@ namespace TheDiplomWork
         public void Draw(OpenGL gl)
         {
             TimeSpan timeItTook = (DateTime.Now - start);
+            Time.time.SetTotalSeconds((int)(DateTime.Now - start_independent).TotalSeconds);
             Time.time.TimeIncrease(timeItTook.TotalMilliseconds * Time.time.Time_Speed);
             start = DateTime.Now;
 
             if (Every10SecondsAction)
             {
-                SS.SunAndMoon.initialization();
-                SS.SunAndMoon.CopyToReady();
-                SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
-
                 if (StaticSettings.S.MusicIsEnabled)
                     Music.wmp_player.PlayTheMusic_Checker();
             }
 
-            if (timeItTook.Seconds > (float)TimeRange * TimeCount)
+            if (Time.time.GetTotalSeconds() > TimeRange * TimeCount)
             {
                 //start = DateTime.Now;
                 Every10SecondsAction = true;
