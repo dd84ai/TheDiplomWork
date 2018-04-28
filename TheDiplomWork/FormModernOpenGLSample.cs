@@ -288,6 +288,19 @@ namespace TheDiplomWork
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
+
+                        DataForDraw_Secondary.TemporalList.Add(new DataForDraw_Secondary.Chunk_and_Cube(Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z],
+                            Scene.SS.env.cub_mem.world.World_as_Whole
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z]
+                            ));
+
+                        GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
                     }
                     else if (e.Button.ToString() == "Left")
                     {
@@ -309,8 +322,9 @@ namespace TheDiplomWork
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color_default;
+
+                        StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                     }
-                    StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                 }
             }
             catch (Exception Ouch)

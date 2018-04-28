@@ -244,6 +244,7 @@ namespace TheDiplomWork
                     SI_main.vertexBufferArray.Delete(gl);
                     SS.Main.CopyToReady();
                     SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
+                    DataForDraw_Secondary.TemporalList.Clear();
                 }
 
                 float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
