@@ -72,6 +72,7 @@
     <Compile Include="Scene\SceneInfo_Main.cs" />
     <Compile Include="Scene\SceneInfo_Secondary.cs" />
     <Compile Include="ShaderedScene\DataForDraw_angled.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_TemporalList.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_SunAndMoon.cs" />
     <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
     <Compile Include="UserInterface\Music.cs" />

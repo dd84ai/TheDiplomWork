@@ -20,7 +20,6 @@ namespace TheDiplomWork
         }
         public override void CreateVerticesForSquare_FirstInit()
         {
-            
             CreateVerticesForSquare_FirstInit_wrapped();
 
             //  Now do the same for the colour data.
@@ -70,8 +69,6 @@ namespace TheDiplomWork
             shiftedcenterDataBuffer.Unbind(gl);
             anglesDataBuffer.Unbind(gl);
             sizeDataBuffer.Unbind(gl);
-
-
         }
     }
 }

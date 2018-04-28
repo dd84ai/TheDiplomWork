@@ -289,7 +289,7 @@ namespace TheDiplomWork
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
 
-                        DataForDraw_Secondary.TemporalList.Add(new DataForDraw_Secondary.Chunk_and_Cube(Scene.SS.env.cub_mem.world.World_as_Whole
+                        DataForDraw_TemporalList.TemporalList.Add(new DataForDraw_TemporalList.Chunk_and_Cube(Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z],
                             Scene.SS.env.cub_mem.world.World_as_Whole
@@ -300,7 +300,7 @@ namespace TheDiplomWork
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.z]
                             ));
 
-                        GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = true;
+                        scene.TemporalList_Refresher();
                     }
                     else if (e.Button.ToString() == "Left")
                     {

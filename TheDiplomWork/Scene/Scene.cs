@@ -51,6 +51,7 @@ namespace TheDiplomWork
         //  The vertex buffer array which contains the vertex and colour buffers.
         static SceneInfo_Main SI_main;
         static SceneInfo_Secondary SI_ghost;
+        static SceneInfo_Secondary SI_temporallist;
         static SceneInfo_Secondary SI_sunandmoon;
 
         //  The shader program for our vertex and fragment shader.
@@ -76,10 +77,11 @@ namespace TheDiplomWork
             try
             {
                 _gl = gl;
-            SI_main = new SceneInfo_Main(gl);
-            SI_ghost = new SceneInfo_Secondary(gl);
-            SI_sunandmoon = new SceneInfo_Secondary(gl);
-            newThread_ghost = new Thread(Scene.DoWork_ghost);
+                SI_main = new SceneInfo_Main(gl);
+                SI_ghost = new SceneInfo_Secondary(gl);            
+                SI_sunandmoon = new SceneInfo_Secondary(gl);
+                SI_temporallist = new SceneInfo_Secondary(gl);
+                newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
             newThread = new Thread(Scene.DoWork);
@@ -170,8 +172,16 @@ namespace TheDiplomWork
                 SS.SunAndMoon.initialization();
                 SS.SunAndMoon.CopyToReady();
                 SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
+
+                
             }
 
+        }
+        public void TemporalList_Refresher()
+        {
+            SS.TemporalList.initialization();
+            SS.TemporalList.CopyToReady();
+            SI_temporallist.CreateVerticesForSquare_angled(ref SS.TemporalList);
         }
 
         /// <summary>
@@ -244,7 +254,8 @@ namespace TheDiplomWork
                     SI_main.vertexBufferArray.Delete(gl);
                     SS.Main.CopyToReady();
                     SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
-                    DataForDraw_Secondary.TemporalList.Clear();
+                    DataForDraw_TemporalList.TemporalList.Clear();
+                    TemporalList_Refresher();
                 }
 
                 float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
@@ -365,6 +376,10 @@ namespace TheDiplomWork
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+
+                SI_temporallist.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
+                SI_temporallist.vertexBufferArray.Unbind(gl);
 
                 SI_ghost.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
