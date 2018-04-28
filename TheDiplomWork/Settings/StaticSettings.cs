@@ -16,7 +16,7 @@ namespace TheDiplomWork
             public bool ReloaderCauseOfChunkRare = false;
 
             public bool ReloaderCauseOfChangingChunk = true;
-            public int RangeOfView = 3; //Range of chunks in every direction from you.
+            public int RangeOfView = 4; //Range of chunks in every direction from you.
 
             public bool RealoderCauseOfPointOfView = false;
             public float PointOfViewCoefOfDifference = 0.85f; // How Much Unchanged Point Of View.
@@ -37,6 +37,8 @@ namespace TheDiplomWork
             public bool SunEnabled = false;
 
             public bool MusicIsEnabled = true;
+
+            public bool PointOfView_Circled_Visible_Cubes = false;
 
             public Settings()
             {

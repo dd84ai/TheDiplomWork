@@ -43,6 +43,9 @@ namespace TheDiplomWork
                 {
                     var XYworld = Scene.SS.env.cub_mem.world.World_as_Whole[i][j];
 
+                    if (Math.Abs(XYworld.xz.x - Scene.SS.env.player.coords.Player_chunk_position.x) < StaticSettings.S.RangeOfView
+                        && Math.Abs(XYworld.xz.z - Scene.SS.env.player.coords.Player_chunk_position.z) < StaticSettings.S.RangeOfView)
+
                     foreach (var Xcube in XYworld.cubes)
                         foreach (var XYcube in Xcube)
                             foreach (var XYZcube in XYcube)
@@ -61,13 +64,15 @@ namespace TheDiplomWork
                                     float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.NormalizedToXYWorld, Scene.SS.env.player.coords.NormalizedLook);
                                     //POINT OF VIEWER
 
-                                    if (!StaticSettings.S.RealoderCauseOfPointOfView || scalar > 0 && range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * StaticSettings.S.RangeOfView)
+                                    if (!StaticSettings.S.RealoderCauseOfPointOfView || scalar > 0)
                                     {
+
                                         //if (!StaticSettings.S.RealoderCauseOfSunSided ||
                                         //    XYworld.xz.x == Scene.SS.env.player.coords.Player_chunk_position.x
                                         //    && XYworld.xz.z == Scene.SS.env.player.coords.Player_chunk_position.z)
                                         //    Draw_Quad_Full_Sunsided(x, y, z, localed_range, XYZcube.color, true); //Вроде обычный куб.
                                         //else
+                                        if (!StaticSettings.S.PointOfView_Circled_Visible_Cubes || range < CubicalMemory.Cube.rangeOfTheEdge * CubicalMemory.Chunk.Width * (StaticSettings.S.RangeOfView))
                                             Draw_Quad_Full_Sunsided_not_angled(x, y, z, localed_range, XYZcube.color);
                                     }
                                 }
