@@ -300,7 +300,7 @@ namespace TheDiplomWork
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.z]
                             ));
 
-                        scene.TemporalList_Refresher();
+                        scene.Reloader_TemporalList();
                     }
                     else if (e.Button.ToString() == "Left")
                     {

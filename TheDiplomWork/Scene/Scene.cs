@@ -169,21 +169,93 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Player_rotational_view.TryLoad("PlayerRotationalView");
                 SaveAndLoad.Load("default");
 
-                SS.SunAndMoon.initialization();
-                SS.SunAndMoon.CopyToReady();
-                SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
-
-                
+                Reloader_SunAndMoon();
             }
 
         }
-        public void TemporalList_Refresher()
+        public void Reloader_SunAndMoon()
+        {
+            SS.SunAndMoon.initialization();
+            SS.SunAndMoon.CopyToReady();
+            SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
+        }
+        public void Reloader_TemporalList()
         {
             SS.TemporalList.initialization();
             SS.TemporalList.CopyToReady();
             SI_temporallist.CreateVerticesForSquare_angled(ref SS.TemporalList);
         }
+        public void Reloader_Ghost()
+        {
+            if (!SS.Secondary.CopiedLastResult)
+            {
+                SS.Secondary.CopyToReady();
+                SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
+            }
+            //Призрачным куб.
+            if (StaticSettings.S.Secondary_SceneInfo_is_Activated &&
+                (
+                (StaticSettings.S.GhostCube_Add_in_Data_For_Draw &&
+                Scene.SS.env.player.coords.Player_cubical_lookforcube !=
+                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD)
+                || GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color
+                || ExtraAction
+                )
+                )
+            {
 
+                if (!newThread_ghost.IsAlive && !DoWork_ghost_IsAlive)
+                {
+                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
+                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
+                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
+                    newThread_ghost = new Thread(Scene.DoWork_ghost);
+                    newThread_ghost.Start(46);
+                }
+                GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = false;
+            }
+        }
+        public void Reloader_Main(OpenGL gl)
+        {
+            if (StaticSettings.S.RequiredReloader && !newThread.IsAlive && !DoWork_IsAlive)
+            {
+                if (!SS.Main.CopiedLastResult)
+                {
+                    SI_main.vertexBufferArray.Delete(gl);
+                    SS.Main.CopyToReady();
+                    SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
+                    DataForDraw_TemporalList.TemporalList.Clear();
+                    Reloader_TemporalList();
+                }
+
+                float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
+
+                if (SS.env.player.coords.Player_chunk_position.x >= 0 && SS.env.player.coords.Player_chunk_position.x < CubicalMemory.World.Quantity_of_chunks_in_root
+                    && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
+
+                    if ((StaticSettings.S.ReloaderCauseOfChunkRare && ((float)Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > ((float)StaticSettings.S.RangeOfView / 2 - 1)
+                    || (float)Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > ((float)StaticSettings.S.RangeOfView / 2 - 1)))
+                            || (StaticSettings.S.ReloaderCauseOfChangingChunk && SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD)
+                        || (StaticSettings.S.RealoderCauseOfPointOfView && scalar < StaticSettings.S.PointOfViewCoefOfDifference)
+                        || (StaticSettings.S.RealoderCauseOfSunSided && SS.env.player.coords.Player_cubical_position.y != SS.env.player.coords.Player_cubical_position_OLD.y)
+                        || StaticSettings.S.RealoderCauseOfBuildingBlocks)
+                    {
+                        newThread = new Thread(Scene.DoWork);
+                        newThread.Start(42);
+                        SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
+                        SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
+                        SS.env.player.coords.Player_cubical_position_OLD.x = SS.env.player.coords.Player_cubical_position.x;
+                        SS.env.player.coords.Player_cubical_position_OLD.y = SS.env.player.coords.Player_cubical_position.y;
+                        SS.env.player.coords.Player_cubical_position_OLD.z = SS.env.player.coords.Player_cubical_position.z;
+                        Console.WriteLine($"Inting My CoThread #{CounterMyCoThread++}");
+                        StaticSettings.S.RealoderCauseOfBuildingBlocks = false;
+                    }
+            }
+            else
+            {
+
+            }
+        }
         /// <summary>
         /// Draws the scene.
         /// </summary>
@@ -216,75 +288,10 @@ namespace TheDiplomWork
             }
             else Every10SecondsAction = false;
 
-            
 
-            if (!SS.Secondary.CopiedLastResult)
-            {
-                SS.Secondary.CopyToReady();
-                SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
-            }
-            //Призрачным куб.
-            if (StaticSettings.S.Secondary_SceneInfo_is_Activated && 
-                (
-                (StaticSettings.S.GhostCube_Add_in_Data_For_Draw &&
-                Scene.SS.env.player.coords.Player_cubical_lookforcube !=
-                Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD)
-                || GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color
-                || ExtraAction
-                )
-                )
-            {
+            Reloader_Ghost();
 
-                
-                if (!newThread_ghost.IsAlive && !DoWork_ghost_IsAlive)
-                {
-                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.x = Scene.SS.env.player.coords.Player_cubical_lookforcube.x;
-                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
-                    Scene.SS.env.player.coords.Player_cubical_lookforcube_OLD.z = Scene.SS.env.player.coords.Player_cubical_lookforcube.z;
-                    newThread_ghost = new Thread(Scene.DoWork_ghost);
-                    newThread_ghost.Start(46);
-                }
-                GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = false;
-            }
-
-            if (StaticSettings.S.RequiredReloader && !newThread.IsAlive && !DoWork_IsAlive)
-            {
-                if (!SS.Main.CopiedLastResult)
-                {
-                    SI_main.vertexBufferArray.Delete(gl);
-                    SS.Main.CopyToReady();
-                    SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
-                    DataForDraw_TemporalList.TemporalList.Clear();
-                    TemporalList_Refresher();
-                }
-
-                float scalar = GeneralProgrammingStuff.vec3_scalar(Scene.SS.env.player.coords.LastPlayerLook, Scene.SS.env.player.coords.NormalizedLook);
-
-                if (SS.env.player.coords.Player_chunk_position.x >= 0 && SS.env.player.coords.Player_chunk_position.x < CubicalMemory.World.Quantity_of_chunks_in_root
-                    && SS.env.player.coords.Player_chunk_position.z >= 0 && SS.env.player.coords.Player_chunk_position.z < CubicalMemory.World.Quantity_of_chunks_in_root)
-
-                if ((StaticSettings.S.ReloaderCauseOfChunkRare && ((float)Math.Abs(SS.env.player.coords.Player_chunk_position.x - SS.env.player.coords.Player_chunk_position_OLD.x) > ((float)StaticSettings.S.RangeOfView / 2 - 1)
-                || (float)Math.Abs(SS.env.player.coords.Player_chunk_position.z - SS.env.player.coords.Player_chunk_position_OLD.z) > ((float)StaticSettings.S.RangeOfView / 2 - 1)))
-                        ||(StaticSettings.S.ReloaderCauseOfChangingChunk && SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD) 
-                    || (StaticSettings.S.RealoderCauseOfPointOfView && scalar < StaticSettings.S.PointOfViewCoefOfDifference) 
-                    || (StaticSettings.S.RealoderCauseOfSunSided && SS.env.player.coords.Player_cubical_position.y != SS.env.player.coords.Player_cubical_position_OLD.y)
-                    || StaticSettings.S.RealoderCauseOfBuildingBlocks)
-                {
-                    newThread = new Thread(Scene.DoWork);
-                    newThread.Start(42);
-                    SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
-                    SS.env.player.coords.Player_chunk_position_OLD.z = SS.env.player.coords.Player_chunk_position.z;
-                    SS.env.player.coords.Player_cubical_position_OLD.x = SS.env.player.coords.Player_cubical_position.x;
-                    SS.env.player.coords.Player_cubical_position_OLD.y = SS.env.player.coords.Player_cubical_position.y;
-                    SS.env.player.coords.Player_cubical_position_OLD.z = SS.env.player.coords.Player_cubical_position.z;
-                    Console.WriteLine($"Inting My CoThread #{CounterMyCoThread++}");
-                    StaticSettings.S.RealoderCauseOfBuildingBlocks = false;
-                    }
-            }
-            else
-            {
-
-            }
+            Reloader_Main(gl);
 
             if (SS.Main.FirstInitialization) Draw_Wrapped(gl);
         }
@@ -336,15 +343,6 @@ namespace TheDiplomWork
             playerMatrix_veced[0] = Sun.S.player_pos;
             playerMatrix_veced[1] = Sun.S.player_stepback;
             playerMatrix_veced[2] = Sun.S.player_look;
-
-            //float temper = 0;
-            //for (int i = 0; i < 3; i++)
-            //    for (int j = i; j < 3; j++)
-            //    {
-            //        temper = sunMatrix_veced[j][i];
-            //        sunMatrix_veced[j][i] = sunMatrix_veced[i][j];
-            //        sunMatrix_veced[j][i] = temper;
-            //    }
 
             playerMatrix = new mat3(playerMatrix_veced);
             shaderProgram.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
