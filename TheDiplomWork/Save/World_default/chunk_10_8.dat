@@ -55,14 +55,12 @@
 3;9;0;True;Black
 3;9;1;True;GreenYellow
 3;9;2;True;GreenYellow
-3;9;3;True;GreenYellow
 3;9;4;True;GreenYellow
 3;9;5;True;GreenYellow
 3;9;6;True;White
 3;9;7;True;White
 3;9;8;True;White
 3;9;9;True;GreenYellow
-3;9;10;True;GreenYellow
 3;9;11;True;Blue
 3;9;12;True;Blue
 3;9;13;True;Blue
@@ -90,7 +88,6 @@
 4;9;7;True;White
 4;9;8;True;White
 4;9;9;True;GreenYellow
-4;9;10;True;GreenYellow
 4;9;11;True;Blue
 4;9;12;True;Blue
 4;9;13;True;GreenYellow
