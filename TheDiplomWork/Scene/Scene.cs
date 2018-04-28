@@ -288,7 +288,6 @@ namespace TheDiplomWork
             }
             else Every10SecondsAction = false;
 
-
             Reloader_Ghost();
 
             Reloader_Main(gl);
