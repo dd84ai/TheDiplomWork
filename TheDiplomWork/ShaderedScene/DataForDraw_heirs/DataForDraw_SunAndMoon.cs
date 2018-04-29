@@ -25,7 +25,7 @@ namespace TheDiplomWork
                  +localed_range * Sun.LocalSun.Sun_Height,
                 0,
 
-                localed_range * 10, System.Drawing.Color.Gold, 0.0f, 0.0f, 0.0f, 10.0f, true);
+                localed_range * 10, System.Drawing.Color.Gold, 10.0f, true);
 
             //Moon
             Draw_Quad_Full_Sunsided_angled(
@@ -37,7 +37,7 @@ namespace TheDiplomWork
                  -localed_range * Sun.LocalSun.Sun_Height,
                 0,
 
-                localed_range * 10, System.Drawing.Color.WhiteSmoke, 0.0f, 0.0f, 0.0f, 10.0f, true);
+                localed_range * 10, System.Drawing.Color.WhiteSmoke, 10.0f, true);
 
             END_initialization();
         }

@@ -3,7 +3,6 @@
 in vec3 in_Position;
 in vec3 in_Color;
 in vec3 in_Center;
-in vec3 in_Angles;
 in vec3 in_Size;
 out vec3 pass_Color;
 out vec4 vertex_x_out;
