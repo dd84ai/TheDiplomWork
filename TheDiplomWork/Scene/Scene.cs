@@ -57,6 +57,7 @@ namespace TheDiplomWork
         //  The shader program for our vertex and fragment shader.
         private ModifiedShaderProgram shaderProgram;
         private ModifiedShaderProgram shaderProgram_secondary;
+        private ModifiedShaderProgram shaderProgram_ghost;
         /// <summary>
         /// Initialises the scene.
         /// </summary>
@@ -116,10 +117,11 @@ namespace TheDiplomWork
                     Sun +
                     Main;
 
-                var fragmentShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\Shader.frag");
+                var FragmentalRegular = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\FragmentalRegular.frag");
+                var FragmentalTransparency = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\FragmentalTransparency.frag");
                 var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\Shader.geom");
                 shaderProgram = new ModifiedShaderProgram();
-                shaderProgram.Create(gl, vertexShaderSource, fragmentShaderSource_2, geometryShaderSource_2, null);
+                shaderProgram.Create(gl, vertexShaderSource, FragmentalRegular, geometryShaderSource_2, null);
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
@@ -134,13 +136,22 @@ namespace TheDiplomWork
                     Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
-                shaderProgram_secondary.Create(gl, vertexShaderSource2, fragmentShaderSource_2, geometryShaderSource_2, null);
+                shaderProgram_secondary.Create(gl, vertexShaderSource2, FragmentalRegular, geometryShaderSource_2, null);
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
                 shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
                 shaderProgram_secondary.BindAttributeLocation(gl, 4, "in_Size");
                 shaderProgram_secondary.AssertValid(gl);
+
+                shaderProgram_ghost = new ModifiedShaderProgram();
+                shaderProgram_ghost.Create(gl, vertexShaderSource2, FragmentalTransparency, geometryShaderSource_2, null);
+                shaderProgram_ghost.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
+                shaderProgram_ghost.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
+                shaderProgram_ghost.BindAttributeLocation(gl, 2, "in_Center");
+                shaderProgram_ghost.BindAttributeLocation(gl, 3, "in_Angles");
+                shaderProgram_ghost.BindAttributeLocation(gl, 4, "in_Size");
+                shaderProgram_ghost.AssertValid(gl);
             }
             catch (ShaderCompilationException ShadersMessageError)
             {
@@ -170,6 +181,9 @@ namespace TheDiplomWork
                 SaveAndLoad.Load("default");
 
                 Reloader_SunAndMoon();
+
+                gl.Enable(OpenGL.GL_BLEND);
+                gl.BlendFunc(OpenGL.GL_SRC_ALPHA, OpenGL.GL_ONE_MINUS_SRC_ALPHA);
             }
 
         }
@@ -378,10 +392,6 @@ namespace TheDiplomWork
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
                 SI_temporallist.vertexBufferArray.Unbind(gl);
 
-                SI_ghost.vertexBufferArray.Bind(gl);
-                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
-                SI_ghost.vertexBufferArray.Unbind(gl);
-
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3(1.0f, 1.0f, 0.0f));
@@ -396,6 +406,26 @@ namespace TheDiplomWork
                 //shaderProgram_sunandmoon.Unbind(gl);
 
                 shaderProgram_secondary.Unbind(gl);
+
+
+                shaderProgram_ghost.Bind(gl);
+
+                shaderProgram_ghost.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
+                shaderProgram_ghost.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
+                shaderProgram_ghost.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
+                shaderProgram_ghost.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
+                shaderProgram_ghost.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
+
+                sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
+                    new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
+                    new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
+                shaderProgram_ghost.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+
+                SI_ghost.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
+                SI_ghost.vertexBufferArray.Unbind(gl);
+
+                shaderProgram_ghost.Unbind(gl);
             }
             
             //SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );
