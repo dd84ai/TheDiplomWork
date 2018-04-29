@@ -40,6 +40,8 @@ namespace TheDiplomWork
 
             public bool PointOfView_Circled_Visible_Cubes = false;
 
+            public bool FallingCube = true;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)

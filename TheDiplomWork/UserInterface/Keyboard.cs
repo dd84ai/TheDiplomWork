@@ -105,10 +105,14 @@ namespace TheDiplomWork
                     break;
 
                 case 'f':
-                    StaticSettings.S.FlyMod = !StaticSettings.S.FlyMod;
-                    if (StaticSettings.S.FlyMod)
-                        Speech.ls.synthesizer.SpeakAsync("Fly Mod Activated");
-                    else Speech.ls.synthesizer.SpeakAsync("Fly Mod Deactivated");
+                    StaticSettings.S.FallingCube = !StaticSettings.S.FallingCube;
+                    if (StaticSettings.S.FallingCube)
+                        Speech.ls.synthesizer.SpeakAsync("Falling Cube Mod Activated");
+                    else Speech.ls.synthesizer.SpeakAsync("Falling Cube Mod Deactivated");
+                    //StaticSettings.S.FlyMod = !StaticSettings.S.FlyMod;
+                    //if (StaticSettings.S.FlyMod)
+                    //    Speech.ls.synthesizer.SpeakAsync("Fly Mod Activated");
+                    //else Speech.ls.synthesizer.SpeakAsync("Fly Mod Deactivated");
                     break;
 
                 case 'p':

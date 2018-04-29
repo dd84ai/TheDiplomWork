@@ -105,6 +105,7 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.LimeGreen, 10, "|P| - Phantom Mod: " + StaticSettings.S.PhantomMod, 2.0f);  place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Time.time.Time_Speed, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.SandyBrown, 10, "|F| - Falling Cube: " + StaticSettings.S.FallingCube, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
             }
@@ -276,18 +277,47 @@ namespace TheDiplomWork
                     if (e.Button.ToString() == "Right")
                     {
                         Music.wav_player.SaySoundEffect("BlockPlacement");
+
+                        
+                        int y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
+                        bool found = false;
+                        if (StaticSettings.S.FallingCube)
+                        {
+                            for (; y >= 0; y--)
+                                if (!Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                                [y]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled)
+                                { found = true; }
+                                else break;
+
+                            if (found)
+                                y++;
+                            else y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
+                        }
+
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                            [y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = true;
+
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                            [y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
+
+                        Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
 
                         DataForDraw_TemporalList.TemporalList.Add(new DataForDraw_TemporalList.Chunk_and_Cube(Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
@@ -296,7 +326,7 @@ namespace TheDiplomWork
                         [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                         [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
+                        [y]
                         [Scene.SS.env.player.coords.Player_cubical_lookforcube.z]
                             ));
 
