@@ -108,6 +108,7 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.SandyBrown, 10, "|F| - Falling Cube: " + StaticSettings.S.FallingCube, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetTotalSeconds(), 2.0f); place++;
             }
             else
             {
@@ -318,6 +319,13 @@ namespace TheDiplomWork
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
                             [y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
+
+                        Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].FallingStartingTime = (float)Time.time.GetTotalSeconds();
 
                         DataForDraw_TemporalList.TemporalList.Add(new DataForDraw_TemporalList.Chunk_and_Cube(Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]

@@ -12,7 +12,13 @@ vec4 Processed(vec3 inp)
 	else 
 	{
 		if (in_Center.y > 0)
-		return Shifted_Position(Translate(inp,vec3(0,in_Center.y - in_Position.y,0)));
+		{
+		float height = in_Center.y - in_Position.y;
+		height = height - (9.8 / 2) * (TimeTotalSeconds - in_Center.x) * (TimeTotalSeconds - in_Center.x);
+		if (height > 0)
+		return Shifted_Position(Translate(inp,vec3(0,height,0)));
+		else return Shifted_Position(inp);
+		}
 		else return Shifted_Position(inp);
 	}
 }

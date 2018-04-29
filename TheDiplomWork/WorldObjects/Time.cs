@@ -26,12 +26,12 @@ namespace TheDiplomWork
             {
                 return ((GetTotalRadianTime() + Math.PI) % (Math.PI * 2)) / Math.PI;
             }
-            int TotalReadlSeconds = 0;
-            public int GetTotalSeconds()
+            double TotalReadlSeconds = 0;
+            public double GetTotalSeconds()
             {
                 return TotalReadlSeconds;
             }
-            public void SetTotalSeconds(int inp)
+            public void SetTotalSeconds(double inp)
             {
                 TotalReadlSeconds = inp;
             }

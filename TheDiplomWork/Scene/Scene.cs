@@ -41,7 +41,7 @@ namespace TheDiplomWork
         mat4 rotMatrix;
         mat3 playerMatrix;
         mat3 sunMatrix;
-        float settingsTransparency;
+        float TimeTotalSeconds = 0;
         mat3 zeroMatrix = new mat3(new vec3(0),
                     new vec3(0),
                     new vec3(0));
@@ -275,7 +275,7 @@ namespace TheDiplomWork
         public void Draw(OpenGL gl)
         {
             TimeSpan timeItTook = (DateTime.Now - start);
-            Time.time.SetTotalSeconds((int)(DateTime.Now - start_independent).TotalSeconds);
+            Time.time.SetTotalSeconds((DateTime.Now - start_independent).TotalSeconds);
             Time.time.TimeIncrease(timeItTook.TotalMilliseconds * Time.time.Time_Speed);
             start = DateTime.Now;
 
@@ -357,6 +357,7 @@ namespace TheDiplomWork
 
             shaderProgram.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
             shaderProgram.SetUniform1(gl, "settingsTransparency", 1.0f);
+            shaderProgram.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
 
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
@@ -381,6 +382,7 @@ namespace TheDiplomWork
                     new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
+                shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
 
                 SI_temporallist.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
