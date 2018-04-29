@@ -11,7 +11,9 @@ vec4 Processed(vec3 inp)
 	}
 	else 
 	{
-		return Shifted_Position(inp);
+		if (in_Center.y > 0)
+		return Shifted_Position(Translate(inp,vec3(0,in_Center.y - in_Position.y,0)));
+		else return Shifted_Position(inp);
 	}
 }
 void main(void) 
