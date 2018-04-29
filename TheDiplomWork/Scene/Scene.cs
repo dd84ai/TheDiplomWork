@@ -41,6 +41,7 @@ namespace TheDiplomWork
         mat4 rotMatrix;
         mat3 playerMatrix;
         mat3 sunMatrix;
+        float settingsTransparency;
         mat3 zeroMatrix = new mat3(new vec3(0),
                     new vec3(0),
                     new vec3(0));
@@ -57,7 +58,7 @@ namespace TheDiplomWork
         //  The shader program for our vertex and fragment shader.
         private ModifiedShaderProgram shaderProgram;
         private ModifiedShaderProgram shaderProgram_secondary;
-        private ModifiedShaderProgram shaderProgram_ghost;
+        //private ModifiedShaderProgram shaderProgram_ghost;
         /// <summary>
         /// Initialises the scene.
         /// </summary>
@@ -117,11 +118,10 @@ namespace TheDiplomWork
                     Sun +
                     Main;
 
-                var FragmentalRegular = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\FragmentalRegular.frag");
-                var FragmentalTransparency = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\FragmentalTransparency.frag");
-                var geometryShaderSource_2 = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\Shader.geom");
+                var FragmentalShader = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\FragmentalShader.frag");
+                var GeometryShader = ManifestResourceLoader.LoadTextFile(@"Shaders\OtherShaders\GeometryShader.geom");
                 shaderProgram = new ModifiedShaderProgram();
-                shaderProgram.Create(gl, vertexShaderSource, FragmentalRegular, geometryShaderSource_2, null);
+                shaderProgram.Create(gl, vertexShaderSource, FragmentalShader, GeometryShader, null);
                 shaderProgram.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram.AssertValid(gl);
@@ -136,22 +136,13 @@ namespace TheDiplomWork
                     Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
-                shaderProgram_secondary.Create(gl, vertexShaderSource2, FragmentalRegular, geometryShaderSource_2, null);
+                shaderProgram_secondary.Create(gl, vertexShaderSource2, FragmentalShader, GeometryShader, null);
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_secondary.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
                 shaderProgram_secondary.BindAttributeLocation(gl, 2, "in_Center");
                 shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
                 shaderProgram_secondary.BindAttributeLocation(gl, 4, "in_Size");
                 shaderProgram_secondary.AssertValid(gl);
-
-                shaderProgram_ghost = new ModifiedShaderProgram();
-                shaderProgram_ghost.Create(gl, vertexShaderSource2, FragmentalTransparency, geometryShaderSource_2, null);
-                shaderProgram_ghost.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
-                shaderProgram_ghost.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
-                shaderProgram_ghost.BindAttributeLocation(gl, 2, "in_Center");
-                shaderProgram_ghost.BindAttributeLocation(gl, 3, "in_Angles");
-                shaderProgram_ghost.BindAttributeLocation(gl, 4, "in_Size");
-                shaderProgram_ghost.AssertValid(gl);
             }
             catch (ShaderCompilationException ShadersMessageError)
             {
@@ -363,7 +354,9 @@ namespace TheDiplomWork
             sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3(StaticSettings.S.SunStatus.x,0,0));
-            shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+
+            shaderProgram.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+            shaderProgram.SetUniform1(gl, "settingsTransparency", 1.0f);
 
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
@@ -387,10 +380,16 @@ namespace TheDiplomWork
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
                     new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+                shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
 
                 SI_temporallist.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
                 SI_temporallist.vertexBufferArray.Unbind(gl);
+
+                shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
+                SI_ghost.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
+                SI_ghost.vertexBufferArray.Unbind(gl);
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
@@ -398,6 +397,7 @@ namespace TheDiplomWork
                 //Второе значений 3 строки отключает Point Of view если больше 0.5 в геом шейдере.
                 //Третье пусть отключит вращение.
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+                shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
                 //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
 
                 SI_sunandmoon.vertexBufferArray.Bind(gl);
@@ -407,25 +407,6 @@ namespace TheDiplomWork
 
                 shaderProgram_secondary.Unbind(gl);
 
-
-                shaderProgram_ghost.Bind(gl);
-
-                shaderProgram_ghost.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
-                shaderProgram_ghost.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
-                shaderProgram_ghost.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
-                shaderProgram_ghost.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
-                shaderProgram_ghost.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
-
-                sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
-                    new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
-                shaderProgram_ghost.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
-
-                SI_ghost.vertexBufferArray.Bind(gl);
-                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
-                SI_ghost.vertexBufferArray.Unbind(gl);
-
-                shaderProgram_ghost.Unbind(gl);
             }
             
             //SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );

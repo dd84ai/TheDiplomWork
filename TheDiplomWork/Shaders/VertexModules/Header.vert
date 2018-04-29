@@ -15,6 +15,7 @@ uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 rotMatrix;
 uniform mat3 sunMatrix;
+uniform float settingsTransparency;
 
 vec4 Shifted_Position(vec3 input_vec)
 {

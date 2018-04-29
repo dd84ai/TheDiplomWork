@@ -106,7 +106,6 @@
     <Compile Include="UserInterface\Mouse.cs" />
     <Compile Include="WorldObjects\Sun.cs" />
     <Compile Include="WorldObjects\Time.cs" />
-    <None Include="Shaders\OtherShaders\FragmentalTransparency.frag" />
     <None Include="Shaders\VertexModules\Sizer.vert" />
     <None Include="Shaders\VertexModules\Cuter.vert" />
     <None Include="Shaders\VertexModules\Header.vert" />
@@ -132,8 +131,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Shaders\Main\Main.vert" />
-    <None Include="Shaders\OtherShaders\FragmentalRegular.frag" />
-    <None Include="Shaders\OtherShaders\Shader.geom" />
+    <None Include="Shaders\OtherShaders\FragmentalShader.frag" />
+    <None Include="Shaders\OtherShaders\GeometryShader.geom" />
     <None Include="Shaders\VertexModules\Rotator.vert" />
     <None Include="Shaders\Main\Adv_main.vert" />
     <None Include="Shaders\VertexModules\Sun.vert" />
