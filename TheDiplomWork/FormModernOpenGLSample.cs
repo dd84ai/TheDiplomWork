@@ -339,6 +339,11 @@ namespace TheDiplomWork
                             ));
 
                         scene.Reloader_TemporalList();
+
+                        float TookTime = (float)Math.Sqrt((Scene.SS.env.player.coords.Player_cubical_lookforcube.y - y) * 2 / 9.8);
+
+                        if (Time.time.GetTotalSeconds() + TookTime > Time.time.TimeWaitForFallingCubes)
+                        Time.time.TimeWaitForFallingCubes = Time.time.GetTotalSeconds() + TookTime;
                     }
                     else if (e.Button.ToString() == "Left")
                     {

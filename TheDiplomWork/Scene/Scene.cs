@@ -41,7 +41,6 @@ namespace TheDiplomWork
         mat4 rotMatrix;
         mat3 playerMatrix;
         mat3 sunMatrix;
-        float TimeTotalSeconds = 0;
         mat3 zeroMatrix = new mat3(new vec3(0),
                     new vec3(0),
                     new vec3(0));
@@ -295,6 +294,7 @@ namespace TheDiplomWork
 
             Reloader_Ghost();
 
+            if (Time.time.GetTotalSeconds() > Time.time.TimeWaitForFallingCubes)
             Reloader_Main(gl);
 
             if (SS.Main.FirstInitialization) Draw_Wrapped(gl);

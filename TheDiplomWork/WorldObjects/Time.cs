@@ -27,6 +27,7 @@ namespace TheDiplomWork
                 return ((GetTotalRadianTime() + Math.PI) % (Math.PI * 2)) / Math.PI;
             }
             double TotalReadlSeconds = 0;
+            public double TimeWaitForFallingCubes = 0;
             public double GetTotalSeconds()
             {
                 return TotalReadlSeconds;
