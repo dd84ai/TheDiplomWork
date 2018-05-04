@@ -327,7 +327,7 @@ namespace TheDiplomWork
                             [y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].FallingStartingTime = (float)Time.time.GetTotalSeconds();
 
-                        DataForDraw_TemporalList.TemporalList.Add(new DataForDraw_TemporalList.Chunk_and_Cube(Scene.SS.env.cub_mem.world.World_as_Whole
+                        DataForDraw_TemporalList.TemporalList.Add(new CubicalMemory.Chunk_and_Cube_link(Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z],
                             Scene.SS.env.cub_mem.world.World_as_Whole

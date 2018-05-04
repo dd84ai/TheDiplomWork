@@ -35,7 +35,7 @@ namespace TheDiplomWork
             public GeneralProgrammingStuff.Point3Int xyz = new Point3Int(0,0,0);
             public int FallingFromHeight = 0;
             public float FallingStartingTime = 0;
-
+            public bool IsTakenForExplosion = false;
             public bool IsFilled_Default;
             public System.Drawing.Color color_default;
             public Cube(int _x, int _y, int _z)
@@ -121,8 +121,20 @@ namespace TheDiplomWork
                     }
             }
         }
+
+        public class Chunk_and_Cube_link
+        {
+            public CubicalMemory.Chunk chunk;
+            public CubicalMemory.Cube cube;
+            public Chunk_and_Cube_link(CubicalMemory.Chunk a, CubicalMemory.Cube b)
+            {
+                chunk = a; cube = b;
+            }
+        }
         public World world;
 
         //Кубик состоит из 6 граней, квадратов.
     }
+
+    
 }

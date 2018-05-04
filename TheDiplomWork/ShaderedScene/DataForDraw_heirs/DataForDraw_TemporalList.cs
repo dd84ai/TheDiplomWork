@@ -8,16 +8,7 @@ namespace TheDiplomWork
 {
     class DataForDraw_TemporalList : DataForDraw_angled
     {
-        public class Chunk_and_Cube
-        {
-            public CubicalMemory.Chunk chunk;
-            public CubicalMemory.Cube cube;
-            public Chunk_and_Cube(CubicalMemory.Chunk a, CubicalMemory.Cube b)
-            {
-                chunk = a; cube = b;
-            }
-        }
-        public static List<DataForDraw_TemporalList.Chunk_and_Cube> TemporalList = new List<DataForDraw_TemporalList.Chunk_and_Cube>();
+        public static List<CubicalMemory.Chunk_and_Cube_link> TemporalList = new List<CubicalMemory.Chunk_and_Cube_link>();
         public override void initialization()
         {
             START_initialization();

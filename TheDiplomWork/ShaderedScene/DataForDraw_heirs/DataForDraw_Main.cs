@@ -50,7 +50,7 @@ namespace TheDiplomWork
                         foreach (var XYcube in Xcube)
                             foreach (var XYZcube in XYcube)
                             {
-                                if (XYZcube.IsFilled)
+                                if (XYZcube.IsFilled && !XYZcube.IsTakenForExplosion)
                                 {
                                     ShaderedScene.CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
 

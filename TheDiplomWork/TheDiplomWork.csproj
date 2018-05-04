@@ -77,6 +77,7 @@
     <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
     <Compile Include="UserInterface\Music.cs" />
     <Compile Include="UserInterface\Speech.cs" />
+    <Compile Include="WorldObjects\Explosion.cs" />
     <Compile Include="WorldObjects\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
     <Compile Include="ShaderedScene\DataForDraw.cs" />
