@@ -13,11 +13,10 @@ namespace TheDiplomWork
             CubicalMemory.Chunk_and_Cube_link abc;
             public Exploder()
             {
-                abc = new CubicalMemory.Chunk_and_Cube_link();
+
             }
 
         }
         public static Exploder exp = new Exploder();
-
     }
 }
