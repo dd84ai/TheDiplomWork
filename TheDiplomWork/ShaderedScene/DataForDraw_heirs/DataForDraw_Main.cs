@@ -14,17 +14,6 @@ namespace TheDiplomWork
         {
             START_initialization();
 
-            //FOR OG WAR
-            //Draw_Quad_Perpendecular_to_OSy
-            //    (
-            //    0, //Start_x
-            //    0, //Start_z
-            //    CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Width * CubicalMemory.Cube.rangeOfTheEdge, //End_x
-            //    CubicalMemory.World.Quantity_of_chunks_in_root * CubicalMemory.Chunk.Length * CubicalMemory.Cube.rangeOfTheEdge, //End_z
-            //    -1, //Height
-            //    System.Drawing.Color.Gray
-            //    );
-
             int i = 0;
             int j = 0;
 
