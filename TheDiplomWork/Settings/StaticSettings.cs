@@ -42,6 +42,8 @@ namespace TheDiplomWork
 
             public bool FallingCube = true;
 
+            public bool ExplosionMod = false;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)

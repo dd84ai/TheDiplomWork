@@ -94,6 +94,8 @@ namespace TheDiplomWork
             WhatToMove.y -= step_vector_extra.y;
             WhatToMove.z -= step_vector_extra.z;
         }
+        public static bool Ctrl_is_pressed = false;
+        public static bool Alt_is_pressed = false;
         public static void Wrapped_SINGLE_KeyPressed_Reaction(char key)
         {
             
@@ -120,6 +122,23 @@ namespace TheDiplomWork
                     if (StaticSettings.S.PhantomMod)
                         Speech.ls.synthesizer.SpeakAsync("Phantom Mod Activated");
                     else Speech.ls.synthesizer.SpeakAsync("Phantom Mod Deactivated");
+
+                    break;
+
+                case 'e':
+                    StaticSettings.S.ExplosionMod = !StaticSettings.S.ExplosionMod;
+                    if (StaticSettings.S.ExplosionMod)
+                        Speech.ls.synthesizer.SpeakAsync("Explosion Mod Activated");
+                    else Speech.ls.synthesizer.SpeakAsync("Explosion Mod Deactivated");
+                    break;
+
+                case 'v':;
+                    if (StaticSettings.S.ExplosionMod)
+                        Explosion.exp.Exploding_Rewriter();
+                    break;
+                case 'b':
+                    if (StaticSettings.S.ExplosionMod)
+                        Explosion.exp.Exploding_Rewriter(false);
                     break;
 
                 case 'h':

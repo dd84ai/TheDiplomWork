@@ -74,6 +74,14 @@ namespace TheDiplomWork
                 if ((Control.ModifierKeys & Keys.Shift) != 0)
                     Keyboard.DoSpecificAction('z');
 
+                if ((Control.ModifierKeys & Keys.Control) != 0)
+                    Keyboard.Ctrl_is_pressed = true;
+                else Keyboard.Ctrl_is_pressed = false;
+
+                if ((Control.ModifierKeys & Keys.Alt) != 0)
+                    Keyboard.Alt_is_pressed = true;
+                else Keyboard.Alt_is_pressed = false;
+
                 Keyboard.DoAction();
 
                 if (Mouse.MouseIsActive)
@@ -106,8 +114,11 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Time.time.Time_Speed, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.SandyBrown, 10, "|F| - Falling Cube: " + StaticSettings.S.FallingCube, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Red, 10, "|E| - Exploding Mod: " + StaticSettings.S.ExplosionMod, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Ctrl: " + Keyboard.Ctrl_is_pressed, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Alt: " + Keyboard.Alt_is_pressed, 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetTotalSeconds(), 2.0f); place++;
             }
             else
@@ -299,6 +310,18 @@ namespace TheDiplomWork
                             else y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                         }
 
+                        {
+                            float x1 = 0, y1 = 0, z1 = 0;
+                            ShaderedScene.CalculateFromMaptoGraphical(Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].xz, Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                            [y]
+                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].xyz, ref x1, ref y1, ref z1);
+                            Explosion.exp.SetBombLocation(x1, y1, z1);
+                        }
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
