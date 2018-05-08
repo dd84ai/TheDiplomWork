@@ -42,7 +42,7 @@ namespace TheDiplomWork
 
             public bool FallingCube = true;
 
-            public bool ExplosionMod = false;
+            public bool ExplosionMod = true;
 
             public Settings()
             {

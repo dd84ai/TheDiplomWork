@@ -26,13 +26,13 @@ namespace TheDiplomWork
                 Bomb_precise_position.y = y1;
                 Bomb_precise_position.z = z1;
             }
-            public void Exploding_Rewriter(bool Explode = true)
+            public void Exploding_Rewriter()
             {
                 Point2Int Bomb_chunk_position = new Point2Int(0, 0);
                 Point3Int Bomb_cubical_position = new Point3Int(0, 0, 0);
                 Scene.SS.env.player.coords.Reverse_presice_to_map_coords(Bomb_precise_position, ref Bomb_chunk_position, ref Bomb_cubical_position);
 
-                int Range_of_chunk_explosion = (((int)Explosion_radius) / CubicalMemory.Chunk.Width) + 1;
+                int Range_of_chunk_explosion = (int)Explosion_radius;
 
                 int i = 0;
                 int j = 0;
@@ -59,7 +59,7 @@ namespace TheDiplomWork
                                 foreach (var XYcube in Xcube)
                                     foreach (var XYZcube in XYcube)
                                     {
-                                        if (XYZcube.IsFilled && !XYZcube.IsTakenForExplosion)
+                                        if (XYZcube.IsFilled)
                                         {
                                             ShaderedScene.CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
 
@@ -72,22 +72,22 @@ namespace TheDiplomWork
 
                                             if (range < CubicalMemory.Cube.rangeOfTheEdge * Explosion_radius)
                                             {
-                                                if (Explode)
-                                                {
                                                     XYZcube.IsTakenForExplosion = true;
-                                                    XYZcube.color = System.Drawing.Color.Red;
-                                                }
-                                                else
-                                                {
-                                                    XYZcube.IsTakenForExplosion = false;
-                                                    XYZcube.color = XYZcube.color_default;
-                                                }
                                                 //Draw_Quad_Full_Sunsided_not_angled(x, y, z, localed_range, XYZcube.color);
                                             }
                                         }
                                     }
                     }
                 }
+            }
+            public void Exploding_Restorer()
+            {
+                foreach (var XWorld in Scene.SS.env.cub_mem.world.World_as_Whole)
+                    foreach (var XYWorld in XWorld)
+                        foreach (var Xcube in XYWorld.cubes)
+                            foreach (var XYcube in Xcube)
+                                foreach (var XYZcube in XYcube)
+                                    XYZcube.IsTakenForExplosion = false;
             }
         }
         public static Exploder exp = new Exploder();

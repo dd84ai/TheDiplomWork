@@ -301,7 +301,13 @@ namespace TheDiplomWork
                                 [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
                                 [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
                                 [y]
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled)
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled
+                                || Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                                [y]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsTakenForExplosion)
                                 { found = true; }
                                 else break;
 
@@ -322,20 +328,22 @@ namespace TheDiplomWork
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].xyz, ref x1, ref y1, ref z1);
                             Explosion.exp.SetBombLocation(x1, y1, z1);
                         }
-                        Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = true;
+                        if (!StaticSettings.S.ExplosionMod)
+                        {
+                            Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                                [y]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = true;
 
-                        Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
-
+                            Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                                [y]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
+                        }
                         Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes

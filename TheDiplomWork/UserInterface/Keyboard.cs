@@ -62,13 +62,26 @@ namespace TheDiplomWork
                                     [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
                                     [Scene.SS.env.player.coords.Player_cubical_position.x]
                                     [Scene.SS.env.player.coords.Player_cubical_position.y - 1]
-                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled)
+                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled
+                                    && !Scene.SS.env.cub_mem.world.World_as_Whole
+                                    [Scene.SS.env.player.coords.Player_chunk_position.x]
+                                    [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
+                                    [Scene.SS.env.player.coords.Player_cubical_position.x]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.y - 1]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsTakenForExplosion)
                                     || (!StaticSettings.S.PhantomMod && Scene.SS.env.cub_mem.world.World_as_Whole
                                     [Scene.SS.env.player.coords.Player_chunk_position.x]
                                     [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
                                     [Scene.SS.env.player.coords.Player_cubical_position.x]
                                     [Scene.SS.env.player.coords.Player_cubical_position.y]
-                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled))
+                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsFilled
+                                    && !Scene.SS.env.cub_mem.world.World_as_Whole
+                                    [Scene.SS.env.player.coords.Player_chunk_position.x]
+                                    [Scene.SS.env.player.coords.Player_chunk_position.z].cubes
+                                    [Scene.SS.env.player.coords.Player_cubical_position.x]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.y]
+                                    [Scene.SS.env.player.coords.Player_cubical_position.z].IsTakenForExplosion
+                                    ))
                 {
                     MoveVector.x = -MoveVector.x;
                     MoveVector.y = -MoveVector.y;
@@ -132,14 +145,16 @@ namespace TheDiplomWork
                     else Speech.ls.synthesizer.SpeakAsync("Explosion Mod Deactivated");
                     break;
 
-                case 'v':;
+                case 'b'://boom!
                     if (StaticSettings.S.ExplosionMod)
                         Explosion.exp.Exploding_Rewriter();
+                    StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                     break;
-                case 'b':
+                case 'v'://vortex of time
                     if (StaticSettings.S.ExplosionMod)
-                        Explosion.exp.Exploding_Rewriter(false);
-                    break;
+                        Explosion.exp.Exploding_Restorer();
+                    StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                    break;  
 
                 case 'h':
                     StaticSettings.S.HelpInfoForPlayer = !StaticSettings.S.HelpInfoForPlayer;
