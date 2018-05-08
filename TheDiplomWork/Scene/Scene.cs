@@ -52,6 +52,7 @@ namespace TheDiplomWork
         static SceneInfo_Main SI_main;
         static SceneInfo_Secondary SI_ghost;
         static SceneInfo_Secondary SI_temporallist;
+        static SceneInfo_Secondary SI_explosionlist;
         static SceneInfo_Secondary SI_sunandmoon;
 
         //  The shader program for our vertex and fragment shader.
@@ -82,6 +83,7 @@ namespace TheDiplomWork
                 SI_ghost = new SceneInfo_Secondary(gl);            
                 SI_sunandmoon = new SceneInfo_Secondary(gl);
                 SI_temporallist = new SceneInfo_Secondary(gl);
+                SI_explosionlist = new SceneInfo_Secondary(gl);
                 newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
@@ -188,6 +190,12 @@ namespace TheDiplomWork
             SS.TemporalList.initialization();
             SS.TemporalList.CopyToReady();
             SI_temporallist.CreateVerticesForSquare_angled(ref SS.TemporalList);
+        }
+        public static void Reloader_ExplosionList()
+        {
+            SS.ExplosionList.initialization();
+            SS.ExplosionList.CopyToReady();
+            SI_explosionlist.CreateVerticesForSquare_angled(ref SS.ExplosionList);
         }
         public void Reloader_Ghost()
         {
@@ -387,6 +395,10 @@ namespace TheDiplomWork
                 SI_temporallist.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
                 SI_temporallist.vertexBufferArray.Unbind(gl);
+
+                SI_explosionlist.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.ExplosionList.Quantity() / 3);
+                SI_explosionlist.vertexBufferArray.Unbind(gl);
 
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
                 SI_ghost.vertexBufferArray.Bind(gl);

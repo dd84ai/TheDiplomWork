@@ -358,6 +358,19 @@ namespace TheDiplomWork
                             [y]
                             [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].FallingStartingTime = (float)Time.time.GetTotalSeconds();
 
+                        Explosion.exp.StartingTime = (float)Time.time.GetTotalSeconds();
+
+                        Explosion.exp.ExplosionCenter = new CubicalMemory.Chunk_and_Cube_link(Scene.SS.env.cub_mem.world.World_as_Whole
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z],
+                            Scene.SS.env.cub_mem.world.World_as_Whole
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                        [y]
+                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z]
+                            );
+
                         DataForDraw_TemporalList.TemporalList.Add(new CubicalMemory.Chunk_and_Cube_link(Scene.SS.env.cub_mem.world.World_as_Whole
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
                             [Scene.SS.env.player.coords.Player_chunk_lookforcube.z],

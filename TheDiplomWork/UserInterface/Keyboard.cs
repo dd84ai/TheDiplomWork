@@ -147,13 +147,19 @@ namespace TheDiplomWork
 
                 case 'b'://boom!
                     if (StaticSettings.S.ExplosionMod)
+                    {
                         Explosion.exp.Exploding_Rewriter();
-                    StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                        Scene.Reloader_ExplosionList();
+                        StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                    }
                     break;
                 case 'v'://vortex of time
                     if (StaticSettings.S.ExplosionMod)
+                    {
                         Explosion.exp.Exploding_Restorer();
-                    StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                        Scene.Reloader_ExplosionList();
+                        StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                    }
                     break;  
 
                 case 'h':

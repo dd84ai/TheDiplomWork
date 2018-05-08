@@ -26,6 +26,10 @@ namespace TheDiplomWork
                 Bomb_precise_position.y = y1;
                 Bomb_precise_position.z = z1;
             }
+
+            public float StartingTime = 0;
+            public CubicalMemory.Chunk_and_Cube_link ExplosionCenter;
+
             public void Exploding_Rewriter()
             {
                 Point2Int Bomb_chunk_position = new Point2Int(0, 0);
@@ -33,6 +37,7 @@ namespace TheDiplomWork
                 Scene.SS.env.player.coords.Reverse_presice_to_map_coords(Bomb_precise_position, ref Bomb_chunk_position, ref Bomb_cubical_position);
 
                 int Range_of_chunk_explosion = (int)Explosion_radius;
+                DataForDraw_ExplodingList.TemporalList.Clear();
 
                 int i = 0;
                 int j = 0;
@@ -73,12 +78,15 @@ namespace TheDiplomWork
                                             if (range < CubicalMemory.Cube.rangeOfTheEdge * Explosion_radius)
                                             {
                                                     XYZcube.IsTakenForExplosion = true;
+                                                DataForDraw_ExplodingList.TemporalList.Add(new CubicalMemory.Chunk_and_Cube_link(XYworld,XYZcube));
                                                 //Draw_Quad_Full_Sunsided_not_angled(x, y, z, localed_range, XYZcube.color);
                                             }
                                         }
                                     }
                     }
                 }
+
+                
             }
             public void Exploding_Restorer()
             {
