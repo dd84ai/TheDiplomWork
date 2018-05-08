@@ -16,6 +16,7 @@ uniform mat4 rotMatrix;
 uniform mat3 sunMatrix;
 uniform float settingsTransparency;
 uniform float TimeTotalSeconds;
+uniform float settingsTHIS_IS_EXPLOSION;
 
 vec4 Shifted_Position(vec3 input_vec)
 {

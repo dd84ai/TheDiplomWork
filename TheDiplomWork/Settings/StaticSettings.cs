@@ -36,7 +36,7 @@ namespace TheDiplomWork
 
             public bool SunEnabled = false;
 
-            public bool MusicIsEnabled = true;
+            public bool MusicIsEnabled = false;
 
             public bool PointOfView_Circled_Visible_Cubes = false;
 

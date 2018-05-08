@@ -366,6 +366,7 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
             shaderProgram.SetUniform1(gl, "settingsTransparency", 1.0f);
             shaderProgram.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
+            shaderProgram.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
 
             //  Bind the out vertex array.
             SI_main.vertexBufferArray.Bind(gl);
@@ -391,15 +392,28 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
+                shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
 
                 SI_temporallist.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
                 SI_temporallist.vertexBufferArray.Unbind(gl);
 
-                SI_explosionlist.vertexBufferArray.Bind(gl);
-                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.ExplosionList.Quantity() / 3);
-                SI_explosionlist.vertexBufferArray.Unbind(gl);
+                if (!newThread.IsAlive && !DoWork_IsAlive)
+                {
+                    if (Explosion.exp.StartingFirst)
+                    {
+                        Explosion.exp.StartingFirst = false;
+                        Explosion.exp.StartingShiftForLoeading = (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingTime;
+                    }
 
+                    shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingShiftForLoeading);// - Explosion.exp.StartingShiftForLoeading);
+                    shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 1.0f);
+                    SI_explosionlist.vertexBufferArray.Bind(gl);
+                    gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.ExplosionList.Quantity() / 3);
+                    SI_explosionlist.vertexBufferArray.Unbind(gl);
+                    shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
+                }
+                shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
                 SI_ghost.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
