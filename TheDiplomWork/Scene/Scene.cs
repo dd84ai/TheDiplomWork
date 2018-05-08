@@ -402,6 +402,13 @@ namespace TheDiplomWork
                 {
                     if (Explosion.exp.StartingFirst)
                     {
+                        //Music.wav_player.SaySoundEffect("Explosion");
+                        //Interface.Time_pause(900);
+                        //TimeSpan timeItTook = (DateTime.Now - start);
+                        //Time.time.SetTotalSeconds((DateTime.Now - start_independent).TotalSeconds);
+                        //Time.time.TimeIncrease(timeItTook.TotalMilliseconds * Time.time.Time_Speed);
+                        //start = DateTime.Now;
+
                         Explosion.exp.StartingFirst = false;
                         Explosion.exp.StartingFirstStarted = true;
                         Explosion.exp.StartingShiftForLoeading = (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingTime;

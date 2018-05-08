@@ -148,6 +148,7 @@ namespace TheDiplomWork
                 case 'b'://boom!
                     if (StaticSettings.S.ExplosionMod)
                     {
+                        Music.wav_player.SaySoundEffect("Explosion");
                         Explosion.exp.StartingFirst = true;
                         Explosion.exp.StartingFirstStarted = false;
                         Explosion.exp.Exploding_Rewriter();
