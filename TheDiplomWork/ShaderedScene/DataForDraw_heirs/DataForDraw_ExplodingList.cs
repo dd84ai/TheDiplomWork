@@ -20,9 +20,9 @@ namespace TheDiplomWork
             float Me = 1.0f; //mass of the explosive charge
             float Mc = 1.0f; //mass of the fragmenting casing
             float K = 1 / 2; //Geometrical Constant
-            float dE = 2.157e+6F; // J/kg Heat of TNT Explosion
+            float dE = 2.157e+6f; // J/kg Heat of TNT Explosion
 
-            float V = (2 * dE * ((Mc / Me) / (1 + K * (Mc / Me)))/10000000.0f);
+            float V = (float)Math.Sqrt(2 * dE * ((Mc / Me) / (1 + K * (Mc / Me))))/100.0f;
 
             foreach (var item in TemporalList)
             {
@@ -30,7 +30,7 @@ namespace TheDiplomWork
 
                 float Vx = x - cx, Vy = y - cy, Vz = z - cz;
                 float Range = (float)Math.Sqrt((double)Vx * Vx + Vy * Vy + Vz * Vz);
-                Vx /= Range * V; Vy /= Range * V; Vz /= Range * V;
+                Vx *= V / Range; Vy *= V / Range; Vz *= V / Range;
 
                 Draw_Quad_Full_Sunsided_angled(x, y, z, Vx,Vy,Vz, localed_range, item.cube.color, item.cube.FallingStartingTime, true);
             }

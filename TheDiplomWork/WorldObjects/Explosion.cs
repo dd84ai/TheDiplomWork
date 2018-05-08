@@ -30,6 +30,7 @@ namespace TheDiplomWork
             public float StartingTime = 0;
 
             public bool StartingFirst = false;
+            public bool StartingFirstStarted = false;
             public float StartingShiftForLoeading = 0;
 
             public CubicalMemory.Chunk_and_Cube_link ExplosionCenter;
@@ -92,6 +93,14 @@ namespace TheDiplomWork
                 }
 
                 
+            }
+            public void Exploding_Last_Cancel()
+            {
+                foreach (var XYZcube in DataForDraw_ExplodingList.TemporalList)
+                {
+                    XYZcube.cube.IsTakenForExplosion = false;
+                    XYZcube.cube.FallingStartingTime = 0;
+                }
             }
             public void Exploding_Restorer()
             {

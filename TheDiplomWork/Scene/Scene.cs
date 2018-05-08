@@ -403,9 +403,13 @@ namespace TheDiplomWork
                     if (Explosion.exp.StartingFirst)
                     {
                         Explosion.exp.StartingFirst = false;
+                        Explosion.exp.StartingFirstStarted = true;
                         Explosion.exp.StartingShiftForLoeading = (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingTime;
                     }
+                }
 
+                if (Explosion.exp.StartingFirstStarted)
+                {
                     shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingShiftForLoeading);// - Explosion.exp.StartingShiftForLoeading);
                     shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 1.0f);
                     SI_explosionlist.vertexBufferArray.Bind(gl);
@@ -413,6 +417,7 @@ namespace TheDiplomWork
                     SI_explosionlist.vertexBufferArray.Unbind(gl);
                     shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
                 }
+                
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
                 SI_ghost.vertexBufferArray.Bind(gl);

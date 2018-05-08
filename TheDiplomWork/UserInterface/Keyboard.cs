@@ -149,12 +149,22 @@ namespace TheDiplomWork
                     if (StaticSettings.S.ExplosionMod)
                     {
                         Explosion.exp.StartingFirst = true;
+                        Explosion.exp.StartingFirstStarted = false;
                         Explosion.exp.Exploding_Rewriter();
                         Scene.Reloader_ExplosionList();
                         StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                     }
                     break;
-                case 'x'://Cancel Explosions
+                case 'x'://Last_Cancel
+                    if (StaticSettings.S.ExplosionMod)
+                    {
+                        Explosion.exp.Exploding_Last_Cancel();
+                        DataForDraw_ExplodingList.TemporalList.Clear();
+                        Scene.Reloader_ExplosionList();
+                        StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                    }
+                    break;
+                case 'v'://Cancel Explosions
                     if (StaticSettings.S.ExplosionMod)
                     {
                         DataForDraw_ExplodingList.TemporalList.Clear();
@@ -227,8 +237,8 @@ namespace TheDiplomWork
                     step_vector.x = -step; step_vector.y = 0; step_vector.z = 0; DoStep(step_vector); break;
                 case 'z':
                     step_vector.x = 0; step_vector.y = step*1.3f; step_vector.z = 0; DoStep(step_vector); break;
-                case 'x':
-                    step_vector.x = 0; step_vector.y = step * 0.1f; step_vector.z = 0; DoStep(step_vector); break;
+                //case 'x':
+                //    step_vector.x = 0; step_vector.y = step * 0.1f; step_vector.z = 0; DoStep(step_vector); break;
                 case ' ':
                     if (StaticSettings.S.FlyMod)
                     { step_vector.x = 0; step_vector.y = -step * 1.3f; step_vector.z = 0; DoStep(step_vector); }
