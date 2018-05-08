@@ -107,6 +107,7 @@ namespace TheDiplomWork
                 var Rotator = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Rotator.vert");
                 var Translation = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Translation.vert");
                 var Sizer = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Sizer.vert");
+                var Explosion = ManifestResourceLoader.LoadTextFile(@"Shaders\VertexModules\Explosion.vert");
 
                 var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
                 var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Adv_main.vert");
@@ -133,7 +134,8 @@ namespace TheDiplomWork
                     Cuter + 
                     Sun +
                     Translation + 
-                    Sizer + 
+                    Sizer +
+                    Explosion +
                     Adv_main;
 
                 shaderProgram_secondary = new ModifiedShaderProgram();
@@ -402,6 +404,7 @@ namespace TheDiplomWork
                 {
                     if (Explosion.exp.StartingFirst)
                     {
+                        Music.wav_player.SaySoundEffect("Explosion");
                         //Music.wav_player.SaySoundEffect("Explosion");
                         //Interface.Time_pause(900);
                         //TimeSpan timeItTook = (DateTime.Now - start);

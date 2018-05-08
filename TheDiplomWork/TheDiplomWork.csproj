@@ -108,6 +108,7 @@
     <Compile Include="UserInterface\Mouse.cs" />
     <Compile Include="WorldObjects\Sun.cs" />
     <Compile Include="WorldObjects\Time.cs" />
+    <None Include="Shaders\VertexModules\Explosion.vert" />
     <None Include="Shaders\VertexModules\Sizer.vert" />
     <None Include="Shaders\VertexModules\Cuter.vert" />
     <None Include="Shaders\VertexModules\Header.vert" />

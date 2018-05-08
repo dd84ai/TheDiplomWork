@@ -7,14 +7,7 @@ vec4 Processed(vec3 inp)
 {
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
-		float TimeItTook = TimeTotalSeconds - in_Size.x;
-		
-		vec3 RelativeShift = vec3(
-		in_Center.x * TimeItTook
-		,in_Center.y * TimeItTook  - (9.8 / 2) * TimeItTook * TimeItTook
-		,in_Center.z * TimeItTook
-		);
-		return Shifted_Position(Translate(inp,vec3(RelativeShift)));
+		return Explosion(inp);
 	}
 	else
 	{
