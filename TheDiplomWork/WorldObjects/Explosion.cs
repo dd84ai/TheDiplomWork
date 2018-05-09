@@ -10,7 +10,6 @@ namespace TheDiplomWork
     {
         public class Exploder
         {
-            CubicalMemory.Chunk_and_Cube_link abc;
             public Exploder()
             {
 
