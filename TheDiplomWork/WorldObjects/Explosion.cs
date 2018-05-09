@@ -17,7 +17,7 @@ namespace TheDiplomWork
             }
 
             public Point3D Bomb_precise_position = new Point3D(0, 0, 0);
-            public float Explosion_radius = 10.0f;
+            public float Explosion_radius = 20.0f;
 
             float x = 0, y = 0, z = 0;
             public void SetBombLocation(float x1, float y1, float z1)
@@ -69,7 +69,7 @@ namespace TheDiplomWork
                                 foreach (var XYcube in Xcube)
                                     foreach (var XYZcube in XYcube)
                                     {
-                                        if (XYZcube.IsFilled)
+                                        if (XYZcube.IsFilled && !XYZcube.IsTakenForExplosion)
                                         {
                                             ShaderedScene.CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
 

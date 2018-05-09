@@ -342,6 +342,13 @@ namespace TheDiplomWork
                                 [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
                                 [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
                                 [y]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsTakenForExplosion = false;
+
+                            Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                                [y]
                                 [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
                         }
                         Scene.SS.env.cub_mem.world.World_as_Whole
