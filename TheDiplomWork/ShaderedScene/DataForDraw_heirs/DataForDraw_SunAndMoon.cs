@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlmNet;
+using SharpGL;
 namespace TheDiplomWork
 {
     public class DataForDraw_SunAndMoon : DataForDraw_angled
     {
-        
+        public DataForDraw_SunAndMoon(OpenGL gl) : base(gl)
+        {
+        }
         public static mat4 SunRotator = glm.rotate(0, new vec3(0, 1, 0));
 
         public override void initialization()

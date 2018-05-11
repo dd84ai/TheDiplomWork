@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SharpGL;
 namespace TheDiplomWork
 {
     public class DataForDraw_angled : DataForDraw
     {
+        public SceneInfo_Secondary scene_info;
+
+        public DataForDraw_angled(OpenGL gl) : base()
+        {
+            scene_info = new SceneInfo_Secondary(gl);
+        }
 
         public List<float> center = new List<float>();
         public int center_count = 0;
@@ -55,5 +61,7 @@ namespace TheDiplomWork
             Add_Value(ref size, size_count++, size_outer);
             Add_Value(ref size, size_count++, size_outer);
         }
+
+        
     }
 }

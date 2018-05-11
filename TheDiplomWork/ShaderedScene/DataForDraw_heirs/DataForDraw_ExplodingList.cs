@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SharpGL;
 namespace TheDiplomWork
 {
     class DataForDraw_ExplodingList : DataForDraw_angled
     {
+        public DataForDraw_ExplodingList(OpenGL gl) : base(gl)
+        {
+        }
         public static List<CubicalMemory.Chunk_and_Cube_link> TemporalList = new List<CubicalMemory.Chunk_and_Cube_link>();
         public override void initialization()
         {

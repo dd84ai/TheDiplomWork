@@ -31,7 +31,7 @@ namespace TheDiplomWork
         /// <summary>
         /// It's Mine
         /// </summary>
-        public static ShaderedScene SS = new ShaderedScene();
+        public static ShaderedScene SS;
         public static LearningAsync LA = new LearningAsync();
 
         //  The projection, view and model matrices.
@@ -49,11 +49,6 @@ namespace TheDiplomWork
         const uint attributeIndexColour = 1;
 
         //  The vertex buffer array which contains the vertex and colour buffers.
-        static SceneInfo_Main SI_main;
-        static SceneInfo_Secondary SI_ghost;
-        static SceneInfo_Secondary SI_temporallist;
-        static SceneInfo_Secondary SI_explosionlist;
-        static SceneInfo_Secondary SI_sunandmoon;
 
         //  The shader program for our vertex and fragment shader.
         private ModifiedShaderProgram shaderProgram;
@@ -79,11 +74,7 @@ namespace TheDiplomWork
             try
             {
                 _gl = gl;
-                SI_main = new SceneInfo_Main(gl);
-                SI_ghost = new SceneInfo_Secondary(gl);            
-                SI_sunandmoon = new SceneInfo_Secondary(gl);
-                SI_temporallist = new SceneInfo_Secondary(gl);
-                SI_explosionlist = new SceneInfo_Secondary(gl);
+                SS =  new ShaderedScene(gl);
                 newThread_ghost = new Thread(Scene.DoWork_ghost);
 
             Console.WriteLine("Starting My");
@@ -165,7 +156,7 @@ namespace TheDiplomWork
                 modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
                 //  Now create the geometry for the square.
-                SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
+                SS.Main.scene_info.CreateVerticesForSquare_not_angled(ref SS.Main);
 
                 var handle = GetConsoleWindow();
                 if (!StaticSettings.S.ConsoleIsEnabled) ShowWindow(handle, SW_HIDE);
@@ -185,26 +176,26 @@ namespace TheDiplomWork
         {
             SS.SunAndMoon.initialization();
             SS.SunAndMoon.CopyToReady();
-            SI_sunandmoon.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
+            SS.SunAndMoon.scene_info.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
         }
         public void Reloader_TemporalList()
         {
             SS.TemporalList.initialization();
             SS.TemporalList.CopyToReady();
-            SI_temporallist.CreateVerticesForSquare_angled(ref SS.TemporalList);
+            SS.TemporalList.scene_info.CreateVerticesForSquare_angled(ref SS.TemporalList);
         }
         public static void Reloader_ExplosionList()
         {
             SS.ExplosionList.initialization();
             SS.ExplosionList.CopyToReady();
-            SI_explosionlist.CreateVerticesForSquare_angled(ref SS.ExplosionList);
+            SS.ExplosionList.scene_info.CreateVerticesForSquare_angled(ref SS.ExplosionList);
         }
         public void Reloader_Ghost()
         {
             if (!SS.Secondary.CopiedLastResult)
             {
                 SS.Secondary.CopyToReady();
-                SI_ghost.CreateVerticesForSquare_angled(ref SS.Secondary);
+                SS.Secondary.scene_info.CreateVerticesForSquare_angled(ref SS.Secondary);
             }
             //Призрачным куб.
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated &&
@@ -235,9 +226,9 @@ namespace TheDiplomWork
             {
                 if (!SS.Main.CopiedLastResult)
                 {
-                    SI_main.vertexBufferArray.Delete(gl);
+                    SS.Main.scene_info.vertexBufferArray.Delete(gl);
                     SS.Main.CopyToReady();
-                    SI_main.CreateVerticesForSquare_not_angled(ref SS.Main);
+                    SS.Main.scene_info.CreateVerticesForSquare_not_angled(ref SS.Main);
                     DataForDraw_TemporalList.TemporalList.Clear();
                     Reloader_TemporalList();
                 }
@@ -371,11 +362,11 @@ namespace TheDiplomWork
             shaderProgram.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
 
             //  Bind the out vertex array.
-            SI_main.vertexBufferArray.Bind(gl);
+            SS.Main.scene_info.vertexBufferArray.Bind(gl);
             //  Draw the square.
             gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Main.Quantity()/3);
             //  Unbind our vertex array and shader.
-            SI_main.vertexBufferArray.Unbind(gl);
+            SS.Main.scene_info.vertexBufferArray.Unbind(gl);
 
             shaderProgram.Unbind(gl);
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated)
@@ -396,9 +387,9 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
 
-                SI_temporallist.vertexBufferArray.Bind(gl);
+                SS.TemporalList.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
-                SI_temporallist.vertexBufferArray.Unbind(gl);
+                SS.TemporalList.scene_info.vertexBufferArray.Unbind(gl);
 
                 if (!newThread.IsAlive && !DoWork_IsAlive)
                 {
@@ -422,17 +413,17 @@ namespace TheDiplomWork
                 {
                     shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingShiftForLoeading);// - Explosion.exp.StartingShiftForLoeading);
                     shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 1.0f);
-                    SI_explosionlist.vertexBufferArray.Bind(gl);
+                    SS.ExplosionList.scene_info.vertexBufferArray.Bind(gl);
                     gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.ExplosionList.Quantity() / 3);
-                    SI_explosionlist.vertexBufferArray.Unbind(gl);
+                    SS.ExplosionList.scene_info.vertexBufferArray.Unbind(gl);
                     shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
                 }
                 
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
-                SI_ghost.vertexBufferArray.Bind(gl);
+                SS.Secondary.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
-                SI_ghost.vertexBufferArray.Unbind(gl);
+                SS.Secondary.scene_info.vertexBufferArray.Unbind(gl);
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
@@ -443,9 +434,9 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
                 //shaderProgram_sunandmoon.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
 
-                SI_sunandmoon.vertexBufferArray.Bind(gl);
+                SS.SunAndMoon.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.SunAndMoon.Quantity() / 3);
-                SI_sunandmoon.vertexBufferArray.Unbind(gl);
+                SS.SunAndMoon.scene_info.vertexBufferArray.Unbind(gl);
                 //shaderProgram_sunandmoon.Unbind(gl);
 
                 shaderProgram_secondary.Unbind(gl);

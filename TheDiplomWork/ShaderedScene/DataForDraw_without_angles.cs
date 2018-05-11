@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SharpGL;
 namespace TheDiplomWork
 {
     public class DataForDraw_without_angles : DataForDraw
     {
+        public SceneInfo_Main scene_info;
+
+        public DataForDraw_without_angles(OpenGL gl) : base()
+        {
+            scene_info = new SceneInfo_Main(gl);
+        }
+
         public override void START_initialization()
         {
             START_initialization_wrapped();
@@ -32,5 +39,6 @@ namespace TheDiplomWork
         {
             base.Process_Point(_x, _y, _z, _colour, number);
         }
+        
     }
 }

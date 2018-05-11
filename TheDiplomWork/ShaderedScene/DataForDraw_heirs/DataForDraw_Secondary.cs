@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SharpGL;
 namespace TheDiplomWork
 {
     class DataForDraw_Secondary : DataForDraw_angled
     {
-
+        public DataForDraw_Secondary(OpenGL gl) : base(gl)
+        {
+        }
         public override void initialization()
         {
             START_initialization();

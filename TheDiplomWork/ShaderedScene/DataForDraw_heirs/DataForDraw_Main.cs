@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlmNet;
+using SharpGL;
 namespace TheDiplomWork
 {
     class DataForDraw_Main : DataForDraw_without_angles
     {
+        public DataForDraw_Main(OpenGL gl) : base(gl)
+        {
+        }
+
         static vec4 CalculatingThing = new vec4(0, 0, 0, 0);
 
         public override void initialization()
