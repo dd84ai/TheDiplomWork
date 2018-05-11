@@ -15,7 +15,7 @@ namespace TheDiplomWork
         public VertexBuffer shiftedcenterDataBuffer;
         public VertexBuffer sizeDataBuffer;
         DataForDraw_angled Data;
-        public SceneInfo_Secondary(OpenGL _gl, ref DataForDraw_angled _Data) : base(_gl)
+        public SceneInfo_Secondary(OpenGL _gl, DataForDraw_angled _Data) : base(_gl)
         {
             Data = _Data;
         }

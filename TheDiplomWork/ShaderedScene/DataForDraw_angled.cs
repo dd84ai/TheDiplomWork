@@ -12,7 +12,7 @@ namespace TheDiplomWork
 
         public DataForDraw_angled(OpenGL gl) : base()
         {
-            scene_info = new SceneInfo_Secondary(gl);
+            scene_info = new SceneInfo_Secondary(gl,this);
         }
 
         public List<float> center = new List<float>();

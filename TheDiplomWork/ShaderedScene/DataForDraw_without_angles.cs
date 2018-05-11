@@ -12,7 +12,7 @@ namespace TheDiplomWork
 
         public DataForDraw_without_angles(OpenGL gl) : base()
         {
-            scene_info = new SceneInfo_Main(gl);
+            scene_info = new SceneInfo_Main(gl, this);
         }
 
         public override void START_initialization()
