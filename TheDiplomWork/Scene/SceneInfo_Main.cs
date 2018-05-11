@@ -11,7 +11,7 @@ namespace TheDiplomWork
     public class SceneInfo_Main : SceneInfo
     {
         DataForDraw_without_angles Data;
-        public SceneInfo_Main(OpenGL _gl, ref DataForDraw_without_angles _Data) : base(_gl)
+        public SceneInfo_Main(OpenGL _gl, DataForDraw_without_angles _Data) : base(_gl)
         {
             Data = _Data;
         }
