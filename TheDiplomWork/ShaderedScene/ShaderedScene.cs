@@ -28,7 +28,6 @@ namespace TheDiplomWork
         }
         
         Random Rand = new Random();
-
         
         public static void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {

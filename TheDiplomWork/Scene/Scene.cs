@@ -156,7 +156,7 @@ namespace TheDiplomWork
                 modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
 
                 //  Now create the geometry for the square.
-                SS.Main.scene_info.CreateVerticesForSquare_not_angled(ref SS.Main);
+                SS.Main.scene_info.CreateVerticesForSquare_not_angled();
 
                 var handle = GetConsoleWindow();
                 if (!StaticSettings.S.ConsoleIsEnabled) ShowWindow(handle, SW_HIDE);
@@ -176,26 +176,26 @@ namespace TheDiplomWork
         {
             SS.SunAndMoon.initialization();
             SS.SunAndMoon.CopyToReady();
-            SS.SunAndMoon.scene_info.CreateVerticesForSquare_angled(ref SS.SunAndMoon);
+            SS.SunAndMoon.scene_info.CreateVerticesForSquare_angled();
         }
         public void Reloader_TemporalList()
         {
             SS.TemporalList.initialization();
             SS.TemporalList.CopyToReady();
-            SS.TemporalList.scene_info.CreateVerticesForSquare_angled(ref SS.TemporalList);
+            SS.TemporalList.scene_info.CreateVerticesForSquare_angled();
         }
         public static void Reloader_ExplosionList()
         {
             SS.ExplosionList.initialization();
             SS.ExplosionList.CopyToReady();
-            SS.ExplosionList.scene_info.CreateVerticesForSquare_angled(ref SS.ExplosionList);
+            SS.ExplosionList.scene_info.CreateVerticesForSquare_angled();
         }
         public void Reloader_Ghost()
         {
             if (!SS.Secondary.CopiedLastResult)
             {
                 SS.Secondary.CopyToReady();
-                SS.Secondary.scene_info.CreateVerticesForSquare_angled(ref SS.Secondary);
+                SS.Secondary.scene_info.CreateVerticesForSquare_angled();
             }
             //Призрачным куб.
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated &&
@@ -228,7 +228,7 @@ namespace TheDiplomWork
                 {
                     SS.Main.scene_info.vertexBufferArray.Delete(gl);
                     SS.Main.CopyToReady();
-                    SS.Main.scene_info.CreateVerticesForSquare_not_angled(ref SS.Main);
+                    SS.Main.scene_info.CreateVerticesForSquare_not_angled();
                     DataForDraw_TemporalList.TemporalList.Clear();
                     Reloader_TemporalList();
                 }

@@ -10,8 +10,10 @@ namespace TheDiplomWork
 {
     public class SceneInfo_Main : SceneInfo
     {
-        public SceneInfo_Main(OpenGL _gl) : base(_gl)
+        DataForDraw_without_angles Data;
+        public SceneInfo_Main(OpenGL _gl, ref DataForDraw_without_angles _Data) : base(_gl)
         {
+            Data = _Data;
         }
 
         public override void CreateVerticesForSquare(ref DataForDraw Data)
@@ -19,7 +21,7 @@ namespace TheDiplomWork
             Console.WriteLine("FATAL ERROR! DO NOT USE IT! USE CreateVerticesForSquare_angled!");
             Console.ReadKey();
         }
-        public void CreateVerticesForSquare_not_angled(ref DataForDraw_without_angles Data)
+        public void CreateVerticesForSquare_not_angled()
         {
             //  Create the vertex array object.
             vertexBufferArray.Bind(gl);

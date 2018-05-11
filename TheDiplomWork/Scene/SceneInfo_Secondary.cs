@@ -14,8 +14,10 @@ namespace TheDiplomWork
     {
         public VertexBuffer shiftedcenterDataBuffer;
         public VertexBuffer sizeDataBuffer;
-        public SceneInfo_Secondary(OpenGL _gl) : base(_gl)
+        DataForDraw_angled Data;
+        public SceneInfo_Secondary(OpenGL _gl, ref DataForDraw_angled _Data) : base(_gl)
         {
+            Data = _Data;
         }
         public override void CreateVerticesForSquare_FirstInit()
         {
@@ -35,7 +37,7 @@ namespace TheDiplomWork
             Console.WriteLine("FATAL ERROR! DO NOT USE IT! USE CreateVerticesForSquare_angled!");
             Console.ReadKey();
         }
-        public void CreateVerticesForSquare_angled(ref DataForDraw_angled Data)
+        public void CreateVerticesForSquare_angled()
         {
             //  Create the vertex array object.
             vertexBufferArray.Bind(gl);
