@@ -156,8 +156,6 @@ namespace TheDiplomWork
             //  Create a perspective transformation.
             //gl.Perspective(60.0f, (double)openGLControl.Size.Width / (double)openGLControl.Size.Height, 0.1f, 10000.0);
 
-            //gl.LookAt(0, 0, 5, 0, 0, 0, 0, -1, 0);
-            //gl.LookAt(-5, 5, -5, 0, 0, 0, 0, -1, 0);
             gl.Ortho2D(0, openGLControl.Width, 0, openGLControl.Height);
             gl.Viewport(0, 0, openGLControl.Width, openGLControl.Height);
             
@@ -232,7 +230,6 @@ namespace TheDiplomWork
         public static bool AnyKeyPressed = false;
         private void openGLControl_KeyDown(object sender, KeyEventArgs e)
         {
-            
             if (!Scene.ShadersInitializated) Application.Exit();
 
             if (e.Control) Keyboard.Ctrl_RUN_IS_ACTIVATED = 4;
@@ -293,23 +290,23 @@ namespace TheDiplomWork
                         Music.wav_player.SaySoundEffect("BlockPlacement");
 
                         Explosion.exp.PlaceTheBombAt(cube);
-                        
+
                         if (!StaticSettings.S.ExplosionMod)
                         {
                             cube.IsFilled = true;
                             cube.IsTakenForExplosion = false;
                             cube.color = GraphicalOverlap.GO_color;
                         }
-                        cube.FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
+                        else
+                        {
+                            Explosion.exp.StartingTime = (float)Time.time.GetTotalSeconds();
+                            Explosion.exp.ExplosionCenter = cube;
+                        }
 
+                        cube.FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                         cube.FallingStartingTime = (float)Time.time.GetTotalSeconds();
 
-                        Explosion.exp.StartingTime = (float)Time.time.GetTotalSeconds();
-
-                        Explosion.exp.ExplosionCenter = cube;
-
                         DataForDraw_TemporalList.TemporalList.Add(cube);
-
                         scene.Reloader_TemporalList();
 
                         float TookTime = (float)Math.Sqrt((Scene.SS.env.player.coords.Player_cubical_lookforcube.y - cube.xyz.y) * 2 / 9.8);
@@ -340,10 +337,8 @@ namespace TheDiplomWork
 
         private void openGLControl_MouseScroller(object sender, MouseEventArgs e)
         {
-            if (e.Delta > 0)
-                GraphicalOverlap.GO_interface_item_choice++;
-            else
-                GraphicalOverlap.GO_interface_item_choice--;
+            if (e.Delta > 0) GraphicalOverlap.GO_interface_item_choice++;
+            else GraphicalOverlap.GO_interface_item_choice--;
 
             GraphicalOverlap.Graphical_OverLap_Logic(GraphicalOverlap.GO_interface_item_choice);
         }
