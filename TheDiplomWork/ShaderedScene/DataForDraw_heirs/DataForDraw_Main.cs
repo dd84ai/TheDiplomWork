@@ -46,7 +46,7 @@ namespace TheDiplomWork
                             {
                                 if (XYZcube.IsFilled && !XYZcube.IsTakenForExplosion)
                                 {
-                                    ShaderedScene.CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
+                                    ShaderedScene.CalculateFromMaptoGraphical(XYZcube, ref x, ref y, ref z);
 
                                     //POINT OF VIEWER
                                     Scene.SS.env.player.NormalizedToXYWorld.x = Scene.SS.env.player.coords.Player_precise_stepback.x - x;

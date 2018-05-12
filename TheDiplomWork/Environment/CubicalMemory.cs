@@ -38,9 +38,11 @@ namespace TheDiplomWork
             public bool IsTakenForExplosion = false;
             public bool IsFilled_Default;
             public System.Drawing.Color color_default;
-            public Cube(int _x, int _y, int _z)
+            public GeneralProgrammingStuff.Point2Int xz;
+            public Cube(int _x, int _y, int _z, GeneralProgrammingStuff.Point2Int _xz)
             {
                 xyz.x = _x; xyz.y = _y; xyz.z = _z;
+                xz = _xz;
             }
         }
         public class Chunk
@@ -54,7 +56,7 @@ namespace TheDiplomWork
             public Chunk(int _x, int _z)
             {
                 xz.x = _x; xz.z = _z;
-                cubes = TripleCubeIniter(Chunk.Width, Chunk.Height, Chunk.Length);
+                cubes = TripleCubeIniter(Chunk.Width, Chunk.Height, Chunk.Length, xz);
 
                 AlgorithmicalGround(FromHeight, ToHeight);
 

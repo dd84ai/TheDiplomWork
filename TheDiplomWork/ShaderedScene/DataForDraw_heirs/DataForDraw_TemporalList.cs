@@ -18,7 +18,7 @@ namespace TheDiplomWork
 
             foreach (var item in TemporalList)
             {
-                ShaderedScene.CalculateFromMaptoGraphical(item.chunk.xz, item.cube.xyz, ref x, ref y, ref z);
+                ShaderedScene.CalculateFromMaptoGraphical(item.cube, ref x, ref y, ref z);
                 Draw_Quad_Full_Sunsided_angled(x, y, z, item.cube.FallingStartingTime, item.cube.FallingFromHeight * (CubicalMemory.Cube.rangeOfTheEdge), 0.0f, localed_range, item.cube.color, 0, true);
             }
 

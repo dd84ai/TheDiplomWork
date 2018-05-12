@@ -19,6 +19,17 @@ namespace TheDiplomWork
             public float Explosion_radius = 20.0f;
 
             float x = 0, y = 0, z = 0;
+            public void PlaceTheBombAt(int y)
+            {
+                float x1 = 0, y1 = 0, z1 = 0;
+                ShaderedScene.CalculateFromMaptoGraphical(Scene.SS.env.cub_mem.world.World_as_Whole
+                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                [y]
+                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z], ref x1, ref y1, ref z1);
+                Explosion.exp.SetBombLocation(x1, y1, z1);
+            }
             public void SetBombLocation(float x1, float y1, float z1)
             {
                 Bomb_precise_position.x = x1;
@@ -70,7 +81,7 @@ namespace TheDiplomWork
                                     {
                                         if (XYZcube.IsFilled && !XYZcube.IsTakenForExplosion)
                                         {
-                                            ShaderedScene.CalculateFromMaptoGraphical(XYworld.xz, XYZcube.xyz, ref x, ref y, ref z);
+                                            ShaderedScene.CalculateFromMaptoGraphical(XYZcube, ref x, ref y, ref z);
 
                                             //POINT OF VIEWER
                                             vec3 range_to_cube = new vec3(0, 0, 0);

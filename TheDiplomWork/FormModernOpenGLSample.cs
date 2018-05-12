@@ -279,7 +279,7 @@ namespace TheDiplomWork
         private void openGLControl_Click(object sender, EventArgs e)
         {
         }
-
+        
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -290,44 +290,11 @@ namespace TheDiplomWork
                     {
                         Music.wav_player.SaySoundEffect("BlockPlacement");
 
+
+                        int y = Cube_Selection.Decide_Position_To_Place_Cube();
+
+                        Explosion.exp.PlaceTheBombAt(y);
                         
-                        int y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
-                        bool found = false;
-                        if (StaticSettings.S.FallingCube)
-                        {
-                            for (; y >= 0; y--)
-                                if (!Scene.SS.env.cub_mem.world.World_as_Whole
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                                [y]
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled
-                                || Scene.SS.env.cub_mem.world.World_as_Whole
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                                [y]
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsTakenForExplosion)
-                                { found = true; }
-                                else break;
-
-                            if (found)
-                                y++;
-                            else y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
-                        }
-
-                        {
-                            float x1 = 0, y1 = 0, z1 = 0;
-                            ShaderedScene.CalculateFromMaptoGraphical(Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].xz, Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].xyz, ref x1, ref y1, ref z1);
-                            Explosion.exp.SetBombLocation(x1, y1, z1);
-                        }
                         if (!StaticSettings.S.ExplosionMod)
                         {
                             Scene.SS.env.cub_mem.world.World_as_Whole

@@ -24,7 +24,7 @@ namespace TheDiplomWork
             }
             return subject;
         }
-        public static List<List<List<CubicalMemory.Cube>>> TripleCubeIniter(int a, int b, int c)
+        public static List<List<List<CubicalMemory.Cube>>> TripleCubeIniter(int a, int b, int c, GeneralProgrammingStuff.Point2Int xz)
         {
             List<List<List<CubicalMemory.Cube>>> subject;
 
@@ -38,7 +38,7 @@ namespace TheDiplomWork
 
                     for (int k = 0; k < c; k++) 
                     {
-                        subject[i][j].Add(new CubicalMemory.Cube(i, j, k));
+                        subject[i][j].Add(new CubicalMemory.Cube(i, j, k, xz));
                     }
                 }
             }

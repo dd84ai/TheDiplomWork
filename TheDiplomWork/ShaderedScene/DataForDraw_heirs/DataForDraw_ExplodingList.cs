@@ -17,7 +17,7 @@ namespace TheDiplomWork
             START_initialization();
 
             float cx = 0, cy = 0, cz = 0;
-            ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter.chunk.xz, Explosion.exp.ExplosionCenter.cube.xyz, ref cx, ref cy, ref cz);
+            ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter.cube, ref cx, ref cy, ref cz);
 
             //Так по поводу взрыва. Давай все мерить в TNT эквиваленте.
             float Me = 1.0f; //mass of the explosive charge
@@ -29,7 +29,7 @@ namespace TheDiplomWork
 
             foreach (var item in TemporalList)
             {
-                ShaderedScene.CalculateFromMaptoGraphical(item.chunk.xz, item.cube.xyz, ref x, ref y, ref z);
+                ShaderedScene.CalculateFromMaptoGraphical(item.cube, ref x, ref y, ref z);
 
                 float Vx = x - cx, Vy = y - cy, Vz = z - cz;
                 float Range = (float)Math.Sqrt((double)Vx * Vx + Vy * Vy + Vz * Vz);
