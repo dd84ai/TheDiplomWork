@@ -11,13 +11,13 @@ namespace TheDiplomWork
         public DataForDraw_ExplodingList(OpenGL gl) : base(gl)
         {
         }
-        public static List<CubicalMemory.Chunk_and_Cube_link> TemporalList = new List<CubicalMemory.Chunk_and_Cube_link>();
+        public static List<CubicalMemory.Cube> TemporalList = new List<CubicalMemory.Cube>();
         public override void initialization()
         {
             START_initialization();
 
             float cx = 0, cy = 0, cz = 0;
-            ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter.cube, ref cx, ref cy, ref cz);
+            ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter, ref cx, ref cy, ref cz);
 
             //Так по поводу взрыва. Давай все мерить в TNT эквиваленте.
             float Me = 1.0f; //mass of the explosive charge
@@ -27,15 +27,15 @@ namespace TheDiplomWork
 
             float V = (float)Math.Sqrt(2 * dE * ((Mc / Me) / (1 + K * (Mc / Me))))/100.0f;
 
-            foreach (var item in TemporalList)
+            foreach (var cube in TemporalList)
             {
-                ShaderedScene.CalculateFromMaptoGraphical(item.cube, ref x, ref y, ref z);
+                ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);
 
                 float Vx = x - cx, Vy = y - cy, Vz = z - cz;
                 float Range = (float)Math.Sqrt((double)Vx * Vx + Vy * Vy + Vz * Vz);
                 Vx *= V / Range; Vy *= V / Range; Vz *= V / Range;
 
-                Draw_Quad_Full_Sunsided_angled(x, y, z, Vx,Vy,Vz, localed_range, item.cube.color, item.cube.FallingStartingTime, true);
+                Draw_Quad_Full_Sunsided_angled(x, y, z, Vx,Vy,Vz, localed_range, cube.color, cube.FallingStartingTime, true);
             }
             END_initialization();
             base.LastCount = vertices.Count();

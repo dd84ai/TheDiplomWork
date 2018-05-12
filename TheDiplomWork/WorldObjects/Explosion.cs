@@ -19,15 +19,10 @@ namespace TheDiplomWork
             public float Explosion_radius = 20.0f;
 
             float x = 0, y = 0, z = 0;
-            public void PlaceTheBombAt(int y)
+            public void PlaceTheBombAt(CubicalMemory.Cube cube)
             {
                 float x1 = 0, y1 = 0, z1 = 0;
-                ShaderedScene.CalculateFromMaptoGraphical(Scene.SS.env.cub_mem.world.World_as_Whole
-                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                [y]
-                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z], ref x1, ref y1, ref z1);
+                ShaderedScene.CalculateFromMaptoGraphical(cube, ref x1, ref y1, ref z1);
                 Explosion.exp.SetBombLocation(x1, y1, z1);
             }
             public void SetBombLocation(float x1, float y1, float z1)
@@ -43,7 +38,7 @@ namespace TheDiplomWork
             public bool StartingFirstStarted = false;
             public float StartingShiftForLoeading = 0;
 
-            public CubicalMemory.Chunk_and_Cube_link ExplosionCenter;
+            public CubicalMemory.Cube ExplosionCenter;
 
             public void Exploding_Rewriter()
             {
@@ -94,7 +89,7 @@ namespace TheDiplomWork
                                             {
                                                     XYZcube.IsTakenForExplosion = true;
                                                 XYZcube.FallingStartingTime = Explosion.exp.StartingTime;
-                                                DataForDraw_ExplodingList.TemporalList.Add(new CubicalMemory.Chunk_and_Cube_link(XYworld,XYZcube));
+                                                DataForDraw_ExplodingList.TemporalList.Add(XYZcube);
                                                 //Draw_Quad_Full_Sunsided_not_angled(x, y, z, localed_range, XYZcube.color);
                                             }
                                         }
@@ -106,10 +101,10 @@ namespace TheDiplomWork
             }
             public void Exploding_Last_Cancel()
             {
-                foreach (var XYZcube in DataForDraw_ExplodingList.TemporalList)
+                foreach (var cube in DataForDraw_ExplodingList.TemporalList)
                 {
-                    XYZcube.cube.IsTakenForExplosion = false;
-                    XYZcube.cube.FallingStartingTime = 0;
+                    cube.IsTakenForExplosion = false;
+                    cube.FallingStartingTime = 0;
                 }
             }
             public void Exploding_Restorer()

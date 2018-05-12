@@ -11,15 +11,15 @@ namespace TheDiplomWork
         public DataForDraw_TemporalList(OpenGL gl) : base(gl)
         {
         }
-        public static List<CubicalMemory.Chunk_and_Cube_link> TemporalList = new List<CubicalMemory.Chunk_and_Cube_link>();
+        public static List<CubicalMemory.Cube> TemporalList = new List<CubicalMemory.Cube>();
         public override void initialization()
         {
             START_initialization();
 
-            foreach (var item in TemporalList)
+            foreach (var cube in TemporalList)
             {
-                ShaderedScene.CalculateFromMaptoGraphical(item.cube, ref x, ref y, ref z);
-                Draw_Quad_Full_Sunsided_angled(x, y, z, item.cube.FallingStartingTime, item.cube.FallingFromHeight * (CubicalMemory.Cube.rangeOfTheEdge), 0.0f, localed_range, item.cube.color, 0, true);
+                ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);
+                Draw_Quad_Full_Sunsided_angled(x, y, z, cube.FallingStartingTime, cube.FallingFromHeight * (CubicalMemory.Cube.rangeOfTheEdge), 0.0f, localed_range, cube.color, 0, true);
             }
 
             END_initialization();

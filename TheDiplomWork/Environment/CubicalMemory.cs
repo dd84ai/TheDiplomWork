@@ -124,15 +124,6 @@ namespace TheDiplomWork
             }
         }
 
-        public class Chunk_and_Cube_link
-        {
-            public CubicalMemory.Chunk chunk;
-            public CubicalMemory.Cube cube;
-            public Chunk_and_Cube_link(CubicalMemory.Chunk a, CubicalMemory.Cube b)
-            {
-                chunk = a; cube = b;
-            }
-        }
         public World world;
 
         //Кубик состоит из 6 граней, квадратов.

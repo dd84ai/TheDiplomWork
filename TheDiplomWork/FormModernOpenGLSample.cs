@@ -286,79 +286,33 @@ namespace TheDiplomWork
             {
                 if (StaticSettings.S.GhostCube_Add_in_Data_For_Draw)
                 {
+                    CubicalMemory.Cube cube = Cube_Selection.Decide_Position_To_Place_Cube();
+
                     if (e.Button.ToString() == "Right")
                     {
                         Music.wav_player.SaySoundEffect("BlockPlacement");
 
-
-                        int y = Cube_Selection.Decide_Position_To_Place_Cube();
-
-                        Explosion.exp.PlaceTheBombAt(y);
+                        Explosion.exp.PlaceTheBombAt(cube);
                         
                         if (!StaticSettings.S.ExplosionMod)
                         {
-                            Scene.SS.env.cub_mem.world.World_as_Whole
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                                [y]
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = true;
-
-                            Scene.SS.env.cub_mem.world.World_as_Whole
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                                [y]
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsTakenForExplosion = false;
-
-                            Scene.SS.env.cub_mem.world.World_as_Whole
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                                [y]
-                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = GraphicalOverlap.GO_color;
+                            cube.IsFilled = true;
+                            cube.IsTakenForExplosion = false;
+                            cube.color = GraphicalOverlap.GO_color;
                         }
-                        Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
+                        cube.FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
 
-                        Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].FallingStartingTime = (float)Time.time.GetTotalSeconds();
+                        cube.FallingStartingTime = (float)Time.time.GetTotalSeconds();
 
                         Explosion.exp.StartingTime = (float)Time.time.GetTotalSeconds();
 
-                        Explosion.exp.ExplosionCenter = new CubicalMemory.Chunk_and_Cube_link(Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z],
-                            Scene.SS.env.cub_mem.world.World_as_Whole
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                        [y]
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z]
-                            );
+                        Explosion.exp.ExplosionCenter = cube;
 
-                        DataForDraw_TemporalList.TemporalList.Add(new CubicalMemory.Chunk_and_Cube_link(Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z],
-                            Scene.SS.env.cub_mem.world.World_as_Whole
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                        [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                        [y]
-                        [Scene.SS.env.player.coords.Player_cubical_lookforcube.z]
-                            ));
+                        DataForDraw_TemporalList.TemporalList.Add(cube);
 
                         scene.Reloader_TemporalList();
 
-                        float TookTime = (float)Math.Sqrt((Scene.SS.env.player.coords.Player_cubical_lookforcube.y - y) * 2 / 9.8);
+                        float TookTime = (float)Math.Sqrt((Scene.SS.env.player.coords.Player_cubical_lookforcube.y - cube.xyz.y) * 2 / 9.8);
 
                         if (Time.time.GetTotalSeconds() + TookTime > Time.time.TimeWaitForFallingCubes)
                         Time.time.TimeWaitForFallingCubes = Time.time.GetTotalSeconds() + TookTime;
@@ -366,23 +320,8 @@ namespace TheDiplomWork
                     else if (e.Button.ToString() == "Left")
                     {
                         Music.wav_player.SaySoundEffect("BlockRemovement");
-                        Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].IsFilled = false;
-                        Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color = Scene.SS.env.cub_mem.world.World_as_Whole
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.y]
-                            [Scene.SS.env.player.coords.Player_cubical_lookforcube.z].color_default;
+                        cube.IsFilled = false;
+                        cube.color = cube.color_default;
 
                         StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                     }

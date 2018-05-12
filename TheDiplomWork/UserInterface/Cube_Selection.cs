@@ -8,7 +8,7 @@ namespace TheDiplomWork
 {
     class Cube_Selection
     {
-        public static int Decide_Position_To_Place_Cube()
+        public static CubicalMemory.Cube Decide_Position_To_Place_Cube()
         {
             int y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
             bool found = false;
@@ -34,7 +34,12 @@ namespace TheDiplomWork
                     y++;
                 else y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
             }
-            return y;
+            return Scene.SS.env.cub_mem.world.World_as_Whole
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.x]
+                                [Scene.SS.env.player.coords.Player_chunk_lookforcube.z].cubes
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.x]
+                                [y]
+                                [Scene.SS.env.player.coords.Player_cubical_lookforcube.z];
         }
     }
 }
