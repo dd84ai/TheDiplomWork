@@ -203,6 +203,10 @@ namespace TheDiplomWork
                     Music.wav_player.SaySoundEffect("Blorp");
                     Time.time.Time_Speed = 40.0; break;
 
+                case 'u':
+                    Music.wav_player.SaySoundEffect("Blorp");
+                    Time.time.Time_Speed = 0.025; break;
+
                 case 'q':
                     SavingAlgorithm();
                     Application.Exit(); break;

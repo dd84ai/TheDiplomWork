@@ -25,7 +25,7 @@ namespace TheDiplomWork
             float K = 1 / 2; //Geometrical Constant
             float dE = 2.157e+6f; // J/kg Heat of TNT Explosion
 
-            float V = (float)Math.Sqrt(2 * dE * ((Mc / Me) / (1 + K * (Mc / Me))))/100.0f;
+            float V = (float)Math.Sqrt(2 * dE * ((Mc / Me) / (1 + K * (Mc / Me)))) / 10.0f;
 
             foreach (var cube in TemporalList)
             {
@@ -33,10 +33,17 @@ namespace TheDiplomWork
 
                 float Vx = x - cx, Vy = y - cy, Vz = z - cz;
                 float Range = (float)Math.Sqrt((double)Vx * Vx + Vy * Vy + Vz * Vz);
-                Vx *= V / Range; Vy *= V / Range; Vz *= V / Range;
+                Vx *= V / (Range * Range); Vy *= V / (Range * Range); Vz *= V / (Range * Range);
+                float Velocity = (float)Math.Sqrt((double)Vx * Vx + Vy * Vy + Vz * Vz);
 
-                Draw_Quad_Full_Sunsided_angled(x, y, z, Vx,Vy,Vz, localed_range, cube.color, cube.FallingStartingTime, true);
+                if (Velocity > 10)
+                {
+                    cube.IsTakenForExplosion = true;
+                    Draw_Quad_Full_Sunsided_angled(x, y, z, Vx, Vy, Vz, localed_range, cube.color, cube.FallingStartingTime, true);
+                }
             }
+            
+
             END_initialization();
             base.LastCount = vertices.Count();
         }

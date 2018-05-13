@@ -119,6 +119,12 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Ctrl: " + Keyboard.Ctrl_is_pressed, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Alt: " + Keyboard.Alt_is_pressed, 2.0f); place++;
+
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "-------------------", 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time.time.GetGameTotalSeconds: " + Time.time.GetGameTotalSeconds(), 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingTime: " + Explosion.exp.StartingTime, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingShift: " + Explosion.exp.StartingShiftForLoeading, 2.0f); place++;
+                //
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetTotalSeconds(), 2.0f); place++;
             }
             else
@@ -253,7 +259,7 @@ namespace TheDiplomWork
                 Keyboard.Ctrl_RUN_IS_ACTIVATED = 1;
             }
             AnyKeyPressed = false;
-            if (item == 't')
+            if (item == 't' || item == 'u')
             {
                 Music.wav_player.SaySoundEffect("Blorp");
                 Time.time.Time_Speed = 1.0;
@@ -299,20 +305,20 @@ namespace TheDiplomWork
                         }
                         else
                         {
-                            Explosion.exp.StartingTime = (float)Time.time.GetTotalSeconds();
+                            Explosion.exp.StartingTime = (float)Time.time.GetGameTotalSeconds();
                             Explosion.exp.ExplosionCenter = cube;
                         }
 
                         cube.FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
-                        cube.FallingStartingTime = (float)Time.time.GetTotalSeconds();
+                        cube.FallingStartingTime = (float)Time.time.GetGameTotalSeconds();
 
                         DataForDraw_TemporalList.TemporalList.Add(cube);
                         scene.Reloader_TemporalList();
 
                         float TookTime = (float)Math.Sqrt((Scene.SS.env.player.coords.Player_cubical_lookforcube.y - cube.xyz.y) * 2 / 9.8);
 
-                        if (Time.time.GetTotalSeconds() + TookTime > Time.time.TimeWaitForFallingCubes)
-                        Time.time.TimeWaitForFallingCubes = Time.time.GetTotalSeconds() + TookTime;
+                        if (Time.time.GetGameTotalSeconds() + TookTime > Time.time.TimeWaitForFallingCubes)
+                        Time.time.TimeWaitForFallingCubes = Time.time.GetGameTotalSeconds() + TookTime;
                     }
                     else if (e.Button.ToString() == "Left")
                     {

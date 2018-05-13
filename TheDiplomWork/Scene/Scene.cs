@@ -295,7 +295,7 @@ namespace TheDiplomWork
 
             Reloader_Ghost();
 
-            if (Time.time.GetTotalSeconds() > Time.time.TimeWaitForFallingCubes)
+            if (Time.time.GetGameTotalSeconds() > Time.time.TimeWaitForFallingCubes)
             Reloader_Main(gl);
 
             if (SS.Main.FirstInitialization) Draw_Wrapped(gl);
@@ -384,7 +384,7 @@ namespace TheDiplomWork
                     new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
-                shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
+                shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
 
                 SS.TemporalList.scene_info.vertexBufferArray.Bind(gl);
@@ -405,13 +405,13 @@ namespace TheDiplomWork
 
                         Explosion.exp.StartingFirst = false;
                         Explosion.exp.StartingFirstStarted = true;
-                        Explosion.exp.StartingShiftForLoeading = (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingTime;
+                        Explosion.exp.StartingShiftForLoeading = (float)Time.time.GetGameTotalSeconds() - Explosion.exp.StartingTime;
                     }
                 }
 
                 if (Explosion.exp.StartingFirstStarted)
                 {
-                    shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds() - Explosion.exp.StartingShiftForLoeading);// - Explosion.exp.StartingShiftForLoeading);
+                    shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds() - (Explosion.exp.StartingShiftForLoeading));// - Explosion.exp.StartingShiftForLoeading);
                     shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 1.0f);
                     SS.ExplosionList.scene_info.vertexBufferArray.Bind(gl);
                     gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.ExplosionList.Quantity() / 3);
@@ -419,7 +419,7 @@ namespace TheDiplomWork
                     shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
                 }
                 
-                shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
+                shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
                 SS.Secondary.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);

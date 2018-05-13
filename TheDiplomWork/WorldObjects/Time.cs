@@ -10,7 +10,8 @@ namespace TheDiplomWork
     {
         public class localtime
         {
-            double Time = 0;
+            public double Time = 0;
+            
             public double Time_Speed = 1.0;
             public float Sun_Time_Decreaser = 200000;
             public double GetTotalRadianTime()
@@ -28,6 +29,11 @@ namespace TheDiplomWork
             }
             double TotalReadlSeconds = 0;
             public double TimeWaitForFallingCubes = 0;
+            public double GetGameTotalSeconds()
+            {
+                return Time/1000;
+                //return TotalReadlSeconds;
+            }
             public double GetTotalSeconds()
             {
                 return TotalReadlSeconds;
