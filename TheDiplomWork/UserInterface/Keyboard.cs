@@ -145,6 +145,27 @@ namespace TheDiplomWork
                     else Speech.ls.synthesizer.SpeakAsync("Explosion Mod Deactivated");
                     break;
 
+                case 'l':
+                    Projectile.jp.Launched = !Projectile.jp.Launched;
+                    if (Projectile.jp.Launched)
+                        Speech.ls.synthesizer.SpeakAsync("Launching Projectile Activated");
+                    else Speech.ls.synthesizer.SpeakAsync("Launching Projectile Deactivated");
+                    break;
+
+                case 'j':
+                    Projectile.jp.RotatingStartingVelocity = !Projectile.jp.RotatingStartingVelocity;
+                    if (Projectile.jp.RotatingStartingVelocity)
+                    {
+                        Projectile.jp.SetStartingPlayerView();
+                        Speech.ls.synthesizer.SpeakAsync("Rotational Mod Activated");
+                    }
+                    else
+                    {
+                        Projectile.jp.SetEndingPlayerView();
+                        Speech.ls.synthesizer.SpeakAsync("Rotational Mod Deactivated");
+                    }
+                    break;
+
                 case 'b'://boom!
                     if (StaticSettings.S.ExplosionMod)
                     {
