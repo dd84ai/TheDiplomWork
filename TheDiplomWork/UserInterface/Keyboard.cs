@@ -177,7 +177,7 @@ namespace TheDiplomWork
                     Projectile.jp.SetHpos1();
                     break;
 
-                case 'u':
+                case 'i':
                     Projectile.jp.SetHpos2();
                     break;
 
@@ -214,7 +214,7 @@ namespace TheDiplomWork
                     StaticSettings.S.HelpInfoForPlayer = !StaticSettings.S.HelpInfoForPlayer;
                     break;
 
-                case 'o':
+                case 'y':
                     if (StaticSettings.S.SunStatus.x > 0.5)
                     {
                         Speech.ls.synthesizer.SpeakAsync("Sun Activated");
@@ -239,7 +239,7 @@ namespace TheDiplomWork
                     Music.wav_player.SaySoundEffect("Blorp");
                     Time.time.Time_Speed = 40.0; break;
 
-                case 'y':
+                case 'u':
                     Music.wav_player.SaySoundEffect("Blorp");
                     Time.time.Time_Speed = 0.025; break;
 

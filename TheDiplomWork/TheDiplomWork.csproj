@@ -73,6 +73,7 @@
     <Compile Include="Scene\SceneInfo_Secondary.cs" />
     <Compile Include="ShaderedScene\DataForDraw_angled.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_ExplodingList.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_Projectile.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_TemporalList.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_SunAndMoon.cs" />
     <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="WorldObjects\Projectile.cs" />
     <Compile Include="WorldObjects\Sun.cs" />
     <Compile Include="WorldObjects\Time.cs" />
+    <None Include="Shaders\Main\Projectile_main.vert" />
     <None Include="Shaders\VertexModules\Explosion.vert" />
     <None Include="Shaders\VertexModules\Sizer.vert" />
     <None Include="Shaders\VertexModules\Cuter.vert" />

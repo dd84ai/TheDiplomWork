@@ -53,6 +53,7 @@ namespace TheDiplomWork
         //  The shader program for our vertex and fragment shader.
         private ModifiedShaderProgram shaderProgram;
         private ModifiedShaderProgram shaderProgram_secondary;
+        private ModifiedShaderProgram shaderProgram_projectile;
         //private ModifiedShaderProgram shaderProgram_ghost;
         /// <summary>
         /// Initialises the scene.
@@ -102,6 +103,7 @@ namespace TheDiplomWork
 
                 var Main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Main.vert");
                 var Adv_main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Adv_main.vert");
+                var Projectile_main = ManifestResourceLoader.LoadTextFile(@"Shaders\Main\Projectile_main.vert");
 
 
                 var vertexShaderSource = 
@@ -137,6 +139,25 @@ namespace TheDiplomWork
                 shaderProgram_secondary.BindAttributeLocation(gl, 3, "in_Angles");
                 shaderProgram_secondary.BindAttributeLocation(gl, 4, "in_Size");
                 shaderProgram_secondary.AssertValid(gl);
+
+                var vertexShaderSource3 =
+                    Header +
+                    Rotator +
+                    Cuter +
+                    Sun +
+                    Translation +
+                    Sizer +
+                    Explosion +
+                    Projectile_main;
+
+                shaderProgram_projectile = new ModifiedShaderProgram();
+                shaderProgram_projectile.Create(gl, vertexShaderSource3, FragmentalShader, GeometryShader, null);
+                shaderProgram_projectile.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
+                shaderProgram_projectile.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
+                //shaderProgram_projectile.BindAttributeLocation(gl, 2, "in_Center");
+                //shaderProgram_projectile.BindAttributeLocation(gl, 3, "in_Angles");
+                //shaderProgram_projectile.BindAttributeLocation(gl, 4, "in_Size");
+                shaderProgram_projectile.AssertValid(gl);
             }
             catch (ShaderCompilationException ShadersMessageError)
             {

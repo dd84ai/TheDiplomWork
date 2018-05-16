@@ -45,6 +45,9 @@ namespace TheDiplomWork
 
             vec3 hposition1 = new vec3(0, 0, 0);
             vec3 hposition2 = new vec3(0, 0, 0);
+
+
+
             vec3 center = new vec3(0,0,0);
             public void SetHpos1()
             {
@@ -60,14 +63,50 @@ namespace TheDiplomWork
 
                 hpos2 = Cube_Selection.Decide_Position_To_Place_Cube(false);
 
+                ShaderedScene.CalculateFromMaptoGraphical(hpos1, ref hposition1);
+                ShaderedScene.CalculateFromMaptoGraphical(hpos2, ref hposition2);
+
                 GatherCubes();
             }
+            public List<CubicalMemory.Cube> ProjectileParts = new List<CubicalMemory.Cube>();
             public void GatherCubes()
             {
-                ShaderedScene.CalculateFromMaptoGraphical(hpos1, ref hposition1);
-                ShaderedScene.CalculateFromMaptoGraphical(hpos1, ref hposition2);
+                if (ProjectileParts.Count() != 0)
+                    foreach (var item in ProjectileParts)
+                        item.IsTakenForExplosion = false;
+                ProjectileParts.Clear();
 
                 center = (hposition1 + hposition2) / 2;
+
+                vec3 pos_min = new vec3(Math.Min(hposition1.x, hposition2.x),
+                    Math.Min(hposition1.y, hposition2.y),
+                    Math.Min(hposition1.z, hposition2.z));
+
+                vec3 pos_max = new vec3(Math.Max(hposition1.x, hposition2.x),
+                    Math.Max(hposition1.y, hposition2.y),
+                    Math.Max(hposition1.z, hposition2.z));
+
+                vec3 cubeposition = new vec3(0, 0, 0);
+                foreach (var XWorld in Scene.SS.env.cub_mem.world.World_as_Whole)
+                    foreach (var XYWorld in XWorld)
+                        foreach (var Xcube in XYWorld.cubes)
+                            foreach (var XYcube in Xcube)
+                                foreach (var XYZcube in XYcube)
+                                {
+                                    ShaderedScene.CalculateFromMaptoGraphical(XYZcube, ref cubeposition);
+
+                                    if (cubeposition.x >= pos_min.x &&
+                                        cubeposition.y >= pos_min.y &&
+                                        cubeposition.z >= pos_min.z &&
+                                        cubeposition.x <= pos_max.x &&
+                                        cubeposition.y <= pos_max.y &&
+                                        cubeposition.z <= pos_max.z)
+                                    {
+                                        XYZcube.IsTakenForExplosion = true;
+                                        ProjectileParts.Add(XYZcube);
+                                    }
+                                }
+                StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
             }
             public void ProcessStartingData()
             {

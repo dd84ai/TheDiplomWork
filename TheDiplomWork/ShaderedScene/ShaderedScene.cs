@@ -16,6 +16,7 @@ namespace TheDiplomWork
         public DataForDraw_angled TemporalList;
         public DataForDraw_angled ExplosionList;
         public DataForDraw_angled SunAndMoon;
+        public DataForDraw_angled ProjectileList;
 
         public ShaderedScene(OpenGL gl)
         {
@@ -24,6 +25,7 @@ namespace TheDiplomWork
             TemporalList = new DataForDraw_TemporalList(gl);
             ExplosionList = new DataForDraw_ExplodingList(gl);
             SunAndMoon = new DataForDraw_SunAndMoon(gl);
+            ProjectileList = new DataForDraw_Projectile(gl);
 
         }
         
