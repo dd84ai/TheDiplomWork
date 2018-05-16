@@ -186,7 +186,14 @@ namespace TheDiplomWork
                     break;
 
                 case 'b'://boom!
-                    if (StaticSettings.S.ExplosionMod)
+                    if (Projectile.jp.Loaded)
+                    {
+                        //Explosion.exp.StartingTime = (float)Time.time.GetGameTotalSeconds();
+                        Explosion.exp.ExplosionCenter = Projectile.jp.CenterCube;
+                        Explosion.exp.PlaceTheBombAt(Explosion.exp.ExplosionCenter);
+                    }
+
+                        if (StaticSettings.S.ExplosionMod)
                     {
                         Explosion.exp.StartingFirst = true;
                         Explosion.exp.StartingFirstStarted = false;
@@ -202,6 +209,7 @@ namespace TheDiplomWork
                         DataForDraw_ExplodingList.TemporalList.Clear();
                         Scene.Reloader_ExplosionList();
                         StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                        Explosion.exp.StartingFirstStarted = false;
                     }
                     break;
                 case 'v'://Cancel Explosions

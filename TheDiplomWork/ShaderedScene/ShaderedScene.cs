@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
 using GlmNet;
+using System.Windows.Forms;
 namespace TheDiplomWork
 {
     public class ShaderedScene
@@ -43,13 +44,20 @@ namespace TheDiplomWork
         }
         public static void CalculateFromMaptoGraphical(CubicalMemory.Cube cube, ref float x, ref float y, ref float z)
         {
-            x = cube.xz.x * CubicalMemory.Chunk.Width + cube.xyz.x;
-            y = cube.xyz.y;
-            z = cube.xz.z * CubicalMemory.Chunk.Length + cube.xyz.z;
+            try
+            {
+                x = cube.xz.x * CubicalMemory.Chunk.Width + cube.xyz.x;
+                y = cube.xyz.y;
+                z = cube.xz.z * CubicalMemory.Chunk.Length + cube.xyz.z;
 
-            x *= (CubicalMemory.Cube.rangeOfTheEdge);
-            y *= (CubicalMemory.Cube.rangeOfTheEdge);
-            z *= (CubicalMemory.Cube.rangeOfTheEdge);
+                x *= (CubicalMemory.Cube.rangeOfTheEdge);
+                y *= (CubicalMemory.Cube.rangeOfTheEdge);
+                z *= (CubicalMemory.Cube.rangeOfTheEdge);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("CalculateFromMaptoGraphical Error");   
+            }
         }
         public static void CalculateFromMaptoGraphical(GeneralProgrammingStuff.Point2Int XYworld, GeneralProgrammingStuff.Point3Int XYZcube, ref float x, ref float y, ref float z)
         {

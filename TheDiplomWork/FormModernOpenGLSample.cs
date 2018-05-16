@@ -123,8 +123,9 @@ namespace TheDiplomWork
 
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "-------------------", 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time.time.GetGameTotalSeconds: " + Time.time.GetGameTotalSeconds(), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingTime: " + Explosion.exp.StartingTime, 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingShift: " + Explosion.exp.StartingShiftForLoeading, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "starting velocity: " + Projectile.jp.GetStringedVec3(Projectile.jp.sd.starting_velocity), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingTime: " + Explosion.exp.StartingTime, 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingShift: " + Explosion.exp.StartingShiftForLoeading, 2.0f); place++;
                 //
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetTotalSeconds(), 2.0f); place++;
             }

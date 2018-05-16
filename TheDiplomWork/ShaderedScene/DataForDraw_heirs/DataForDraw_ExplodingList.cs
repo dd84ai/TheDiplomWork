@@ -16,6 +16,17 @@ namespace TheDiplomWork
         {
             START_initialization();
 
+            ForEachTemporalList(TemporalList);
+
+            if (Projectile.jp.Loaded)
+                ForEachTemporalList(Projectile.jp.ProjectileParts);
+
+
+            END_initialization();
+            base.LastCount = vertices.Count();
+        }
+        void ForEachTemporalList(List<CubicalMemory.Cube> Temper)
+        {
             float cx = 0, cy = 0, cz = 0;
             ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter, ref cx, ref cy, ref cz);
 
@@ -27,7 +38,7 @@ namespace TheDiplomWork
 
             float V = (float)Math.Sqrt(2 * dE * ((Mc / Me) / (1 + K * (Mc / Me)))) / 10.0f;
 
-            foreach (var cube in TemporalList)
+            foreach (var cube in Temper)
             {
                 ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);
 
@@ -39,13 +50,9 @@ namespace TheDiplomWork
                 if (Velocity > 10)
                 {
                     cube.IsTakenForExplosion = true;
-                    Draw_Quad_Full_Sunsided_angled(x, y, z, Vx, Vy, Vz, localed_range, cube.color, cube.FallingStartingTime, true);
+                    Draw_Quad_Full_Sunsided_angled(x, y, z, Vx, Vy, Vz, localed_range, cube.color, 0, true);
                 }
             }
-            
-
-            END_initialization();
-            base.LastCount = vertices.Count();
         }
     }
 }

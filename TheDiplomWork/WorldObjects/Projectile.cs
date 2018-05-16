@@ -15,11 +15,11 @@ namespace TheDiplomWork
         {
             public bool Launched = false;
 
-            class Starting_Data
+            public class Starting_Data
             {
                 public vec3 starting_velocity = new vec3(0, 0, 0);
             }
-            Starting_Data sd = new Starting_Data();
+            public Starting_Data sd = new Starting_Data();
 
             public bool RotatingStartingVelocity = false;
 
@@ -76,6 +76,8 @@ namespace TheDiplomWork
                 GatherCubes();
             }
             public List<CubicalMemory.Cube> ProjectileParts = new List<CubicalMemory.Cube>();
+            public CubicalMemory.Cube CenterCube = null;
+            double CenterCube_RangeMax = double.MaxValue;
             public void GatherCubes()
             {
                 Loaded = true;
@@ -109,11 +111,23 @@ namespace TheDiplomWork
                                         cubeposition.z >= pos_min.z &&
                                         cubeposition.x <= pos_max.x &&
                                         cubeposition.y <= pos_max.y &&
-                                        cubeposition.z <= pos_max.z &&
-                                        XYZcube.IsFilled)
+                                        cubeposition.z <= pos_max.z
+                                        )
                                     {
-                                        XYZcube.IsTakenForExplosion = true;
-                                        ProjectileParts.Add(XYZcube);
+                                        vec3 ranged = cubeposition - center;
+                                        double range = Math.Sqrt(ranged.x * ranged.x + ranged.y * ranged.y + ranged.z * ranged.z);
+
+                                        if (range < CenterCube_RangeMax)
+                                        {
+                                            CenterCube_RangeMax = range;
+                                            CenterCube = XYZcube;
+                                        }
+
+                                        if (XYZcube.IsFilled)
+                                        {
+                                            XYZcube.IsTakenForExplosion = true;
+                                            ProjectileParts.Add(XYZcube);
+                                        }
                                     }
                                 }
 
@@ -220,7 +234,11 @@ namespace TheDiplomWork
 
                 return coordinates;
             }
-            mat3 GetProjectileMatrix()
+            public string GetStringedVec3(vec3 inp)
+            {
+                return inp.x.ToString() + " ; " + inp.y.ToString() + " ; " + inp.z.ToString();
+            }
+            public mat3 GetProjectileMatrix()
             {
                 //Первый вектор. Координаты
                 //Второй вектор.... Угол поворота

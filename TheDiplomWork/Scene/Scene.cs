@@ -467,7 +467,7 @@ namespace TheDiplomWork
 
             }
 
-            if (Projectile.jp.Loaded)
+            if (Projectile.jp.Loaded && !Explosion.exp.StartingFirstStarted)
             {
                 shaderProgram_projectile.Bind(gl);
 
@@ -484,6 +484,8 @@ namespace TheDiplomWork
                 shaderProgram_projectile.SetUniform1(gl, "settingsTransparency", 1.0f);
                 shaderProgram_projectile.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_projectile.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
+
+                shaderProgram_projectile.SetUniformMatrix3(gl, "projectileMatrix", Projectile.jp.GetProjectileMatrix().to_array());
 
                 SS.ProjectileList.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.ProjectileList.Quantity() / 3);
