@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
 using GlmNet;
+using System.Windows.Forms;
 namespace TheDiplomWork
 {
     class Projectile : GeneralProgrammingStuff
@@ -38,7 +39,37 @@ namespace TheDiplomWork
                 Player_rotational_view_Result.y = Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.y;
                 Player_rotational_view_Result.z = Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
             }
-            public void ActivateStartingData()
+
+            CubicalMemory.Cube hpos1 = null;
+            CubicalMemory.Cube hpos2 = null;
+
+            vec3 hposition1 = new vec3(0, 0, 0);
+            vec3 hposition2 = new vec3(0, 0, 0);
+            vec3 center = new vec3(0,0,0);
+            public void SetHpos1()
+            {
+                hpos1 = Cube_Selection.Decide_Position_To_Place_Cube(false);
+            }
+            public void SetHpos2()
+            {
+                if (hpos1 == null)
+                {
+                    MessageBox.Show("Select Hpos1(K) before Hpos2(U)!");
+                    return;
+                }
+
+                hpos2 = Cube_Selection.Decide_Position_To_Place_Cube(false);
+
+                GatherCubes();
+            }
+            public void GatherCubes()
+            {
+                ShaderedScene.CalculateFromMaptoGraphical(hpos1, ref hposition1);
+                ShaderedScene.CalculateFromMaptoGraphical(hpos1, ref hposition2);
+
+                center = (hposition1 + hposition2) / 2;
+            }
+            public void ProcessStartingData()
             {
                 if (!Launched)
                 {
@@ -47,9 +78,16 @@ namespace TheDiplomWork
                     sd.starting_velocity.z = 0;
 
                     sd.starting_velocity = Rotate(sd.starting_velocity, PlayerAngles());
-
-                    StartingTimeToFly = Time.time.GetGameTotalSeconds();
                 }
+            }
+            public void Launch()
+            {
+                StartingTimeToFly = Time.time.GetGameTotalSeconds();
+                Launched = true;
+            }
+            public void DeLaunch()
+            {
+                Launched = false;
             }
 
             vec3 Rotate(vec3 SomethingToRotate, vec3 ang)
@@ -71,9 +109,7 @@ namespace TheDiplomWork
                 return temp;
             }
 
-            CubicalMemory.Cube hpos1 { get; }
-            CubicalMemory.Cube hpos2 { get; }
-            CubicalMemory.Cube center { get; }
+            
 
             vec3 os_x = new vec3(1, 0, 0);
             vec3 os_y = new vec3(1, 0, 0);
@@ -116,7 +152,7 @@ namespace TheDiplomWork
             double StartingTimeToFly = 0;
             float TimeOfFlight()
             {
-                if (StartingTimeToFly < Time.time.GetGameTotalSeconds()) return 0;
+                if (!Launched) return 0;
                 else return (float)(Time.time.GetGameTotalSeconds() - StartingTimeToFly);
             }
 
@@ -137,11 +173,11 @@ namespace TheDiplomWork
             {
                 //Первый вектор. Координаты
                 //Второй вектор.... Угол поворота
-                //Третий вектор. Системные данные и просто доп.
+                //Третий вектор. Центр Снаряда.
 
                 return new mat3(Coordinates(),
                     PlayerAngles(),
-                    new vec3(0, 0, 0)
+                    center
                     );
             }
         }

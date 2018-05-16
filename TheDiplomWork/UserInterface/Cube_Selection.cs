@@ -8,11 +8,11 @@ namespace TheDiplomWork
 {
     class Cube_Selection
     {
-        public static CubicalMemory.Cube Decide_Position_To_Place_Cube()
+        public static CubicalMemory.Cube Decide_Position_To_Place_Cube(bool FallingCube)
         {
             int y = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
             bool found = false;
-            if (StaticSettings.S.FallingCube)
+            if (FallingCube)
             {
                 for (; y >= 0; y--)
                     if (!Scene.SS.env.cub_mem.world.World_as_Whole

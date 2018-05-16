@@ -28,7 +28,17 @@ namespace TheDiplomWork
         }
         
         Random Rand = new Random();
-        
+
+        public static void CalculateFromMaptoGraphical(CubicalMemory.Cube cube, ref vec3 inp)
+        {
+            inp.x = cube.xz.x * CubicalMemory.Chunk.Width + cube.xyz.x;
+            inp.y = cube.xyz.y;
+            inp.z = cube.xz.z * CubicalMemory.Chunk.Length + cube.xyz.z;
+
+            inp.x *= (CubicalMemory.Cube.rangeOfTheEdge);
+            inp.y *= (CubicalMemory.Cube.rangeOfTheEdge);
+            inp.z *= (CubicalMemory.Cube.rangeOfTheEdge);
+        }
         public static void CalculateFromMaptoGraphical(CubicalMemory.Cube cube, ref float x, ref float y, ref float z)
         {
             x = cube.xz.x * CubicalMemory.Chunk.Width + cube.xyz.x;

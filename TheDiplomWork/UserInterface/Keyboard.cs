@@ -148,8 +148,15 @@ namespace TheDiplomWork
                 case 'l':
                     Projectile.jp.Launched = !Projectile.jp.Launched;
                     if (Projectile.jp.Launched)
+                    {
+                        Projectile.jp.Launch();
                         Speech.ls.synthesizer.SpeakAsync("Launching Projectile Activated");
-                    else Speech.ls.synthesizer.SpeakAsync("Launching Projectile Deactivated");
+                    }
+                    else
+                    {
+                        Projectile.jp.DeLaunch();
+                        Speech.ls.synthesizer.SpeakAsync("Launching Projectile Deactivated");
+                    }
                     break;
 
                 case 'j':
@@ -164,6 +171,14 @@ namespace TheDiplomWork
                         Projectile.jp.SetEndingPlayerView();
                         Speech.ls.synthesizer.SpeakAsync("Rotational Mod Deactivated");
                     }
+                    break;
+
+                case 'k':
+                    Projectile.jp.SetHpos1();
+                    break;
+
+                case 'u':
+                    Projectile.jp.SetHpos2();
                     break;
 
                 case 'b'://boom!
@@ -199,7 +214,7 @@ namespace TheDiplomWork
                     StaticSettings.S.HelpInfoForPlayer = !StaticSettings.S.HelpInfoForPlayer;
                     break;
 
-                case 'y':
+                case 'o':
                     if (StaticSettings.S.SunStatus.x > 0.5)
                     {
                         Speech.ls.synthesizer.SpeakAsync("Sun Activated");
@@ -224,7 +239,7 @@ namespace TheDiplomWork
                     Music.wav_player.SaySoundEffect("Blorp");
                     Time.time.Time_Speed = 40.0; break;
 
-                case 'u':
+                case 'y':
                     Music.wav_player.SaySoundEffect("Blorp");
                     Time.time.Time_Speed = 0.025; break;
 
@@ -269,14 +284,14 @@ namespace TheDiplomWork
                     { step_vector.x = 0; step_vector.y = -step * 1.3f; step_vector.z = 0; DoStep(step_vector); }
                     break; 
 
-                case 'l':
-                    Scene.SS.env.player.coords.Player_rotational_view.x += rotational_step; break;
-                case 'j':
-                    Scene.SS.env.player.coords.Player_rotational_view.x -= rotational_step; break;
-                case 'i':
-                    Scene.SS.env.player.coords.Player_rotational_view.y += rotational_step; break;
-                case 'k':
-                    Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
+                //case 'l':
+                //    Scene.SS.env.player.coords.Player_rotational_view.x += rotational_step; break;
+                //case 'j':
+                //    Scene.SS.env.player.coords.Player_rotational_view.x -= rotational_step; break;
+                //case 'i':
+                //    Scene.SS.env.player.coords.Player_rotational_view.y += rotational_step; break;
+                //case 'k':
+                //    Scene.SS.env.player.coords.Player_rotational_view.y -= rotational_step; break;
 
                 case (char)188://','
                     step_multiplier += 1; break;

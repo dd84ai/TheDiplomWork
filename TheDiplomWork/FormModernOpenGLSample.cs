@@ -290,7 +290,7 @@ namespace TheDiplomWork
             {
                 if (StaticSettings.S.GhostCube_Add_in_Data_For_Draw)
                 {
-                    CubicalMemory.Cube cube = Cube_Selection.Decide_Position_To_Place_Cube();
+                    CubicalMemory.Cube cube = Cube_Selection.Decide_Position_To_Place_Cube(StaticSettings.S.FallingCube);
 
                     if (e.Button.ToString() == "Right")
                     {

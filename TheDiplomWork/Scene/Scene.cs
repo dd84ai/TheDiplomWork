@@ -325,7 +325,7 @@ namespace TheDiplomWork
         vec3[] playerMatrix_veced = new vec3[3];
         public void Draw_Wrapped(OpenGL gl)
         {
-            Projectile.jp.ActivateStartingData();
+            Projectile.jp.ProcessStartingData();
 
             //  Create a view matrix to move us back a bit.
             viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,
