@@ -31,6 +31,12 @@ namespace TheDiplomWork
                 Bomb_precise_position.y = y1;
                 Bomb_precise_position.z = z1;
             }
+            public void SetBombLocation(vec3 bomb_location)
+            {
+                Bomb_precise_position.x = bomb_location.x;
+                Bomb_precise_position.y = bomb_location.y;
+                Bomb_precise_position.z = bomb_location.z;
+            }
 
             public float StartingTime = 0;
 

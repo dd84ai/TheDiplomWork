@@ -15,8 +15,9 @@ namespace TheDiplomWork
         {
             START_initialization();
 
-            Explosion.exp.ExplosionCenter = Projectile.jp.CenterCube;
-            DataForDraw_ExplodingList.ForEachTemporalList(this, Projectile.jp.ProjectileParts);
+            float x = 0, y = 0, z = 0;
+            ShaderedScene.CalculateFromMaptoGraphical(Projectile.jp.CenterCube, ref x, ref y, ref z);
+            DataForDraw_ExplodingList.ForEachTemporalList(this, Projectile.jp.ProjectileParts,x,y,z);
 
             //foreach (var cube in Projectile.jp.ProjectileParts)
             //{

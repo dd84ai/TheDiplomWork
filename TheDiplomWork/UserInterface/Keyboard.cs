@@ -190,7 +190,8 @@ namespace TheDiplomWork
                     {
                         //Explosion.exp.StartingTime = (float)Time.time.GetGameTotalSeconds();
                         Explosion.exp.ExplosionCenter = Projectile.jp.CenterCube;
-                        Explosion.exp.PlaceTheBombAt(Explosion.exp.ExplosionCenter);
+                        Explosion.exp.SetBombLocation(Projectile.jp.TrueLocation());
+                        //Explosion.exp.PlaceTheBombAt(Explosion.exp.ExplosionCenter);
                     }
 
                         if (StaticSettings.S.ExplosionMod)
@@ -210,6 +211,7 @@ namespace TheDiplomWork
                         Scene.Reloader_ExplosionList();
                         StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                         Explosion.exp.StartingFirstStarted = false;
+                        Projectile.jp.Launched = false;
                     }
                     break;
                 case 'v'://Cancel Explosions

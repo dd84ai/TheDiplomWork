@@ -17,7 +17,18 @@ namespace TheDiplomWork
             START_initialization();
 
             
-            ForEachTemporalList(this,TemporalList);
+            float x = 0, y = 0, z = 0;
+            if (!Projectile.jp.Loaded)
+                ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter, ref x, ref y, ref z);
+            else
+            {
+                x = Projectile.jp.TrueLocation().x;
+                y = Projectile.jp.TrueLocation().y;
+                z = Projectile.jp.TrueLocation().z;
+            }
+
+
+            ForEachTemporalList(this,TemporalList,x,y,z);
 
             //if (Projectile.jp.Loaded)
             //    ForEachTemporalList(Projectile.jp.ProjectileParts);
@@ -26,11 +37,10 @@ namespace TheDiplomWork
             END_initialization();
             base.LastCount = vertices.Count();
         }
-        public static void ForEachTemporalList(DataForDraw_angled Data, List<CubicalMemory.Cube> Temper)
+        public static void ForEachTemporalList(DataForDraw_angled Data, List<CubicalMemory.Cube> Temper, float cx, float cy, float cz)
         {
             float x = 0, y = 0, z = 0;
-            float cx = 0, cy = 0, cz = 0;
-            ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter, ref cx, ref cy, ref cz);
+            
 
             //Так по поводу взрыва. Давай все мерить в TNT эквиваленте.
             float Me = 1.0f; //mass of the explosive charge

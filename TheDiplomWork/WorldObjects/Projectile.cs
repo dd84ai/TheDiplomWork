@@ -55,7 +55,11 @@ namespace TheDiplomWork
                 GatherCubes();
             }
 
-            vec3 center = new vec3(0,0,0);
+            public vec3 TrueLocation()
+            {
+                return Projectile.jp.center + Projectile.jp.Coordinates();
+            }
+            public vec3 center = new vec3(0,0,0);
             public void SetHpos1()
             {
                 hpos1 = Cube_Selection.Decide_Position_To_Place_Cube(false);
@@ -222,7 +226,7 @@ namespace TheDiplomWork
             }
 
             vec3 coordinates = new vec3(0, 0, 0);
-            vec3 Coordinates()
+            public vec3 Coordinates()
             {
                 return CoordinatesAtTime(TimeOfFlight());
             }
