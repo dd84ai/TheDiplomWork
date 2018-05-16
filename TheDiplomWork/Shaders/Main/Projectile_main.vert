@@ -5,7 +5,15 @@
 
 vec4 Processed(vec3 inp)
 {
-	 return Shifted_Position(projectileMatrix[0] + inp);
+	if (settingsTHIS_IS_EXPLOSION > 0.5)
+	{
+		return Shifted_Position(projectileMatrix[0] + Explosion(inp));
+	}
+	else
+	{
+		return Shifted_Position(projectileMatrix[0] + inp);
+	}
+	 
 }
 void main(void) 
 {

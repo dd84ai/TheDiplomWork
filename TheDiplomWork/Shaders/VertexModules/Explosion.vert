@@ -1,5 +1,5 @@
 ﻿float TimePauseForExplosion = 0.6;
-vec4 Explosion(vec3 inp)
+vec3 Explosion(vec3 inp)
 {
 	float TimeItTook = TimeTotalSeconds - in_Size.x;
 	if (TimeItTook > TimePauseForExplosion) TimeItTook = TimeItTook - TimePauseForExplosion;
@@ -10,5 +10,5 @@ vec4 Explosion(vec3 inp)
 	,in_Center.y * TimeItTook  - (9.8 / 2) * TimeItTook * TimeItTook
 	,in_Center.z * TimeItTook
 	);
-	return Shifted_Position(Translate(inp,vec3(RelativeShift)));
+	return (Translate(inp,vec3(RelativeShift)));
 }

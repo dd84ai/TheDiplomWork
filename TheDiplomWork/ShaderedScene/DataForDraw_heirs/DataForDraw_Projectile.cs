@@ -15,11 +15,14 @@ namespace TheDiplomWork
         {
             START_initialization();
 
-            foreach (var cube in Projectile.jp.ProjectileParts)
-            {
-                ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);
-                Draw_Quad_Full_Sunsided_angled(x, y, z, 0, 0, 0, localed_range, cube.color, 0, true);
-            }
+            Explosion.exp.ExplosionCenter = Projectile.jp.CenterCube;
+            DataForDraw_ExplodingList.ForEachTemporalList(this, Projectile.jp.ProjectileParts);
+
+            //foreach (var cube in Projectile.jp.ProjectileParts)
+            //{
+            //    ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);
+            //    Draw_Quad_Full_Sunsided_angled(x, y, z, 0, 0, 0, localed_range, cube.color, 0, true);
+            //}
 
             END_initialization();
             base.LastCount = vertices.Count();
