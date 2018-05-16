@@ -5,18 +5,21 @@
 
 vec4 Processed(vec3 inp)
 {
+	//Explosion
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
 		return Shifted_Position(Explosion(inp));
 	}
 	else
 	{
+		//Sun?
 		if (sunMatrix[2].z < 0.5)
 		{
 			return Shifted_Position(Translate(Rotated_Around(Expander(inp),in_Center),vec3(playerMatrix[0].x,0,playerMatrix[0].z)));
 		}
 		else 
 		{
+			//Falling Cube
 			if (in_Center.y > 0)
 			{
 			float height = in_Center.y - in_Position.y;
@@ -25,7 +28,11 @@ vec4 Processed(vec3 inp)
 			return Shifted_Position(Translate(inp,vec3(0,height,0)));
 			else return Shifted_Position(inp);
 			}
-			else return Shifted_Position(inp);
+			else
+			{
+				//Default
+				return Shifted_Position(inp);
+			}
 		}
 	}
 }

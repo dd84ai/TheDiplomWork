@@ -29,17 +29,50 @@ namespace TheDiplomWork
             Point3D Player_rotational_view_Result = new Point3D(0, 0, 0);
             public void SetStartingPlayerView()
             {
-                Player_rotational_view_OLD.x = Scene.SS.env.player.coords.Player_rotational_view.x;
-                Player_rotational_view_OLD.y = Scene.SS.env.player.coords.Player_rotational_view.y;
+                Player_rotational_view_OLD.x = Scene.SS.env.player.coords.Player_rotational_view.y;
+                Player_rotational_view_OLD.y = Scene.SS.env.player.coords.Player_rotational_view.x;
                 Player_rotational_view_OLD.z = Scene.SS.env.player.coords.Player_rotational_view.z;
             }
             public void SetEndingPlayerView()
             {
-                Player_rotational_view_Result.x = Scene.SS.env.player.coords.Player_rotational_view.x - Player_rotational_view_OLD.x;
-                Player_rotational_view_Result.y = Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.y;
-                Player_rotational_view_Result.z = Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
+                Player_rotational_view_Result.x += Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x;
+                Player_rotational_view_Result.y += Scene.SS.env.player.coords.Player_rotational_view.x - Player_rotational_view_OLD.y;
+                Player_rotational_view_Result.z += Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
             }
+            vec3 angles = new vec3(0, 0, 0);
+            vec3 PlayerAngles()
+            {
+                if (RotatingStartingVelocity)
+                {
+                    angles.x = Player_rotational_view_Result.x + Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x;
+                    angles.y = Player_rotational_view_Result.y + Scene.SS.env.player.coords.Player_rotational_view.x - Player_rotational_view_OLD.y;
+                    angles.z = Player_rotational_view_Result.z + Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
+                }
+                else
+                {
+                    angles.x = Player_rotational_view_Result.x;
+                    angles.y = Player_rotational_view_Result.y;
+                    angles.z = Player_rotational_view_Result.z;
+                }
 
+                return angles;
+            }
+            public void Player_rotational_view_Result_NULLIFICATE()
+            {
+                Player_rotational_view_Result.x = 0;
+                Player_rotational_view_Result.y = 0;
+                Player_rotational_view_Result.z = 0;
+            }
+            vec3 Angles(bool deactivated)
+            {
+                vec3 nv = glm.normalize(Velocity());
+
+                angles.x = (float)Math.Atan(nv.y / nv.x);
+                angles.y = (float)Math.Atan(Math.Sqrt(nv.x * nv.x + nv.y + nv.y) / nv.z);
+                angles.z = 0;
+
+                return angles;
+            }
             CubicalMemory.Cube hpos1 = null;
             CubicalMemory.Cube hpos2 = null;
 
@@ -183,34 +216,7 @@ namespace TheDiplomWork
             vec3 os_x = new vec3(1, 0, 0);
             vec3 os_y = new vec3(1, 0, 0);
 
-            vec3 angles = new vec3(0, 0, 0);
-            vec3 PlayerAngles()
-            {
-                if (RotatingStartingVelocity)
-                {
-                    angles.x = Scene.SS.env.player.coords.Player_rotational_view.x - Player_rotational_view_OLD.x;
-                    angles.y = Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.y;
-                    angles.z = Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
-                }
-                else
-                {
-                    angles.x = Player_rotational_view_Result.x;
-                    angles.y = Player_rotational_view_Result.y;
-                    angles.z = Player_rotational_view_Result.z;
-                }
-
-                return angles;
-            }
-            vec3 Angles(bool deactivated)
-            {
-                vec3 nv = glm.normalize(Velocity());
-
-                angles.x = (float)Math.Atan(nv.y / nv.x);
-                angles.y = (float)Math.Atan(Math.Sqrt(nv.x * nv.x + nv.y + nv.y) / nv.z);
-                angles.z = 0;
-
-                return angles;
-            }
+            
 
             float step = 0.01f;
             vec3 Velocity()

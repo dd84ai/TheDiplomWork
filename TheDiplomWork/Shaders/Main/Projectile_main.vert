@@ -3,15 +3,26 @@
 //#include <Rotator.vert>
 //#include <Sun.vert>
 
+vec3 ProcessingProjectile(vec3 inp)
+{
+	//Rotate
+	vec3 ShiftToRotate = Shifted(inp) - projectileMatrix[2];
+	ShiftToRotate = Rotate(projectileMatrix[1], ShiftToRotate);
+	ShiftToRotate = Deshifted(ShiftToRotate) + projectileMatrix[2];
+
+	vec3 ShiftedToRelativePosition = projectileMatrix[0] + ShiftToRotate;
+
+	return ShiftedToRelativePosition;
+}
 vec4 Processed(vec3 inp)
 {
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
-		return Shifted_Position(projectileMatrix[0] + Explosion(inp));
+		return Shifted_Position(ProcessingProjectile(Explosion(inp)));
 	}
 	else
 	{
-		return Shifted_Position(projectileMatrix[0] + inp);
+		return Shifted_Position(ProcessingProjectile(inp));
 	}
 	 
 }

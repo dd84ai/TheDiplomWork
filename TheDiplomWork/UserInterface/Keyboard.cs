@@ -173,6 +173,7 @@ namespace TheDiplomWork
                     }
                     break;
 
+
                 case 'k':
                     Projectile.jp.SetHpos1();
                     break;
@@ -183,6 +184,10 @@ namespace TheDiplomWork
 
                 case 'o':
                     Projectile.jp.LoadFromFile();
+                    break;
+
+                case (char)186:
+                    Projectile.jp.Player_rotational_view_Result_NULLIFICATE();
                     break;
 
                 case 'b'://boom!
