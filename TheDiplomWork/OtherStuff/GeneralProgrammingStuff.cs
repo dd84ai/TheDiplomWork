@@ -36,7 +36,7 @@ namespace TheDiplomWork
                 {
                     subject[i].Add(new List<CubicalMemory.Cube>());
 
-                    for (int k = 0; k < c; k++) 
+                    for (int k = 0; k < c; k++)
                     {
                         subject[i][j].Add(new CubicalMemory.Cube(i, j, k, xz));
                     }
@@ -112,9 +112,9 @@ namespace TheDiplomWork
             {
                 return "Point3D: " + x.ToString("G3") + " ; "
                     + y.ToString("G3") + " ; "
-                +z.ToString("G3");
+                + z.ToString("G3");
             }
-            public static void CopyToFrom(ref Point3D Output,Point3D _Input)
+            public static void CopyToFrom(ref Point3D Output, Point3D _Input)
             {
                 Output.x = _Input.x;
                 Output.y = _Input.y;
@@ -127,11 +127,11 @@ namespace TheDiplomWork
                 {
                     using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(Path + Name + ".dat"))
-                {
-                    file.WriteLine(x.ToString("E15"));
-                    file.WriteLine(y.ToString("E15"));
-                    file.WriteLine(z.ToString("E15"));
-                }
+                    {
+                        file.WriteLine(x.ToString("E15"));
+                        file.WriteLine(y.ToString("E15"));
+                        file.WriteLine(z.ToString("E15"));
+                    }
                 }
                 catch (Exception ThrowItAway)
                 {
@@ -167,7 +167,7 @@ namespace TheDiplomWork
             public int x, z;
             public Point2Int(int _x, int _z)
             {
-                x = _x; z = _z; 
+                x = _x; z = _z;
             }
             public Point2Int(Point2Int input)
             {
@@ -288,5 +288,51 @@ namespace TheDiplomWork
             return a.x * b.x + a.y * b.y + a.z * b.z;
         }
     }
-    
+
+    public class vec3things
+    {
+        static string Path = Interface.ProjectPath + "\\" + "Save" + "\\";
+        public static void Save(vec3 vec, string Name)
+        {
+            try
+            {
+                using (System.IO.StreamWriter file =
+        new System.IO.StreamWriter(Path + Name + ".dat"))
+                {
+                    file.WriteLine(vec.x.ToString("E15"));
+                    file.WriteLine(vec.y.ToString("E15"));
+                    file.WriteLine(vec.z.ToString("E15"));
+                }
+            }
+            catch (Exception ThrowItAway)
+            {
+                Console.WriteLine($"{ThrowItAway.Message}");
+            }
+        }
+        static string ReplaceDecimalSeparator(string inp)
+        {
+            inp = inp.Replace(",", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+            inp = inp.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+            return inp;
+        }
+        public static bool TryLoad(ref vec3 vec, string Name)
+        {
+            try
+            {
+                using (System.IO.StreamReader file =
+            new System.IO.StreamReader(Path + Name + ".dat"))
+                {
+                    vec.x = Convert.ToSingle(ReplaceDecimalSeparator(file.ReadLine()));
+                    vec.y = Convert.ToSingle(ReplaceDecimalSeparator(file.ReadLine()));
+                    vec.z = Convert.ToSingle(ReplaceDecimalSeparator(file.ReadLine()));
+                }
+                return true;
+            }
+            catch (Exception ThrowItAway)
+            {
+                Console.WriteLine($"{ThrowItAway.Message}");
+                return false;
+            }
+        }
+    }
 }

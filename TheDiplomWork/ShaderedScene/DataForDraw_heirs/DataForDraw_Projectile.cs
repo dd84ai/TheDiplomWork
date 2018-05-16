@@ -18,7 +18,7 @@ namespace TheDiplomWork
             foreach (var cube in Projectile.jp.ProjectileParts)
             {
                 ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);
-                Draw_Quad_Full_Sunsided_angled(x, y, z, cube.FallingStartingTime, cube.FallingFromHeight * (CubicalMemory.Cube.rangeOfTheEdge), 0.0f, localed_range, cube.color, 0, true);
+                Draw_Quad_Full_Sunsided_angled(x, y, z, 0, 0, 0, localed_range, cube.color, 0, true);
             }
 
             END_initialization();

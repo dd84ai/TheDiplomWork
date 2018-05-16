@@ -181,6 +181,10 @@ namespace TheDiplomWork
                     Projectile.jp.SetHpos2();
                     break;
 
+                case 'o':
+                    Projectile.jp.LoadFromFile();
+                    break;
+
                 case 'b'://boom!
                     if (StaticSettings.S.ExplosionMod)
                     {
@@ -321,7 +325,9 @@ namespace TheDiplomWork
         {
             Scene.SS.env.player.coords.Player_precise_position.Save("PlayerPosition");
             Scene.SS.env.player.coords.Player_rotational_view.Save("PlayerRotationalView");
-            SaveAndLoad.Save("default");
+
+            vec3things.Save(Projectile.jp.hposition1, "hposition1");
+            vec3things.Save(Projectile.jp.hposition2, "hposition2");
         }
         public static void RestoringToDefaultAlgorithm()
         {

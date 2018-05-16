@@ -154,9 +154,9 @@ namespace TheDiplomWork
                 shaderProgram_projectile.Create(gl, vertexShaderSource3, FragmentalShader, GeometryShader, null);
                 shaderProgram_projectile.BindAttributeLocation(gl, attributeIndexPosition, "in_Position");
                 shaderProgram_projectile.BindAttributeLocation(gl, attributeIndexColour, "in_Color");
-                //shaderProgram_projectile.BindAttributeLocation(gl, 2, "in_Center");
-                //shaderProgram_projectile.BindAttributeLocation(gl, 3, "in_Angles");
-                //shaderProgram_projectile.BindAttributeLocation(gl, 4, "in_Size");
+                shaderProgram_projectile.BindAttributeLocation(gl, 2, "in_Center");
+                shaderProgram_projectile.BindAttributeLocation(gl, 3, "in_Angles");
+                shaderProgram_projectile.BindAttributeLocation(gl, 4, "in_Size");
                 shaderProgram_projectile.AssertValid(gl);
             }
             catch (ShaderCompilationException ShadersMessageError)
@@ -211,6 +211,7 @@ namespace TheDiplomWork
             SS.ExplosionList.CopyToReady();
             SS.ExplosionList.scene_info.CreateVerticesForSquare_angled();
         }
+        
         public void Reloader_Ghost()
         {
             if (!SS.Secondary.CopiedLastResult)
@@ -464,6 +465,31 @@ namespace TheDiplomWork
 
                 shaderProgram_secondary.Unbind(gl);
 
+            }
+
+            if (Projectile.jp.Loaded)
+            {
+                shaderProgram_projectile.Bind(gl);
+
+                shaderProgram_projectile.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
+                shaderProgram_projectile.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
+                shaderProgram_projectile.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
+                shaderProgram_projectile.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
+                shaderProgram_projectile.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
+
+                sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
+                    new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
+                    new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
+                shaderProgram_projectile.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
+                shaderProgram_projectile.SetUniform1(gl, "settingsTransparency", 1.0f);
+                shaderProgram_projectile.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
+                shaderProgram_projectile.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
+
+                SS.ProjectileList.scene_info.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.ProjectileList.Quantity() / 3);
+                SS.ProjectileList.scene_info.vertexBufferArray.Unbind(gl);
+
+                shaderProgram_projectile.Unbind(gl);
             }
             
             //SS.OpenGLDraw(gl, modelMatrix * rotMatrix * viewMatrix);//projectionMatrix * rotMatrix * viewMatrix * );

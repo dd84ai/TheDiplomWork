@@ -62,6 +62,11 @@ namespace TheDiplomWork
             Add_Value(ref size, size_count++, size_outer);
         }
 
-        
+        public void Reloader()
+        {
+            initialization();
+            CopyToReady();
+            scene_info.CreateVerticesForSquare_angled();
+        }
     }
 }

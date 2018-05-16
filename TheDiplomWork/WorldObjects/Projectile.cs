@@ -43,10 +43,17 @@ namespace TheDiplomWork
             CubicalMemory.Cube hpos1 = null;
             CubicalMemory.Cube hpos2 = null;
 
-            vec3 hposition1 = new vec3(0, 0, 0);
-            vec3 hposition2 = new vec3(0, 0, 0);
+            public vec3 hposition1 = new vec3(0, 0, 0);
+            public vec3 hposition2 = new vec3(0, 0, 0);
 
-
+            public bool Loaded = false;
+            public void LoadFromFile()
+            {
+                vec3things.TryLoad(ref Projectile.jp.hposition1, "hposition1");
+                vec3things.TryLoad(ref Projectile.jp.hposition2, "hposition2");
+                
+                GatherCubes();
+            }
 
             vec3 center = new vec3(0,0,0);
             public void SetHpos1()
@@ -71,6 +78,8 @@ namespace TheDiplomWork
             public List<CubicalMemory.Cube> ProjectileParts = new List<CubicalMemory.Cube>();
             public void GatherCubes()
             {
+                Loaded = true;
+
                 if (ProjectileParts.Count() != 0)
                     foreach (var item in ProjectileParts)
                         item.IsTakenForExplosion = false;
@@ -100,12 +109,15 @@ namespace TheDiplomWork
                                         cubeposition.z >= pos_min.z &&
                                         cubeposition.x <= pos_max.x &&
                                         cubeposition.y <= pos_max.y &&
-                                        cubeposition.z <= pos_max.z)
+                                        cubeposition.z <= pos_max.z &&
+                                        XYZcube.IsFilled)
                                     {
                                         XYZcube.IsTakenForExplosion = true;
                                         ProjectileParts.Add(XYZcube);
                                     }
                                 }
+
+                Scene.SS.ProjectileList.Reloader();
                 StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
             }
             public void ProcessStartingData()
