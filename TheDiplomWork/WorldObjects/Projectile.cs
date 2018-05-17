@@ -106,7 +106,7 @@ namespace TheDiplomWork
 
             public vec3 AbsoluteLocation()
             {
-                return Projectile.jp.center + Projectile.jp.Coordinates();
+                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + (float)Time.time.AverageRebuildingTime);
             }
             public vec3 AbsoluteEstimatedLocation()
             {
