@@ -212,6 +212,7 @@ namespace TheDiplomWork
             SS.ExplosionList.CopyToReady();
             SS.ExplosionList.scene_info.CreateVerticesForSquare_angled();
         }
+
         
         public void Reloader_Ghost()
         {
@@ -459,6 +460,14 @@ namespace TheDiplomWork
                 SS.Ghost.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Ghost.Quantity() / 3);
                 SS.Ghost.scene_info.vertexBufferArray.Unbind(gl);
+
+                if (Projectile.jp.Loaded && !Projectile.jp.Launched)
+                {
+                    SS.TrajectoryPath.Reloader();
+                    SS.TrajectoryPath.scene_info.vertexBufferArray.Bind(gl);
+                    gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TrajectoryPath.Quantity() / 3);
+                    SS.TrajectoryPath.scene_info.vertexBufferArray.Unbind(gl);
+                }
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),

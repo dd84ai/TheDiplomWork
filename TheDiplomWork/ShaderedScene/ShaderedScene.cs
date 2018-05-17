@@ -18,6 +18,7 @@ namespace TheDiplomWork
         public DataForDraw_angled ExplosionList;
         public DataForDraw_angled SunAndMoon;
         public DataForDraw_angled ProjectileList;
+        public DataForDraw_angled TrajectoryPath;
 
         public ShaderedScene(OpenGL gl)
         {
@@ -27,7 +28,7 @@ namespace TheDiplomWork
             ExplosionList = new DataForDraw_ExplodingList(gl);
             SunAndMoon = new DataForDraw_SunAndMoon(gl);
             ProjectileList = new DataForDraw_Projectile(gl);
-
+            TrajectoryPath = new DataForDraw_TrajectoryPath(gl);
         }
         
         Random Rand = new Random();

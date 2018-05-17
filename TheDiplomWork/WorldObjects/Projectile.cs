@@ -112,6 +112,10 @@ namespace TheDiplomWork
             {
                 return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + (float)Time.time.AverageRebuildingTime);
             }
+            public vec3 AbsoluteLocationAtTime(float _time)
+            {
+                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(_time);
+            }
             public vec3 center = new vec3(0,0,0);
             public void SetHpos1()
             {
@@ -261,6 +265,12 @@ namespace TheDiplomWork
                 coordinates.z = sd.starting_velocity.z * time;
 
                 return coordinates;
+            }
+            public float TimeWhenSecondZero()
+            {
+                // - (9.8f / 2f) * time * time + sd.starting_velocity.y * time - coordinates.y = 0;
+                double Discr = Math.Sqrt(sd.starting_velocity.y* sd.starting_velocity.y);
+                return (float)((-sd.starting_velocity.y - Discr) / (-2 * (9.8f / 2f)));
             }
             public string GetStringedVec3(vec3 inp)
             {
