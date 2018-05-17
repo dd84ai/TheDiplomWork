@@ -79,8 +79,13 @@ namespace TheDiplomWork
                 else Keyboard.Ctrl_is_pressed = false;
 
                 if ((Control.ModifierKeys & Keys.Alt) != 0)
-                    Keyboard.Alt_is_pressed = true;
-                else Keyboard.Alt_is_pressed = false;
+                {
+                    
+                }
+                else
+                {
+                    Keyboard.Alt_is_pressed = false;
+                }
 
                 Keyboard.DoAction();
 
@@ -253,6 +258,8 @@ namespace TheDiplomWork
 
             if (!AnyKeyPressed) Keyboard.Wrapped_SINGLE_KeyPressed_Reaction(item);
             AnyKeyPressed = true;
+
+            if ((char)e.KeyValue == 'j' || (char)e.KeyValue == 'J') Projectile.jp.SetStartingPlayerView();
         }
 
         private void openGLControl_KeyUp(object sender, KeyEventArgs e)
@@ -270,6 +277,8 @@ namespace TheDiplomWork
                 Music.wav_player.SaySoundEffect("Blorp");
                 Time.time.Time_Speed = 1.0;
             }
+
+            Projectile.jp.SetEndingPlayerView();
         }
 
         private void openGLControl_MouseEnter(object sender, EventArgs e)

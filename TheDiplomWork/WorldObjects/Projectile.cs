@@ -15,6 +15,10 @@ namespace TheDiplomWork
         {
             public bool Launched = false;
 
+            public Localized_projectile()
+            {
+                
+            }
             public class Starting_Data
             {
                 public vec3 default_velocity = new vec3(0, 20, 0);
@@ -30,24 +34,33 @@ namespace TheDiplomWork
             Point3D Player_rotational_view_Result = new Point3D(0, 0, 0);
             public void SetStartingPlayerView()
             {
-                Player_rotational_view_OLD.x = Scene.SS.env.player.coords.Player_rotational_view.y;
-                Player_rotational_view_OLD.y = -Scene.SS.env.player.coords.Player_rotational_view.x;
-                Player_rotational_view_OLD.z = Scene.SS.env.player.coords.Player_rotational_view.z;
+                if (!Projectile.jp.RotatingStartingVelocity)
+                {
+                    Projectile.jp.RotatingStartingVelocity = true;
+                    Player_rotational_view_OLD.x = Scene.SS.env.player.coords.Player_rotational_view.y;
+                    Player_rotational_view_OLD.y = -Scene.SS.env.player.coords.Player_rotational_view.x;
+                    Player_rotational_view_OLD.z = Scene.SS.env.player.coords.Player_rotational_view.z;
+                }
             }
+            float MultiPlayerForView = 2.0f;
             public void SetEndingPlayerView()
             {
-                Player_rotational_view_Result.x += Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x;
-                Player_rotational_view_Result.y += (-Scene.SS.env.player.coords.Player_rotational_view.x) - Player_rotational_view_OLD.y;
-                Player_rotational_view_Result.z += Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
+                if (Projectile.jp.RotatingStartingVelocity)
+                {
+                    Projectile.jp.RotatingStartingVelocity = false;
+                    Player_rotational_view_Result.x += MultiPlayerForView * (Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x);
+                    Player_rotational_view_Result.y += MultiPlayerForView * ((-Scene.SS.env.player.coords.Player_rotational_view.x) - Player_rotational_view_OLD.y);
+                    Player_rotational_view_Result.z += MultiPlayerForView * (Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z);
+                }
             }
             vec3 angles = new vec3(0, 0, 0);
             vec3 PlayerAngles()
             {
                 if (RotatingStartingVelocity)
                 {
-                    angles.x = Player_rotational_view_Result.x + Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x;
-                    angles.y = Player_rotational_view_Result.y + (-Scene.SS.env.player.coords.Player_rotational_view.x) - Player_rotational_view_OLD.y;
-                    angles.z = Player_rotational_view_Result.z + Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
+                    angles.x = Player_rotational_view_Result.x + MultiPlayerForView * (Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x);
+                    angles.y = Player_rotational_view_Result.y + MultiPlayerForView * ((-Scene.SS.env.player.coords.Player_rotational_view.x) - Player_rotational_view_OLD.y);
+                    angles.z = Player_rotational_view_Result.z + MultiPlayerForView * (Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z);
                 }
                 else
                 {

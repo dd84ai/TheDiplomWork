@@ -158,19 +158,19 @@ namespace TheDiplomWork
                     }
                     break;
 
-                case 'j':
-                    Projectile.jp.RotatingStartingVelocity = !Projectile.jp.RotatingStartingVelocity;
-                    if (Projectile.jp.RotatingStartingVelocity)
-                    {
-                        Projectile.jp.SetStartingPlayerView();
-                        Speech.ls.synthesizer.SpeakAsync("On");
-                    }
-                    else
-                    {
-                        Projectile.jp.SetEndingPlayerView();
-                        Speech.ls.synthesizer.SpeakAsync("Off");
-                    }
-                    break;
+                //case 'j':
+                //    Projectile.jp.RotatingStartingVelocity = !Projectile.jp.RotatingStartingVelocity;
+                //    if (Projectile.jp.RotatingStartingVelocity)
+                //    {
+                //        Projectile.jp.SetStartingPlayerView();
+                //        Speech.ls.synthesizer.SpeakAsync("On");
+                //    }
+                //    else
+                //    {
+                //        Projectile.jp.SetEndingPlayerView();
+                //        Speech.ls.synthesizer.SpeakAsync("Off");
+                //    }
+                //    break;
 
 
                 case 'k':

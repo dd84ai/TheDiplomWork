@@ -192,6 +192,7 @@ namespace TheDiplomWork
                 gl.BlendFunc(OpenGL.GL_SRC_ALPHA, OpenGL.GL_ONE_MINUS_SRC_ALPHA);
             }
 
+            if (StaticSettings.S.LoadProjectile) Projectile.jp.LoadFromFile();
         }
         public void Reloader_SunAndMoon()
         {

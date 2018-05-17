@@ -44,6 +44,8 @@ namespace TheDiplomWork
 
             public bool ExplosionMod = true;
 
+            public bool LoadProjectile = true;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)
