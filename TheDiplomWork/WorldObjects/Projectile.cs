@@ -222,7 +222,7 @@ namespace TheDiplomWork
                     mat3 RotateZ = new mat3(new vec3((float)Math.Cos(ang.z), -(float)Math.Sin(ang.z), 0),
                     new vec3((float)Math.Sin(ang.z), (float)Math.Cos(ang.z), 0),
                     new vec3(0, 0, 1));
-                    mat3 Rotator = RotateX * RotateY * RotateZ;
+                    mat3 Rotator = RotateX * (RotateY * (RotateZ));
 
                     vec3 temp = Rotator * SomethingToRotate;
                     return temp;

@@ -28,7 +28,7 @@ vec3 Rotate(vec3 Angles, vec3 Cube)
 	vec3(sin(Angles.z),cos(Angles.z),0),
 	vec3(0,0,1));
 	
-	return Cube * RotateX * RotateY * RotateZ;
+	return Cube * (RotateX * (RotateY * (RotateZ)));
 }
 vec3 Rotated_Position(vec3 input_vec)
 {
