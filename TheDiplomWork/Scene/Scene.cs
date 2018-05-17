@@ -421,6 +421,7 @@ namespace TheDiplomWork
                     if (Explosion.exp.StartingFirst)
                     {
                         Music.wav_player.SaySoundEffect("Explosion");
+
                         //Music.wav_player.SaySoundEffect("Explosion");
                         //Interface.Time_pause(900);
                         //TimeSpan timeItTook = (DateTime.Now - start);
