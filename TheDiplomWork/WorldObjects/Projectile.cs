@@ -58,13 +58,13 @@ namespace TheDiplomWork
             {
                 if (RotatingStartingVelocity)
                 {
-                    angles.x = Player_rotational_view_Result.x + MultiPlayerForView * (Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x);
+                    angles.x = Player_rotational_view_Result.x + MultiPlayerForView * (Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x) - AngleBetweenStartingAndCurrentVelocity();
                     angles.y = Player_rotational_view_Result.y + MultiPlayerForView * ((-Scene.SS.env.player.coords.Player_rotational_view.x) - Player_rotational_view_OLD.y);
                     angles.z = Player_rotational_view_Result.z + MultiPlayerForView * (Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z);
                 }
                 else
                 {
-                    angles.x = Player_rotational_view_Result.x;
+                    angles.x = Player_rotational_view_Result.x - AngleBetweenStartingAndCurrentVelocity();
                     angles.y = Player_rotational_view_Result.y;
                     angles.z = Player_rotational_view_Result.z;
                 }
@@ -214,7 +214,20 @@ namespace TheDiplomWork
             {
                 return (CoordinatesAtTime(TimeOfFlight() + step) - CoordinatesAtTime(TimeOfFlight()))/step;
             }
+            float vec3_length(vec3 inp)
+            {
+                return (float)Math.Sqrt(inp.x * inp.x + inp.y * inp.y + inp.z * inp.z);
+            }
 
+            public float AngleBetweenStartingAndCurrentVelocity()
+            {
+                vec3 v1 = sd.starting_velocity;
+                vec3 v2 = Velocity();
+
+                float temp = (float)Math.Acos((glm.dot(v1,v2)) / (vec3_length(v1) * vec3_length(v2)));
+
+                if (double.IsNaN(temp)) return 0; else return temp;
+            }
             double StartingTimeToFly = 0;
             float TimeOfFlight()
             {
