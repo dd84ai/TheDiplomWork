@@ -463,6 +463,7 @@ namespace TheDiplomWork
 
                 if (Projectile.jp.Loaded && !Projectile.jp.Launched)
                 {
+                    shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 0.3f);
                     SS.TrajectoryPath.Reloader();
                     SS.TrajectoryPath.scene_info.vertexBufferArray.Bind(gl);
                     gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TrajectoryPath.Quantity() / 3);

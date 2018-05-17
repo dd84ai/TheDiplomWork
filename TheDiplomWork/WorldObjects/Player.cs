@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlmNet;
+using System.Windows.Forms;
 namespace TheDiplomWork
 {
     public class Player : GeneralProgrammingStuff
@@ -93,6 +94,38 @@ namespace TheDiplomWork
 
                 _cubical.x = x;
                 _cubical.z = z;
+            }
+            public bool Reverse_presice_to_map_coords(vec3 _precise)
+            {
+                try
+                {
+                    Point2Int _chunk = new Point2Int(0, 0);
+                    Point3Int _cubical = new Point3Int(0, 0, 0);
+
+                    _chunk.x = (int)((_precise.x / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Width);
+                    _chunk.z = (int)((_precise.z / (double)CubicalMemory.Cube.rangeOfTheEdge) / (double)CubicalMemory.Chunk.Length);
+
+                    int x = (int)(_precise.x / (double)CubicalMemory.Cube.rangeOfTheEdge);
+                    int z = (int)(_precise.z / (double)CubicalMemory.Cube.rangeOfTheEdge);
+                    _cubical.y = (int)(_precise.y / (double)CubicalMemory.Cube.rangeOfTheEdge);
+
+                    x -= _chunk.x * CubicalMemory.Chunk.Width;
+                    z -= _chunk.z * CubicalMemory.Chunk.Length;
+
+                    _cubical.x = x;
+                    _cubical.z = z;
+
+                    return Scene.SS.env.cub_mem.world.World_as_Whole[_chunk.x]
+                                    [_chunk.z].cubes
+                                    [_cubical.x]
+                                    [_cubical.y]
+                                    [_cubical.z].IsFilled;
+                }
+                catch (Exception)
+                {
+                    //MessageBox.Show(e.Message);
+                    return false;
+                }
             }
 
             public Point3D Player_precise_lookforcube = new Point3D(0, 0, 0);

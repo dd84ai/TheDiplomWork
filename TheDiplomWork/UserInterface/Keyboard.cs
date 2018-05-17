@@ -215,6 +215,7 @@ namespace TheDiplomWork
                         StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                         Explosion.exp.StartingFirstStarted = false;
                         Projectile.jp.Launched = false;
+                        Projectile.jp.Exploded = false;
                     }
                     break;
                 case 'v'://Cancel Explosions

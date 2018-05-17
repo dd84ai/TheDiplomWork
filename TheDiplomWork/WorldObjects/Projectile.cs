@@ -202,13 +202,28 @@ namespace TheDiplomWork
                 Scene.SS.ProjectileList.Reloader();
                 StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
             }
+
+            public bool Exploded = false;
             public void ProcessStartingData()
             {
-                FromShaderWithLove.ShaderRotator SR = new FromShaderWithLove.ShaderRotator(center + sd.Get_Default_Velosity());
-                if (!Launched)
+                if (Loaded)
                 {
-                    sd.starting_velocity = SR.ReturnTheThing();//Rotate(sd.default_velocity, PlayerAngles());
+                    FromShaderWithLove.ShaderRotator SR = new FromShaderWithLove.ShaderRotator(center + sd.Get_Default_Velosity());
+                    if (!Launched)
+                    {
+                        sd.starting_velocity = SR.ReturnTheThing();//Rotate(sd.default_velocity, PlayerAngles());
+                    }
+                    else
+                    {
+                        if (!Exploded && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation()))
+                        {
+                            Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('b');
+                            Exploded = true;
+                        }
+                        
+                    }
                 }
+
             }
             public void Launch()
             {
