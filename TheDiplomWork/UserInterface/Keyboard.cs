@@ -150,12 +150,11 @@ namespace TheDiplomWork
                     if (Projectile.jp.Launched)
                     {
                         Projectile.jp.Launch();
-                        Speech.ls.synthesizer.SpeakAsync("Launching Projectile Activated");
+                        Speech.ls.synthesizer.SpeakAsync("Launching");
                     }
                     else
                     {
                         Projectile.jp.DeLaunch();
-                        Speech.ls.synthesizer.SpeakAsync("Launching Projectile Deactivated");
                     }
                     break;
 
