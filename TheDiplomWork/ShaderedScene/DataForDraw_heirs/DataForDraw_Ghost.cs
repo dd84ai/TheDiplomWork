@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using SharpGL;
 namespace TheDiplomWork
 {
-    class DataForDraw_Secondary : DataForDraw_angled
+    class DataForDraw_Ghost : DataForDraw_angled
     {
-        public DataForDraw_Secondary(OpenGL gl) : base(gl)
+        public DataForDraw_Ghost(OpenGL gl) : base(gl)
         {
         }
         public override void initialization()

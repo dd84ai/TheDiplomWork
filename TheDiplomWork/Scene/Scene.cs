@@ -202,9 +202,9 @@ namespace TheDiplomWork
         }
         public void Reloader_TemporalList()
         {
-            SS.TemporalList.initialization();
-            SS.TemporalList.CopyToReady();
-            SS.TemporalList.scene_info.CreateVerticesForSquare_angled();
+            SS.FreshlyPlacedList.initialization();
+            SS.FreshlyPlacedList.CopyToReady();
+            SS.FreshlyPlacedList.scene_info.CreateVerticesForSquare_angled();
         }
         public static void Reloader_ExplosionList()
         {
@@ -215,10 +215,10 @@ namespace TheDiplomWork
         
         public void Reloader_Ghost()
         {
-            if (!SS.Secondary.CopiedLastResult)
+            if (!SS.Ghost.CopiedLastResult)
             {
-                SS.Secondary.CopyToReady();
-                SS.Secondary.scene_info.CreateVerticesForSquare_angled();
+                SS.Ghost.CopyToReady();
+                SS.Ghost.scene_info.CreateVerticesForSquare_angled();
             }
             //Призрачным куб.
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated &&
@@ -254,7 +254,7 @@ namespace TheDiplomWork
                     SS.Main.scene_info.vertexBufferArray.Delete(gl);
                     SS.Main.CopyToReady();
                     SS.Main.scene_info.CreateVerticesForSquare_not_angled();
-                    DataForDraw_TemporalList.TemporalList.Clear();
+                    DataForDraw_FreshlyPlacedCubes.TemporalList.Clear();
                     Reloader_TemporalList();
                 }
 
@@ -349,7 +349,7 @@ namespace TheDiplomWork
         public static void DoWork_ghost(object data)
         {
             DoWork_ghost_IsAlive = true;
-            SS.Secondary.initialization();
+            SS.Ghost.initialization();
             DoWork_ghost_IsAlive = false;
             if (!ExtraAction) ExtraAction = true; else ExtraAction = false;
             return;
@@ -421,9 +421,9 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
 
-                SS.TemporalList.scene_info.vertexBufferArray.Bind(gl);
-                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TemporalList.Quantity() / 3);
-                SS.TemporalList.scene_info.vertexBufferArray.Unbind(gl);
+                SS.FreshlyPlacedList.scene_info.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.FreshlyPlacedList.Quantity() / 3);
+                SS.FreshlyPlacedList.scene_info.vertexBufferArray.Unbind(gl);
 
                 if (!newThread.IsAlive && !DoWork_IsAlive)
                 {
@@ -456,9 +456,9 @@ namespace TheDiplomWork
                 
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
-                SS.Secondary.scene_info.vertexBufferArray.Bind(gl);
-                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Secondary.Quantity() / 3);
-                SS.Secondary.scene_info.vertexBufferArray.Unbind(gl);
+                SS.Ghost.scene_info.vertexBufferArray.Bind(gl);
+                gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Ghost.Quantity() / 3);
+                SS.Ghost.scene_info.vertexBufferArray.Unbind(gl);
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),

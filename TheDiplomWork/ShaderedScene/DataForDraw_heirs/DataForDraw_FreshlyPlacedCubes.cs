@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using SharpGL;
 namespace TheDiplomWork
 {
-    class DataForDraw_TemporalList : DataForDraw_angled
+    class DataForDraw_FreshlyPlacedCubes : DataForDraw_angled
     {
-        public DataForDraw_TemporalList(OpenGL gl) : base(gl)
+        public DataForDraw_FreshlyPlacedCubes(OpenGL gl) : base(gl)
         {
         }
         public static List<CubicalMemory.Cube> TemporalList = new List<CubicalMemory.Cube>();

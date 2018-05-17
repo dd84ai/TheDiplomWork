@@ -13,8 +13,8 @@ namespace TheDiplomWork
         public Environment env = new Environment();
 
         public DataForDraw_without_angles Main;
-        public DataForDraw_angled Secondary;
-        public DataForDraw_angled TemporalList;
+        public DataForDraw_angled Ghost;
+        public DataForDraw_angled FreshlyPlacedList;
         public DataForDraw_angled ExplosionList;
         public DataForDraw_angled SunAndMoon;
         public DataForDraw_angled ProjectileList;
@@ -22,8 +22,8 @@ namespace TheDiplomWork
         public ShaderedScene(OpenGL gl)
         {
             Main = new DataForDraw_Main(gl);
-            Secondary = new DataForDraw_Secondary(gl);
-            TemporalList = new DataForDraw_TemporalList(gl);
+            Ghost = new DataForDraw_Ghost(gl);
+            FreshlyPlacedList = new DataForDraw_FreshlyPlacedCubes(gl);
             ExplosionList = new DataForDraw_ExplodingList(gl);
             SunAndMoon = new DataForDraw_SunAndMoon(gl);
             ProjectileList = new DataForDraw_Projectile(gl);

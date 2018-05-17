@@ -74,7 +74,7 @@
     <Compile Include="ShaderedScene\DataForDraw_angled.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_ExplodingList.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_Projectile.cs" />
-    <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_TemporalList.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_FreshlyPlacedCubes.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_SunAndMoon.cs" />
     <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
     <Compile Include="Shaders\Artificial\FromShaderWithLove.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="WorldObjects\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
     <Compile Include="ShaderedScene\DataForDraw.cs" />
-    <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_Secondary.cs" />
+    <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_Ghost.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_Main.cs" />
     <Compile Include="ShaderedScene\ShaderedScene.cs" />
     <Compile Include="FormModernOpenGLSample.cs">

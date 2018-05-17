@@ -21,14 +21,17 @@ namespace TheDiplomWork
             }
             public class Starting_Data
             {
-                public vec3 default_velocity = new vec3(0, 20, 0);
+                public float StartingVelocity = 20f;
+
+                public vec3 Get_Default_Velosity() { return new vec3(0, StartingVelocity, 0); } 
+
                 public vec3 starting_velocity = new vec3(0, 0, 0);
             }
             public Starting_Data sd = new Starting_Data();
 
             public bool RotatingStartingVelocity = false;
 
-            float StartingVelocity = 20f;
+            
 
             Point3D Player_rotational_view_OLD = new Point3D(0, 0, 0);
             Point3D Player_rotational_view_Result = new Point3D(0, 0, 0);
@@ -197,7 +200,7 @@ namespace TheDiplomWork
             }
             public void ProcessStartingData()
             {
-                FromShaderWithLove.ShaderRotator SR = new FromShaderWithLove.ShaderRotator(center + sd.default_velocity);
+                FromShaderWithLove.ShaderRotator SR = new FromShaderWithLove.ShaderRotator(center + sd.Get_Default_Velosity());
                 if (!Launched)
                 {
                     sd.starting_velocity = SR.ReturnTheThing();//Rotate(sd.default_velocity, PlayerAngles());

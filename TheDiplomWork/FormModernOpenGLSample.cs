@@ -329,7 +329,7 @@ namespace TheDiplomWork
                         cube.FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                         cube.FallingStartingTime = (float)Time.time.GetGameTotalSeconds();
 
-                        DataForDraw_TemporalList.TemporalList.Add(cube);
+                        DataForDraw_FreshlyPlacedCubes.TemporalList.Add(cube);
                         scene.Reloader_TemporalList();
 
                         float TookTime = (float)Math.Sqrt((Scene.SS.env.player.coords.Player_cubical_lookforcube.y - cube.xyz.y) * 2 / 9.8);
