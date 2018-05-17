@@ -163,12 +163,12 @@ namespace TheDiplomWork
                     if (Projectile.jp.RotatingStartingVelocity)
                     {
                         Projectile.jp.SetStartingPlayerView();
-                        Speech.ls.synthesizer.SpeakAsync("Rotational Mod Activated");
+                        Speech.ls.synthesizer.SpeakAsync("On");
                     }
                     else
                     {
                         Projectile.jp.SetEndingPlayerView();
-                        Speech.ls.synthesizer.SpeakAsync("Rotational Mod Deactivated");
+                        Speech.ls.synthesizer.SpeakAsync("Off");
                     }
                     break;
 

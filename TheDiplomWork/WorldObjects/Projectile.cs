@@ -31,13 +31,13 @@ namespace TheDiplomWork
             public void SetStartingPlayerView()
             {
                 Player_rotational_view_OLD.x = Scene.SS.env.player.coords.Player_rotational_view.y;
-                Player_rotational_view_OLD.y = Scene.SS.env.player.coords.Player_rotational_view.x;
+                Player_rotational_view_OLD.y = -Scene.SS.env.player.coords.Player_rotational_view.x;
                 Player_rotational_view_OLD.z = Scene.SS.env.player.coords.Player_rotational_view.z;
             }
             public void SetEndingPlayerView()
             {
                 Player_rotational_view_Result.x += Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x;
-                Player_rotational_view_Result.y += Scene.SS.env.player.coords.Player_rotational_view.x - Player_rotational_view_OLD.y;
+                Player_rotational_view_Result.y += (-Scene.SS.env.player.coords.Player_rotational_view.x) - Player_rotational_view_OLD.y;
                 Player_rotational_view_Result.z += Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
             }
             vec3 angles = new vec3(0, 0, 0);
@@ -46,7 +46,7 @@ namespace TheDiplomWork
                 if (RotatingStartingVelocity)
                 {
                     angles.x = Player_rotational_view_Result.x + Scene.SS.env.player.coords.Player_rotational_view.y - Player_rotational_view_OLD.x;
-                    angles.y = Player_rotational_view_Result.y + Scene.SS.env.player.coords.Player_rotational_view.x - Player_rotational_view_OLD.y;
+                    angles.y = Player_rotational_view_Result.y + (-Scene.SS.env.player.coords.Player_rotational_view.x) - Player_rotational_view_OLD.y;
                     angles.z = Player_rotational_view_Result.z + Scene.SS.env.player.coords.Player_rotational_view.z - Player_rotational_view_OLD.z;
                 }
                 else
