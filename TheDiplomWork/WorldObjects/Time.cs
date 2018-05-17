@@ -10,6 +10,8 @@ namespace TheDiplomWork
     {
         public class localtime
         {
+            public double AverageRebuildingTime = 0;
+
             public double Time = 0;
             
             public double Time_Speed = 1.0;

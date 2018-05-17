@@ -243,6 +243,8 @@ namespace TheDiplomWork
                 GraphicalOverlap.Rebuilding_is_required_cause_of_GO_color_changed_color = false;
             }
         }
+        /// TimeSpan timeItTook = (DateTime.Now - start);
+        
         public void Reloader_Main(OpenGL gl)
         {
             if (StaticSettings.S.RequiredReloader && !newThread.IsAlive && !DoWork_IsAlive)
@@ -268,6 +270,8 @@ namespace TheDiplomWork
                         || (StaticSettings.S.RealoderCauseOfSunSided && SS.env.player.coords.Player_cubical_position.y != SS.env.player.coords.Player_cubical_position_OLD.y)
                         || StaticSettings.S.RealoderCauseOfBuildingBlocks)
                     {
+                        
+
                         newThread = new Thread(Scene.DoWork);
                         newThread.Start(42);
                         SS.env.player.coords.Player_chunk_position_OLD.x = SS.env.player.coords.Player_chunk_position.x;
@@ -288,7 +292,7 @@ namespace TheDiplomWork
         /// Draws the scene.
         /// </summary>
         /// <param name="gl">The OpenGL instance.</param>
-        /// 
+        /// TimeSpan timeItTook = (DateTime.Now - start);
         static DateTime start = DateTime.Now;
         static DateTime start_independent = DateTime.Now;
         public bool Every10SecondsAction = true;
@@ -327,6 +331,7 @@ namespace TheDiplomWork
         public static bool DoWork_IsAlive = false;
         public static void DoWork(object data)
         {
+            DateTime Main_start = DateTime.Now;
             DoWork_IsAlive = true;
             Scene.SS.env.player.coords.LastPlayerLook.x = Scene.SS.env.player.coords.NormalizedLook.x;
             Scene.SS.env.player.coords.LastPlayerLook.y = Scene.SS.env.player.coords.NormalizedLook.y;
@@ -334,6 +339,10 @@ namespace TheDiplomWork
             SS.Main.initialization();
             DoWork_IsAlive = false;
             //GC.Collect();
+
+            TimeSpan timeItTook = (DateTime.Now - Main_start);
+            Time.time.AverageRebuildingTime = timeItTook.TotalSeconds;
+            //Main_start = DateTime.Now;
             return;
         }
         public static bool DoWork_ghost_IsAlive = false;

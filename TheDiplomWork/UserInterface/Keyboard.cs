@@ -194,11 +194,11 @@ namespace TheDiplomWork
                     {
                         //Explosion.exp.StartingTime = (float)Time.time.GetGameTotalSeconds();
                         Explosion.exp.ExplosionCenter = Projectile.jp.CenterCube;
-                        Explosion.exp.SetBombLocation(Projectile.jp.TrueLocation());
+                        Explosion.exp.SetBombLocation(Projectile.jp.AbsoluteEstimatedLocation());
                         //Explosion.exp.PlaceTheBombAt(Explosion.exp.ExplosionCenter);
                     }
 
-                        if (StaticSettings.S.ExplosionMod)
+                    if (StaticSettings.S.ExplosionMod)
                     {
                         Explosion.exp.StartingFirst = true;
                         Explosion.exp.StartingFirstStarted = false;

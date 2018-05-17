@@ -133,6 +133,7 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Projectile.jp.Coordinates() " + Projectile.jp.GetStringedVec3(Projectile.jp.center), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Bomb Location " + Explosion.exp.Bomb_precise_position.ToString(), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Rocket Angle: " + Projectile.jp.AngleBetweenStartingAndCurrentVelocity(), 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Average Rebuilding Main Time: " + Time.time.AverageRebuildingTime, 2.0f); place++;
                 
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingTime: " + Explosion.exp.StartingTime, 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingShift: " + Explosion.exp.StartingShiftForLoeading, 2.0f); place++;

@@ -101,9 +101,13 @@ namespace TheDiplomWork
                 GatherCubes();
             }
 
-            public vec3 TrueLocation()
+            public vec3 AbsoluteLocation()
             {
                 return Projectile.jp.center + Projectile.jp.Coordinates();
+            }
+            public vec3 AbsoluteEstimatedLocation()
+            {
+                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + (float)Time.time.AverageRebuildingTime);
             }
             public vec3 center = new vec3(0,0,0);
             public void SetHpos1()
@@ -128,6 +132,8 @@ namespace TheDiplomWork
             public List<CubicalMemory.Cube> ProjectileParts = new List<CubicalMemory.Cube>();
             public CubicalMemory.Cube CenterCube = null;
             double CenterCube_RangeMax = double.MaxValue;
+
+            public vec3 high_part = new vec3(0, 0, 0);
             public void GatherCubes()
             {
                 Loaded = true;
@@ -139,6 +145,7 @@ namespace TheDiplomWork
 
                 center = (hposition1 + hposition2) / 2;
 
+
                 vec3 pos_min = new vec3(Math.Min(hposition1.x, hposition2.x),
                     Math.Min(hposition1.y, hposition2.y),
                     Math.Min(hposition1.z, hposition2.z));
@@ -146,6 +153,10 @@ namespace TheDiplomWork
                 vec3 pos_max = new vec3(Math.Max(hposition1.x, hposition2.x),
                     Math.Max(hposition1.y, hposition2.y),
                     Math.Max(hposition1.z, hposition2.z));
+
+                vec3 high_part = new vec3(center.x,
+                    Math.Max(hposition1.y, hposition2.y),
+                    center.z);
 
                 vec3 cubeposition = new vec3(0, 0, 0);
                 foreach (var XWorld in Scene.SS.env.cub_mem.world.World_as_Whole)

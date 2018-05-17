@@ -22,9 +22,9 @@ namespace TheDiplomWork
                 ShaderedScene.CalculateFromMaptoGraphical(Explosion.exp.ExplosionCenter, ref x, ref y, ref z);
             else
             {
-                x = Projectile.jp.TrueLocation().x;
-                y = Projectile.jp.TrueLocation().y;
-                z = Projectile.jp.TrueLocation().z;
+                x = Projectile.jp.AbsoluteEstimatedLocation().x;
+                y = Projectile.jp.AbsoluteEstimatedLocation().y;
+                z = Projectile.jp.AbsoluteEstimatedLocation().z;
             }
 
 
