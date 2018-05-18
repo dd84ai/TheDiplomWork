@@ -224,6 +224,7 @@ namespace TheDiplomWork
                         Explosion.exp.StartingFirstStarted = false;
                         Projectile.jp.Launched = false;
                         Projectile.jp.Exploded = false;
+                        Projectile.jp.TimeOfExplosion = 99999999999;
                     }
                     break;
                 case (char)254://Last_Cancel
@@ -237,6 +238,7 @@ namespace TheDiplomWork
                         Explosion.exp.StartingFirstStarted = false;
                         Projectile.jp.Launched = false;
                         Projectile.jp.Exploded = false;
+                        Projectile.jp.TimeOfExplosion = 99999999999;
                     }
                     break;
                 case 'v'://Cancel Explosions

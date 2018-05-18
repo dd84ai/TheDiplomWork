@@ -118,6 +118,15 @@ namespace TheDiplomWork
             {
                 return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
             }
+            public vec3 AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()
+            {
+                TimeOfExplosion = TimeOfFlight() + TimePauseUntilExplosion;
+                return Projectile.jp.center + Projectile.jp.CoordinatesAtTimeAtHighPart(TimeOfFlight() + TimePauseUntilExplosion);
+            }
+            public vec3 CoordinatesAtTimeAtHighPart(float time)
+            {
+                return CoordinatesAtTime(time) + half_height * glm.normalize(Velocity());
+            }
             public vec3 AbsoluteLocationAtTime(float _time)
             {
                 return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(_time);
@@ -149,6 +158,7 @@ namespace TheDiplomWork
             double CenterCube_RangeMax = double.MaxValue;
 
             public vec3 high_part = new vec3(0, 0, 0);
+            public float half_height = 0;
             public void GatherCubes()
             {
                 Loaded = true;
@@ -168,6 +178,8 @@ namespace TheDiplomWork
                 vec3 pos_max = new vec3(Math.Max(hposition1.x, hposition2.x),
                     Math.Max(hposition1.y, hposition2.y),
                     Math.Max(hposition1.z, hposition2.z));
+
+                half_height = hposition2.y - hposition1.y;
 
                 vec3 high_part = new vec3(center.x,
                     Math.Max(hposition1.y, hposition2.y),
@@ -212,6 +224,7 @@ namespace TheDiplomWork
             }
 
             public bool Exploded = false;
+            public float TimeOfExplosion = 99999999999;
             public void ProcessStartingData()
             {
                 if (Loaded)
@@ -223,7 +236,7 @@ namespace TheDiplomWork
                     }
                     else
                     {
-                        if (!Exploded && TimeOfFlight()>1.0f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation()))
+                        if (!Exploded && TimeOfFlight()>1.0f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
                         {
                             Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('b');
                             Exploded = true;
@@ -288,8 +301,19 @@ namespace TheDiplomWork
             double StartingTimeToFly = 0;
             float TimeOfFlight()
             {
-                if (!Launched) return 0;
-                else return (float)(Time.time.GetGameTotalSeconds() - StartingTimeToFly);
+                float time = 0;
+                if (!Launched) time = 0;
+                else time = (float)(Time.time.GetGameTotalSeconds() - StartingTimeToFly);
+
+                if (time > TimeOfExplosion)
+                    time = TimeOfExplosion;
+                //if (time > TimeOfExplosion-0.1)
+                //{
+                    //time = TimeOfExplosion;
+                //    Time.time.Time_Speed = 0.025;
+                //}
+
+                return time;
             }
 
             vec3 coordinates = new vec3(0, 0, 0);
