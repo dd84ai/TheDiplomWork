@@ -270,7 +270,11 @@ namespace TheDiplomWork
                 vec3 v2 = Velocity();
 
                 double Inside = (glm.dot(v1, v2)) / (vec3_length(v1) * vec3_length(v2));
-                if (Inside > 1.0f) Inside = 0.999f;
+                if (Launched)
+                {
+                    if (Inside > 1.0f) Inside = 0.999999f;
+                    if (Inside < -1.0f) Inside = -0.999999f;
+                }
                 float temp = (float)Math.Acos(Inside);
 
                 if (double.IsNaN(temp))
