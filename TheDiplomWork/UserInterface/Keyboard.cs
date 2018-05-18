@@ -157,6 +157,7 @@ namespace TheDiplomWork
                     else
                     {
                         Projectile.jp.DeLaunch();
+                        Wrapped_SINGLE_KeyPressed_Reaction((char)254);
                     }
                     break;
 
