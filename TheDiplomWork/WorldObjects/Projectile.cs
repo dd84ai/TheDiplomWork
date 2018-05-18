@@ -26,6 +26,11 @@ namespace TheDiplomWork
                 public vec3 Get_Default_Velosity() { return new vec3(0, StartingVelocity, 0); } 
 
                 public vec3 starting_velocity = new vec3(0, 0, 0);
+
+                public void ChangeStartingVelocity(float value)
+                {
+                    if (StartingVelocity + value > 0) StartingVelocity += value;
+                }
             }
             public Starting_Data sd = new Starting_Data();
 
@@ -104,13 +109,14 @@ namespace TheDiplomWork
                 GatherCubes();
             }
 
+            public float TimePauseUntilExplosion = 0.6f;
             public vec3 AbsoluteLocation()
             {
-                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + (float)Time.time.AverageRebuildingTime);
+                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
             }
             public vec3 AbsoluteEstimatedLocation()
             {
-                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + (float)Time.time.AverageRebuildingTime);
+                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
             }
             public vec3 AbsoluteLocationAtTime(float _time)
             {
@@ -215,7 +221,7 @@ namespace TheDiplomWork
                     }
                     else
                     {
-                        if (!Exploded && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation()))
+                        if (!Exploded && TimeOfFlight()>1.0f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation()))
                         {
                             Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('b');
                             Exploded = true;
@@ -301,6 +307,20 @@ namespace TheDiplomWork
                     PlayerAngles(),
                     center
                     );
+            }
+
+            vec3 OldVelocity = new vec3(-9999123, -9999123, -9999123);
+            public void NotEveryTimeRealoder()
+            {
+                if (OldVelocity.x != sd.starting_velocity.x
+                    && OldVelocity.y != sd.starting_velocity.y
+                    && OldVelocity.z != sd.starting_velocity.z)
+                {
+                    OldVelocity.x = sd.starting_velocity.x;
+                    OldVelocity.y = sd.starting_velocity.y;
+                    OldVelocity.z = sd.starting_velocity.z;
+                    Scene.SS.TrajectoryPath.Reloader();
+                }
             }
         }
     }

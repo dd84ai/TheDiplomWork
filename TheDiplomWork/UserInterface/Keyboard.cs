@@ -24,7 +24,10 @@ namespace TheDiplomWork
             //if ((DateTime.Now - start).TotalMilliseconds > 100)
             //{
             foreach (var key in Keyboard.KeysActive)
+            {
                 Keyboard.Wrapped_KeyPressed_Reaction(key);
+                Keyboard.Regular_Single_KeyPressed_Reaction(key);
+            }
             //start = DateTime.Now;
             //}
         }
@@ -206,10 +209,25 @@ namespace TheDiplomWork
                         StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
                     }
                     break;
+
                 case 'x'://Last_Cancel
                     if (StaticSettings.S.ExplosionMod)
                     {
+                        DataForDraw_ExplodingList.TemporalList_Clear();
                         Explosion.exp.Exploding_Last_Cancel();
+                        DataForDraw_ExplodingList.TemporalList.Clear();
+                        Scene.Reloader_ExplosionList();
+                        StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                        Explosion.exp.StartingFirstStarted = false;
+                        Projectile.jp.Launched = false;
+                        Projectile.jp.Exploded = false;
+                    }
+                    break;
+                case (char)254://Last_Cancel
+                    if (StaticSettings.S.ExplosionMod)
+                    {
+                        //Explosion.exp.Exploding_Last_Cancel();
+                        DataForDraw_ExplodingList.TemporalList_Save();
                         DataForDraw_ExplodingList.TemporalList.Clear();
                         Scene.Reloader_ExplosionList();
                         StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
@@ -274,6 +292,8 @@ namespace TheDiplomWork
                     RestoringToDefaultAlgorithm();
                     break;
 
+                
+
                 case 'm': Music.wmp_player.PlayTheMusic(); break;
                 case 'n': Music.wmp_player.PlayTheMusic_NextSong(); break;
 
@@ -300,7 +320,7 @@ namespace TheDiplomWork
                 case ' ':
                     if (StaticSettings.S.FlyMod)
                     { step_vector.x = 0; step_vector.y = -step * 1.3f; step_vector.z = 0; DoStep(step_vector); }
-                    break; 
+                    break;
 
                 //case 'l':
                 //    Scene.SS.env.player.coords.Player_rotational_view.x += rotational_step; break;
@@ -333,6 +353,17 @@ namespace TheDiplomWork
                 {
                     Console.WriteLine(Error.Message);
                 }
+            }
+        }
+        public static void Regular_Single_KeyPressed_Reaction(char key)
+        {
+            switch (key)
+            {
+                case (char)187: Projectile.jp.sd.ChangeStartingVelocity(+1); break;
+                case (char)189: Projectile.jp.sd.ChangeStartingVelocity(-1); break;
+
+
+                default: break;
             }
         }
         public static void SavingAlgorithm()

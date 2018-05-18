@@ -119,7 +119,11 @@ namespace TheDiplomWork
                                     [_chunk.z].cubes
                                     [_cubical.x]
                                     [_cubical.y]
-                                    [_cubical.z].IsFilled;
+                                    [_cubical.z].IsFilled && !Scene.SS.env.cub_mem.world.World_as_Whole[_chunk.x]
+                                    [_chunk.z].cubes
+                                    [_cubical.x]
+                                    [_cubical.y]
+                                    [_cubical.z].IsTakenForExplosion;
                 }
                 catch (Exception)
                 {

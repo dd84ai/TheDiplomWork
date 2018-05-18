@@ -12,6 +12,20 @@ namespace TheDiplomWork
         {
         }
         public static List<CubicalMemory.Cube> TemporalList = new List<CubicalMemory.Cube>();
+        public static List<CubicalMemory.Cube> TemporalList_ToClear = new List<CubicalMemory.Cube>();
+        public static void TemporalList_Save()
+        {
+            foreach (var item in TemporalList) TemporalList_ToClear.Add(item);
+        }
+        public static void TemporalList_Clear()
+        {
+            foreach (var cube in DataForDraw_ExplodingList.TemporalList_ToClear)
+            {
+                cube.IsTakenForExplosion = false;
+                cube.FallingStartingTime = 0;
+            }
+            TemporalList_ToClear.Clear();
+        }
         public override void initialization()
         {
             START_initialization();

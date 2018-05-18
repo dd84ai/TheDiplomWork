@@ -1,4 +1,4 @@
-﻿float TimePauseForExplosion = 0.0;
+﻿float TimePauseForExplosion = 0.6;
 vec3 Explosion(vec3 inp)
 {
 	float TimeItTook = TimeTotalSeconds - in_Size.x;

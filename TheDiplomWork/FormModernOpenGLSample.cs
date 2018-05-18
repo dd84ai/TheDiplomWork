@@ -91,7 +91,7 @@ namespace TheDiplomWork
 
                 if (Mouse.MouseIsActive)
                 {
-                    Mouse.DoMouse(Control.MousePosition);
+                    Mouse.DoMouse(Control.MousePosition, Control.MouseButtons.ToString());
                     Cursor.Position = Mouse.ReturnToCenter();
                 }
 
@@ -262,7 +262,7 @@ namespace TheDiplomWork
             if (!AnyKeyPressed) Keyboard.Wrapped_SINGLE_KeyPressed_Reaction(item);
             AnyKeyPressed = true;
 
-            if ((char)e.KeyValue == 'j' || (char)e.KeyValue == 'J') Projectile.jp.SetStartingPlayerView();
+            if (((char)e.KeyValue == 'j' || (char)e.KeyValue == 'J')) Projectile.jp.SetStartingPlayerView();
         }
 
         private void openGLControl_KeyUp(object sender, KeyEventArgs e)
@@ -309,8 +309,14 @@ namespace TheDiplomWork
                 {
                     CubicalMemory.Cube cube = Cube_Selection.Decide_Position_To_Place_Cube(StaticSettings.S.FallingCube);
 
+
                     if (e.Button.ToString() == "Right")
                     {
+                        if (GraphicalOverlap.GO_interface_item_choice == 0 && Projectile.jp.Loaded && !Projectile.jp.Launched)
+                        {
+                            Projectile.jp.SetStartingPlayerView();
+                            //Projectile.jp.SetEndingPlayerView();
+                        }
                         Music.wav_player.SaySoundEffect("BlockPlacement");
 
                         Explosion.exp.PlaceTheBombAt(cube);
@@ -370,6 +376,11 @@ namespace TheDiplomWork
         {
             scene.Scene_Form_Closing(openGLControl.OpenGL);
             Music.wmp_player.Player.close();
+        }
+
+        private void openGLControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            Projectile.jp.SetEndingPlayerView();
         }
     }
 }

@@ -56,6 +56,7 @@
             this.openGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseDown);
             this.openGLControl.MouseEnter += new System.EventHandler(this.openGLControl_MouseEnter);
             this.openGLControl.MouseLeave += new System.EventHandler(this.openGLControl_MouseLeave);
+            this.openGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseUp);
             this.openGLControl.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseScroller);
             // 
             // label1_InfoTable

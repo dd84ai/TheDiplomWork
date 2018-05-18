@@ -16,7 +16,7 @@ namespace TheDiplomWork
             }
 
             public Point3D Bomb_precise_position = new Point3D(0, 0, 0);
-            public float Explosion_radius = 100.0f;
+            public float Explosion_radius = 10.0f;
 
             float x = 0, y = 0, z = 0;
             public void PlaceTheBombAt(CubicalMemory.Cube cube)

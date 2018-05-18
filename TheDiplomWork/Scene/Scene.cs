@@ -421,6 +421,7 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
+                //shaderProgram_secondary.SetUniform1(gl, "TimePauseForExplosion", Projectile.jp.TimePauseUntilExplosion);
 
                 SS.FreshlyPlacedList.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.FreshlyPlacedList.Quantity() / 3);
@@ -464,7 +465,9 @@ namespace TheDiplomWork
                 if (Projectile.jp.Loaded && !Projectile.jp.Launched)
                 {
                     shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 0.3f);
-                    SS.TrajectoryPath.Reloader();
+
+                    Projectile.jp.NotEveryTimeRealoder();
+
                     SS.TrajectoryPath.scene_info.vertexBufferArray.Bind(gl);
                     gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.TrajectoryPath.Quantity() / 3);
                     SS.TrajectoryPath.scene_info.vertexBufferArray.Unbind(gl);
@@ -509,6 +512,7 @@ namespace TheDiplomWork
                     shaderProgram_projectile.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 1.0f);
                 else
                     shaderProgram_projectile.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.5f);
+                //shaderProgram_projectile.SetUniform1(gl, "TimePauseForExplosion", Projectile.jp.TimePauseUntilExplosion);
 
                 shaderProgram_projectile.SetUniformMatrix3(gl, "projectileMatrix", Projectile.jp.GetProjectileMatrix().to_array());
 
