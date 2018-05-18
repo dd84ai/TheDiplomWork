@@ -84,9 +84,9 @@ namespace TheDiplomWork
             void AlgorithmicalSinusidoalGround(int fromHeight, int toHeight)
             {
                 int Height = toHeight - fromHeight;
-                    for (int i = 0; i < Width; i++)
-                        for (int j = 0; j < Length; j++)
-                        {
+                for (int i = 0; i < Width; i++)
+                    for (int j = 0; j < Length; j++)
+                    {
 
                         if (i == 7)
                             Console.Write("");
@@ -96,10 +96,13 @@ namespace TheDiplomWork
                         //for (int k = fromHeight; k < fromHeight + Sinusodial + 1; k++)
                         //{
                         int k = Sinusodial;
-                            cubes[i][k][j].IsFilled = true;
-                            cubes[i][k][j].color = ColorSwitch(Rand.Next(11));
+                        cubes[i][k][j].IsFilled = true;
+                        cubes[i][k][j].color = ColorSwitch(Rand.Next(11));
+
+                        cubes[i][k - 1][j].IsFilled = true;
+                        cubes[i][k - 1][j].color = ColorSwitch(Rand.Next(11));
                         //}
-                        }
+                    }
             }
         }
 
