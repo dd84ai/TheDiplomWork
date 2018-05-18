@@ -18,7 +18,7 @@ vec4 Processed(vec3 inp)
 {
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
-		return Shifted_Position(ProcessingProjectile(Explosion(inp)));
+		return Shifted_Position(Explosion(ProcessingProjectile((inp))));
 	}
 	else
 	{
