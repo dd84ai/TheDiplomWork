@@ -51,7 +51,7 @@ namespace TheDiplomWork
             END_initialization();
             base.LastCount = vertices.Count();
         }
-        public static void ForEachTemporalList(DataForDraw_angled Data, List<CubicalMemory.Cube> Temper, float cx, float cy, float cz)
+        public static void ForEachTemporalList(DataForDraw_angled Data, List<CubicalMemory.Cube> Temper, float cx, float cy, float cz, bool ShowAlways = false)
         {
             float x = 0, y = 0, z = 0;
             
@@ -73,7 +73,7 @@ namespace TheDiplomWork
                 Vx *= V / (Range * Range); Vy *= V / (Range * Range); Vz *= V / (Range * Range);
                 float Velocity = (float)Math.Sqrt((double)Vx * Vx + Vy * Vy + Vz * Vz);
 
-                if (Velocity > 10)
+                if (ShowAlways || Velocity > 10)
                 {
                     cube.IsTakenForExplosion = true;
                     Data.Draw_Quad_Full_Sunsided_angled(x, y, z, Vx, Vy, Vz, localed_range, cube.color, 0, true);

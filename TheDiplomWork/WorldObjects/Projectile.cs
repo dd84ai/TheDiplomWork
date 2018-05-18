@@ -140,6 +140,8 @@ namespace TheDiplomWork
                 ShaderedScene.CalculateFromMaptoGraphical(hpos1, ref hposition1);
                 ShaderedScene.CalculateFromMaptoGraphical(hpos2, ref hposition2);
 
+                center = (hposition1 + hposition2) / 2;
+
                 GatherCubes();
             }
             public List<CubicalMemory.Cube> ProjectileParts = new List<CubicalMemory.Cube>();

@@ -177,10 +177,12 @@ namespace TheDiplomWork
 
 
                 case 'k':
+                    Speech.ls.synthesizer.SpeakAsync("First Position fixated");
                     Projectile.jp.SetHpos1();
                     break;
 
                 case 'i':
+                    Speech.ls.synthesizer.SpeakAsync("Second Position fixated");
                     Projectile.jp.SetHpos2();
                     break;
 
