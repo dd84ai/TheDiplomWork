@@ -46,6 +46,8 @@ namespace TheDiplomWork
 
             public bool LoadProjectile = true;
 
+            public bool SinusoidalWorld = true;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)

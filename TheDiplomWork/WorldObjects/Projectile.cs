@@ -252,6 +252,12 @@ namespace TheDiplomWork
             vec3 Velocity()
             {
                 return (CoordinatesAtTime(TimeOfFlight() + step) - CoordinatesAtTime(TimeOfFlight()))/step;
+
+                //return new vec3(sd.starting_velocity.x, sd.starting_velocity.y - (9.8f) * TimeOfFlight(), sd.starting_velocity.z);
+
+                //coordinates.x = sd.starting_velocity.x* time;
+                //coordinates.y = sd.starting_velocity.y * time - (9.8f / 2f) * time * time;
+                //coordinates.z = sd.starting_velocity.z * time;
             }
             float vec3_length(vec3 inp)
             {
@@ -263,9 +269,15 @@ namespace TheDiplomWork
                 vec3 v1 = sd.starting_velocity;
                 vec3 v2 = Velocity();
 
-                float temp = (float)Math.Acos((glm.dot(v1,v2)) / (vec3_length(v1) * vec3_length(v2)));
+                double Inside = (glm.dot(v1, v2)) / (vec3_length(v1) * vec3_length(v2));
+                if (Inside > 1.0f) Inside = 0.999f;
+                float temp = (float)Math.Acos(Inside);
 
-                if (double.IsNaN(temp)) return 0; else return temp;
+                if (double.IsNaN(temp))
+                {
+                    return 0; 
+                }
+                else return temp;
             }
             double StartingTimeToFly = 0;
             float TimeOfFlight()
@@ -289,8 +301,12 @@ namespace TheDiplomWork
             }
             public float TimeWhenSecondZero()
             {
-                // - (9.8f / 2f) * time * time + sd.starting_velocity.y * time - coordinates.y = 0;
-                double Discr = Math.Sqrt(sd.starting_velocity.y* sd.starting_velocity.y);
+                // - (9.8f / 2f) * time * time + sd.starting_velocity.y * time + 10 = 0;
+
+                //double Discr = Math.Sqrt(sd.starting_velocity.y* sd.starting_velocity.y);
+                //return (float)((-sd.starting_velocity.y - Discr) / (-2 * (9.8f / 2f)));
+
+                double Discr = Math.Sqrt(sd.starting_velocity.y* sd.starting_velocity.y + 4 * 10 * (9.8f / 2f));
                 return (float)((-sd.starting_velocity.y - Discr) / (-2 * (9.8f / 2f)));
             }
             public string GetStringedVec3(vec3 inp)

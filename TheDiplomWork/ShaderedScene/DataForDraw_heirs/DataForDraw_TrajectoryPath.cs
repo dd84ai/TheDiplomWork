@@ -16,10 +16,10 @@ namespace TheDiplomWork
         {
             START_initialization();
 
-            int count = 10;
             float EndTime = Projectile.jp.TimeWhenSecondZero();
+            int count = 4 * (int)EndTime;
             vec3 temp;
-            for (int i = 1; i <= count; i++)
+            for (int i = 2; i <= count; i++)
             {
                 temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
                 Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.Black, 0, true);

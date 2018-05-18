@@ -17,7 +17,7 @@ namespace TheDiplomWork
         
         public static int Seed = 46;
         //Flat Ground from height to height
-        static int FromHeight = 8, ToHeight = 10;
+        static int FromHeight = 6, ToHeight = 10;
 
         //World beginning
         //Логично будет начинатся в углу и в низу.
@@ -58,8 +58,10 @@ namespace TheDiplomWork
                 xz.x = _x; xz.z = _z;
                 cubes = TripleCubeIniter(Chunk.Width, Chunk.Height, Chunk.Length, xz);
 
+                if (StaticSettings.S.SinusoidalWorld)
+                AlgorithmicalSinusidoalGround(4, ToHeight);
+                else
                 AlgorithmicalGround(FromHeight, ToHeight);
-
                 
             }
             
@@ -77,6 +79,26 @@ namespace TheDiplomWork
                         {
                             cubes[i][k][j].IsFilled = true;
                             cubes[i][k][j].color = ColorSwitch(Rand.Next(11));
+                        }
+            }
+            void AlgorithmicalSinusidoalGround(int fromHeight, int toHeight)
+            {
+                int Height = toHeight - fromHeight;
+                    for (int i = 0; i < Width; i++)
+                        for (int j = 0; j < Length; j++)
+                        {
+
+                        if (i == 7)
+                            Console.Write("");
+                        double rad_i = (double)i / 15 * Math.PI;
+                        double rad_j = (double)j / 15 * Math.PI;
+                        int Sinusodial = fromHeight + (int)(Height * Math.Sin(rad_i) * Math.Sin(rad_j));
+                        //for (int k = fromHeight; k < fromHeight + Sinusodial + 1; k++)
+                        //{
+                        int k = Sinusodial;
+                            cubes[i][k][j].IsFilled = true;
+                            cubes[i][k][j].color = ColorSwitch(Rand.Next(11));
+                        //}
                         }
             }
         }

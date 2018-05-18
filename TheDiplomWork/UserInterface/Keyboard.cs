@@ -293,7 +293,8 @@ namespace TheDiplomWork
                     RestoringToDefaultAlgorithm();
                     break;
 
-                
+                case (char)187: Projectile.jp.sd.ChangeStartingVelocity(+1); break;
+                case (char)189: Projectile.jp.sd.ChangeStartingVelocity(-1); break;
 
                 case 'm': Music.wmp_player.PlayTheMusic(); break;
                 case 'n': Music.wmp_player.PlayTheMusic_NextSong(); break;
@@ -360,8 +361,8 @@ namespace TheDiplomWork
         {
             switch (key)
             {
-                case (char)187: Projectile.jp.sd.ChangeStartingVelocity(+1); break;
-                case (char)189: Projectile.jp.sd.ChangeStartingVelocity(-1); break;
+                //case (char)187: Projectile.jp.sd.ChangeStartingVelocity(+1); break;
+                //case (char)189: Projectile.jp.sd.ChangeStartingVelocity(-1); break;
 
 
                 default: break;
