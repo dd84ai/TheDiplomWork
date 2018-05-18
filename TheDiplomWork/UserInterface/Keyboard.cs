@@ -184,6 +184,7 @@ namespace TheDiplomWork
                 case 'i':
                     Speech.ls.synthesizer.SpeakAsync("Second Position fixated");
                     Projectile.jp.SetHpos2();
+                    Wrapped_SINGLE_KeyPressed_Reaction((char)254);
                     break;
 
                 case 'o':

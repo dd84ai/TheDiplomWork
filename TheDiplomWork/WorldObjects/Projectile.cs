@@ -236,7 +236,7 @@ namespace TheDiplomWork
                     }
                     else
                     {
-                        if (!Exploded && TimeOfFlight()>1.0f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
+                        if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
                         {
                             Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('b');
                             Exploded = true;
