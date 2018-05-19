@@ -315,6 +315,16 @@ namespace TheDiplomWork
             inp = inp.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
             return inp;
         }
+        public static string ToString(vec3 inp)
+        {
+            string standard = "G2";
+            return inp.x.ToString(standard) + " ; " + inp.y.ToString(standard) + " ; " + inp.z.ToString(standard);
+        }
+        public static string Length(vec3 inp)
+        {
+            string standard = "G2";
+            return Math.Sqrt(inp.x* inp.x + inp.y* inp.y + inp.z* inp.z).ToString(standard);
+        }
         public static bool TryLoad(ref vec3 vec, string Name)
         {
             try

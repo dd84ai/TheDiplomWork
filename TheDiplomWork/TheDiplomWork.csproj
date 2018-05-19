@@ -82,7 +82,11 @@
     <Compile Include="UserInterface\Cube_Selection.cs" />
     <Compile Include="UserInterface\Music.cs" />
     <Compile Include="UserInterface\Speech.cs" />
+    <Compile Include="WonderfulPhysics\DragProjectile.cs" />
+    <Compile Include="WonderfulPhysics\SimpleProjectile.cs" />
+    <Compile Include="WonderfulPhysics\WindProjectile.cs" />
     <Compile Include="WorldObjects\Explosion.cs" />
+    <Compile Include="WonderfulPhysics\ODE.cs" />
     <Compile Include="WorldObjects\Player.cs" />
     <Compile Include="Environment\SaveAndLoad.cs" />
     <Compile Include="ShaderedScene\DataForDraw.cs" />

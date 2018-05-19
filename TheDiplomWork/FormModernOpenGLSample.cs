@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using SharpGL;
+using GlmNet;
 namespace TheDiplomWork
 {
     /// <summary>
@@ -67,6 +68,7 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height / 2 - 60, System.Drawing.Color.Red, 14, "Press any key to exit", 2.0f, openGLControl);
             }
         }
+        
         public void openGL_Draw_Wrapped()
         {
             if (this.ActiveControl.Focused)
@@ -123,19 +125,21 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Purple, 10, "|J| - Rotational Mod: " + Projectile.jp.RotatingStartingVelocity, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Ctrl: " + Keyboard.Ctrl_is_pressed, 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Alt: " + Keyboard.Alt_is_pressed, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Starting Velocity: " + vec3things.ToString(Projectile.jp.sd.starting_velocity), 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Total Velocity: " + Projectile.jp.sd.StartingVelocity.ToString("G2"), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Ctrl: " + Keyboard.Ctrl_is_pressed, 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Alt: " + Keyboard.Alt_is_pressed, 2.0f); place++;
 
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "-------------------", 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time.time.GetGameTotalSeconds: " + Time.time.GetGameTotalSeconds(), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "starting velocity: " + Projectile.jp.GetStringedVec3(Projectile.jp.sd.starting_velocity), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Projectile.jp.Coordinates() " + Projectile.jp.GetStringedVec3(Projectile.jp.Coordinates()), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Projectile.jp.Coordinates() " + Projectile.jp.GetStringedVec3(Projectile.jp.center), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Bomb Location " + Explosion.exp.Bomb_precise_position.ToString(), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Rocket Angle: " + Projectile.jp.AngleBetweenStartingAndCurrentVelocity(), 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Average Rebuilding Main Time: " + Time.time.AverageRebuildingTime, 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "TimeWhenSecondZero: " + Projectile.jp.TimeWhenSecondZero(), 2.0f); place++;
-                
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "-------------------", 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time.time.GetGameTotalSeconds: " + Time.time.GetGameTotalSeconds(), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "starting velocity: " + Projectile.jp.GetStringedVec3(Projectile.jp.sd.starting_velocity), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Projectile.jp.Coordinates() " + Projectile.jp.GetStringedVec3(Projectile.jp.Coordinates()), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Projectile.jp.Coordinates() " + Projectile.jp.GetStringedVec3(Projectile.jp.center), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Bomb Location " + Explosion.exp.Bomb_precise_position.ToString(), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Rocket Angle: " + Projectile.jp.AngleBetweenStartingAndCurrentVelocity(), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Average Rebuilding Main Time: " + Time.time.AverageRebuildingTime, 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "TimeWhenSecondZero: " + Projectile.jp.TimeWhenSecondZero(), 2.0f); place++;
+
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingTime: " + Explosion.exp.StartingTime, 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Explosion.exp.StartingShift: " + Explosion.exp.StartingShiftForLoeading, 2.0f); place++;
                 //
