@@ -17,13 +17,27 @@ namespace TheDiplomWork
             START_initialization();
 
             float EndTime = Projectile.jp.TimeWhenSecondZero();
-            int count = 4 * (int)EndTime;
             vec3 temp;
-            for (int i = 2; i <= count; i++)
-            {
-                temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
-                Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.Black, 0, true);
-            }
+            //if (!Projectile.jp.NewVersion)
+            //{
+                
+                int count = 4 * (int)EndTime + 4*2;
+                
+                for (int i = 2; i <= count; i++)
+                {
+                    temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
+                    Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.Black, 0, true);
+                }
+            //}
+            //else
+            //{
+            //    temp = Projectile.jp.AbsoluteLocationAtTime((float)EndTime * 0.1f);
+            //    Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.Black, 0, true);
+
+            //    temp = Projectile.jp.AbsoluteLocationAtTime((float)EndTime * 0.2f);
+            //    Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.Black, 0, true);
+            //}
+
             //foreach (var cube in TemporalList)
             //{
             //    ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);

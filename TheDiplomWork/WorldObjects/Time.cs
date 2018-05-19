@@ -29,7 +29,7 @@ namespace TheDiplomWork
             double TimeLastIncreasement = 0.1;
             public double Get_TimeLastIncreasement()
             {
-                return TimeLastIncreasement;
+                return TimeLastIncreasement / 1000;
             }
 
             public double TimeViaRadianAngle()

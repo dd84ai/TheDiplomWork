@@ -131,6 +131,18 @@ namespace TheDiplomWork
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Alt: " + Keyboard.Alt_is_pressed, 2.0f); place++;
 
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "-------------------", 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Position Old: " + vec3things.ToString(Projectile.jp.Coordinates()), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Position New: " + vec3things.ToString(Projectile.jp.Coordinates(true)), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Velocity Old: " + vec3things.ToString(Projectile.jp.Velocity()), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Velocity New: " + vec3things.ToString(Projectile.jp.Velocity(true)), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 Old: " + vec3things.ToString(Projectile.jp.AbsoluteLocationAtTime(1.0f)), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 New: " + vec3things.ToString(Projectile.jp.AbsoluteLocationAtTime(1.0f,true)), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 Old: " + vec3things.ToString(Projectile.jp.CoordinatesAtTimeAtHighPart(1.0f)), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 New: " + vec3things.ToString(Projectile.jp.CoordinatesAtTimeAtHighPart(1.0f, true)), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 Old: " + vec3things.ToString(Projectile.jp.AbsoluteEstimatedLocation()), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 New: " + vec3things.ToString(Projectile.jp.AbsoluteEstimatedLocation(true)), 2.0f); place++;
+                
+
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time.time.GetGameTotalSeconds: " + Time.time.GetGameTotalSeconds(), 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "starting velocity: " + Projectile.jp.GetStringedVec3(Projectile.jp.sd.starting_velocity), 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Projectile.jp.Coordinates() " + Projectile.jp.GetStringedVec3(Projectile.jp.Coordinates()), 2.0f); place++;

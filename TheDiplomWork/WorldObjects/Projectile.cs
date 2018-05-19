@@ -117,26 +117,29 @@ namespace TheDiplomWork
             //    if (!NewVersion) return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
             //    else return Projectile.jp.center + SP.get_vec3_Predicted_Position(TimePauseUntilExplosion);
             //}
-            public vec3 AbsoluteEstimatedLocation()
+            public vec3 AbsoluteEstimatedLocation(bool GiveMeNewVers = false)
             {
-                if (!NewVersion) return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
+                if (!NewVersion && !GiveMeNewVers) return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
                 else return Projectile.jp.center + SP.get_vec3_Predicted_Position(TimePauseUntilExplosion);
             }
             public vec3 AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()
             {
                 TimeOfExplosion = TimeOfFlight() + TimePauseUntilExplosion;
-                return Projectile.jp.center + Projectile.jp.CoordinatesAtTimeAtHighPart(TimeOfFlight() + TimePauseUntilExplosion);
+                return Projectile.jp.center + Projectile.jp.CoordinatesAtTimeAtHighPart(TimePauseUntilExplosion);
             }
-            public vec3 CoordinatesAtTimeAtHighPart(float time)
+            public vec3 CoordinatesAtTimeAtHighPart(float time, bool GiveMeNewVers = false)
             {
-                if (!NewVersion) return CoordinatesAtTime(time) + half_height * glm.normalize(Velocity());
-                else return SP.get_vec3_Position() +half_height * glm.normalize(Velocity());
+                if (!NewVersion && !GiveMeNewVers) return CoordinatesAtTime(TimeOfFlight() + time) + half_height * glm.normalize(Velocity());
+                else return SP.get_vec3_Predicted_Position(time) +half_height * glm.normalize(Velocity(true));
             }
-            public vec3 AbsoluteLocationAtTime(float _time)
+            public vec3 AbsoluteLocationAtTime(float _time, bool GiveMeNewVers = false)
             {
-                if (!NewVersion)
-                return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(_time);
-                else return Projectile.jp.SP.get_vec3_Predicted_Position(_time);
+                if (!NewVersion && !GiveMeNewVers)
+                    return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(_time);
+                else
+                {
+                    return Projectile.jp.center + Projectile.jp.SP.get_vec3_Predicted_Position_NotDepenedToTime(_time);
+                }
             }
 
             public vec3 center = new vec3(0,0,0);
@@ -242,11 +245,12 @@ namespace TheDiplomWork
                     if (!Launched)
                     {
                         sd.starting_velocity = SR.ReturnTheThing();//Rotate(sd.default_velocity, PlayerAngles());
-                        SP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.starting_velocity.x, sd.starting_velocity.y, sd.starting_velocity.z, 0);
+                        SP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.starting_velocity.x, sd.starting_velocity.z, sd.starting_velocity.y, 0);
                     }
                     else
                     {
-                        SP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
+                        if (!(SP.getTime() > TimeOfExplosion))
+                            SP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
 
                         if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
                         {
@@ -276,11 +280,11 @@ namespace TheDiplomWork
             vec3 os_y = new vec3(1, 0, 0);
 
             
-            public bool NewVersion = false;
+            public bool NewVersion = true;
             float step = 0.01f;
-            vec3 Velocity()
+            public vec3 Velocity(bool Givemenew = false)
             {
-                if (!NewVersion) return(CoordinatesAtTime(TimeOfFlight() + step) - CoordinatesAtTime(TimeOfFlight()))/step;
+                if (!NewVersion && !Givemenew) return(CoordinatesAtTime(TimeOfFlight() + step) - CoordinatesAtTime(TimeOfFlight()))/step;
                 else return SP.get_vec3_Velocity();
 
                 //return new vec3(sd.starting_velocity.x, sd.starting_velocity.y - (9.8f) * TimeOfFlight(), sd.starting_velocity.z);
@@ -322,9 +326,10 @@ namespace TheDiplomWork
 
                 if (time > TimeOfExplosion)
                     time = TimeOfExplosion;
+
                 //if (time > TimeOfExplosion-0.1)
                 //{
-                    //time = TimeOfExplosion;
+                //time = TimeOfExplosion;
                 //    Time.time.Time_Speed = 0.025;
                 //}
 
@@ -332,9 +337,9 @@ namespace TheDiplomWork
             }
 
             vec3 coordinates = new vec3(0, 0, 0);
-            public vec3 Coordinates()
+            public vec3 Coordinates(bool GiveMeNew = false)
             {
-                if (!NewVersion) return CoordinatesAtTime(TimeOfFlight());
+                if (!NewVersion && !GiveMeNew) return CoordinatesAtTime(TimeOfFlight());
                 else return SP.get_vec3_Position();
             }
             vec3 CoordinatesAtTime(float time)

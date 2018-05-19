@@ -138,17 +138,26 @@ namespace TheDiplomWork
         }
         public vec3 get_vec3_Position()
         {
-            return new vec3((float)getQ(1), (float)getQ(3), (float)getQ(5));
+            return new vec3((float)getQ(1), (float)getQ(5), (float)getQ(3));
         }
         public vec3 get_vec3_Velocity()
         {
-            return new vec3((float)getQ(0), (float)getQ(2), (float)getQ(4));
+            return new vec3((float)getQ(0), (float)getQ(4), (float)getQ(2));
         }
         public vec3 get_vec3_Predicted_Position(double dt)
         {
             Save_Old_Data();
             updateLocationAndVelocity(dt);
-            vec3 temp = new vec3((float)getQ(1), (float)getQ(3), (float)getQ(5));
+            vec3 temp = new vec3((float)getQ(1), (float)getQ(5), (float)getQ(3));
+            Restore_Old_Data();
+            return temp;
+        }
+        public vec3 get_vec3_Predicted_Position_NotDepenedToTime(double dt)
+        {
+            Save_Old_Data();
+            Reiniting_StartingPositionAndVelocity(0, 0, 0, Projectile.jp.sd.starting_velocity.x, Projectile.jp.sd.starting_velocity.z, Projectile.jp.sd.starting_velocity.y, 0);
+            updateLocationAndVelocity(dt);
+            vec3 temp = new vec3((float)getQ(1), (float)getQ(5), (float)getQ(3));
             Restore_Old_Data();
             return temp;
         }
@@ -156,7 +165,7 @@ namespace TheDiplomWork
         {
             Save_Old_Data();
             updateLocationAndVelocity(dt);
-            vec3 temp = new vec3((float)getQ(0), (float)getQ(2), (float)getQ(4));
+            vec3 temp = new vec3((float)getQ(0), (float)getQ(4), (float)getQ(2));
             Restore_Old_Data();
             return temp;
         }
