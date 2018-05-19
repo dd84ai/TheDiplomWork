@@ -27,6 +27,23 @@ namespace TheDiplomWork
             setQ(vz0, 4);
             setQ(z0, 5);
         }
+        public void Reiniting_StartingPositionAndVelocity(double x0, double y0, double z0,
+        double vx0, double vy0, double vz0,
+        double time)
+        {
+            // Call the ODE class constructor.
+            //base. super(6);
+            // Load the initial position, velocity, and time
+            // values into the s field and q array from the
+            // ODE class.
+            setS(time);
+            setQ(vx0, 0);
+            setQ(x0, 1);
+            setQ(vy0, 2);
+            setQ(y0, 3);
+            setQ(vz0, 4);
+            setQ(z0, 5);
+        }
         //    The SimpleProjectile class declares a series of methods to return the current location,
         //velocity, and time values for the projectile.Since these quantities are stored in the s field and
         //q[] array of the ODE class, the get methods in the SimpleProjectile class simply call the getS or

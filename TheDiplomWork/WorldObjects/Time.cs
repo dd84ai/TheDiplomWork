@@ -24,7 +24,14 @@ namespace TheDiplomWork
             public void TimeIncrease(double inp)
             {
                 Time += inp;
+                TimeLastIncreasement = inp;
             }
+            double TimeLastIncreasement = 0.1;
+            public double Get_TimeLastIncreasement()
+            {
+                return TimeLastIncreasement;
+            }
+
             public double TimeViaRadianAngle()
             {
                 return ((GetTotalRadianTime() + Math.PI) % (Math.PI * 2)) / Math.PI;

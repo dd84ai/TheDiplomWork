@@ -51,7 +51,7 @@ namespace TheDiplomWork.WonderfulPhysics
         // This method updates the velocity and location
         // of the projectile using a 4th order Runge-Kutta
         // solver to integrate the equations of motion.
-        public void updateLocationAndVelocity(double dt)
+        public new void updateLocationAndVelocity(double dt)
         {
             ODESolver.rungeKutta4(this, dt);
         }
@@ -65,7 +65,7 @@ namespace TheDiplomWork.WonderfulPhysics
         // q[3] = y
         // q[4] = vz = dzdt
         // q[5] = z
-        public double[] getRightHandSide(double s, double[] q,
+        public new double[] getRightHandSide(double s, double[] q,
     double[] deltaQ, double ds,
     double qScale)
         {

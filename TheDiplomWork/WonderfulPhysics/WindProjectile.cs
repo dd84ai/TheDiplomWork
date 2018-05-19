@@ -40,26 +40,26 @@ mass, area, density, Cd)
 // This method updates the velocity and location
 // of the projectile using a 4th order Runge-Kutta
 // solver to integrate the equations of motion.
-public void updateLocationAndVelocity(double dt)
+public new void updateLocationAndVelocity(double dt)
     {
         ODESolver.rungeKutta4(this, dt);
     }
-//    The getRightHandSide method in the WindProjectile class is exactly the same as the
-//    getRightHandSide method in the DragProjectile class with two exceptions.When the interme-
-//diate values of the x-, y-, and z-velocity components are obtained, they are converted into
-//    apparent velocities by subtracting the wind velocity components. The apparent velocities are
-//    then used to compute the drag force terms. The other difference is because the mass, density,
-//    area, and Cd fields were given private access in the DragProjectile class, we must use the getMass,
-//getDensity, getArea, and getCd methods to access their values in the WindProjectile class.
-    // The getRightHandSide() method returns the right-hand
-// sides of the six first-order projectile ODEs.
-// q[0] = vx = dxdt
-// q[1] = x
-// q[2] = vy = dydt
-// q[3] = y
-// q[4] = vz = dzdt
-// q[5] = z
-public double[] getRightHandSide(double s, double[] q,
+        //    The getRightHandSide method in the WindProjectile class is exactly the same as the
+        //    getRightHandSide method in the DragProjectile class with two exceptions.When the interme-
+        //diate values of the x-, y-, and z-velocity components are obtained, they are converted into
+        //    apparent velocities by subtracting the wind velocity components. The apparent velocities are
+        //    then used to compute the drag force terms. The other difference is because the mass, density,
+        //    area, and Cd fields were given private access in the DragProjectile class, we must use the getMass,
+        //getDensity, getArea, and getCd methods to access their values in the WindProjectile class.
+        // The getRightHandSide() method returns the right-hand
+        // sides of the six first-order projectile ODEs.
+        // q[0] = vx = dxdt
+        // q[1] = x
+        // q[2] = vy = dydt
+        // q[3] = y
+        // q[4] = vz = dzdt
+        // q[5] = z
+        public new double[] getRightHandSide(double s, double[] q,
 double[] deltaQ, double ds,
 double qScale)
     {
