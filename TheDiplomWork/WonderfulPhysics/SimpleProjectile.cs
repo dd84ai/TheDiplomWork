@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GlmNet;
 namespace TheDiplomWork
 {
     public class SimpleProjectile : ODE
@@ -45,6 +45,10 @@ namespace TheDiplomWork
         {
             return getQ(4);
         }
+        public vec3 get_vec3_Velocity()
+        {
+            return new vec3((float)getQ(0), (float)getQ(2), (float)getQ(4));
+        }
         public double getX()
         {
             return getQ(1);
@@ -56,6 +60,10 @@ namespace TheDiplomWork
         public double getZ()
         {
             return getQ(5);
+        }
+        public vec3 get_vec3_Position()
+        {
+            return new vec3((float)getQ(1), (float)getQ(3), (float)getQ(5));
         }
         public double getTime()
         {
@@ -89,6 +97,20 @@ namespace TheDiplomWork
             setQ(vz, 4);
             setQ(z, 5);
         }
+
+        double[] q_old = new double[6];
+        public double time_old = 0;
+        public void Save_Old_Data()
+        {
+            for (int i = 0; i < 6; i++) q_old[i] = getQ(i);
+            time_old = getTime();
+        }
+        public void Restore_Old_Data()
+        {
+            for (int i = 0; i < 6; i++) setQ(q_old[i],i);
+            setS(time_old);
+        }
+
         //    Because the SimpleProjectile class is a subclass of ODE, it has to provide an implemen-
         //tation of the getRightHandSide method.If you remember from the previous chapter, this
         //method is used to compute the right-hand side of the ODEs that will be solved.The
