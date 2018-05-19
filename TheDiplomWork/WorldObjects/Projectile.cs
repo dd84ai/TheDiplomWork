@@ -237,7 +237,7 @@ namespace TheDiplomWork
             public bool Exploded = false;
             public float TimeOfExplosion = 99999999999;
             //Масса в килограмах, область в квадратных метрах, коэф сопротив безразм, плотность килограм на кубометр.
-            public WindProjectile SP = new WindProjectile(0, 0, 0, 0, 0, 0, 0,0.05,0.001,0.25,1,50,50);
+            public WindProjectile SP = new WindProjectile(0, 0, 0, 0, 0, 0, 0,0.05,0.001,0.25,1,0,0);
             public void ProcessStartingData()
             {
                 if (Loaded)
