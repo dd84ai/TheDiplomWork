@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheDiplomWork.WonderfulPhysics
+namespace TheDiplomWork
 {
     public class DragProjectile : SimpleProjectile
     {
@@ -65,7 +65,7 @@ namespace TheDiplomWork.WonderfulPhysics
         // q[3] = y
         // q[4] = vz = dzdt
         // q[5] = z
-        public new double[] getRightHandSide(double s, double[] q,
+        public override double[] getRightHandSide(double s, double[] q,
     double[] deltaQ, double ds,
     double qScale)
         {
