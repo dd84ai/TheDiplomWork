@@ -154,7 +154,7 @@ namespace TheDiplomWork
         }
         public void Reignite()
         {
-            Reiniting_StartingPositionAndVelocity(0, 0, 0, Projectile.jp.sd.starting_velocity.x, Projectile.jp.sd.starting_velocity.z, Projectile.jp.sd.starting_velocity.y, 0);
+            Reiniting_StartingPositionAndVelocity(0, 0, 0, Projectile.jp.sd.Get_Starting_velocity().x, Projectile.jp.sd.Get_Starting_velocity().z, Projectile.jp.sd.Get_Starting_velocity().y, 0);
         }
         public vec3 get_vec3_Predicted_Position_NotDepenedToTime(double dt)
         {

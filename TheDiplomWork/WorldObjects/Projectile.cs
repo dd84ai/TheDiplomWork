@@ -23,11 +23,18 @@ namespace TheDiplomWork
             {
                 public float StartingVelocity = 20f;
 
-                public vec3 Get_Default_Velosity() { return new vec3(0, StartingVelocity, 0); } 
+                public vec3 Get_Default_Velosity() { return new vec3(0, StartingVelocity, 0); }
 
-                public vec3 starting_velocity = new vec3(0, 0, 0);
+                vec3 starting_position = new vec3(0, 0, 0);
 
-                
+                vec3 center = new vec3(0, 0, 0);
+                public vec3 Get_Center() { return center; }
+                public void Set_Center(vec3 inp) { center = inp; }
+
+                vec3 starting_velocity = new vec3(0, 0, 0);
+                public vec3 Get_Starting_velocity() { return starting_velocity; }
+                public void Set_Starting_velocity(vec3 inp) { starting_velocity = inp; }
+
 
                 public void ChangeStartingVelocity(float value)
                 {
@@ -112,20 +119,15 @@ namespace TheDiplomWork
             }
 
             public float TimePauseUntilExplosion = 0.6f;
-            //public vec3 AbsoluteLocation()
-            //{
-            //    if (!NewVersion) return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
-            //    else return Projectile.jp.center + SP.get_vec3_Predicted_Position(TimePauseUntilExplosion);
-            //}
             public vec3 AbsoluteEstimatedLocation(bool GiveMeNewVers = false)
             {
-                if (!NewVersion && !GiveMeNewVers) return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
-                else return Projectile.jp.center + SP.get_vec3_Predicted_Position(TimePauseUntilExplosion);
+                if (!NewVersion && !GiveMeNewVers) return sd.Get_Center() + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
+                else return sd.Get_Center() + SP.get_vec3_Predicted_Position(TimePauseUntilExplosion);
             }
             public vec3 AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()
             {
                 TimeOfExplosion = TimeOfFlight() + TimePauseUntilExplosion;
-                return Projectile.jp.center + Projectile.jp.CoordinatesAtTimeAtHighPart(TimePauseUntilExplosion);
+                return sd.Get_Center() + Projectile.jp.CoordinatesAtTimeAtHighPart(TimePauseUntilExplosion);
             }
             public vec3 CoordinatesAtTimeAtHighPart(float time, bool GiveMeNewVers = false)
             {
@@ -135,14 +137,14 @@ namespace TheDiplomWork
             public vec3 AbsoluteLocationAtTime(float _time, bool GiveMeNewVers = false)
             {
                 if (!NewVersion && !GiveMeNewVers)
-                    return Projectile.jp.center + Projectile.jp.CoordinatesAtTime(_time);
+                    return sd.Get_Center() + Projectile.jp.CoordinatesAtTime(_time);
                 else
                 {
-                    return Projectile.jp.center + Projectile.jp.SP.get_vec3_Predicted_Position_NotDepenedToTime(_time);
+                    return sd.Get_Center() + Projectile.jp.SP.get_vec3_Predicted_Position_NotDepenedToTime(_time);
                 }
             }
 
-            public vec3 center = new vec3(0,0,0);
+            
             public void SetHpos1()
             {
                 hpos1 = Cube_Selection.Decide_Position_To_Place_Cube(false);
@@ -160,7 +162,7 @@ namespace TheDiplomWork
                 ShaderedScene.CalculateFromMaptoGraphical(hpos1, ref hposition1);
                 ShaderedScene.CalculateFromMaptoGraphical(hpos2, ref hposition2);
 
-                center = (hposition1 + hposition2) / 2;
+                sd.Set_Center((hposition1 + hposition2) / 2);
 
                 GatherCubes();
             }
@@ -179,7 +181,7 @@ namespace TheDiplomWork
                         item.IsTakenForExplosion = false;
                 ProjectileParts.Clear();
 
-                center = (hposition1 + hposition2) / 2;
+                sd.Set_Center((hposition1 + hposition2) / 2);
 
 
                 vec3 pos_min = new vec3(Math.Min(hposition1.x, hposition2.x),
@@ -191,10 +193,6 @@ namespace TheDiplomWork
                     Math.Max(hposition1.z, hposition2.z));
 
                 half_height = hposition2.y - hposition1.y;
-
-                vec3 high_part = new vec3(center.x,
-                    Math.Max(hposition1.y, hposition2.y),
-                    center.z);
 
                 vec3 cubeposition = new vec3(0, 0, 0);
                 foreach (var XWorld in Scene.SS.env.cub_mem.world.World_as_Whole)
@@ -213,7 +211,7 @@ namespace TheDiplomWork
                                         cubeposition.z <= pos_max.z
                                         )
                                     {
-                                        vec3 ranged = cubeposition - center;
+                                        vec3 ranged = cubeposition - sd.Get_Center();
                                         double range = Math.Sqrt(ranged.x * ranged.x + ranged.y * ranged.y + ranged.z * ranged.z);
 
                                         if (range < CenterCube_RangeMax)
@@ -242,11 +240,11 @@ namespace TheDiplomWork
             {
                 if (Loaded)
                 {
-                    FromShaderWithLove.ShaderRotator SR = new FromShaderWithLove.ShaderRotator(center + sd.Get_Default_Velosity());
+                    FromShaderWithLove.ShaderRotator SR = new FromShaderWithLove.ShaderRotator(sd.Get_Center() + sd.Get_Default_Velosity());
                     if (!Launched)
                     {
-                        sd.starting_velocity = SR.ReturnTheThing();//Rotate(sd.default_velocity, PlayerAngles());
-                        SP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.starting_velocity.x, sd.starting_velocity.z, sd.starting_velocity.y, 0);
+                        sd.Set_Starting_velocity(SR.ReturnTheThing());//Rotate(sd.default_velocity, PlayerAngles());
+                        SP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.Get_Starting_velocity().x, sd.Get_Starting_velocity().z, sd.Get_Starting_velocity().y, 0);
                     }
                     else
                     {
@@ -267,19 +265,14 @@ namespace TheDiplomWork
             {
                 StartingTimeToFly = Time.time.GetGameTotalSeconds();
                 Launched = true;
-
-
             }
             public void DeLaunch()
             {
                 Launched = false;
             }
 
-            
-
             vec3 os_x = new vec3(1, 0, 0);
             vec3 os_y = new vec3(1, 0, 0);
-
             
             public bool NewVersion = true;
             float step = 0.01f;
@@ -301,7 +294,7 @@ namespace TheDiplomWork
 
             public float AngleBetweenStartingAndCurrentVelocity()
             {
-                vec3 v1 = sd.starting_velocity;
+                vec3 v1 = sd.Get_Starting_velocity();
                 vec3 v2 = Velocity();
 
                 double Inside = (glm.dot(v1, v2)) / (vec3_length(v1) * vec3_length(v2));
@@ -328,12 +321,6 @@ namespace TheDiplomWork
                 if (time > TimeOfExplosion)
                     time = TimeOfExplosion;
 
-                //if (time > TimeOfExplosion-0.1)
-                //{
-                //time = TimeOfExplosion;
-                //    Time.time.Time_Speed = 0.025;
-                //}
-
                 return time;
             }
 
@@ -345,21 +332,20 @@ namespace TheDiplomWork
             }
             vec3 CoordinatesAtTime(float time)
             {
-                coordinates.x = sd.starting_velocity.x * time;
-                coordinates.y = sd.starting_velocity.y * time - (9.8f / 2f) * time * time;
-                coordinates.z = sd.starting_velocity.z * time;
+                coordinates.x = sd.Get_Starting_velocity().x * time;
+                coordinates.y = sd.Get_Starting_velocity().y * time - (9.8f / 2f) * time * time;
+                coordinates.z = sd.Get_Starting_velocity().z * time;
 
                 return coordinates;
             }
             public float TimeWhenSecondZero()
             {
                 // - (9.8f / 2f) * time * time + sd.starting_velocity.y * time + 10 = 0;
-
                 //double Discr = Math.Sqrt(sd.starting_velocity.y* sd.starting_velocity.y);
                 //return (float)((-sd.starting_velocity.y - Discr) / (-2 * (9.8f / 2f)));
 
-                double Discr = Math.Sqrt(sd.starting_velocity.y* sd.starting_velocity.y + 4 * 10 * (9.8f / 2f));
-                return (float)((-sd.starting_velocity.y - Discr) / (-2 * (9.8f / 2f)));
+                double Discr = Math.Sqrt(sd.Get_Starting_velocity().y* sd.Get_Starting_velocity().y + 4 * 10 * (9.8f / 2f));
+                return (float)((-sd.Get_Starting_velocity().y - Discr) / (-2 * (9.8f / 2f)));
             }
             public string GetStringedVec3(vec3 inp)
             {
@@ -367,26 +353,22 @@ namespace TheDiplomWork
             }
             public mat3 GetProjectileMatrix()
             {
-                //Первый вектор. Координаты
-                //Второй вектор.... Угол поворота
-                //Третий вектор. Центр Снаряда.
-
                 return new mat3(Coordinates(),
                     PlayerAngles(),
-                    center
+                    sd.Get_Center()
                     );
             }
 
             vec3 OldVelocity = new vec3(-9999123, -9999123, -9999123);
             public void NotEveryTimeRealoder()
             {
-                if (OldVelocity.x != sd.starting_velocity.x
-                    && OldVelocity.y != sd.starting_velocity.y
-                    && OldVelocity.z != sd.starting_velocity.z)
+                if (OldVelocity.x != sd.Get_Starting_velocity().x
+                    && OldVelocity.y != sd.Get_Starting_velocity().y
+                    && OldVelocity.z != sd.Get_Starting_velocity().z)
                 {
-                    OldVelocity.x = sd.starting_velocity.x;
-                    OldVelocity.y = sd.starting_velocity.y;
-                    OldVelocity.z = sd.starting_velocity.z;
+                    OldVelocity.x = sd.Get_Starting_velocity().x;
+                    OldVelocity.y = sd.Get_Starting_velocity().y;
+                    OldVelocity.z = sd.Get_Starting_velocity().z;
                     Scene.SS.TrajectoryPath.Reloader();
                 }
             }

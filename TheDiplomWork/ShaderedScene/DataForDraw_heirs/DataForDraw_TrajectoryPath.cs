@@ -39,7 +39,7 @@ namespace TheDiplomWork
                 for (int i = 2; i <= count; i++)
                 {
                     Projectile.jp.SP.updateLocationAndVelocity(Increment);
-                    temp = Projectile.jp.center + Projectile.jp.SP.get_vec3_Position();
+                    temp = Projectile.jp.sd.Get_Center() + Projectile.jp.SP.get_vec3_Position();
                     //temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
                     Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.White, 0, true);
                 }

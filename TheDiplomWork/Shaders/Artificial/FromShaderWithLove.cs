@@ -45,7 +45,7 @@ namespace TheDiplomWork
             vec3 ProcessingProjectile(vec3 inp)
             {
                 //Rotate
-                vec3 ShiftToRotate = Shifted(inp) - Projectile.jp.center;
+                vec3 ShiftToRotate = Shifted(inp) - Projectile.jp.sd.Get_Center();
                 ShiftToRotate = Rotate(ShiftToRotate, Projectile.jp.PlayerAngles());
                 //ShiftToRotate = Deshifted(ShiftToRotate) + Projectile.jp.center;
 
