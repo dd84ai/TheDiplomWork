@@ -116,7 +116,12 @@ namespace TheDiplomWork
                 case (char)27:
                     StaticAccess.FMOS.table_Menu_main.Location = new System.Drawing.Point(StaticAccess.FMOS.openGLControl.Width/2 - StaticAccess.FMOS.table_Menu_main.Size.Width / 2, StaticAccess.FMOS.openGLControl.Height/2 - StaticAccess.FMOS.table_Menu_main.Size.Height / 2);
                     StaticAccess.FMOS.table_Menu_main.Visible = !StaticAccess.FMOS.table_Menu_main.Visible;
-                    if (!StaticAccess.FMOS.table_Menu_main.Visible) StaticAccess.FMOS.openGLControl.Focus();
+                    if (!StaticAccess.FMOS.table_Menu_main.Visible)
+                    {
+                        StaticAccess.FMOS.openGLControl.Focus();
+                        Cursor.Hide();
+                    }
+                    else Cursor.Show();
                     break;
 
                 //case 'g':

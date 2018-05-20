@@ -65,7 +65,14 @@ namespace TheDiplomWork
         public void OpenGL_Draw_ReWrapped()
         {
             if (Scene.ShadersInitializated)
+            {
                 openGL_Draw_Wrapped();
+                if (table_Menu_main.Visible)
+                {
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 80, System.Drawing.Color.Red, 40, "PAUSE", 2.0f, openGLControl);
+                }
+   
+            }
             else
             {
                 Application.Exit();
@@ -76,7 +83,7 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height / 2 + 60, System.Drawing.Color.Red, 14, "WARNING!", 2.0f, openGLControl);
 
                 //Center = OpenGLcontrol.Width/2 - (string.Length)*step/2
-                CF.Ultimate_DrawText(20, openGLControl.Height/2 + 20, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, 2.0f, openGLControl);
+                CF.Ultimate_DrawText(20, openGLControl.Height / 2 + 20, System.Drawing.Color.Red, 14, scene.ShadersWereNotInitializatedMessage, 2.0f, openGLControl);
                 CF.Ultimate_DrawText(20, openGLControl.Height / 2 - 20, System.Drawing.Color.Red, 14, "Please, check compatibility with OpenGL 2.1", 2.0f, openGLControl);
                 CF.Ultimate_DrawText(20, openGLControl.Height / 2 - 60, System.Drawing.Color.Red, 14, "Press any key to exit", 2.0f, openGLControl);
             }
@@ -311,6 +318,7 @@ namespace TheDiplomWork
         {
             Mouse.MouseIsActive = true;
             Mouse.SetOldPisition(Control.MousePosition);
+            if (!table_Menu_main.Visible)
             Cursor.Hide();
         }
 
@@ -409,6 +417,7 @@ namespace TheDiplomWork
         private void button_Return_Click(object sender, EventArgs e)
         {
             Keyboard.Wrapped_SINGLE_KeyPressed_Reaction((char)27);
+            
         }
 
         private void button_SaveAndExit_Click(object sender, EventArgs e)
