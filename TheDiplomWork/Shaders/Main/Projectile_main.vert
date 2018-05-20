@@ -18,7 +18,7 @@ vec4 Processed(vec3 inp)
 {
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
-		return Shifted_Position(RotatedExplosion(Rotate(projectileMatrix[1], in_Center)) + ProcessingProjectile(inp));
+		return Shifted_Position(RotatedExplosion(Rotate(projectileMatrix[1], in_Center)) + ProcessingProjectile(AngularRotating(Rotate(projectileMatrix[1], in_Center),inp)));
 	}
 	else
 	{

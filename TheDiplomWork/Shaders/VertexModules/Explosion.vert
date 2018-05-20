@@ -14,6 +14,7 @@ vec3 Explosion()
 }
 vec3 RotatedExplosion(vec3 inp)
 {
+	//InitialVelocity
 	float TimeItTook = TimeTotalSeconds - in_Size.x;
 	if (TimeItTook > TimePauseForExplosion) TimeItTook = TimeItTook - TimePauseForExplosion;
 	else TimeItTook = 0;
@@ -24,4 +25,12 @@ vec3 RotatedExplosion(vec3 inp)
 	,inp.z * TimeItTook
 	);
 	return (vec3(RelativeShift));
+}
+vec3 AngularRotating(vec3 angles, vec3 inp)
+{
+		float TimeItTook = TimeTotalSeconds - in_Size.x;
+		if (TimeItTook > TimePauseForExplosion) TimeItTook = TimeItTook - TimePauseForExplosion;
+		else TimeItTook = 0;
+
+		return Rotate(angles * TimeItTook * 0.1,inp);
 }

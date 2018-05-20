@@ -8,7 +8,11 @@ vec4 Processed(vec3 inp)
 	//Explosion
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
-		return Shifted_Position(inp + Explosion());
+		
+
+		
+
+		return Shifted_Position(AngularRotating(in_Center,inp) + Explosion());
 	}
 	else
 	{
