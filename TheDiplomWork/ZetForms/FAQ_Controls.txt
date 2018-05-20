@@ -8,8 +8,8 @@ Space' - Moving up.
 'F' - Enable/Disable of falling freshly placed cubes.
 'P' - Enable/Disable moving through walls
 'L' - Launch the projectile(Or return the launched projectile to a starting position)
-'k' - You can select new projectile through placing two cubes in a way to describe a three dimensional cube. You should just imagine that you will be placing cubes from different corners of the 3D cube. K is to select the first corner;
-'I' - (look for description of key 'L) to select second corner of the cube and finish the new projectile. Try to rotate starting trajectory(by pressing right button of a mouse) if it's not showing itself.
+'K' - You can select new projectile through placing two cubes in a way to describe a three dimensional cube. You should just imagine that you will be placing cubes from different corners of the 3D cube. K is to select the first corner;
+'I' - (look for description of key 'K') to select second corner of the cube and finish the new projectile. Try to rotate starting trajectory(by pressing right button of a mouse) if it's not showing itself.
 'Y' - Enable/Disable angled sun/moon lighting
 'T' - Time speed 40x while pressed(you can move)
 'U' - Time speed (1/40)x while pressed(you can move)
