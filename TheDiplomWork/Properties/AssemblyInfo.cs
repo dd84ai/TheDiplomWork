@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("TheDiplomWork")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("The Cubes")]
+[assembly: AssemblyDescription("The Cubes is a program to try myself in a voxel graphic. You can build here anything from cubes(if you disabled (E)xplosion mod). Also you can select any explosive projectile and launch it to any target. For more info you should select 'Controls' in Menu.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TheDiplomWork")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCompany("NSTU, 2018")]
+[assembly: AssemblyProduct("The Cubes")]
+[assembly: AssemblyCopyright("Copyright © Novoselov A.A. dd84ai@gmail.com")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номер сборки и номер редакции по умолчанию.
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.2.2.9")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

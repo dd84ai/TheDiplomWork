@@ -23,8 +23,11 @@ namespace TheDiplomWork
             
             public void TimeIncrease(double inp)
             {
-                Time += inp;
-                TimeLastIncreasement = inp;
+                if (!StaticAccess.FMOS.table_Menu_main.Visible)
+                {
+                    Time += inp;
+                    TimeLastIncreasement = inp;
+                }
             }
             double TimeLastIncreasement = 0.1;
             public double Get_TimeLastIncreasement()

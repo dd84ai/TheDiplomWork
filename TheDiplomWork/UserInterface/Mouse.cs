@@ -18,15 +18,15 @@ namespace TheDiplomWork
         }
         public static void SetCenterCursor(System.Drawing.Point Position)
         {
-            CenterCursor = Position;
+                CenterCursor = Position;
         }
         static float MouseRotateDecreaser = 0.004f;
         public static void DoMouse(System.Drawing.Point Position, string button)
         {
             Scene.SS.env.player.coords.Player_rotational_view.x += (float)(Position.X - OldPosition.X) * MouseRotateDecreaser;
-            if (Scene.SS.env.player.coords.Player_rotational_view.y - (float)(Position.Y - OldPosition.Y) * MouseRotateDecreaser > -3.14f/2.0f
+            if (Scene.SS.env.player.coords.Player_rotational_view.y - (float)(Position.Y - OldPosition.Y) * MouseRotateDecreaser > -3.14f / 2.0f
                 && Scene.SS.env.player.coords.Player_rotational_view.y - (float)(Position.Y - OldPosition.Y) * MouseRotateDecreaser < 3.14f / 2.0f)
-            Scene.SS.env.player.coords.Player_rotational_view.y -= (float)(Position.Y - OldPosition.Y) * MouseRotateDecreaser;
+                Scene.SS.env.player.coords.Player_rotational_view.y -= (float)(Position.Y - OldPosition.Y) * MouseRotateDecreaser;
 
             //if (button == "Middle")
             //Projectile.jp.sd.ChangeStartingVelocity((float)(Position.Y - OldPosition.Y));

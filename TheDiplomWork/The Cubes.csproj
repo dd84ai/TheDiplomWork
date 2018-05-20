@@ -117,6 +117,15 @@
     <Compile Include="WorldObjects\Projectile.cs" />
     <Compile Include="WorldObjects\Sun.cs" />
     <Compile Include="WorldObjects\Time.cs" />
+    <Compile Include="ZetForms\AboutBox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZetForms\AboutBox1.Designer.cs">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ZetForms\AboutBox1.resx">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Shaders\Main\Projectile_main.vert" />
     <None Include="Shaders\VertexModules\Explosion.vert" />
     <None Include="Shaders\VertexModules\Sizer.vert" />
@@ -156,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico.ico" />
+    <Content Include="ZetForms\FAQ_Controls.txt" />
     <Content Include="Sounds\BlockPlacement.wav" />
     <Content Include="Sounds\BlockRemovement.wav" />
     <Content Include="Sounds\Blorp.wav" />

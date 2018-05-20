@@ -10,6 +10,19 @@ namespace TheDiplomWork
 {
     class Projectile : GeneralProgrammingStuff
     {
+        public class Settings
+        {
+            public static bool AdvancedPhysics = true;
+
+            //0.05,0.001,0.25,1,0,0
+            public static double mass = 0.05; //в kg масса объекта для расчета силы воздушного сопротивления(СВС)
+            public static double area = 0.001; //в м^2 фронтальная площадь объекта влияет на СВС
+            public static double cd = 0.25; // Коэффициент воздушного сопротивления, раскрывается в более крутую величину.
+            public static double density = 1; //kg/m^3 Плотноть окружающей среды. 
+
+            public static double windVx = 0; //Ветер по Х
+            public static double windVy = 0; //Ветер по Y
+        }
         public static Localized_projectile jp = new Localized_projectile();
         public class Localized_projectile
         {
@@ -121,8 +134,8 @@ namespace TheDiplomWork
             public float TimePauseUntilExplosion = 0.6f;
             public vec3 AbsoluteEstimatedLocation(bool GiveMeNewVers = false)
             {
-                if (!NewVersion && !GiveMeNewVers) return sd.Get_Center() + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
-                else return sd.Get_Center() + SP.get_vec3_Predicted_Position(TimePauseUntilExplosion);
+                if (!Projectile.Settings.AdvancedPhysics && !GiveMeNewVers) return sd.Get_Center() + Projectile.jp.CoordinatesAtTime(TimeOfFlight() + TimePauseUntilExplosion);
+                else return sd.Get_Center() + WP.get_vec3_Predicted_Position(TimePauseUntilExplosion);
             }
             public vec3 AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()
             {
@@ -131,16 +144,16 @@ namespace TheDiplomWork
             }
             public vec3 CoordinatesAtTimeAtHighPart(float time, bool GiveMeNewVers = false)
             {
-                if (!NewVersion && !GiveMeNewVers) return CoordinatesAtTime(TimeOfFlight() + time) + half_height * glm.normalize(Velocity());
-                else return SP.get_vec3_Predicted_Position(time) +half_height * glm.normalize(Velocity(true));
+                if (!Projectile.Settings.AdvancedPhysics && !GiveMeNewVers) return CoordinatesAtTime(TimeOfFlight() + time) + half_height * glm.normalize(Velocity());
+                else return WP.get_vec3_Predicted_Position(time) +half_height * glm.normalize(Velocity(true));
             }
             public vec3 AbsoluteLocationAtTime(float _time, bool GiveMeNewVers = false)
             {
-                if (!NewVersion && !GiveMeNewVers)
+                if (!Projectile.Settings.AdvancedPhysics && !GiveMeNewVers)
                     return sd.Get_Center() + Projectile.jp.CoordinatesAtTime(_time);
                 else
                 {
-                    return sd.Get_Center() + Projectile.jp.SP.get_vec3_Predicted_Position_NotDepenedToTime(_time);
+                    return sd.Get_Center() + Projectile.jp.WP.get_vec3_Predicted_Position_NotDepenedToTime(_time);
                 }
             }
 
@@ -235,7 +248,13 @@ namespace TheDiplomWork
             public bool Exploded = false;
             public float TimeOfExplosion = 99999999999;
             //Масса в килограмах, область в квадратных метрах, коэф сопротив безразм, плотность килограм на кубометр.
-            public WindProjectile SP = new WindProjectile(0, 0, 0, 0, 0, 0, 0,0.05,0.001,0.25,1,0,0);
+            public WindProjectile WP = new WindProjectile(0, 0, 0, 0, 0, 0, 0,
+                Projectile.Settings.mass,
+                Projectile.Settings.area,
+                Projectile.Settings.density,
+                Projectile.Settings.cd,
+                Projectile.Settings.windVx,
+                Projectile.Settings.windVy);
             public void ProcessStartingData()
             {
                 if (Loaded)
@@ -244,12 +263,12 @@ namespace TheDiplomWork
                     if (!Launched)
                     {
                         sd.Set_Starting_velocity(SR.ReturnTheThing());//Rotate(sd.default_velocity, PlayerAngles());
-                        SP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.Get_Starting_velocity().x, sd.Get_Starting_velocity().z, sd.Get_Starting_velocity().y, 0);
+                        WP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.Get_Starting_velocity().x, sd.Get_Starting_velocity().z, sd.Get_Starting_velocity().y, 0);
                     }
                     else
                     {
-                        if (!(SP.getTime() > TimeOfExplosion))
-                            SP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
+                        if (!(WP.getTime() > TimeOfExplosion))
+                            WP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
 
                         if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
                         {
@@ -273,13 +292,12 @@ namespace TheDiplomWork
 
             vec3 os_x = new vec3(1, 0, 0);
             vec3 os_y = new vec3(1, 0, 0);
-            
-            public bool NewVersion = true;
+
             float step = 0.01f;
             public vec3 Velocity(bool Givemenew = false)
             {
-                if (!NewVersion && !Givemenew) return(CoordinatesAtTime(TimeOfFlight() + step) - CoordinatesAtTime(TimeOfFlight()))/step;
-                else return SP.get_vec3_Velocity();
+                if (!Projectile.Settings.AdvancedPhysics && !Givemenew) return(CoordinatesAtTime(TimeOfFlight() + step) - CoordinatesAtTime(TimeOfFlight()))/step;
+                else return WP.get_vec3_Velocity();
 
                 //return new vec3(sd.starting_velocity.x, sd.starting_velocity.y - (9.8f) * TimeOfFlight(), sd.starting_velocity.z);
 
@@ -327,8 +345,8 @@ namespace TheDiplomWork
             vec3 coordinates = new vec3(0, 0, 0);
             public vec3 Coordinates(bool GiveMeNew = false)
             {
-                if (!NewVersion && !GiveMeNew) return CoordinatesAtTime(TimeOfFlight());
-                else return SP.get_vec3_Position();
+                if (!Projectile.Settings.AdvancedPhysics && !GiveMeNew) return CoordinatesAtTime(TimeOfFlight());
+                else return WP.get_vec3_Position();
             }
             vec3 CoordinatesAtTime(float time)
             {

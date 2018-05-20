@@ -32,18 +32,18 @@ namespace TheDiplomWork
                 }
 
 
-            if (Projectile.jp.NewVersion)
+            if (Projectile.Settings.AdvancedPhysics)
             {
-                Projectile.jp.SP.Save_Old_Data();
-                Projectile.jp.SP.Reignite();
+                Projectile.jp.WP.Save_Old_Data();
+                Projectile.jp.WP.Reignite();
                 for (int i = 2; i <= count; i++)
                 {
-                    Projectile.jp.SP.updateLocationAndVelocity(Increment);
-                    temp = Projectile.jp.sd.Get_Center() + Projectile.jp.SP.get_vec3_Position();
+                    Projectile.jp.WP.updateLocationAndVelocity(Increment);
+                    temp = Projectile.jp.sd.Get_Center() + Projectile.jp.WP.get_vec3_Position();
                     //temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
                     Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.White, 0, true);
                 }
-                Projectile.jp.SP.Restore_Old_Data();
+                Projectile.jp.WP.Restore_Old_Data();
             }
 
 

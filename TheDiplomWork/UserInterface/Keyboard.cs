@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlmNet;
 using System.Windows.Forms;
+
 namespace TheDiplomWork
 {
     class Keyboard
@@ -21,15 +22,11 @@ namespace TheDiplomWork
         }
         public static void DoAction()
         {
-            //if ((DateTime.Now - start).TotalMilliseconds > 100)
-            //{
             foreach (var key in Keyboard.KeysActive)
             {
                 Keyboard.Wrapped_KeyPressed_Reaction(key);
                 Keyboard.Regular_Single_KeyPressed_Reaction(key);
             }
-            //start = DateTime.Now;
-            //}
         }
         public static void RepeatLastStep()
         {
@@ -116,6 +113,11 @@ namespace TheDiplomWork
             
             switch (key)
             {
+                case (char)27:
+                    StaticAccess.FMOS.table_Menu_main.Location = new System.Drawing.Point(StaticAccess.FMOS.openGLControl.Width/2 - StaticAccess.FMOS.table_Menu_main.Size.Width / 2, StaticAccess.FMOS.openGLControl.Height/2 - StaticAccess.FMOS.table_Menu_main.Size.Height / 2);
+                    StaticAccess.FMOS.table_Menu_main.Visible = !StaticAccess.FMOS.table_Menu_main.Visible;
+                    if (!StaticAccess.FMOS.table_Menu_main.Visible) StaticAccess.FMOS.openGLControl.Focus();
+                    break;
 
                 case 'g':
                     StaticSettings.S.GhostCube_Add_in_Data_For_Draw = !StaticSettings.S.GhostCube_Add_in_Data_For_Draw;

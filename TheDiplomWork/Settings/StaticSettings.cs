@@ -11,7 +11,7 @@ namespace TheDiplomWork
         public class Settings
         {
             //You can change here.
-            public bool ConsoleIsEnabled = true;
+            public bool ConsoleIsEnabled = false;
 
             public bool ReloaderCauseOfChunkRare = false;
 
@@ -30,8 +30,6 @@ namespace TheDiplomWork
 
             public bool GradientLightEffect = true;
 
-            //public bool SystemInfo = false;
-
             public bool HelpInfoForPlayer = true;
 
             public bool SunEnabled = false;
@@ -47,6 +45,8 @@ namespace TheDiplomWork
             public bool LoadProjectile = true;
 
             public bool SinusoidalWorld = true;
+
+            public bool ShowPlayerPosition = false;
 
             public Settings()
             {

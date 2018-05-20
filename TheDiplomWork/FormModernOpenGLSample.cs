@@ -9,6 +9,7 @@ namespace TheDiplomWork
     /// </summary>
     public partial class FormModernOpenGLSample : Form
     {
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="FormModernOpenGLSample"/> class.
         /// </summary>
@@ -16,10 +17,22 @@ namespace TheDiplomWork
         {
             InitializeComponent();
             CF = new CalculatorFont(openGLControl);
-
+            
             //if (Interface.IsReadyToPlay() && StaticSettings.S.MusicIsEnabled)
 
             Music.Initialize();
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+
+            //this.BackColor = System.Drawing.Color.Transparent;
+            //this.TransparencyKey = System.Drawing.Color.Transparent;
+            //table_Menu_main.Parent = openGLControl;
+            table_Menu_main.BackColor = System.Drawing.Color.Transparent;
+            
+
             //Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('m');
         }
 
@@ -91,7 +104,7 @@ namespace TheDiplomWork
 
                 Keyboard.DoAction();
 
-                if (Mouse.MouseIsActive)
+                if (Mouse.MouseIsActive && (StaticAccess.FMOS!=null && !StaticAccess.FMOS.table_Menu_main.Visible))
                 {
                     Mouse.DoMouse(Control.MousePosition, Control.MouseButtons.ToString());
                     Cursor.Position = Mouse.ReturnToCenter();
@@ -112,7 +125,6 @@ namespace TheDiplomWork
 
             if (StaticSettings.S.HelpInfoForPlayer)
             {
-                label1_InfoTable.Visible = false;
                 int place = 1;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * 1, System.Drawing.Color.Gold, 10, "|F| - Fly Mod: " + StaticSettings.S.FlyMod, 2.0f);
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Gold, 10, "|M| - Music: " + Music.wmp_player.PlayerTime() + " " + Music.wmp_player.PlayerSongName(), 2.0f); place++;
@@ -123,6 +135,17 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.SandyBrown, 10, "|F| - Falling Cube: " + StaticSettings.S.FallingCube, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Red, 10, "|E| - Exploding Mod: " + StaticSettings.S.ExplosionMod, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Purple, 10, "|J| - Rotational Mod: " + Projectile.jp.RotatingStartingVelocity, 2.0f); place++;
+
+                if (StaticSettings.S.ShowPlayerPosition)
+                {
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "PrecisePosition:" + Scene.SS.env.player.coords.Player_precise_position.ToString(), 2.0f); place++;
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "ChunkPosition:" + Scene.SS.env.player.coords.Player_chunk_position.ToString(), 2.0f); place++;
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "CubicalPosition:" + Scene.SS.env.player.coords.Player_cubical_position.ToString(), 2.0f); place++;
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "PreciseLook:" + Scene.SS.env.player.coords.Player_precise_lookforcube.ToString(), 2.0f); place++;
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "ChunkLook:" + Scene.SS.env.player.coords.Player_chunk_lookforcube.ToString(), 2.0f); place++;
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString(), 2.0f); place++;
+                }
+
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Blue, 10, "Range of View: " + StaticSettings.S.RangeOfView, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Starting Velocity: " + vec3things.ToString(Projectile.jp.sd.Get_Starting_velocity()), 2.0f); place++;
@@ -157,22 +180,6 @@ namespace TheDiplomWork
                 //
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetTotalSeconds(), 2.0f); place++;
             }
-            else
-            {
-                label1_InfoTable.Visible = true;
-                label1_InfoTable.Text = info_table();
-            }
-        }
-        public string info_table()
-        {
-            return "PrecisePosition:" + Scene.SS.env.player.coords.Player_precise_position.ToString() + "\r\n"
-                + "ChunkPosition:" + Scene.SS.env.player.coords.Player_chunk_position.ToString() + "\r\n"
-                + "CubicalPosition:" + Scene.SS.env.player.coords.Player_cubical_position.ToString() + "\r\n"
-             + "PreciseLook:" + Scene.SS.env.player.coords.Player_precise_lookforcube.ToString() + "\r\n"
-             + "ChunkLook:" + Scene.SS.env.player.coords.Player_chunk_lookforcube.ToString() + "\r\n"
-             + "CubicalLook:" + Scene.SS.env.player.coords.Player_cubical_lookforcube.ToString() + "\r\n"
-            + "Step_multiplier:" + Keyboard.step_multiplier.ToString("F2") + "\r\n"
-            + "Step_multiplier:" + Scene.SS.env.player.coords.Player_precise_stepback.ToString();
         }
         static int FontSizeTargetPointer = 40;
         CalculatorFont CF;
@@ -397,6 +404,31 @@ namespace TheDiplomWork
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
         {
             Projectile.jp.SetEndingPlayerView();
+        }
+
+        private void button_Return_Click(object sender, EventArgs e)
+        {
+            Keyboard.Wrapped_SINGLE_KeyPressed_Reaction((char)27);
+        }
+
+        private void button_SaveAndExit_Click(object sender, EventArgs e)
+        {
+            Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('q');
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button_About_Click(object sender, EventArgs e)
+        {
+            if (StaticAccess.AB == null || (StaticAccess.AB != null && StaticAccess.AB.IsDisposed))
+            {
+                if (StaticAccess.AB == null ||
+                    (StaticAccess.AB != null && StaticAccess.AB.IsDisposed))
+                StaticAccess.AB = new AboutBox1();
+            }
         }
     }
 }
