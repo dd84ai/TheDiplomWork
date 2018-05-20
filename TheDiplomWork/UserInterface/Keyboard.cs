@@ -119,9 +119,9 @@ namespace TheDiplomWork
                     if (!StaticAccess.FMOS.table_Menu_main.Visible) StaticAccess.FMOS.openGLControl.Focus();
                     break;
 
-                case 'g':
-                    StaticSettings.S.GhostCube_Add_in_Data_For_Draw = !StaticSettings.S.GhostCube_Add_in_Data_For_Draw;
-                    break;
+                //case 'g':
+                //    StaticSettings.S.GhostCube_Add_in_Data_For_Draw = !StaticSettings.S.GhostCube_Add_in_Data_For_Draw;
+                //    break;
 
                 case 'f':
                     StaticSettings.S.FallingCube = !StaticSettings.S.FallingCube;
@@ -142,12 +142,12 @@ namespace TheDiplomWork
 
                     break;
 
-                case 'e':
-                    StaticSettings.S.ExplosionMod = !StaticSettings.S.ExplosionMod;
-                    if (StaticSettings.S.ExplosionMod)
-                        Speech.ls.synthesizer.SpeakAsync("Explosion Mod Activated");
-                    else Speech.ls.synthesizer.SpeakAsync("Explosion Mod Deactivated");
-                    break;
+                //case 'e':
+                //    StaticSettings.S.ExplosionMod = !StaticSettings.S.ExplosionMod;
+                //    if (StaticSettings.S.ExplosionMod)
+                //        Speech.ls.synthesizer.SpeakAsync("Explosion Mod Activated");
+                //    else Speech.ls.synthesizer.SpeakAsync("Explosion Mod Deactivated");
+                //    break;
 
                 case 'l':
                     Projectile.jp.Launched = !Projectile.jp.Launched;
@@ -204,10 +204,7 @@ namespace TheDiplomWork
                         Explosion.exp.ExplosionCenter = Projectile.jp.CenterCube;
                         Explosion.exp.SetBombLocation(Projectile.jp.AbsoluteEstimatedLocation());
                         //Explosion.exp.PlaceTheBombAt(Explosion.exp.ExplosionCenter);
-                    }
 
-                    if (StaticSettings.S.ExplosionMod)
-                    {
                         Explosion.exp.StartingFirst = true;
                         Explosion.exp.StartingFirstStarted = false;
                         Explosion.exp.Exploding_Rewriter();
@@ -217,7 +214,7 @@ namespace TheDiplomWork
                     break;
 
                 case 'x'://Last_Cancel
-                    if (StaticSettings.S.ExplosionMod)
+                    if (Projectile.jp.Loaded)
                     {
                         DataForDraw_ExplodingList.TemporalList_Clear();
                         Explosion.exp.Exploding_Last_Cancel();
@@ -231,7 +228,7 @@ namespace TheDiplomWork
                     }
                     break;
                 case (char)254://Last_Cancel
-                    if (StaticSettings.S.ExplosionMod)
+                    if (Projectile.jp.Loaded)
                     {
                         //Explosion.exp.Exploding_Last_Cancel();
                         DataForDraw_ExplodingList.TemporalList_Save();
@@ -244,19 +241,19 @@ namespace TheDiplomWork
                         Projectile.jp.TimeOfExplosion = 99999999999;
                     }
                     break;
-                case 'v'://Cancel Explosions
-                    if (StaticSettings.S.ExplosionMod)
-                    {
-                        DataForDraw_ExplodingList.TemporalList.Clear();
-                        Explosion.exp.Exploding_Restorer();
-                        Scene.Reloader_ExplosionList();
-                        StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
-                    }
-                    break;  
+                //case 'v'://Cancel Explosions
+                //    if (StaticSettings.S.ExplosionMod)
+                //    {
+                //        DataForDraw_ExplodingList.TemporalList.Clear();
+                //        Explosion.exp.Exploding_Restorer();
+                //        Scene.Reloader_ExplosionList();
+                //        StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+                //    }
+                //    break;  
 
-                case 'h':
-                    StaticSettings.S.HelpInfoForPlayer = !StaticSettings.S.HelpInfoForPlayer;
-                    break;
+                //case 'h':
+                //    StaticSettings.S.HelpInfoForPlayer = !StaticSettings.S.HelpInfoForPlayer;
+                //    break;
 
                 case 'y':
                     if (StaticSettings.S.SunStatus.x > 0.5)

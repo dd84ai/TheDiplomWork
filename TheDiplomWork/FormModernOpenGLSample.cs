@@ -28,9 +28,9 @@ namespace TheDiplomWork
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
             //this.BackColor = System.Drawing.Color.Transparent;
-            //this.TransparencyKey = System.Drawing.Color.Transparent;
-            //table_Menu_main.Parent = openGLControl;
-            table_Menu_main.BackColor = System.Drawing.Color.Transparent;
+            this.TransparencyKey = System.Drawing.Color.Transparent;
+            table_Menu_main.Parent = openGLControl;
+            table_Menu_main.BackColor = System.Drawing.Color.FromArgb(0,System.Drawing.Color.White);
             
 
             //Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('m');
@@ -133,7 +133,7 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Yellow, 10, "|Y| - Sun Disabled: " + StaticSettings.S.SunStatus.x, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.WhiteSmoke, 10, "|T| - Time Speed: " + Time.time.Time_Speed, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.SandyBrown, 10, "|F| - Falling Cube: " + StaticSettings.S.FallingCube, 2.0f); place++;
-                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Red, 10, "|E| - Exploding Mod: " + StaticSettings.S.ExplosionMod, 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Red, 10, "|E| - Exploding Mod: " + StaticSettings.S.ExplosionMod, 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Purple, 10, "|J| - Rotational Mod: " + Projectile.jp.RotatingStartingVelocity, 2.0f); place++;
 
                 if (StaticSettings.S.ShowPlayerPosition)
@@ -344,17 +344,17 @@ namespace TheDiplomWork
 
                         Explosion.exp.PlaceTheBombAt(cube);
 
-                        if (!StaticSettings.S.ExplosionMod)
-                        {
+                        //if (!StaticSettings.S.ExplosionMod)
+                        //{
                             cube.IsFilled = true;
                             cube.IsTakenForExplosion = false;
                             cube.color = GraphicalOverlap.GO_color;
-                        }
-                        else
-                        {
-                            Explosion.exp.StartingTime = (float)Time.time.GetGameTotalSeconds();
-                            Explosion.exp.ExplosionCenter = cube;
-                        }
+                        //}
+                        //else
+                        //{
+                            //Explosion.exp.StartingTime = (float)Time.time.GetGameTotalSeconds();
+                            //Explosion.exp.ExplosionCenter = cube;
+                        //}
 
                         cube.FallingFromHeight = Scene.SS.env.player.coords.Player_cubical_lookforcube.y;
                         cube.FallingStartingTime = (float)Time.time.GetGameTotalSeconds();
@@ -428,6 +428,16 @@ namespace TheDiplomWork
                 if (StaticAccess.AB == null ||
                     (StaticAccess.AB != null && StaticAccess.AB.IsDisposed))
                 StaticAccess.AB = new AboutBox1();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (StaticAccess.FAQ_Controls == null || (StaticAccess.FAQ_Controls != null && StaticAccess.FAQ_Controls.IsDisposed))
+            {
+                if (StaticAccess.FAQ_Controls == null ||
+                    (StaticAccess.FAQ_Controls != null && StaticAccess.FAQ_Controls.IsDisposed))
+                    StaticAccess.FAQ_Controls = new Form_FAQ_Controls();
             }
         }
     }

@@ -12,6 +12,7 @@ namespace TheDiplomWork
     {
         public static FormModernOpenGLSample FMOS;
         public static AboutBox1 AB = null;
+        public static Form_FAQ_Controls FAQ_Controls = null;
     }
     static class Program
     {

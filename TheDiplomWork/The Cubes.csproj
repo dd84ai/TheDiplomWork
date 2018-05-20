@@ -123,8 +123,17 @@
     <Compile Include="ZetForms\AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZetForms\Form_FAQ_Controls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZetForms\Form_FAQ_Controls.Designer.cs">
+      <DependentUpon>Form_FAQ_Controls.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ZetForms\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZetForms\Form_FAQ_Controls.resx">
+      <DependentUpon>Form_FAQ_Controls.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Shaders\Main\Projectile_main.vert" />
     <None Include="Shaders\VertexModules\Explosion.vert" />
@@ -165,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico.ico" />
-    <Content Include="ZetForms\FAQ_Controls.txt" />
     <Content Include="Sounds\BlockPlacement.wav" />
     <Content Include="Sounds\BlockRemovement.wav" />
     <Content Include="Sounds\Blorp.wav" />
