@@ -129,11 +129,20 @@
     <Compile Include="ZetForms\Form_FAQ_Controls.Designer.cs">
       <DependentUpon>Form_FAQ_Controls.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZetForms\Form_ProjectileSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZetForms\Form_ProjectileSettings.Designer.cs">
+      <DependentUpon>Form_ProjectileSettings.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ZetForms\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ZetForms\Form_FAQ_Controls.resx">
       <DependentUpon>Form_FAQ_Controls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZetForms\Form_ProjectileSettings.resx">
+      <DependentUpon>Form_ProjectileSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Shaders\Main\Projectile_main.vert" />
     <None Include="Shaders\VertexModules\Explosion.vert" />
