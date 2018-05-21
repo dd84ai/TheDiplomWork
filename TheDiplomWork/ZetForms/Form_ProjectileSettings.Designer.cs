@@ -196,7 +196,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(194, 41);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Wind by axe X";
+            this.label6.Text = ".";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
@@ -210,7 +210,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(194, 40);
             this.label7.TabIndex = 1;
-            this.label7.Text = "Coefficient of aerodynamic drag";
+            this.label7.Text = ".";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
@@ -224,7 +224,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(194, 40);
             this.label10.TabIndex = 3;
-            this.label10.Text = "Frontal area of object";
+            this.label10.Text = ".";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
@@ -238,7 +238,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(194, 40);
             this.label13.TabIndex = 0;
-            this.label13.Text = "Density of surrounding fluid";
+            this.label13.Text = ".";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label14
@@ -266,7 +266,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(194, 40);
             this.label15.TabIndex = 8;
-            this.label15.Text = "Mass of object";
+            this.label15.Text = ".";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
