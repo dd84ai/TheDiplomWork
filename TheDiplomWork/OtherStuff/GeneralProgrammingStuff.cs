@@ -138,7 +138,7 @@ namespace TheDiplomWork
                     Console.WriteLine($"{ThrowItAway.Message}");
                 }
             }
-            string ReplaceDecimalSeparator(string inp)
+            public static string ReplaceDecimalSeparator(string inp)
             {
                 inp = inp.Replace(",", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
                 inp = inp.Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);

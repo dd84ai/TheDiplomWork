@@ -68,10 +68,10 @@ namespace TheDiplomWork
             {
                 openGL_Draw_Wrapped();
                 if (table_Menu_main.Visible)
-                {
                     CF.Ultimate_DrawText(20, openGLControl.Height - 80, System.Drawing.Color.Red, 40, "PAUSE", 2.0f, openGLControl);
-                }
-   
+                else
+                    CF.Ultimate_DrawText(20, openGLControl.Height - 20, System.Drawing.Color.Red, 12, "Press Esc for opening menu", 2.0f, openGLControl);
+
             }
             else
             {

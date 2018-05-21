@@ -299,6 +299,7 @@
             this.checkBox_Advanced_Flying_Physics.Text = "Advanced Flying Physics";
             this.checkBox_Advanced_Flying_Physics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBox_Advanced_Flying_Physics.UseVisualStyleBackColor = true;
+            this.checkBox_Advanced_Flying_Physics.CheckedChanged += new System.EventHandler(this.checkBox_Advanced_Flying_Physics_CheckedChanged);
             // 
             // tableLayoutPanel6
             // 
@@ -340,6 +341,7 @@
             this.textBox_WindVz.Name = "textBox_WindVz";
             this.textBox_WindVz.Size = new System.Drawing.Size(173, 20);
             this.textBox_WindVz.TabIndex = 16;
+            this.textBox_WindVz.TextChanged += new System.EventHandler(this.textBox_WindVz_TextChanged);
             // 
             // textBox_windVx
             // 
@@ -348,6 +350,7 @@
             this.textBox_windVx.Name = "textBox_windVx";
             this.textBox_windVx.Size = new System.Drawing.Size(173, 20);
             this.textBox_windVx.TabIndex = 15;
+            this.textBox_windVx.TextChanged += new System.EventHandler(this.textBox_windVx_TextChanged);
             // 
             // textBox_density
             // 
@@ -356,6 +359,7 @@
             this.textBox_density.Name = "textBox_density";
             this.textBox_density.Size = new System.Drawing.Size(173, 20);
             this.textBox_density.TabIndex = 14;
+            this.textBox_density.TextChanged += new System.EventHandler(this.textBox_density_TextChanged);
             // 
             // textBox_cd
             // 
@@ -364,6 +368,7 @@
             this.textBox_cd.Name = "textBox_cd";
             this.textBox_cd.Size = new System.Drawing.Size(173, 20);
             this.textBox_cd.TabIndex = 13;
+            this.textBox_cd.TextChanged += new System.EventHandler(this.textBox_cd_TextChanged);
             // 
             // textBox_area
             // 
@@ -372,6 +377,7 @@
             this.textBox_area.Name = "textBox_area";
             this.textBox_area.Size = new System.Drawing.Size(173, 20);
             this.textBox_area.TabIndex = 12;
+            this.textBox_area.TextChanged += new System.EventHandler(this.textBox_area_TextChanged);
             // 
             // textBox_mass
             // 

@@ -32,7 +32,7 @@ namespace TheDiplomWork
                 }
 
 
-            if (Projectile.Settings.AdvancedPhysics)
+            if (Projectile.settings.AdvancedPhysics)
             {
                 Projectile.jp.WP.Save_Old_Data();
                 Projectile.jp.WP.Reignite();

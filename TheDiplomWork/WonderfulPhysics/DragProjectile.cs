@@ -25,6 +25,13 @@ namespace TheDiplomWork
             this.density = density;
             this.Cd = Cd;
         }
+        protected void Reignite_drag(double mass, double area, double density, double Cd)
+        {
+            this.mass = mass;
+            this.area = area;
+            this.density = density;
+            this.Cd = Cd;
+        }
         //A series of get methods are declared to return the values of the fields declared in the class.
         // These methods return the value of the fields
         // declared in this class.

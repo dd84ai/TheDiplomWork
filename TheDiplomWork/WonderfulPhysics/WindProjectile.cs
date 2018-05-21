@@ -24,10 +24,27 @@ mass, area, density, Cd)
         this.windVx = windVx;
         this.windVy = windVy;
     }
-    //Two get methods are declared that return the values of the windVx and windVy fields.
-// These methods return the value of the fields
-// declared in this class.
-    public double getWindVx()
+        void Reignite_wind(double mass, double area, double density, double Cd,
+double windVx, double windVy)
+        {
+            Reignite_drag(mass, area, density, Cd);
+            this.windVx = windVx;
+            this.windVy = windVy;
+        }
+        public void Reignite_wind_from_static_info()
+        {
+            Reignite_wind(
+                Projectile.settings.mass,
+                Projectile.settings.area,
+                Projectile.settings.density,
+                Projectile.settings.cd,
+                Projectile.settings.windVx,
+                Projectile.settings.windVy);
+        }
+        //Two get methods are declared that return the values of the windVx and windVy fields.
+        // These methods return the value of the fields
+        // declared in this class.
+        public double getWindVx()
     {
         return windVx;
     }
