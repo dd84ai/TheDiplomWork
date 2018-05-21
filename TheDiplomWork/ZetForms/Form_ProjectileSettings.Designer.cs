@@ -41,6 +41,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.textBox_TimeSpeed = new System.Windows.Forms.TextBox();
+            this.textBox_rangeofview = new System.Windows.Forms.TextBox();
+            this.textBox_angleofview = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.checkBox_Advanced_Flying_Physics = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -57,7 +60,7 @@
             this.label_mass = new System.Windows.Forms.Label();
             this.label_windVz = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox_TimeSpeed = new System.Windows.Forms.TextBox();
+            this.textBox_SideCoef = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -174,6 +177,9 @@
             this.tableLayoutPanel3.Controls.Add(this.label14, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label15, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.textBox_TimeSpeed, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_rangeofview, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_angleofview, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_SideCoef, 1, 3);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 49);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 6;
@@ -212,7 +218,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(194, 40);
             this.label7.TabIndex = 1;
-            this.label7.Text = ".";
+            this.label7.Text = "Side Coefficient";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
@@ -226,7 +232,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(194, 40);
             this.label10.TabIndex = 3;
-            this.label10.Text = ".";
+            this.label10.Text = "Angle of view";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label13
@@ -268,8 +274,35 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(194, 40);
             this.label15.TabIndex = 8;
-            this.label15.Text = ".";
+            this.label15.Text = "Range of view";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_TimeSpeed
+            // 
+            this.textBox_TimeSpeed.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_TimeSpeed.Location = new System.Drawing.Point(209, 10);
+            this.textBox_TimeSpeed.Name = "textBox_TimeSpeed";
+            this.textBox_TimeSpeed.Size = new System.Drawing.Size(173, 20);
+            this.textBox_TimeSpeed.TabIndex = 12;
+            this.textBox_TimeSpeed.TextChanged += new System.EventHandler(this.textBox_ProjectileSet_TextChanged);
+            // 
+            // textBox_rangeofview
+            // 
+            this.textBox_rangeofview.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_rangeofview.Location = new System.Drawing.Point(209, 50);
+            this.textBox_rangeofview.Name = "textBox_rangeofview";
+            this.textBox_rangeofview.Size = new System.Drawing.Size(173, 20);
+            this.textBox_rangeofview.TabIndex = 13;
+            this.textBox_rangeofview.TextChanged += new System.EventHandler(this.textBox_StaticSet_TextChanged);
+            // 
+            // textBox_angleofview
+            // 
+            this.textBox_angleofview.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_angleofview.Location = new System.Drawing.Point(209, 90);
+            this.textBox_angleofview.Name = "textBox_angleofview";
+            this.textBox_angleofview.Size = new System.Drawing.Size(173, 20);
+            this.textBox_angleofview.TabIndex = 14;
+            this.textBox_angleofview.TextChanged += new System.EventHandler(this.textBox_StaticSet_TextChanged);
             // 
             // label8
             // 
@@ -343,7 +376,7 @@
             this.textBox_WindVz.Name = "textBox_WindVz";
             this.textBox_WindVz.Size = new System.Drawing.Size(173, 20);
             this.textBox_WindVz.TabIndex = 16;
-            this.textBox_WindVz.TextChanged += new System.EventHandler(this.textBox_WindVz_TextChanged);
+            this.textBox_WindVz.TextChanged += new System.EventHandler(this.textBox_ProjectileSet_TextChanged);
             // 
             // textBox_windVx
             // 
@@ -352,7 +385,7 @@
             this.textBox_windVx.Name = "textBox_windVx";
             this.textBox_windVx.Size = new System.Drawing.Size(173, 20);
             this.textBox_windVx.TabIndex = 15;
-            this.textBox_windVx.TextChanged += new System.EventHandler(this.textBox_windVx_TextChanged);
+            this.textBox_windVx.TextChanged += new System.EventHandler(this.textBox_ProjectileSet_TextChanged);
             // 
             // textBox_density
             // 
@@ -361,7 +394,7 @@
             this.textBox_density.Name = "textBox_density";
             this.textBox_density.Size = new System.Drawing.Size(173, 20);
             this.textBox_density.TabIndex = 14;
-            this.textBox_density.TextChanged += new System.EventHandler(this.textBox_density_TextChanged);
+            this.textBox_density.TextChanged += new System.EventHandler(this.textBox_ProjectileSet_TextChanged);
             // 
             // textBox_cd
             // 
@@ -370,7 +403,7 @@
             this.textBox_cd.Name = "textBox_cd";
             this.textBox_cd.Size = new System.Drawing.Size(173, 20);
             this.textBox_cd.TabIndex = 13;
-            this.textBox_cd.TextChanged += new System.EventHandler(this.textBox_cd_TextChanged);
+            this.textBox_cd.TextChanged += new System.EventHandler(this.textBox_ProjectileSet_TextChanged);
             // 
             // textBox_area
             // 
@@ -379,7 +412,7 @@
             this.textBox_area.Name = "textBox_area";
             this.textBox_area.Size = new System.Drawing.Size(173, 20);
             this.textBox_area.TabIndex = 12;
-            this.textBox_area.TextChanged += new System.EventHandler(this.textBox_area_TextChanged);
+            this.textBox_area.TextChanged += new System.EventHandler(this.textBox_ProjectileSet_TextChanged);
             // 
             // textBox_mass
             // 
@@ -388,7 +421,7 @@
             this.textBox_mass.Name = "textBox_mass";
             this.textBox_mass.Size = new System.Drawing.Size(173, 20);
             this.textBox_mass.TabIndex = 11;
-            this.textBox_mass.TextChanged += new System.EventHandler(this.textBox_mass_TextChanged);
+            this.textBox_mass.TextChanged += new System.EventHandler(this.textBox_ProjectileSet_TextChanged);
             // 
             // label_windVx
             // 
@@ -488,14 +521,14 @@
             this.label9.Text = "Time Speed";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox_TimeSpeed
+            // textBox_SideCoef
             // 
-            this.textBox_TimeSpeed.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_TimeSpeed.Location = new System.Drawing.Point(209, 10);
-            this.textBox_TimeSpeed.Name = "textBox_TimeSpeed";
-            this.textBox_TimeSpeed.Size = new System.Drawing.Size(173, 20);
-            this.textBox_TimeSpeed.TabIndex = 12;
-            this.textBox_TimeSpeed.TextChanged += new System.EventHandler(this.textBox_TimeSpeed_TextChanged);
+            this.textBox_SideCoef.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_SideCoef.Location = new System.Drawing.Point(209, 130);
+            this.textBox_SideCoef.Name = "textBox_SideCoef";
+            this.textBox_SideCoef.Size = new System.Drawing.Size(173, 20);
+            this.textBox_SideCoef.TabIndex = 15;
+            this.textBox_SideCoef.TextChanged += new System.EventHandler(this.textBox_StaticSet_TextChanged);
             // 
             // Form_ProjectileSettings
             // 
@@ -550,5 +583,8 @@
         private System.Windows.Forms.Label label_windVz;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox_TimeSpeed;
+        private System.Windows.Forms.TextBox textBox_rangeofview;
+        private System.Windows.Forms.TextBox textBox_angleofview;
+        private System.Windows.Forms.TextBox textBox_SideCoef;
     }
 }

@@ -20,6 +20,7 @@ vec3 color[8];
 vec4 point[8];
 
 uniform mat3 sunMatrix;
+uniform vec3 viewparameters;
 float min_light = 0.1;
 vec3 MainLight(float vector)
 {
@@ -153,9 +154,9 @@ void Compressed()
 }
 void main()
 {	
-	if (!(sunMatrix[2].y > 0.5))
+	if (!(sunMatrix[2].y > viewparameters.z))
 	{
-		if ((range[0] < 48 && pointofview[0] > 0.4))
+		if ((range[0] < viewparameters.x && pointofview[0] > viewparameters.y))
 		{
 		Compressed();
 		if (scalar_sides[0].z > SunSidedCoef) Front();

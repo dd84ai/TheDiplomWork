@@ -135,6 +135,7 @@
     <Compile Include="ZetForms\Form_ProjectileSettings.Designer.cs">
       <DependentUpon>Form_ProjectileSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="ZetForms\Wrapped_Box.cs" />
     <EmbeddedResource Include="ZetForms\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>

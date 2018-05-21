@@ -269,9 +269,10 @@ namespace TheDiplomWork
                             || (StaticSettings.S.ReloaderCauseOfChangingChunk && SS.env.player.coords.Player_chunk_position != SS.env.player.coords.Player_chunk_position_OLD)
                         || (StaticSettings.S.RealoderCauseOfPointOfView && scalar < StaticSettings.S.PointOfViewCoefOfDifference)
                         || (StaticSettings.S.RealoderCauseOfSunSided && SS.env.player.coords.Player_cubical_position.y != SS.env.player.coords.Player_cubical_position_OLD.y)
-                        || StaticSettings.S.RealoderCauseOfBuildingBlocks)
+                        || StaticSettings.S.RealoderCauseOfBuildingBlocks
+                        || StaticSettings.S.RangeOfView_Old != StaticSettings.S.RangeOfView)
                     {
-                        
+                        StaticSettings.S.RangeOfView_Old = StaticSettings.S.RangeOfView;
 
                         newThread = new Thread(Scene.DoWork);
                         newThread.Start(42);
@@ -343,6 +344,7 @@ namespace TheDiplomWork
 
             TimeSpan timeItTook = (DateTime.Now - Main_start);
             Time.time.AverageRebuildingTime = timeItTook.TotalSeconds;
+
             //Main_start = DateTime.Now;
             return;
         }
@@ -394,6 +396,11 @@ namespace TheDiplomWork
             shaderProgram.SetUniform1(gl, "settingsTransparency", 1.0f);
             shaderProgram.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetTotalSeconds());
             shaderProgram.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
+            shaderProgram.SetUniform3(gl, "viewparameters", 
+                (float)(StaticSettings.S.RangeOfView_Old - 1)*16,
+                StaticSettings.S.PointOfViewCoefOfDifference,
+                StaticSettings.S.SunSidedCoef
+                );
 
             //  Bind the out vertex array.
             SS.Main.scene_info.vertexBufferArray.Bind(gl);
@@ -421,6 +428,12 @@ namespace TheDiplomWork
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
                 //shaderProgram_secondary.SetUniform1(gl, "TimePauseForExplosion", Projectile.jp.TimePauseUntilExplosion);
+
+                shaderProgram_secondary.SetUniform3(gl, "viewparameters",
+               (float)(StaticSettings.S.RangeOfView_Old - 1) * 16,
+               StaticSettings.S.PointOfViewCoefOfDifference,
+               StaticSettings.S.SunSidedCoef
+               );
 
                 SS.FreshlyPlacedList.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.FreshlyPlacedList.Quantity() / 3);
@@ -505,7 +518,12 @@ namespace TheDiplomWork
                     new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
                 shaderProgram_projectile.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 shaderProgram_projectile.SetUniform1(gl, "settingsTransparency", 1.0f);
-                shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds() - (Explosion.exp.StartingShiftForLoeading));// - Explosion.exp.StartingShiftForLoeading);
+                shaderProgram_projectile.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds() - (Explosion.exp.StartingShiftForLoeading));// - Explosion.exp.StartingShiftForLoeading);
+                shaderProgram_projectile.SetUniform3(gl, "viewparameters",
+               (float)(StaticSettings.S.RangeOfView_Old - 1) * 16,
+               StaticSettings.S.PointOfViewCoefOfDifference,
+               StaticSettings.S.SunSidedCoef
+               );
 
                 if (Explosion.exp.StartingFirstStarted)
                     shaderProgram_projectile.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 1.0f);

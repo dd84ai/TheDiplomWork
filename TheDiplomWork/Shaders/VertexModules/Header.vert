@@ -18,6 +18,7 @@ uniform float settingsTransparency;
 uniform float TimeTotalSeconds;
 uniform float settingsTHIS_IS_EXPLOSION;
 uniform mat3 projectileMatrix;
+uniform vec3 viewparameters;
 
 vec4 Shifted_Position(vec3 input_vec)
 {

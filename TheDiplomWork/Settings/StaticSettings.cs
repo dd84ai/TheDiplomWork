@@ -16,13 +16,15 @@ namespace TheDiplomWork
             public bool ReloaderCauseOfChunkRare = false;
 
             public bool ReloaderCauseOfChangingChunk = true;
-            public int RangeOfView = 4; //Range of chunks in every direction from you.
+
+            public int RangeOfView_Old { set; get; } = 4;
+            public int RangeOfView { set; get; } = 4; //Range of chunks in every direction from you.
 
             public bool RealoderCauseOfPointOfView = false;
-            public float PointOfViewCoefOfDifference = 0.85f; // How Much Unchanged Point Of View.
+            public float PointOfViewCoefOfDifference { set; get; } = 0.4f; // How Much Unchanged Point Of View.
 
             public bool RealoderCauseOfSunSided = false;
-            public float SunSidedCoef = 0.25f; //It's a light side to you.
+            public float SunSidedCoef { set; get; } = 0.5f; //It's a light side to you.
 
             public bool FlyMod = true;
 
