@@ -25,6 +25,8 @@ namespace TheDiplomWork
             {
                 if (!StaticAccess.FMOS.table_Menu_main.Visible)
                 {
+                    inp *= Projectile.settings.timespeed;
+
                     Time += inp;
                     TimeLastIncreasement = inp;
                 }

@@ -23,6 +23,8 @@ namespace TheDiplomWork
             public double windVx { set; get; } = 0; //Ветер по Х
             public double windVy { set; get; } = 0; //Ветер по Y
 
+            public double timespeed { set; get; } = 1.0;
+
             public Settings()
             {
                 //mass = 0.05; //в kg масса объекта для расчета силы воздушного сопротивления(СВС)
@@ -279,7 +281,7 @@ namespace TheDiplomWork
                     }
                     else
                     {
-                        if (!(WP.getTime() > TimeOfExplosion))
+                        if (!(WP.getTime() > TimeOfExplosion) && !StaticAccess.FMOS.table_Menu_main.Visible)
                             WP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
 
                         if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))

@@ -57,6 +57,7 @@
             this.label_mass = new System.Windows.Forms.Label();
             this.label_windVz = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.textBox_TimeSpeed = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -172,6 +173,7 @@
             this.tableLayoutPanel3.Controls.Add(this.label13, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.label14, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label15, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_TimeSpeed, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 49);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 6;
@@ -486,6 +488,15 @@
             this.label9.Text = "Time Speed";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // textBox_TimeSpeed
+            // 
+            this.textBox_TimeSpeed.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_TimeSpeed.Location = new System.Drawing.Point(209, 10);
+            this.textBox_TimeSpeed.Name = "textBox_TimeSpeed";
+            this.textBox_TimeSpeed.Size = new System.Drawing.Size(173, 20);
+            this.textBox_TimeSpeed.TabIndex = 12;
+            this.textBox_TimeSpeed.TextChanged += new System.EventHandler(this.textBox_TimeSpeed_TextChanged);
+            // 
             // Form_ProjectileSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -510,7 +521,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox checkBox_Advanced_Flying_Physics;
+        public System.Windows.Forms.CheckBox checkBox_Advanced_Flying_Physics;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button button_Accept;
         private System.Windows.Forms.Button button_Cancel;
@@ -538,5 +549,6 @@
         private System.Windows.Forms.Label label_mass;
         private System.Windows.Forms.Label label_windVz;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox_TimeSpeed;
     }
 }
