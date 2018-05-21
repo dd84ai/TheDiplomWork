@@ -31,17 +31,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormModernOpenGLSample));
             this.openGLControl = new SharpGL.OpenGLControl();
             this.table_Menu_main = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button_About = new System.Windows.Forms.Button();
             this.button_Return = new System.Windows.Forms.Button();
             this.button_SaveAndExit = new System.Windows.Forms.Button();
             this.Exit = new System.Windows.Forms.Button();
-            this.button_About = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.table_Menu_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGLControl
             // 
+            this.openGLControl.Cursor = System.Windows.Forms.Cursors.Cross;
             this.openGLControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.openGLControl.DrawFPS = true;
             this.openGLControl.FrameRate = 160;
@@ -69,7 +70,7 @@
             // 
             this.table_Menu_main.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.table_Menu_main.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.table_Menu_main.BackColor = System.Drawing.Color.White;
+            this.table_Menu_main.BackColor = System.Drawing.Color.Black;
             this.table_Menu_main.ColumnCount = 1;
             this.table_Menu_main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.table_Menu_main.Controls.Add(this.button1, 0, 2);
@@ -77,8 +78,9 @@
             this.table_Menu_main.Controls.Add(this.button_Return, 0, 0);
             this.table_Menu_main.Controls.Add(this.button_SaveAndExit, 0, 4);
             this.table_Menu_main.Controls.Add(this.Exit, 0, 3);
+            this.table_Menu_main.Cursor = System.Windows.Forms.Cursors.Cross;
             this.table_Menu_main.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.table_Menu_main.Location = new System.Drawing.Point(184, 103);
+            this.table_Menu_main.Location = new System.Drawing.Point(192, 102);
             this.table_Menu_main.Name = "table_Menu_main";
             this.table_Menu_main.RowCount = 5;
             this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.00049F));
@@ -89,6 +91,32 @@
             this.table_Menu_main.Size = new System.Drawing.Size(341, 352);
             this.table_Menu_main.TabIndex = 3;
             this.table_Menu_main.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(5, 149);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(331, 51);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "FAQ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button_About
+            // 
+            this.button_About.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button_About.FlatAppearance.BorderSize = 0;
+            this.button_About.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_About.Location = new System.Drawing.Point(5, 79);
+            this.button_About.Name = "button_About";
+            this.button_About.Size = new System.Drawing.Size(331, 51);
+            this.button_About.TabIndex = 3;
+            this.button_About.Text = "About";
+            this.button_About.UseVisualStyleBackColor = true;
+            this.button_About.Click += new System.EventHandler(this.button_About_Click);
             // 
             // button_Return
             // 
@@ -128,32 +156,6 @@
             this.Exit.Text = "Exit";
             this.Exit.UseVisualStyleBackColor = true;
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
-            // 
-            // button_About
-            // 
-            this.button_About.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button_About.FlatAppearance.BorderSize = 0;
-            this.button_About.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_About.Location = new System.Drawing.Point(5, 79);
-            this.button_About.Name = "button_About";
-            this.button_About.Size = new System.Drawing.Size(331, 51);
-            this.button_About.TabIndex = 3;
-            this.button_About.Text = "About";
-            this.button_About.UseVisualStyleBackColor = true;
-            this.button_About.Click += new System.EventHandler(this.button_About_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(5, 149);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(331, 51);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "FAQ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormModernOpenGLSample
             // 

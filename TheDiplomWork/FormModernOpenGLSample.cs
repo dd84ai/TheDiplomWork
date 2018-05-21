@@ -21,18 +21,18 @@ namespace TheDiplomWork
             //if (Interface.IsReadyToPlay() && StaticSettings.S.MusicIsEnabled)
 
             Music.Initialize();
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            SetStyle(ControlStyles.ResizeRedraw, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            //SetStyle(ControlStyles.UserPaint, true);
+            //SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            //SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            //SetStyle(ControlStyles.ResizeRedraw, true);
+            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
 
             //this.BackColor = System.Drawing.Color.Transparent;
-            this.TransparencyKey = System.Drawing.Color.Transparent;
-            table_Menu_main.Parent = openGLControl;
-            table_Menu_main.BackColor = System.Drawing.Color.FromArgb(0,System.Drawing.Color.White);
-            
+            //this.TransparencyKey = System.Drawing.Color.Transparent;
+            //table_Menu_main.Parent = openGLControl;
 
+            //this.Focus();
+            //openGLControl.Focus();
             //Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('m');
         }
 
@@ -318,7 +318,7 @@ namespace TheDiplomWork
         {
             Mouse.MouseIsActive = true;
             Mouse.SetOldPisition(Control.MousePosition);
-            if (!table_Menu_main.Visible)
+            // if (!table_Menu_main.Visible)
             Cursor.Hide();
         }
 
