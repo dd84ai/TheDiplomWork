@@ -36,6 +36,7 @@
             this.button_Return = new System.Windows.Forms.Button();
             this.button_SaveAndExit = new System.Windows.Forms.Button();
             this.Exit = new System.Windows.Forms.Button();
+            this.button_Settings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.table_Menu_main.SuspendLayout();
             this.SuspendLayout();
@@ -73,21 +74,23 @@
             this.table_Menu_main.BackColor = System.Drawing.Color.Black;
             this.table_Menu_main.ColumnCount = 1;
             this.table_Menu_main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.table_Menu_main.Controls.Add(this.button_Settings, 0, 3);
             this.table_Menu_main.Controls.Add(this.button1, 0, 2);
             this.table_Menu_main.Controls.Add(this.button_About, 0, 1);
             this.table_Menu_main.Controls.Add(this.button_Return, 0, 0);
-            this.table_Menu_main.Controls.Add(this.button_SaveAndExit, 0, 4);
-            this.table_Menu_main.Controls.Add(this.Exit, 0, 3);
+            this.table_Menu_main.Controls.Add(this.button_SaveAndExit, 0, 5);
+            this.table_Menu_main.Controls.Add(this.Exit, 0, 4);
             this.table_Menu_main.Cursor = System.Windows.Forms.Cursors.Cross;
             this.table_Menu_main.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.table_Menu_main.Location = new System.Drawing.Point(192, 102);
+            this.table_Menu_main.Location = new System.Drawing.Point(192, 78);
             this.table_Menu_main.Name = "table_Menu_main";
-            this.table_Menu_main.RowCount = 5;
-            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.00049F));
-            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0005F));
-            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0005F));
-            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.9985F));
-            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.table_Menu_main.RowCount = 6;
+            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
+            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
+            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66708F));
+            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66542F));
+            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.table_Menu_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.table_Menu_main.Size = new System.Drawing.Size(341, 352);
             this.table_Menu_main.TabIndex = 3;
             this.table_Menu_main.Visible = false;
@@ -97,7 +100,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(5, 149);
+            this.button1.Location = new System.Drawing.Point(5, 119);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(331, 51);
             this.button1.TabIndex = 4;
@@ -110,7 +113,7 @@
             this.button_About.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button_About.FlatAppearance.BorderSize = 0;
             this.button_About.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_About.Location = new System.Drawing.Point(5, 79);
+            this.button_About.Location = new System.Drawing.Point(5, 61);
             this.button_About.Name = "button_About";
             this.button_About.Size = new System.Drawing.Size(331, 51);
             this.button_About.TabIndex = 3;
@@ -123,9 +126,9 @@
             this.button_Return.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button_Return.FlatAppearance.BorderSize = 0;
             this.button_Return.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Return.Location = new System.Drawing.Point(5, 7);
+            this.button_Return.Location = new System.Drawing.Point(5, 3);
             this.button_Return.Name = "button_Return";
-            this.button_Return.Size = new System.Drawing.Size(331, 56);
+            this.button_Return.Size = new System.Drawing.Size(331, 52);
             this.button_Return.TabIndex = 1;
             this.button_Return.Text = "Return";
             this.button_Return.UseVisualStyleBackColor = true;
@@ -136,7 +139,7 @@
             this.button_SaveAndExit.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button_SaveAndExit.FlatAppearance.BorderSize = 0;
             this.button_SaveAndExit.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_SaveAndExit.Location = new System.Drawing.Point(5, 288);
+            this.button_SaveAndExit.Location = new System.Drawing.Point(5, 293);
             this.button_SaveAndExit.Name = "button_SaveAndExit";
             this.button_SaveAndExit.Size = new System.Drawing.Size(331, 56);
             this.button_SaveAndExit.TabIndex = 0;
@@ -149,13 +152,26 @@
             this.Exit.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Exit.FlatAppearance.BorderSize = 0;
             this.Exit.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Exit.Location = new System.Drawing.Point(5, 219);
+            this.Exit.Location = new System.Drawing.Point(5, 235);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(331, 51);
             this.Exit.TabIndex = 2;
             this.Exit.Text = "Exit";
             this.Exit.UseVisualStyleBackColor = true;
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
+            // button_Settings
+            // 
+            this.button_Settings.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button_Settings.FlatAppearance.BorderSize = 0;
+            this.button_Settings.Font = new System.Drawing.Font("Arial Unicode MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Settings.Location = new System.Drawing.Point(5, 177);
+            this.button_Settings.Name = "button_Settings";
+            this.button_Settings.Size = new System.Drawing.Size(331, 51);
+            this.button_Settings.TabIndex = 5;
+            this.button_Settings.Text = "Settings";
+            this.button_Settings.UseVisualStyleBackColor = true;
+            this.button_Settings.Click += new System.EventHandler(this.button_Settings_Click);
             // 
             // FormModernOpenGLSample
             // 
@@ -185,6 +201,7 @@
         private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.Button button_About;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_Settings;
     }
 }
 

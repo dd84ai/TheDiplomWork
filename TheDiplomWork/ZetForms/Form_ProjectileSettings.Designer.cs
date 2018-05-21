@@ -1,4 +1,4 @@
-﻿namespace TheDiplomWork.ZetForms
+﻿namespace TheDiplomWork
 {
     partial class Form_ProjectileSettings
     {
@@ -29,20 +29,11 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkBox_Advanced_Flying_Physics = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button_Accept = new System.Windows.Forms.Button();
             this.button_Cancel = new System.Windows.Forms.Button();
-            this.label_area = new System.Windows.Forms.Label();
-            this.label_cd = new System.Windows.Forms.Label();
-            this.label_windVx = new System.Windows.Forms.Label();
-            this.label_density = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label_mass = new System.Windows.Forms.Label();
-            this.label_windVz = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -50,18 +41,27 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox_mass = new System.Windows.Forms.TextBox();
-            this.textBox_area = new System.Windows.Forms.TextBox();
-            this.textBox_cd = new System.Windows.Forms.TextBox();
-            this.textBox_dencity = new System.Windows.Forms.TextBox();
-            this.textBox_windVx = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.checkBox_Advanced_Flying_Physics = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_WindVz = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.textBox_windVx = new System.Windows.Forms.TextBox();
+            this.textBox_density = new System.Windows.Forms.TextBox();
+            this.textBox_cd = new System.Windows.Forms.TextBox();
+            this.textBox_area = new System.Windows.Forms.TextBox();
+            this.textBox_mass = new System.Windows.Forms.TextBox();
+            this.label_windVx = new System.Windows.Forms.Label();
+            this.label_cd = new System.Windows.Forms.Label();
+            this.label_area = new System.Windows.Forms.Label();
+            this.label_density = new System.Windows.Forms.Label();
+            this.label_mass = new System.Windows.Forms.Label();
+            this.label_windVz = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -82,22 +82,19 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // checkBox_Advanced_Flying_Physics
+            // label17
             // 
-            this.checkBox_Advanced_Flying_Physics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox_Advanced_Flying_Physics.AutoSize = true;
-            this.checkBox_Advanced_Flying_Physics.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.checkBox_Advanced_Flying_Physics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox_Advanced_Flying_Physics.Location = new System.Drawing.Point(400, 3);
-            this.checkBox_Advanced_Flying_Physics.Name = "checkBox_Advanced_Flying_Physics";
-            this.checkBox_Advanced_Flying_Physics.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBox_Advanced_Flying_Physics.Size = new System.Drawing.Size(391, 40);
-            this.checkBox_Advanced_Flying_Physics.TabIndex = 0;
-            this.checkBox_Advanced_Flying_Physics.Text = "Advanced Flying Physics";
-            this.checkBox_Advanced_Flying_Physics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBox_Advanced_Flying_Physics.UseVisualStyleBackColor = true;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label17.Location = new System.Drawing.Point(3, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(794, 60);
+            this.label17.TabIndex = 8;
+            this.label17.Text = "Settings";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2
             // 
@@ -126,6 +123,7 @@
             this.button_Accept.TabIndex = 6;
             this.button_Accept.Text = "Accept";
             this.button_Accept.UseVisualStyleBackColor = true;
+            this.button_Accept.Click += new System.EventHandler(this.button_Accept_Click);
             // 
             // button_Cancel
             // 
@@ -138,62 +136,7 @@
             this.button_Cancel.TabIndex = 5;
             this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
-            // 
-            // label_area
-            // 
-            this.label_area.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_area.AutoSize = true;
-            this.label_area.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_area.Location = new System.Drawing.Point(3, 40);
-            this.label_area.Name = "label_area";
-            this.label_area.Size = new System.Drawing.Size(194, 40);
-            this.label_area.TabIndex = 3;
-            this.label_area.Text = "Frontal area of object";
-            this.label_area.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_cd
-            // 
-            this.label_cd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_cd.AutoSize = true;
-            this.label_cd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label_cd.Location = new System.Drawing.Point(3, 80);
-            this.label_cd.Name = "label_cd";
-            this.label_cd.Size = new System.Drawing.Size(194, 40);
-            this.label_cd.TabIndex = 1;
-            this.label_cd.Text = "Coefficient of aerodynamic drag";
-            this.label_cd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_windVx
-            // 
-            this.label_windVx.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_windVx.AutoSize = true;
-            this.label_windVx.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_windVx.Location = new System.Drawing.Point(3, 160);
-            this.label_windVx.Name = "label_windVx";
-            this.label_windVx.Size = new System.Drawing.Size(194, 40);
-            this.label_windVx.TabIndex = 4;
-            this.label_windVx.Text = "Wind by axe X";
-            this.label_windVx.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_density
-            // 
-            this.label_density.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_density.AutoSize = true;
-            this.label_density.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_density.Location = new System.Drawing.Point(3, 120);
-            this.label_density.Name = "label_density";
-            this.label_density.Size = new System.Drawing.Size(194, 40);
-            this.label_density.TabIndex = 0;
-            this.label_density.Text = "Density of surrounding fluid";
-            this.label_density.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -214,95 +157,6 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.03008F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(794, 293);
             this.tableLayoutPanel4.TabIndex = 3;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label8.Location = new System.Drawing.Point(3, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(391, 46);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Main and Interface";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label9.Location = new System.Drawing.Point(3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(194, 48);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Time Speed";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.textBox_WindVz, 1, 5);
-            this.tableLayoutPanel6.Controls.Add(this.textBox_windVx, 1, 4);
-            this.tableLayoutPanel6.Controls.Add(this.textBox_dencity, 1, 3);
-            this.tableLayoutPanel6.Controls.Add(this.textBox_cd, 1, 2);
-            this.tableLayoutPanel6.Controls.Add(this.textBox_area, 1, 1);
-            this.tableLayoutPanel6.Controls.Add(this.textBox_mass, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label_windVx, 0, 4);
-            this.tableLayoutPanel6.Controls.Add(this.label_cd, 0, 2);
-            this.tableLayoutPanel6.Controls.Add(this.label_area, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.label_density, 0, 3);
-            this.tableLayoutPanel6.Controls.Add(this.label_mass, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label_windVz, 0, 5);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(400, 49);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 6;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(391, 241);
-            this.tableLayoutPanel6.TabIndex = 9;
-            // 
-            // label_mass
-            // 
-            this.label_mass.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_mass.AutoSize = true;
-            this.label_mass.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_mass.Location = new System.Drawing.Point(3, 0);
-            this.label_mass.Name = "label_mass";
-            this.label_mass.Size = new System.Drawing.Size(194, 40);
-            this.label_mass.TabIndex = 8;
-            this.label_mass.Text = "Mass of object";
-            this.label_mass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_windVz
-            // 
-            this.label_windVz.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_windVz.AutoSize = true;
-            this.label_windVz.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label_windVz.Location = new System.Drawing.Point(3, 200);
-            this.label_windVz.Name = "label_windVz";
-            this.label_windVz.Size = new System.Drawing.Size(194, 41);
-            this.label_windVz.TabIndex = 9;
-            this.label_windVz.Text = "Wind by axe Z";
-            this.label_windVz.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
             // 
@@ -415,45 +269,69 @@
             this.label15.Text = "Mass of object";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox_mass
+            // label8
             // 
-            this.textBox_mass.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_mass.Location = new System.Drawing.Point(209, 10);
-            this.textBox_mass.Name = "textBox_mass";
-            this.textBox_mass.Size = new System.Drawing.Size(173, 20);
-            this.textBox_mass.TabIndex = 11;
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label8.Location = new System.Drawing.Point(3, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(391, 46);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Main and Interface";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox_area
+            // checkBox_Advanced_Flying_Physics
             // 
-            this.textBox_area.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_area.Location = new System.Drawing.Point(209, 50);
-            this.textBox_area.Name = "textBox_area";
-            this.textBox_area.Size = new System.Drawing.Size(173, 20);
-            this.textBox_area.TabIndex = 12;
+            this.checkBox_Advanced_Flying_Physics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_Advanced_Flying_Physics.AutoSize = true;
+            this.checkBox_Advanced_Flying_Physics.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.checkBox_Advanced_Flying_Physics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox_Advanced_Flying_Physics.Location = new System.Drawing.Point(400, 3);
+            this.checkBox_Advanced_Flying_Physics.Name = "checkBox_Advanced_Flying_Physics";
+            this.checkBox_Advanced_Flying_Physics.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBox_Advanced_Flying_Physics.Size = new System.Drawing.Size(391, 40);
+            this.checkBox_Advanced_Flying_Physics.TabIndex = 0;
+            this.checkBox_Advanced_Flying_Physics.Text = "Advanced Flying Physics";
+            this.checkBox_Advanced_Flying_Physics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox_Advanced_Flying_Physics.UseVisualStyleBackColor = true;
             // 
-            // textBox_cd
+            // tableLayoutPanel6
             // 
-            this.textBox_cd.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_cd.Location = new System.Drawing.Point(209, 90);
-            this.textBox_cd.Name = "textBox_cd";
-            this.textBox_cd.Size = new System.Drawing.Size(173, 20);
-            this.textBox_cd.TabIndex = 13;
-            // 
-            // textBox_dencity
-            // 
-            this.textBox_dencity.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_dencity.Location = new System.Drawing.Point(209, 130);
-            this.textBox_dencity.Name = "textBox_dencity";
-            this.textBox_dencity.Size = new System.Drawing.Size(173, 20);
-            this.textBox_dencity.TabIndex = 14;
-            // 
-            // textBox_windVx
-            // 
-            this.textBox_windVx.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_windVx.Location = new System.Drawing.Point(209, 170);
-            this.textBox_windVx.Name = "textBox_windVx";
-            this.textBox_windVx.Size = new System.Drawing.Size(173, 20);
-            this.textBox_windVx.TabIndex = 15;
+            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.textBox_WindVz, 1, 5);
+            this.tableLayoutPanel6.Controls.Add(this.textBox_windVx, 1, 4);
+            this.tableLayoutPanel6.Controls.Add(this.textBox_density, 1, 3);
+            this.tableLayoutPanel6.Controls.Add(this.textBox_cd, 1, 2);
+            this.tableLayoutPanel6.Controls.Add(this.textBox_area, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.textBox_mass, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label_windVx, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label_cd, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label_area, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label_density, 0, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label_mass, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label_windVz, 0, 5);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(400, 49);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 6;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(391, 241);
+            this.tableLayoutPanel6.TabIndex = 9;
             // 
             // textBox_WindVz
             // 
@@ -463,19 +341,144 @@
             this.textBox_WindVz.Size = new System.Drawing.Size(173, 20);
             this.textBox_WindVz.TabIndex = 16;
             // 
-            // label17
+            // textBox_windVx
             // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.textBox_windVx.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_windVx.Location = new System.Drawing.Point(209, 170);
+            this.textBox_windVx.Name = "textBox_windVx";
+            this.textBox_windVx.Size = new System.Drawing.Size(173, 20);
+            this.textBox_windVx.TabIndex = 15;
+            // 
+            // textBox_density
+            // 
+            this.textBox_density.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_density.Location = new System.Drawing.Point(209, 130);
+            this.textBox_density.Name = "textBox_density";
+            this.textBox_density.Size = new System.Drawing.Size(173, 20);
+            this.textBox_density.TabIndex = 14;
+            // 
+            // textBox_cd
+            // 
+            this.textBox_cd.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_cd.Location = new System.Drawing.Point(209, 90);
+            this.textBox_cd.Name = "textBox_cd";
+            this.textBox_cd.Size = new System.Drawing.Size(173, 20);
+            this.textBox_cd.TabIndex = 13;
+            // 
+            // textBox_area
+            // 
+            this.textBox_area.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_area.Location = new System.Drawing.Point(209, 50);
+            this.textBox_area.Name = "textBox_area";
+            this.textBox_area.Size = new System.Drawing.Size(173, 20);
+            this.textBox_area.TabIndex = 12;
+            // 
+            // textBox_mass
+            // 
+            this.textBox_mass.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_mass.Location = new System.Drawing.Point(209, 10);
+            this.textBox_mass.Name = "textBox_mass";
+            this.textBox_mass.Size = new System.Drawing.Size(173, 20);
+            this.textBox_mass.TabIndex = 11;
+            this.textBox_mass.TextChanged += new System.EventHandler(this.textBox_mass_TextChanged);
+            // 
+            // label_windVx
+            // 
+            this.label_windVx.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label17.Location = new System.Drawing.Point(3, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(794, 60);
-            this.label17.TabIndex = 8;
-            this.label17.Text = "Settings";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_windVx.AutoSize = true;
+            this.label_windVx.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label_windVx.Location = new System.Drawing.Point(3, 160);
+            this.label_windVx.Name = "label_windVx";
+            this.label_windVx.Size = new System.Drawing.Size(194, 40);
+            this.label_windVx.TabIndex = 4;
+            this.label_windVx.Text = "Wind by axe X";
+            this.label_windVx.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_cd
+            // 
+            this.label_cd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_cd.AutoSize = true;
+            this.label_cd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label_cd.Location = new System.Drawing.Point(3, 80);
+            this.label_cd.Name = "label_cd";
+            this.label_cd.Size = new System.Drawing.Size(194, 40);
+            this.label_cd.TabIndex = 1;
+            this.label_cd.Text = "Coefficient of aerodynamic drag";
+            this.label_cd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_area
+            // 
+            this.label_area.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_area.AutoSize = true;
+            this.label_area.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label_area.Location = new System.Drawing.Point(3, 40);
+            this.label_area.Name = "label_area";
+            this.label_area.Size = new System.Drawing.Size(194, 40);
+            this.label_area.TabIndex = 3;
+            this.label_area.Text = "Frontal area of object";
+            this.label_area.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_density
+            // 
+            this.label_density.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_density.AutoSize = true;
+            this.label_density.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label_density.Location = new System.Drawing.Point(3, 120);
+            this.label_density.Name = "label_density";
+            this.label_density.Size = new System.Drawing.Size(194, 40);
+            this.label_density.TabIndex = 0;
+            this.label_density.Text = "Density of surrounding fluid";
+            this.label_density.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_mass
+            // 
+            this.label_mass.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_mass.AutoSize = true;
+            this.label_mass.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label_mass.Location = new System.Drawing.Point(3, 0);
+            this.label_mass.Name = "label_mass";
+            this.label_mass.Size = new System.Drawing.Size(194, 40);
+            this.label_mass.TabIndex = 8;
+            this.label_mass.Text = "Mass of object";
+            this.label_mass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_windVz
+            // 
+            this.label_windVz.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_windVz.AutoSize = true;
+            this.label_windVz.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label_windVz.Location = new System.Drawing.Point(3, 200);
+            this.label_windVz.Name = "label_windVz";
+            this.label_windVz.Size = new System.Drawing.Size(194, 41);
+            this.label_windVz.TabIndex = 9;
+            this.label_windVz.Text = "Wind by axe Z";
+            this.label_windVz.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(194, 48);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Time Speed";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form_ProjectileSettings
             // 
@@ -490,10 +493,10 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -522,7 +525,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TextBox textBox_WindVz;
         private System.Windows.Forms.TextBox textBox_windVx;
-        private System.Windows.Forms.TextBox textBox_dencity;
+        private System.Windows.Forms.TextBox textBox_density;
         private System.Windows.Forms.TextBox textBox_cd;
         private System.Windows.Forms.TextBox textBox_area;
         private System.Windows.Forms.TextBox textBox_mass;

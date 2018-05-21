@@ -449,5 +449,15 @@ namespace TheDiplomWork
                     StaticAccess.FAQ_Controls = new Form_FAQ_Controls();
             }
         }
+
+        private void button_Settings_Click(object sender, EventArgs e)
+        {
+            if (StaticAccess.Form_Settings == null || (StaticAccess.Form_Settings != null && StaticAccess.Form_Settings.IsDisposed))
+            {
+                if (StaticAccess.Form_Settings == null ||
+                    (StaticAccess.Form_Settings != null && StaticAccess.Form_Settings.IsDisposed))
+                    StaticAccess.Form_Settings = new Form_ProjectileSettings();
+            }
+        }
     }
 }
