@@ -115,21 +115,74 @@ namespace TheDiplomWork
                     _cubical.x = x;
                     _cubical.z = z;
 
-                    return Scene.SS.env.cub_mem.world.World_as_Whole[_chunk.x]
-                                    [_chunk.z].cubes
-                                    [_cubical.x]
-                                    [_cubical.y]
-                                    [_cubical.z].IsFilled && !Scene.SS.env.cub_mem.world.World_as_Whole[_chunk.x]
-                                    [_chunk.z].cubes
-                                    [_cubical.x]
-                                    [_cubical.y]
-                                    [_cubical.z].IsTakenForExplosion;
+                    for (int i = 0; i < 3; i++)
+                        for (int j = 0; j < 3; j++)
+                            for (int k = 0; k < 3; k++)
+                                if (TryCheckByHeight(_chunk, new Point3Int(
+                                    _cubical.x - 1 + i,
+                                    _cubical.y - 1 + j,
+                                    _cubical.z - 1 + k
+                                    ))) return true;
+
+
                 }
                 catch (Exception)
                 {
-                    //MessageBox.Show(e.Message);
                     return false;
                 }
+                return false;
+            }
+
+            public bool TryCheckByHeight(Point2Int _chunk, Point3Int _cubical)
+            {
+                if (_cubical.x < 0)
+                {
+                    if (_chunk.x > 1)
+                    {
+                        _chunk.x--;
+                        _cubical.x = CubicalMemory.Chunk.Width - 1;
+                    }
+                    else return false;
+                }
+                if (_cubical.z < 0)
+                {
+                    if (_chunk.z > 1)
+                    {
+                        _chunk.z--;
+                        _cubical.z = CubicalMemory.Chunk.Length - 1;
+                    }
+                    else return false;
+                }
+                if (_cubical.y < 0 || _cubical.y >= CubicalMemory.Chunk.Height)
+                {
+                    return false;
+                }
+                if (_cubical.x >= CubicalMemory.Chunk.Width)
+                {
+                    if (_chunk.x < CubicalMemory.World.Quantity_of_chunks_in_root - 1)
+                    {
+                        _chunk.x++;
+                        _cubical.x = 0;
+                    }
+                    else return false;
+                }
+                if (_cubical.z >= CubicalMemory.Chunk.Width)
+                {
+                    if (_chunk.z < CubicalMemory.World.Quantity_of_chunks_in_root - 1)
+                    {
+                        _chunk.z++;
+                        _cubical.z = 0;
+                    }
+                    else return false;
+                }
+
+                try
+                {
+                    if (Scene.SS.env.cub_mem.world.World_as_Whole[_chunk.x][_chunk.z].cubes[_cubical.x][_cubical.y][_cubical.z].IsFilled &&
+                           !Scene.SS.env.cub_mem.world.World_as_Whole[_chunk.x][_chunk.z].cubes[_cubical.x][_cubical.y][_cubical.z].IsTakenForExplosion) return true;
+                }
+                catch (Exception) { }
+                return false;
             }
 
             public Point3D Player_precise_lookforcube = new Point3D(0, 0, 0);

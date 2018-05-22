@@ -153,13 +153,12 @@ namespace TheDiplomWork
             }
             public vec3 AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()
             {
-                TimeOfExplosion = TimeOfFlight() + TimePauseUntilExplosion;
                 return sd.Get_Center() + Projectile.jp.CoordinatesAtTimeAtHighPart(TimePauseUntilExplosion);
             }
             public vec3 CoordinatesAtTimeAtHighPart(float time, bool GiveMeNewVers = false)
             {
                 if (!Projectile.settings.AdvancedPhysics && !GiveMeNewVers) return CoordinatesAtTime(TimeOfFlight() + time) + half_height * glm.normalize(Velocity());
-                else return WP.get_vec3_Predicted_Position(time) +half_height * glm.normalize(Velocity(true));
+                else return WP.get_vec3_Predicted_Position(time) +half_height * glm.normalize(Velocity(true)) - glm.normalize(Velocity(true));
             }
             public vec3 AbsoluteLocationAtTime(float _time, bool GiveMeNewVers = false)
             {
@@ -284,8 +283,11 @@ namespace TheDiplomWork
                         if (!(WP.getTime() > TimeOfExplosion) && !StaticAccess.FMOS.table_Menu_main.Visible)
                             WP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
 
-                        if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
+                        //if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
+                        if (!Exploded && TimeOfFlight() > 0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
+                        //if (!Exploded && TimeOfFlight() > 0.01f && TimeOfFlight() > AnalyzedTimeOfExplosion)
                         {
+                            TimeOfExplosion = TimeOfFlight() + TimePauseUntilExplosion;
                             Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('b');
                             Exploded = true;
                         }
@@ -294,11 +296,38 @@ namespace TheDiplomWork
                 }
 
             }
+            double AnalyzedTimeOfExplosion = 0;
             public void Launch()
             {
                 StartingTimeToFly = Time.time.GetGameTotalSeconds();
+
+                //TimeOfExplosion = float.MaxValue;
+                //AnalyzedTimeOfExplosion = double.MaxValue;
+                //FindingExplosionTime();
+
                 Launched = true;
             }
+            void FindingExplosionTime()
+            {
+                Projectile.jp.WP.Save_Old_Data();
+                Projectile.jp.WP.Reignite();
+                vec3 temp;
+                double Increment = 0.01;
+                double time = 60 / Increment;
+                for (int i = 0; i <= time; i++)
+                {
+                    Projectile.jp.WP.updateLocationAndVelocity(Increment);
+                    temp = Projectile.jp.sd.Get_Center() + Projectile.jp.WP.get_vec3_Position();
+
+                    if (i > 100 && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation()))
+                    {
+                        AnalyzedTimeOfExplosion = i * Increment; break;
+                    }
+                }
+                Projectile.jp.WP.Restore_Old_Data();
+                Projectile.jp.WP.Reignite();
+            }
+            
             public void DeLaunch()
             {
                 Launched = false;
