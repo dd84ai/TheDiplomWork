@@ -327,7 +327,11 @@ namespace TheDiplomWork
             if (Time.time.GetGameTotalSeconds() > Time.time.TimeWaitForFallingCubes)
             Reloader_Main(gl);
 
-            if (SS.Main.FirstInitialization) Draw_Wrapped(gl);
+            if (SS.Main.FirstInitialization)
+            {
+                StaticSettings.S.RealoderCauseOfBuildingBlocks = true;
+            }
+            else Draw_Wrapped(gl);
         }
         public static int CounterMyCoThread = 0;
         public static bool DoWork_IsAlive = false;

@@ -173,7 +173,7 @@ namespace TheDiplomWork
         }
         public float[] vertices_arrayed;
         public float[] colours_arrayed;
-        public bool FirstInitialization = false;
+        public bool FirstInitialization = true;
         public bool CopiedLastResult = true;
 
         public int LastCount = 0;
@@ -184,7 +184,7 @@ namespace TheDiplomWork
         public virtual void CopyToReady()
         {
             Quantity_of_all_values = vertices.Count();
-            FirstInitialization = true;
+            FirstInitialization = false;
             CopiedLastResult = true;
             LastCount = vertices.Count();
             Initialization_in_process = false;
