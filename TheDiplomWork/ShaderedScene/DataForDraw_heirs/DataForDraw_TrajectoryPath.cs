@@ -21,31 +21,33 @@ namespace TheDiplomWork
             vec3 temp;
             //if (!Projectile.jp.NewVersion)
             //{
-                
-                int count = 4 * (int)EndTime + 4*2;
-            double Increment = EndTime / (double)count;
 
-            for (int i = 2; i <= count; i++)
+            if (StaticSettings.S.TrajectoryIsVisilible)
+            {
+                int count = 4 * (int)EndTime + 4 * 2;
+                double Increment = EndTime / (double)count;
+
+                for (int i = 2; i <= count; i++)
                 {
                     temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
                     Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.Black, 0, true);
                 }
 
 
-            if (Projectile.settings.AdvancedPhysics)
-            {
-                Projectile.jp.WP.Save_Old_Data();
-                Projectile.jp.WP.Reignite();
-                for (int i = 2; i <= count; i++)
+                if (Projectile.settings.AdvancedPhysics)
                 {
-                    Projectile.jp.WP.updateLocationAndVelocity(Increment);
-                    temp = Projectile.jp.sd.Get_Center() + Projectile.jp.WP.get_vec3_Position();
-                    //temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
-                    Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.White, 0, true);
+                    Projectile.jp.WP.Save_Old_Data();
+                    Projectile.jp.WP.Reignite();
+                    for (int i = 2; i <= count; i++)
+                    {
+                        Projectile.jp.WP.updateLocationAndVelocity(Increment);
+                        temp = Projectile.jp.sd.Get_Center() + Projectile.jp.WP.get_vec3_Position();
+                        //temp = Projectile.jp.AbsoluteLocationAtTime((float)i * EndTime / count);
+                        Draw_Quad_Full_Sunsided_angled(temp.x, temp.y, temp.z, 0, 0, 0, localed_range, System.Drawing.Color.White, 0, true);
+                    }
+                    Projectile.jp.WP.Restore_Old_Data();
                 }
-                Projectile.jp.WP.Restore_Old_Data();
             }
-
 
             //}
             //else

@@ -44,6 +44,8 @@
             this.textBox_TimeSpeed = new System.Windows.Forms.TextBox();
             this.textBox_rangeofview = new System.Windows.Forms.TextBox();
             this.textBox_angleofview = new System.Windows.Forms.TextBox();
+            this.textBox_angleblockcuter = new System.Windows.Forms.TextBox();
+            this.checkBox1_Trajectory = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.checkBox_Advanced_Flying_Physics = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -60,7 +62,7 @@
             this.label_mass = new System.Windows.Forms.Label();
             this.label_windVz = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox_SideCoef = new System.Windows.Forms.TextBox();
+            this.checkBox_HelpfulInfo = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -170,7 +172,6 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.label10, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label13, 0, 4);
@@ -179,7 +180,10 @@
             this.tableLayoutPanel3.Controls.Add(this.textBox_TimeSpeed, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.textBox_rangeofview, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.textBox_angleofview, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox_SideCoef, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_angleblockcuter, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.checkBox1_Trajectory, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.checkBox_HelpfulInfo, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 5);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 49);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 6;
@@ -204,7 +208,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(194, 41);
             this.label6.TabIndex = 4;
-            this.label6.Text = ".";
+            this.label6.Text = "Tips";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
@@ -218,7 +222,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(194, 40);
             this.label7.TabIndex = 1;
-            this.label7.Text = "Side Coefficient";
+            this.label7.Text = "Angle block cuter";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
@@ -246,7 +250,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(194, 40);
             this.label13.TabIndex = 0;
-            this.label13.Text = ".";
+            this.label13.Text = "Trajectory visibility";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label14
@@ -303,6 +307,29 @@
             this.textBox_angleofview.Size = new System.Drawing.Size(173, 20);
             this.textBox_angleofview.TabIndex = 14;
             this.textBox_angleofview.TextChanged += new System.EventHandler(this.textBox_StaticSet_TextChanged);
+            // 
+            // textBox_angleblockcuter
+            // 
+            this.textBox_angleblockcuter.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBox_angleblockcuter.Location = new System.Drawing.Point(209, 130);
+            this.textBox_angleblockcuter.Name = "textBox_angleblockcuter";
+            this.textBox_angleblockcuter.Size = new System.Drawing.Size(173, 20);
+            this.textBox_angleblockcuter.TabIndex = 15;
+            this.textBox_angleblockcuter.TextChanged += new System.EventHandler(this.textBox_StaticSet_TextChanged);
+            // 
+            // checkBox1_Trajectory
+            // 
+            this.checkBox1_Trajectory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1_Trajectory.AutoSize = true;
+            this.checkBox1_Trajectory.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox1_Trajectory.Location = new System.Drawing.Point(203, 163);
+            this.checkBox1_Trajectory.Name = "checkBox1_Trajectory";
+            this.checkBox1_Trajectory.Size = new System.Drawing.Size(185, 34);
+            this.checkBox1_Trajectory.TabIndex = 16;
+            this.checkBox1_Trajectory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox1_Trajectory.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -521,14 +548,19 @@
             this.label9.Text = "Time Speed";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox_SideCoef
+            // checkBox_HelpfulInfo
             // 
-            this.textBox_SideCoef.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_SideCoef.Location = new System.Drawing.Point(209, 130);
-            this.textBox_SideCoef.Name = "textBox_SideCoef";
-            this.textBox_SideCoef.Size = new System.Drawing.Size(173, 20);
-            this.textBox_SideCoef.TabIndex = 15;
-            this.textBox_SideCoef.TextChanged += new System.EventHandler(this.textBox_StaticSet_TextChanged);
+            this.checkBox_HelpfulInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_HelpfulInfo.AutoSize = true;
+            this.checkBox_HelpfulInfo.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox_HelpfulInfo.Location = new System.Drawing.Point(203, 203);
+            this.checkBox_HelpfulInfo.Name = "checkBox_HelpfulInfo";
+            this.checkBox_HelpfulInfo.Size = new System.Drawing.Size(185, 35);
+            this.checkBox_HelpfulInfo.TabIndex = 17;
+            this.checkBox_HelpfulInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBox_HelpfulInfo.UseVisualStyleBackColor = true;
             // 
             // Form_ProjectileSettings
             // 
@@ -585,6 +617,8 @@
         private System.Windows.Forms.TextBox textBox_TimeSpeed;
         private System.Windows.Forms.TextBox textBox_rangeofview;
         private System.Windows.Forms.TextBox textBox_angleofview;
-        private System.Windows.Forms.TextBox textBox_SideCoef;
+        private System.Windows.Forms.TextBox textBox_angleblockcuter;
+        private System.Windows.Forms.CheckBox checkBox1_Trajectory;
+        private System.Windows.Forms.CheckBox checkBox_HelpfulInfo;
     }
 }

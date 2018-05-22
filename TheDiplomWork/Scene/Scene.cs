@@ -68,10 +68,12 @@ namespace TheDiplomWork
         public string ShadersWereNotInitializatedMessage = "";
         //System.Collections.Generic.Dictionary<uint, string> dict = new System.Collections.Generic.Dictionary<uint,string>();
 
+            float width, height;
         //Создание шейдеров более in Old Fashioned Way чтобы использовать Geomtry Shader
         //https://www.codeproject.com/Articles/1167387/OpenGL-with-OpenTK-in-Csharp-Part-Compiling-Shader
         public void Initialise(OpenGL gl, float width, float height)
         {
+            this.width = width; this.height = height;
             try
             {
                 _gl = gl;
@@ -170,8 +172,6 @@ namespace TheDiplomWork
             if (ShadersInitializated)
             {
                 //  Create a perspective projection matrix.
-                const float rads = (60.0f / 360.0f) * (float)Math.PI * 2.0f;
-                projectionMatrix = glm.perspective(rads, width / height, 0.1f, 1000.0f);
 
                 //  Create a model matrix to make the model a little bigger.
                 modelMatrix = glm.scale(new mat4(1.0f), new vec3(Environment.SizeView));
@@ -361,6 +361,9 @@ namespace TheDiplomWork
         public void Draw_Wrapped(OpenGL gl)
         {
             Projectile.jp.ProcessStartingData();
+
+            float rads = (StaticSettings.S.AngleOfView / 360.0f) * (float)Math.PI * 2.0f;
+            projectionMatrix = glm.perspective(rads, width / height, 0.1f, 1000.0f);
 
             //  Create a view matrix to move us back a bit.
             viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,

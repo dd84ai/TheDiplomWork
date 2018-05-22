@@ -28,8 +28,12 @@ namespace TheDiplomWork
             ProjectileSet.Add(textBox_TimeSpeed, nameof(Projectile.settings.timespeed), Wrapped_Box.Types.doubler);
 
             StaticSet.Add(textBox_rangeofview, nameof(StaticSettings.S.RangeOfView), Wrapped_Box.Types.integer);
-            StaticSet.Add(textBox_angleofview, nameof(StaticSettings.S.PointOfViewCoefOfDifference), Wrapped_Box.Types.floater);
-            StaticSet.Add(textBox_SideCoef, nameof(StaticSettings.S.SunSidedCoef), Wrapped_Box.Types.floater);
+            StaticSet.Add(textBox_angleofview, nameof(StaticSettings.S.AngleOfView), Wrapped_Box.Types.floater);
+            StaticSet.Add(textBox_angleblockcuter, nameof(StaticSettings.S.PointOfViewCoefOfDifference), Wrapped_Box.Types.floater);
+
+            checkBox1_Trajectory.Checked = StaticSettings.S.TrajectoryIsVisilible;
+            checkBox_HelpfulInfo.Checked = StaticSettings.S.HelpInfoForPlayer;
+            //
 
             checkBox_Advanced_Flying_Physics.Checked = Projectile.settings.AdvancedPhysics;
             ProjectileSet.RegulatingAdvancedSectorVisilibility();
@@ -44,6 +48,9 @@ namespace TheDiplomWork
                 ProjectileSet.Wrapped_Transfer_or_Die();
 
             StaticSet.Wrapped_Transfer_or_Die();
+
+            StaticSettings.S.TrajectoryIsVisilible = checkBox1_Trajectory.Checked;
+            StaticSettings.S.HelpInfoForPlayer = checkBox_HelpfulInfo.Checked;
 
             Projectile.jp.WP.Reignite_wind_from_static_info();
             Scene.SS.TrajectoryPath.Reloader();
@@ -72,19 +79,6 @@ namespace TheDiplomWork
             StaticSet.Process_Text_Changed((TextBox)sender);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-    
-
 }
 
 

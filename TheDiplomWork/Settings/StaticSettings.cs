@@ -50,6 +50,10 @@ namespace TheDiplomWork
 
             public bool ShowPlayerPosition = false;
 
+            public bool TrajectoryIsVisilible = true;
+
+            public float AngleOfView { set; get; } = 60.0f;
+
             public Settings()
             {
                 if (ReloaderCauseOfChangingChunk || RealoderCauseOfPointOfView || RealoderCauseOfSunSided || ReloaderCauseOfChunkRare)
