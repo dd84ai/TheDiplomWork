@@ -478,11 +478,17 @@ namespace TheDiplomWork
                     shaderProgram_secondary.SetUniform1(gl, "settingsTHIS_IS_EXPLOSION", 0.0f);
                 }
                 
+
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", (float)(0.4 + 0.2 * Math.Abs(Math.Sin(Time.time.GetTotalRadianTime()*200.0))));
                 SS.Ghost.scene_info.vertexBufferArray.Bind(gl);
                 gl.DrawArrays(OpenGL.GL_POINTS, 0, SS.Ghost.Quantity() / 3);
                 SS.Ghost.scene_info.vertexBufferArray.Unbind(gl);
+
+                sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
+                    new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
+                    new vec3(1.0f, 1.0f, 1.0f));
+                shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
 
                 if (Projectile.jp.Loaded && !Projectile.jp.Launched)
                 {

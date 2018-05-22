@@ -9,6 +9,7 @@ in vec3 pass_Color[];
 in float pointofview[];
 
 in vec3 sun_vector[];
+in float SunSide[];
 
 in vec3 scalar_sides[];
 
@@ -22,10 +23,31 @@ vec4 point[8];
 uniform mat3 sunMatrix;
 uniform vec3 viewparameters;
 float min_light = 0.1;
+float Fixer(float a, float b)
+{
+float c = a;
+if (b > a) return b;
+return c;
+}
 vec3 MainLight(float vector)
 {
-	if (sun_vector[0].y > 0) return min(sun_vector[0].y,vector) * vec3(0.9,0.9,0.9) + vec3(0.1,0.1,0.1);
-	else return min(-sun_vector[0].y,-vector) * vec3(0.1,0.5,0.6) + vec3(0.1,0.1,0.1);
+	//if (sun_vector[0].y > 0) return min(sun_vector[0].y,vector) * vec3(0.6,0.6,0.6) + vec3(0.4,0.4,0.4);
+	//else return min(-sun_vector[0].y,-vector) * vec3(0.2,0.5,0.6) + vec3(0.4,0.4,0.4);
+
+	vec3 sun = max(SunSide[0] * vector * vec3(0.6,0.6,0.6),vec3(0,0,0));
+	vec3 moon = max((1 - SunSide[0]) * (-vector) * vec3(0.2,0.5,0.6),vec3(0,0,0));
+	vec3 amb = vec3(0.4,0.4,0.4);
+
+	return sun + moon + amb;
+
+	//if (sun_vector[0].y > 0) return sun + amb;
+	//else return moon + amb;
+
+	 //res.x = min(res.x,1.0);
+	 //res.y = min(res.y,1.0);
+	 //res.z = min(res.z,1.0);
+
+	//return sun;
 }
 vec3 TheLight(float vector)
 {

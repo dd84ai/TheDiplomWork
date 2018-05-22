@@ -31,6 +31,11 @@ void main(void)
 	PrepareRotator(vec3(sunMatrix[0]));
 	PrepareSun();
 
+	
+	sun_vector.x = dot(sun_position,Rotate(projectileMatrix[1],vec3(1,0,0)));
+	sun_vector.y = dot(sun_position,Rotate(projectileMatrix[1],vec3(0,1,0)));
+	sun_vector.z = dot(sun_position,Rotate(projectileMatrix[1],vec3(0,0,1)));
+
 	Cuter_PointOfView();
 	Cuter_PlayerSidedAdvanced();
 	
