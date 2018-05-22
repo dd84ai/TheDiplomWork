@@ -157,6 +157,11 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Starting Velocity: " + vec3things.ToString(Projectile.jp.sd.Get_Starting_velocity()), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Total Velocity: " + Projectile.jp.sd.StartingVelocity.ToString("G2"), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "X: " + StaticCompass.C.Xangle.ToString("G2"), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Z: " + StaticCompass.C.Zangle.ToString("G2"), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Z: " + (StaticCompass.C.Xangle / Math.PI * 180.0f).ToString("G3"), 2.0f); place++;
+                //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Z: " + (StaticCompass.C.Zangle / Math.PI * 180.0f).ToString("G3"), 2.0f); place++;
+
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Ctrl: " + Keyboard.Ctrl_is_pressed, 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Alt: " + Keyboard.Alt_is_pressed, 2.0f); place++;
 
@@ -171,7 +176,7 @@ namespace TheDiplomWork
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 New: " + vec3things.ToString(Projectile.jp.CoordinatesAtTimeAtHighPart(1.0f, true)), 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 Old: " + vec3things.ToString(Projectile.jp.AbsoluteEstimatedLocation()), 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Predicted After 1 New: " + vec3things.ToString(Projectile.jp.AbsoluteEstimatedLocation(true)), 2.0f); place++;
-                
+
 
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time.time.GetGameTotalSeconds: " + Time.time.GetGameTotalSeconds(), 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "starting velocity: " + Projectile.jp.GetStringedVec3(Projectile.jp.sd.starting_velocity), 2.0f); place++;
@@ -189,7 +194,7 @@ namespace TheDiplomWork
             }
         }
         static int FontSizeTargetPointer = 40;
-        CalculatorFont CF;
+        public CalculatorFont CF;
         private void openGLControl_Resized(object sender, EventArgs e)
         {
             //  TODO: Set the projection matrix here.

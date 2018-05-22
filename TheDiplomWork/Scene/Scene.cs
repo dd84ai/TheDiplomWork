@@ -376,6 +376,9 @@ namespace TheDiplomWork
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
             Time.time.GetSkyColor(gl);
 
+            if (StaticSettings.S.Compass)
+                StaticCompass.C.Draw_Compas(gl, (int)StaticAccess.FMOS.openGLControl.Width/2, (int)(0 + StaticCompass.C.r * 2 + 2));
+
             //  Bind the shader, set the matrices.
             shaderProgram.Bind(gl);
             shaderProgram.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());

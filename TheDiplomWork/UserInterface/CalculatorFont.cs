@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SharpGL;
 namespace TheDiplomWork
 {
-    class CalculatorFont
+    public class CalculatorFont
     {
         Single Line_Height = 0.5f;
         float fontsize;

@@ -33,6 +33,7 @@ namespace TheDiplomWork
 
             checkBox1_Trajectory.Checked = StaticSettings.S.TrajectoryIsVisilible;
             checkBox_HelpfulInfo.Checked = StaticSettings.S.HelpInfoForPlayer;
+            checkBox_compass.Checked = StaticSettings.S.Compass;
             //
 
             checkBox_Advanced_Flying_Physics.Checked = Projectile.settings.AdvancedPhysics;
@@ -51,6 +52,7 @@ namespace TheDiplomWork
 
             StaticSettings.S.TrajectoryIsVisilible = checkBox1_Trajectory.Checked;
             StaticSettings.S.HelpInfoForPlayer = checkBox_HelpfulInfo.Checked;
+            StaticSettings.S.Compass = checkBox_compass.Checked;
 
             Projectile.jp.WP.Reignite_wind_from_static_info();
             Scene.SS.TrajectoryPath.Reloader();

@@ -52,6 +52,8 @@ namespace TheDiplomWork
 
             public bool TrajectoryIsVisilible = true;
 
+            public bool Compass = false;
+
             public float AngleOfView { set; get; } = 60.0f;
 
             public Settings()

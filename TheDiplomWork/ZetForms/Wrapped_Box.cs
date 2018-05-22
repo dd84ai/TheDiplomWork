@@ -35,8 +35,11 @@ namespace TheDiplomWork
         public void RegulatingAdvancedSectorVisilibility()
         {
             foreach (var item in Boxes)
-                if (item.Get_Name() != "timespeed")
+            {
+                string str = item.Get_Name();
+                if (!str.Contains("Time"))
                     item.SetVisibility(Projectile.settings.AdvancedPhysics);
+            }
         }
 
         public void Process_Text_Changed(TextBox Boxik)

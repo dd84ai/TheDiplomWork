@@ -325,6 +325,10 @@ namespace TheDiplomWork
             string standard = "G2";
             return Math.Sqrt(inp.x* inp.x + inp.y* inp.y + inp.z* inp.z).ToString(standard);
         }
+        public static float LengthForSure(vec3 inp)
+        {
+            return (float)Math.Sqrt(inp.x * inp.x + inp.y * inp.y + inp.z * inp.z);
+        }
         public static bool TryLoad(ref vec3 vec, string Name)
         {
             try

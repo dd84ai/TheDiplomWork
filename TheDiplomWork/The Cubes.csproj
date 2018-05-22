@@ -79,6 +79,7 @@
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_SunAndMoon.cs" />
     <Compile Include="ShaderedScene\DataForDraw_without_angles.cs" />
     <Compile Include="Shaders\Artificial\FromShaderWithLove.cs" />
+    <Compile Include="UserInterface\Compas.cs" />
     <Compile Include="UserInterface\Cube_Selection.cs" />
     <Compile Include="UserInterface\Music.cs" />
     <Compile Include="UserInterface\Speech.cs" />
