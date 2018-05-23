@@ -8,9 +8,10 @@ vec4 Processed(vec3 inp)
 	//Explosion
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
-		
 
-		
+		//sun_vector.x = dot(sun_position,AngularRotating(in_Center,vec3(1,0,0)));
+		//sun_vector.y = dot(sun_position,AngularRotating(in_Center,vec3(0,1,0)));
+		//sun_vector.z = dot(sun_position,AngularRotating(in_Center,vec3(0,0,1)));
 
 		return Shifted_Position(AngularRotating(in_Center,inp) + Explosion());
 	}
@@ -44,6 +45,13 @@ void main(void)
 {
 	PrepareRotator(vec3(sunMatrix[0]));
 	PrepareSun();
+
+	if (settingsTHIS_IS_EXPLOSION > 0.5)
+	{
+	sun_vector.x = dot(sun_position,RotatedSunVector(vec3(1,0,0)));
+	sun_vector.y = dot(sun_position,RotatedSunVector(vec3(0,1,0)));
+	sun_vector.z = dot(sun_position,RotatedSunVector(vec3(0,0,1)));
+	}
 
 	Cuter_PointOfView();
 	Cuter_PlayerSidedAdvanced();

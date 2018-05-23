@@ -34,3 +34,27 @@ vec3 AngularRotating(vec3 angles, vec3 inp)
 
 		return Rotate(angles * TimeItTook * 0.1,inp);
 }
+vec3 RotatedSunVector(vec3 inp)
+{
+
+return
+
+	AngularRotating
+						(
+							Rotate(projectileMatrix[1], in_Center)
+							,inp
+						)
+	;
+}
+vec3 RotatedSunVectorForRocket(vec3 inp)
+{
+
+return
+Rotate(projectileMatrix[1], 
+	AngularRotating
+						(
+							Rotate(projectileMatrix[1], in_Center)
+							,inp
+						)
+	);
+}

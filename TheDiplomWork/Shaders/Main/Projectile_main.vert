@@ -18,10 +18,29 @@ vec4 Processed(vec3 inp)
 {
 	if (settingsTHIS_IS_EXPLOSION > 0.5)
 	{
-		return Shifted_Position(RotatedExplosion(Rotate(projectileMatrix[1], in_Center)) + ProcessingProjectile(AngularRotating(Rotate(projectileMatrix[1], in_Center),inp)));
+		return Shifted_Position(
+
+		RotatedExplosion
+			(
+		Rotate(projectileMatrix[1], in_Center)
+			)
+			
+			+ ProcessingProjectile
+					(
+						AngularRotating
+						(
+							Rotate(projectileMatrix[1], in_Center)
+							,inp
+						)
+					)
+		
+		);
+
 	}
 	else
 	{
+		
+
 		return Shifted_Position(ProcessingProjectile(inp));
 	}
 	 
@@ -31,10 +50,18 @@ void main(void)
 	PrepareRotator(vec3(sunMatrix[0]));
 	PrepareSun();
 
-	
+	if (settingsTHIS_IS_EXPLOSION > 0.5)
+	{
+	sun_vector.x = dot(sun_position,RotatedSunVectorForRocket(vec3(1,0,0)));
+	sun_vector.y = dot(sun_position,RotatedSunVectorForRocket(vec3(0,1,0)));
+	sun_vector.z = dot(sun_position,RotatedSunVectorForRocket(vec3(0,0,1)));
+	}
+	else
+	{
 	sun_vector.x = dot(sun_position,Rotate(projectileMatrix[1],vec3(1,0,0)));
 	sun_vector.y = dot(sun_position,Rotate(projectileMatrix[1],vec3(0,1,0)));
 	sun_vector.z = dot(sun_position,Rotate(projectileMatrix[1],vec3(0,0,1)));
+	}
 
 	Cuter_PointOfView();
 	Cuter_PlayerSidedAdvanced();
