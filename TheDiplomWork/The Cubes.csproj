@@ -71,6 +71,7 @@
     <Compile Include="Scene\ModifiedShader.cs" />
     <Compile Include="Scene\SceneInfo_Main.cs" />
     <Compile Include="Scene\SceneInfo_Secondary.cs" />
+    <Compile Include="Scene\Shadow.cs" />
     <Compile Include="ShaderedScene\DataForDraw_angled.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_ExplodingList.cs" />
     <Compile Include="ShaderedScene\DataForDraw_heirs\DataForDraw_TrajectoryPath.cs" />

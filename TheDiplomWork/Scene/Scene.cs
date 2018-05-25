@@ -36,9 +36,9 @@ namespace TheDiplomWork
 
         //  The projection, view and model matrices.
         mat4 projectionMatrix;
-        mat4 viewMatrix;
+        public mat4 viewMatrix;
         mat4 modelMatrix;
-        mat4 rotMatrix;
+        public mat4 rotMatrix;
         mat3 playerMatrix;
         mat3 sunMatrix;
         mat3 zeroMatrix = new mat3(new vec3(0),
@@ -361,9 +361,8 @@ namespace TheDiplomWork
             if (!ExtraAction) ExtraAction = true; else ExtraAction = false;
             return;
         }
-        vec3[] playerMatrix_veced = new vec3[3];
-        public bool ShadowProtocolWasPressed = false;
-        float rememberPlayerHeight = 0;
+        public vec3[] playerMatrix_veced = new vec3[3];
+
         public void Draw_Wrapped(OpenGL gl)
         {
             Projectile.jp.ProcessStartingData();
@@ -376,36 +375,15 @@ namespace TheDiplomWork
                 -SS.env.player.coords.Player_precise_position.y,
                 -SS.env.player.coords.Player_precise_position.z));
 
-            if (ShadowProtocolWasPressed)
-            {
-                ShadowProtocolWasPressed = false;
-                SS.env.player.coords.Player_precise_position.y = rememberPlayerHeight;
-            }
-            if (Keyboard.Ctrl_is_pressed)
-            {
-                //SHADOWPROTOCOL
-                vec3 DefaultSunPosition = new vec3(0, Sun.LocalSun.Sun_Height, 0);
-                vec3 SunPosition = FromShaderWithLove.ShaderRotator.Rotate(DefaultSunPosition, new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0)) + new vec3(Sun.S.player_pos.x, 0, Sun.S.player_pos.z);
-                viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SunPosition.x,
-                    -SunPosition.y,
-                    -SunPosition.z));
+            rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
 
-                // = Sun.S.player_pos.y;
-                Sun.S.player_pos.y = CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge - 0.5f;
-                rememberPlayerHeight = SS.env.player.coords.Player_precise_position.y;
-                SS.env.player.coords.Player_precise_position.y = CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge - 0.5f;
-                StaticSettings.S.PointOfViewCuterDisabled = 1.0f;
-                ShadowProtocolWasPressed = true;
+            playerMatrix_veced[0] = Sun.S.player_pos;
+            playerMatrix_veced[1] = Sun.S.player_stepback;
+            playerMatrix_veced[2] = Sun.S.player_stepback - Sun.S.player_look;
 
-                rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate((float)Math.PI/2 - (float)Time.time.GetTotalRadianTime(), new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate((float)Math.PI, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
-            }
-            else 
-            {
-                StaticSettings.S.PointOfViewCuterDisabled = 0.0f;
+            StaticShadow.Sh.ShadowProtocol();
 
-                rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
-            }
-
+            playerMatrix = new mat3(playerMatrix_veced);
 
             //  Clear the scene.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
@@ -422,11 +400,7 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
-            playerMatrix_veced[0] = Sun.S.player_pos;
-            playerMatrix_veced[1] = Sun.S.player_stepback;
-            playerMatrix_veced[2] = Sun.S.player_look;
-
-            playerMatrix = new mat3(playerMatrix_veced);
+            
 
             shaderProgram.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 

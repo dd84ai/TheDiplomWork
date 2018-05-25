@@ -10,7 +10,7 @@ void Cuter_Ranger()
 void Cuter_PointOfView()
 {
 	//POINT OF VIEW
-	vec3 VectoredLook = normalize(playerMatrix[1] - playerMatrix[0]);
+	vec3 VectoredLook = normalize(playerMatrix[2]);
 	VectoredToCube = normalize(playerMatrix[1] - in_Position);
 	pointofview = dot(VectoredLook, VectoredToCube);
 

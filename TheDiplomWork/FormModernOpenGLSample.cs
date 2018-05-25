@@ -275,7 +275,7 @@ namespace TheDiplomWork
         /// <summary>
         /// The scene that we are rendering.
         /// </summary>
-        private readonly Scene scene = new Scene();
+        public readonly Scene scene = new Scene();
 
 
         private void openGLControl_KeyPress(object sender, KeyPressEventArgs e)
