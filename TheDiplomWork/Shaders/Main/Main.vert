@@ -14,7 +14,7 @@ void main(void)
 
 	Cuter_without_angles();
 
-	if (range < viewparameters.x && pointofview > viewparameters.y)
+	if (range < viewparameters.x && pointofview > viewparameters.y || (sunMatrix[2].z < 0.5))
 	{
 	mat4 Transform = projectionMatrix *rotMatrix *  viewMatrix * modelMatrix;
 

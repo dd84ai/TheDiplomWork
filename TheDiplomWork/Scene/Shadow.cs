@@ -35,16 +35,16 @@ namespace TheDiplomWork
                     Sun.S.player_pos.y = CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge - 0.5f;
                     rememberPlayerHeight = Scene.SS.env.player.coords.Player_precise_position.y;
                     Scene.SS.env.player.coords.Player_precise_position.y = CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge - 0.5f;
-                    StaticSettings.S.PointOfViewCuterDisabled = 1.0f;
+                    StaticSettings.S.PointOfViewCuterEnabled = 0.0f;
                     ShadowProtocolWasPressed = true;
 
                     StaticAccess.FMOS.scene.rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate((float)Math.PI / 2 - (float)Time.time.GetTotalRadianTime(), new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate((float)Math.PI, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
 
-                    StaticAccess.FMOS.scene.playerMatrix_veced[2] = (SunPosition - Sun.S.player_pos);
+                    //StaticAccess.FMOS.scene.playerMatrix_veced[2] = (SunPosition - Sun.S.player_pos);
                 }
                 else
                 {
-                    StaticSettings.S.PointOfViewCuterDisabled = 0.0f;
+                    StaticSettings.S.PointOfViewCuterEnabled = 1.0f;
                 }
             }
         }

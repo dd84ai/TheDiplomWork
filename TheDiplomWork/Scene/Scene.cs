@@ -406,7 +406,7 @@ namespace TheDiplomWork
 
             sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3(StaticSettings.S.SunStatus.x,0,StaticSettings.S.PointOfViewCuterDisabled));
+                    new vec3(StaticSettings.S.SunStatus.x,0,StaticSettings.S.PointOfViewCuterEnabled));
 
             shaderProgram.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
             shaderProgram.SetUniform1(gl, "settingsTransparency", 1.0f);
@@ -537,7 +537,7 @@ namespace TheDiplomWork
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
+                    new vec3(StaticSettings.S.SunStatus.x, 1.0f, 0.0f));
                 shaderProgram_projectile.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 shaderProgram_projectile.SetUniform1(gl, "settingsTransparency", 1.0f);
                 shaderProgram_projectile.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds() - (Explosion.exp.StartingShiftForLoeading));// - Explosion.exp.StartingShiftForLoeading);

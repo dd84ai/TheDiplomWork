@@ -24,13 +24,13 @@ namespace TheDiplomWork
 
             int value = 0;
             if ((value = Scene.SS.env.player.coords.Player_chunk_position.x - StaticSettings.S.RangeOfView) > 0)
-                i = value;
+                i = value + 1;
             else i = 0;
 
             for (; i < Scene.SS.env.cub_mem.world.World_as_Whole.Count() && i < Scene.SS.env.player.coords.Player_chunk_position.x + StaticSettings.S.RangeOfView; i++)
             {
                 if ((value = Scene.SS.env.player.coords.Player_chunk_position.z - StaticSettings.S.RangeOfView) > 0)
-                    j = value;
+                    j = value + 1;
                 else j = 0;
 
                 for (; j < Scene.SS.env.cub_mem.world.World_as_Whole[i].Count() && j < Scene.SS.env.player.coords.Player_chunk_position.z + StaticSettings.S.RangeOfView; j++)

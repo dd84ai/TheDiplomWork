@@ -56,7 +56,7 @@ namespace TheDiplomWork
 
             public float AngleOfView { set; get; } = 60.0f;
 
-            public float PointOfViewCuterDisabled = 0.0f;
+            public float PointOfViewCuterEnabled = 1.0f;
 
             public Settings()
             {
