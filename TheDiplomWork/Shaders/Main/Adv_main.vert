@@ -18,7 +18,7 @@ vec4 Processed(vec3 inp)
 	else
 	{
 		//Sun?
-		if (sunMatrix[2].z < 0.5)
+		if (sunMatrix[2].z < 0.5 && sunMatrix[2].z > 0.1)
 		{
 			return Shifted_Position(Translate(Rotated_Around(Expander(inp),in_Center),vec3(playerMatrix[0].x,0,playerMatrix[0].z)));
 		}

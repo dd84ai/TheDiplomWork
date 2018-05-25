@@ -442,7 +442,7 @@ namespace TheDiplomWork
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3(StaticSettings.S.SunStatus.x, 1.0f, 1.0f));
+                    new vec3(StaticSettings.S.SunStatus.x, 1.0f, 0.0f));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
                 shaderProgram_secondary.SetUniform1(gl, "settingsTransparency", 1.0f);
                 shaderProgram_secondary.SetUniform1(gl, "TimeTotalSeconds", (float)Time.time.GetGameTotalSeconds());
@@ -497,7 +497,7 @@ namespace TheDiplomWork
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3(1.0f, 1.0f, 1.0f));
+                    new vec3(1.0f, 1.0f, 0.0f));
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
 
                 if (Projectile.jp.Loaded && !Projectile.jp.Launched)
@@ -513,7 +513,7 @@ namespace TheDiplomWork
 
                 sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3(1.0f, 1.0f, 0.0f));
+                    new vec3(1.0f, 1.0f, 0.25f));
                 //Второе значений 3 строки отключает Point Of view если больше 0.5 в геом шейдере.
                 //Третье пусть отключит вращение.
                 shaderProgram_secondary.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
