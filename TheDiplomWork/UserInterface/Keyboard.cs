@@ -384,6 +384,8 @@ namespace TheDiplomWork
 
             vec3things.Save(Projectile.jp.hposition1, "hposition1");
             vec3things.Save(Projectile.jp.hposition2, "hposition2");
+
+            SaveAndLoad.Save("default");
         }
         public static void RestoringToDefaultAlgorithm()
         {
