@@ -54,11 +54,35 @@ namespace TheDiplomWork
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="args">The <see cref="RenderEventArgs"/> instance containing the event data.</param>
-        
-        
-        
+
+
+        private int counter = 0;
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs args)
         {
+            //openGLControl.OpenGL.DepthRange(0, 200);
+            //openGLControl.OpenGL.DepthMask(1);
+
+            //openGLControl.OpenGL.GenTextures()
+            //openGLControl.OpenGL.DrawBuffer(OpenGL.GL_NONE);
+            //openGLControl.OpenGL.ReadBuffer(OpenGL.GL_NONE);
+
+            //uint[] FramebufferName = new uint[0];
+            //openGLControl.OpenGL.GenFramebuffersEXT(1, FramebufferName);
+            //openGLControl.OpenGL.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, FramebufferName[0]);
+
+            //uint[] renderedTexture = new uint[0];
+            //openGLControl.OpenGL.GenTextures(1, renderedTexture);
+
+            //// "Bind" the newly created texture : all future texture functions will modify this texture
+            //openGLControl.OpenGL.BindTexture(OpenGL.GL_TEXTURE_2D, renderedTexture[0]);
+
+            //// Give an empty image to OpenGL ( the last "0" )
+            //openGLControl.OpenGL.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, OpenGL.GL_RGB, 1024, 768, 0, OpenGL.GL_RGB, OpenGL.GL_UNSIGNED_BYTE, 0);
+
+            //// Poor filtering. Needed !
+            //openGLControl.OpenGL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MAG_FILTER, OpenGL.GL_NEAREST);
+            //openGLControl.OpenGL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_NEAREST);
+
             OpenGL_Draw_ReWrapped();
             //defaulttriangle();
         }

@@ -14,8 +14,11 @@ namespace TheDiplomWork
 
             public bool ShadowProtocolWasPressed = false;
             float rememberPlayerHeight = 0;
+            public vec3 SunPosition = new vec3(0, 0, 0);
             public void ShadowProtocol()
             {
+                vec3 DefaultSunPosition = new vec3(0, Sun.LocalSun.Sun_Height, 0);
+                SunPosition = FromShaderWithLove.ShaderRotator.Rotate(DefaultSunPosition, new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0)) + new vec3(Sun.S.player_pos.x, 0, Sun.S.player_pos.z);
 
                 if (ShadowProtocolWasPressed)
                 {
@@ -25,8 +28,6 @@ namespace TheDiplomWork
                 if (Keyboard.Ctrl_is_pressed || StaticShadow.Sh.ViewFromSun)
                 {
                     //SHADOWPROTOCOL
-                    vec3 DefaultSunPosition = new vec3(0, Sun.LocalSun.Sun_Height, 0);
-                    vec3 SunPosition = FromShaderWithLove.ShaderRotator.Rotate(DefaultSunPosition, new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0)) + new vec3(Sun.S.player_pos.x, 0, Sun.S.player_pos.z);
                     StaticAccess.FMOS.scene.viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SunPosition.x,
                         -(SunPosition.y),
                         -SunPosition.z));

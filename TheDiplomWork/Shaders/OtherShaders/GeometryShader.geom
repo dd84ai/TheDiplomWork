@@ -8,6 +8,12 @@ in vec4 vertex_z_out[];
 in vec3 pass_Color[];
 in float pointofview[];
 
+in vec3 sun_position[];
+out vec3 sun_position_to_frag;
+
+in float sun_distance_to_cube_to_geom[];
+out float sun_distance_to_cube;
+
 in vec3 sun_vector[];
 in float SunSide[];
 
@@ -19,6 +25,8 @@ out vec3 f_Color;
 
 vec3 color[8];
 vec4 point[8];
+
+uniform vec3 SunPosition;
 
 uniform mat3 sunMatrix;
 uniform vec3 viewparameters;
@@ -151,36 +159,36 @@ void Bottom()
 	EndPrimitive();
 }
 float SunSidedCoef = 0;
-void Compressed()
+void Compressed(const vec4 Position, vec3 colour)
 {
-	vec4 vectorx = vertex_x_out[0] - gl_in[0].gl_Position;
-	vec4 vectory = vertex_y_out[0] - gl_in[0].gl_Position;
-	vec4 vectorz = vertex_z_out[0] - gl_in[0].gl_Position;
+	vec4 vectorx = vertex_x_out[0] - Position;
+	vec4 vectory = vertex_y_out[0] - Position;
+	vec4 vectorz = vertex_z_out[0] - Position;
 
-	point[1] = gl_in[0].gl_Position + vectorx;
-	point[2] = gl_in[0].gl_Position + vectory;
-	point[3] = gl_in[0].gl_Position + vectorz;
+	point[1] = Position + vectorx;
+	point[2] = Position + vectory;
+	point[3] = Position + vectorz;
 	point[4] = point[1] + vectory;
 	point[5] = point[1] + vectorz;
 	point[6] = point[3] + vectory;
 	point[7] = point[4] + vectorz;
 
-	color[0] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
-	color[1] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
-	color[2] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
-	color[3] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
-	color[4] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
-	color[5] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
-	color[6] = (pass_Color[0] * 7 + vec3(0,0,0)) / 8;
-	color[7] = (pass_Color[0] * 7 + vec3(1,1,1)) / 8;
+	color[0] = (colour * 7 + vec3(0,0,0)) / 8;
+	color[1] = (colour * 7 + vec3(1,1,1)) / 8;
+	color[2] = (colour * 7 + vec3(1,1,1)) / 8;
+	color[3] = (colour * 7 + vec3(1,1,1)) / 8;
+	color[4] = (colour * 7 + vec3(0,0,0)) / 8;
+	color[5] = (colour * 7 + vec3(0,0,0)) / 8;
+	color[6] = (colour * 7 + vec3(0,0,0)) / 8;
+	color[7] = (colour * 7 + vec3(1,1,1)) / 8;
 }
-void main()
-{	
-	if (!(sunMatrix[2].z < 0.5))
+void Wrapper(const vec4 Position, vec3 colour)
+{
+if (!(sunMatrix[2].z < 0.5))
 	{
 		if ((range[0] < viewparameters.x && pointofview[0] > viewparameters.y))
 		{
-		Compressed();
+		Compressed(Position,colour);
 		if (scalar_sides[0].z > SunSidedCoef) Front();
 		else Back();
 		if (scalar_sides[0].x > SunSidedCoef) Left();
@@ -191,7 +199,7 @@ void main()
 	}
 	else
 	{
-	Compressed();
+	Compressed(Position,colour);
 	Front();
 	Back();
 	Left();
@@ -199,4 +207,14 @@ void main()
 	Bottom();
 	Top();
 	}
+}
+void main()
+{	
+	sun_position_to_frag = sun_position[0];
+	sun_distance_to_cube = sun_distance_to_cube_to_geom[0];
+
+	Wrapper(gl_in[0].gl_Position,pass_Color[0]);
+
+	//vec4 vector = normalize(gl_in[0].gl_Position - vec4(sun_position_to_frag,1.0));
+	//Wrapper(gl_in[0].gl_Position - vector*4,pass_Color[0]);
 }  

@@ -365,6 +365,8 @@ namespace TheDiplomWork
 
         public void Draw_Wrapped(OpenGL gl)
         {
+            //shaderProgram.SetUniform1
+
             Projectile.jp.ProcessStartingData();
 
             float rads = (StaticSettings.S.AngleOfView / 360.0f) * (float)Math.PI * 2.0f;
@@ -383,6 +385,7 @@ namespace TheDiplomWork
 
             StaticShadow.Sh.ShadowProtocol();
 
+
             playerMatrix = new mat3(playerMatrix_veced);
 
             //  Clear the scene.
@@ -400,7 +403,7 @@ namespace TheDiplomWork
             shaderProgram.SetUniformMatrix4(gl, "viewMatrix", viewMatrix.to_array());
             shaderProgram.SetUniformMatrix4(gl, "rotMatrix", rotMatrix.to_array());
 
-            
+            shaderProgram.SetUniform3(gl, "SunPosition", StaticShadow.Sh.SunPosition.x, StaticShadow.Sh.SunPosition.y, StaticShadow.Sh.SunPosition.z);
 
             shaderProgram.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
@@ -429,6 +432,7 @@ namespace TheDiplomWork
             if (StaticSettings.S.Secondary_SceneInfo_is_Activated)
             {
                 shaderProgram_secondary.Bind(gl);
+                shaderProgram_secondary.SetUniform3(gl, "SunPosition", StaticShadow.Sh.SunPosition.x, StaticShadow.Sh.SunPosition.y, StaticShadow.Sh.SunPosition.z);
 
                 shaderProgram_secondary.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
                 shaderProgram_secondary.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
@@ -528,6 +532,7 @@ namespace TheDiplomWork
             if (Projectile.jp.Loaded)
             {
                 shaderProgram_projectile.Bind(gl);
+                shaderProgram_projectile.SetUniform3(gl, "SunPosition", StaticShadow.Sh.SunPosition.x, StaticShadow.Sh.SunPosition.y, StaticShadow.Sh.SunPosition.z);
 
                 shaderProgram_projectile.SetUniformMatrix4(gl, "projectionMatrix", projectionMatrix.to_array());
                 shaderProgram_projectile.SetUniformMatrix4(gl, "modelMatrix", modelMatrix.to_array());
