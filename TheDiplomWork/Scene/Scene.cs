@@ -396,13 +396,16 @@ namespace TheDiplomWork
                 SS.env.player.coords.Player_precise_position.y = CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge - 0.5f;
                 StaticSettings.S.PointOfViewCuterDisabled = 1.0f;
                 ShadowProtocolWasPressed = true;
+
+                rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate((float)Math.PI/2 - (float)Time.time.GetTotalRadianTime(), new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate((float)Math.PI, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
             }
             else 
             {
                 StaticSettings.S.PointOfViewCuterDisabled = 0.0f;
+
+                rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
             }
 
-            rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
 
             //  Clear the scene.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT | OpenGL.GL_STENCIL_BUFFER_BIT);
@@ -424,6 +427,7 @@ namespace TheDiplomWork
             playerMatrix_veced[2] = Sun.S.player_look;
 
             playerMatrix = new mat3(playerMatrix_veced);
+
             shaderProgram.SetUniformMatrix3(gl, "playerMatrix", playerMatrix.to_array());
 
             sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
