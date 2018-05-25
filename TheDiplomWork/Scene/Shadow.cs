@@ -25,7 +25,7 @@ namespace TheDiplomWork
                     ShadowProtocolWasPressed = false;
                     Scene.SS.env.player.coords.Player_precise_position.y = rememberPlayerHeight;
                 }
-                if (Keyboard.Ctrl_is_pressed || StaticShadow.Sh.ViewFromSun)
+                if (StaticShadow.Sh.ViewFromSun)//Keyboard.Ctrl_is_pressed || 
                 {
                     //SHADOWPROTOCOL
                     StaticAccess.FMOS.scene.viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SunPosition.x,
