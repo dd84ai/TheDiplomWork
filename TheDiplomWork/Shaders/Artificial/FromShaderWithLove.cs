@@ -16,7 +16,7 @@ namespace TheDiplomWork
             {
                 in_Position = inp;
             }
-            vec3 Rotate(vec3 SomethingToRotate, vec3 ang)
+            public static vec3 Rotate(vec3 SomethingToRotate, vec3 ang)
             {
                 mat3 RotateX = new mat3(new vec3(1, 0, 0),
                 new vec3(0, (float)Math.Cos(ang.x), -(float)Math.Sin(ang.x)),
@@ -55,5 +55,6 @@ namespace TheDiplomWork
             }
             public vec3 ReturnTheThing() { return ProcessingProjectile(new vec3(0, 0, 0)); }
         }
+        
     }
 }

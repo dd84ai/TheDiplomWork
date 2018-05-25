@@ -48,13 +48,15 @@ namespace TheDiplomWork
 
             public bool SinusoidalWorld = true;
 
-            public bool ShowPlayerPosition = false;
+            public bool ShowPlayerPosition = true;
 
             public bool TrajectoryIsVisilible = true;
 
             public bool Compass = false;
 
             public float AngleOfView { set; get; } = 60.0f;
+
+            public float PointOfViewCuterDisabled = 0.0f;
 
             public Settings()
             {

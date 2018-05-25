@@ -362,6 +362,8 @@ namespace TheDiplomWork
             return;
         }
         vec3[] playerMatrix_veced = new vec3[3];
+        public bool ShadowProtocolWasPressed = false;
+        float rememberPlayerHeight = 0;
         public void Draw_Wrapped(OpenGL gl)
         {
             Projectile.jp.ProcessStartingData();
@@ -373,6 +375,32 @@ namespace TheDiplomWork
             viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SS.env.player.coords.Player_precise_position.x,
                 -SS.env.player.coords.Player_precise_position.y,
                 -SS.env.player.coords.Player_precise_position.z));
+
+            if (ShadowProtocolWasPressed)
+            {
+                ShadowProtocolWasPressed = false;
+                SS.env.player.coords.Player_precise_position.y = rememberPlayerHeight;
+            }
+            if (Keyboard.Ctrl_is_pressed)
+            {
+                //SHADOWPROTOCOL
+                vec3 DefaultSunPosition = new vec3(0, Sun.LocalSun.Sun_Height, 0);
+                vec3 SunPosition = FromShaderWithLove.ShaderRotator.Rotate(DefaultSunPosition, new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0)) + new vec3(Sun.S.player_pos.x, 0, Sun.S.player_pos.z);
+                viewMatrix = glm.translate(new mat4(1.0f), new vec3(-SunPosition.x,
+                    -SunPosition.y,
+                    -SunPosition.z));
+
+                // = Sun.S.player_pos.y;
+                Sun.S.player_pos.y = CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge - 0.5f;
+                rememberPlayerHeight = SS.env.player.coords.Player_precise_position.y;
+                SS.env.player.coords.Player_precise_position.y = CubicalMemory.Chunk.Height * CubicalMemory.Cube.rangeOfTheEdge - 0.5f;
+                StaticSettings.S.PointOfViewCuterDisabled = 1.0f;
+                ShadowProtocolWasPressed = true;
+            }
+            else 
+            {
+                StaticSettings.S.PointOfViewCuterDisabled = 0.0f;
+            }
 
             rotMatrix = glm.scale(new mat4(1.0f), new vec3(1.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.y, new vec3(1.0f, 0.0f, 0.0f)) * glm.rotate(-SS.env.player.coords.Player_rotational_view.x, new vec3(0.0f, 1.0f, 0.0f)) * glm.rotate(0, new vec3(0.0f, 0.0f, 1.0f));
 
@@ -400,7 +428,7 @@ namespace TheDiplomWork
 
             sunMatrix = new mat3(new vec3(-(float)Time.time.GetTotalRadianTime(), 0, 0),
                     new vec3(0, DataForDraw.localed_range * Sun.LocalSun.Sun_Height, 0),//new vec3(0, (float)+DataForDraw.localed_range * 100, 0),
-                    new vec3(StaticSettings.S.SunStatus.x,0,0));
+                    new vec3(StaticSettings.S.SunStatus.x,0,StaticSettings.S.PointOfViewCuterDisabled));
 
             shaderProgram.SetUniformMatrix3(gl, "sunMatrix", sunMatrix.to_array());
             shaderProgram.SetUniform1(gl, "settingsTransparency", 1.0f);

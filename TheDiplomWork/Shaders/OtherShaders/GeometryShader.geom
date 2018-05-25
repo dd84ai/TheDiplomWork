@@ -176,7 +176,7 @@ void Compressed()
 }
 void main()
 {	
-	if (!(sunMatrix[2].y > viewparameters.z))
+	if (!(sunMatrix[2].y > 0.5))
 	{
 		if ((range[0] < viewparameters.x && pointofview[0] > viewparameters.y))
 		{
