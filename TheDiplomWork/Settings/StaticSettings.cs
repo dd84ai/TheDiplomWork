@@ -48,7 +48,7 @@ namespace TheDiplomWork
 
             public bool SinusoidalWorld = true;
 
-            public bool ShowPlayerPosition = true;
+            public bool ShowPlayerPosition = false;
 
             public bool TrajectoryIsVisilible = true;
 
