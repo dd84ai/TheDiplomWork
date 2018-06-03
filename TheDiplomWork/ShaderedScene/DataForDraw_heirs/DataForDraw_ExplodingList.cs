@@ -56,12 +56,14 @@ namespace TheDiplomWork
             float x = 0, y = 0, z = 0;
             
             //Так по поводу взрыва. Давай все мерить в TNT эквиваленте.
-            float Me = 1.0f; //mass of the explosive charge
-            float Mc = 10.0f; //mass of the fragmenting casing
-            float K = 1 / 2; //Geometrical Constant for cube
-            float dE = 2.157e+6f; // J/kg Heat of TNT Explosion
+            float Me = (float)Projectile.settings.Me; //mass of the fragmenting casing
+            float Mc = (float)Projectile.settings.Mc; //mass of the explosive charge
+            float K = (float)Projectile.settings.K; //Geometrical Constant for cube
+            float dE = (float)Projectile.settings.dE; // J/kg Heat of TNT Explosion
 
-            float V = (float)Math.Sqrt(2 * dE * ((Mc / Me) / (1 + K * (Mc / Me))));
+            double rightpart = (Mc / Me) / (1 + K * (Mc / Me));
+
+            float V = (float)Math.Sqrt(2 * dE * (rightpart));
 
             foreach (var cube in Temper)
             {

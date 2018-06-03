@@ -16,7 +16,6 @@ namespace TheDiplomWork
             }
 
             public Point3D Bomb_precise_position = new Point3D(0, 0, 0);
-            public float Explosion_radius = 10.0f;
 
             float x = 0, y = 0, z = 0;
             public void PlaceTheBombAt(CubicalMemory.Cube cube)
@@ -54,7 +53,7 @@ namespace TheDiplomWork
                     Point3Int Bomb_cubical_position = new Point3Int(0, 0, 0);
                     Scene.SS.env.player.coords.Reverse_presice_to_map_coords(Bomb_precise_position, ref Bomb_chunk_position, ref Bomb_cubical_position);
 
-                    int Range_of_chunk_explosion = (int)Explosion_radius;
+                    int Range_of_chunk_explosion = (int)Projectile.settings.Explosion_radius;
                     //DataForDraw_ExplodingList.TemporalList.Clear();
 
                     int i = 0;
@@ -93,7 +92,7 @@ namespace TheDiplomWork
                                                 range_to_cube.z = Bomb_precise_position.z - z;
                                                 float range = GeneralProgrammingStuff.vec3_range(range_to_cube);
 
-                                                if (range < CubicalMemory.Cube.rangeOfTheEdge * Explosion_radius)
+                                                if (range < CubicalMemory.Cube.rangeOfTheEdge * Projectile.settings.Explosion_radius)
                                                 {
                                                     XYZcube.FallingStartingTime = Explosion.exp.StartingTime;
                                                     DataForDraw_ExplodingList.TemporalList.Add(XYZcube);

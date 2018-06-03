@@ -26,6 +26,14 @@ namespace TheDiplomWork
 
             public double timespeed { set; get; } = 1.0;
 
+
+            public double Me { set; get; } = 5e-2; //mass of the fragmenting casing//
+            public double Mc { set; get; } = 5e-4; //mass of the explosive charge
+            public double K { set; get; } = (double)1 / 2; //Geometrical Constant for cube
+            public double dE { set; get; } = 2.157e+6f; // J/kg Heat of TNT Explosion
+
+            public double Explosion_radius { set; get; } = 10.0f;
+
             public Settings()
             {
                 //mass = 0.05; //в kg масса объекта для расчета силы воздушного сопротивления(СВС)
