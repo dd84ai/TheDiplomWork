@@ -381,6 +381,10 @@ namespace TheDiplomWork
                     // Create a file to write to.
                     using (StreamWriter sw = File.CreateText(path))
                     {
+                        sw.Write("V0.x" + delimeter);
+                        sw.Write("V0.y" + delimeter);
+                        sw.Write("V0.z" + delimeter);
+                        sw.Write("V0" + delimeter);
                         sw.Write("S.x" + delimeter);
                         sw.Write("S.y" + delimeter);
                         sw.Write("S.z" + delimeter);
@@ -394,6 +398,11 @@ namespace TheDiplomWork
                         sw.Write("density" + delimeter);
                         sw.Write("area" + delimeter);
                         sw.Write("cd" + delimeter);
+                        sw.Write("Mass of Exp" + delimeter);
+                        sw.Write("Mass of Cas" + delimeter);
+                        sw.Write("Geom Const" + delimeter);
+                        sw.Write("Heat" + delimeter);
+                        sw.Write("Exp Velocity" + delimeter);
                         sw.WriteLine("");
                     }
                 }
@@ -402,6 +411,11 @@ namespace TheDiplomWork
                 // if it is not deleted.
                 using (StreamWriter sw = File.AppendText(path))
                 {
+                    sw.Write(sd.Get_Starting_velocity().x + delimeter);
+                    sw.Write(sd.Get_Starting_velocity().y + delimeter);
+                    sw.Write(sd.Get_Starting_velocity().z + delimeter);
+                    sw.Write(sd.StartingVelocity + delimeter);
+
                     sw.Write(LastPositionForMeasurements.x + delimeter);
                     sw.Write(LastPositionForMeasurements.y + delimeter);
                     sw.Write(LastPositionForMeasurements.z + delimeter);
@@ -415,6 +429,11 @@ namespace TheDiplomWork
                     sw.Write(Projectile.settings.density + delimeter);
                     sw.Write(Projectile.settings.area + delimeter);
                     sw.Write(Projectile.settings.cd + delimeter);
+                    sw.Write(Projectile.settings.Mc + delimeter);
+                    sw.Write(Projectile.settings.Me + delimeter);
+                    sw.Write(Projectile.settings.K + delimeter);
+                    sw.Write(Projectile.settings.dE + delimeter);
+                    sw.Write(DataForDraw_ExplodingList.ExplosionVelocity + delimeter);
                     sw.WriteLine("");
                 }
             }

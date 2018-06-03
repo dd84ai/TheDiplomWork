@@ -51,6 +51,7 @@ namespace TheDiplomWork
             END_initialization();
             base.LastCount = vertices.Count();
         }
+        public static double ExplosionVelocity = 0;
         public static void ForEachTemporalList(DataForDraw_angled Data, List<CubicalMemory.Cube> Temper, float cx, float cy, float cz, bool ShowAlways = false)
         {
             float x = 0, y = 0, z = 0;
@@ -64,7 +65,7 @@ namespace TheDiplomWork
             double rightpart = (Mc / Me) / (1 + K * (Mc / Me));
 
             float V = (float)Math.Sqrt(2 * dE * (rightpart));
-
+            ExplosionVelocity = V;
             foreach (var cube in Temper)
             {
                 ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);
