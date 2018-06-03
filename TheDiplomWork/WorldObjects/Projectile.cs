@@ -373,11 +373,19 @@ namespace TheDiplomWork
                     // Create a file to write to.
                     using (StreamWriter sw = File.CreateText(path))
                     {
-                        sw.Write("LastPositionForMeasurements.x + " + delimeter);
-                        sw.Write("LastPositionForMeasurements.y + " + delimeter);
-                        sw.Write("LastPositionForMeasurements.z + " + delimeter);
-                        sw.Write("TotalRangeZXForMeasurements + " + delimeter);
-                        sw.Write("TotalFlyingDistanceInAnArcWay + " + delimeter);
+                        sw.Write("S.x" + delimeter);
+                        sw.Write("S.y" + delimeter);
+                        sw.Write("S.z" + delimeter);
+                        sw.Write("S.XZ" + delimeter);
+                        sw.Write("S.Arc" + delimeter);
+                        sw.Write("Time" + delimeter);
+                        sw.Write("WindVx" + delimeter);
+                        sw.Write("WindVy" + delimeter);
+                        sw.Write("WindVxy" + delimeter);
+                        sw.Write("mass" + delimeter);
+                        sw.Write("density" + delimeter);
+                        sw.Write("area" + delimeter);
+                        sw.Write("cd" + delimeter);
                         sw.WriteLine("");
                     }
                 }
@@ -391,6 +399,14 @@ namespace TheDiplomWork
                     sw.Write(LastPositionForMeasurements.z + delimeter);
                     sw.Write(TotalRangeZXForMeasurements + delimeter);
                     sw.Write(TotalFlyingDistanceInAnArcWay + delimeter);
+                    sw.Write((TimeOfExplosion - TimePauseUntilExplosion) + delimeter);
+                    sw.Write(Projectile.settings.windVx + delimeter);
+                    sw.Write(Projectile.settings.windVy + delimeter);
+                    sw.Write(Math.Sqrt(Projectile.settings.windVx * Projectile.settings.windVx + Projectile.settings.windVy * Projectile.settings.windVy) + delimeter);
+                    sw.Write(Projectile.settings.mass + delimeter);
+                    sw.Write(Projectile.settings.density + delimeter);
+                    sw.Write(Projectile.settings.area + delimeter);
+                    sw.Write(Projectile.settings.cd + delimeter);
                     sw.WriteLine("");
                 }
             }
