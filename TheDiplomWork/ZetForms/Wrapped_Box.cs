@@ -37,7 +37,7 @@ namespace TheDiplomWork
             foreach (var item in Boxes)
             {
                 string str = item.Get_Name();
-                if (!str.Contains("Time"))
+                if (!str.Contains("Time") && !str.Contains("Explosive"))
                     item.SetVisibility(Projectile.settings.AdvancedPhysics);
             }
         }

@@ -27,11 +27,11 @@ namespace TheDiplomWork
             ProjectileSet.Add(textBox_WindVz, nameof(Projectile.settings.windVy), Wrapped_Box.Types.doubler);
             ProjectileSet.Add(textBox_TimeSpeed, nameof(Projectile.settings.timespeed), Wrapped_Box.Types.doubler);
 
-            ProjectileSet.Add(textBox_ExplosiveMass, nameof(Projectile.settings.Mc), Wrapped_Box.Types.doubler);
-            ProjectileSet.Add(textBox_FragmentalMass, nameof(Projectile.settings.Me), Wrapped_Box.Types.doubler);
-            ProjectileSet.Add(textBox_GeometricalConstant, nameof(Projectile.settings.K), Wrapped_Box.Types.doubler);
-            ProjectileSet.Add(textBox_HeatOfTheExplosion, nameof(Projectile.settings.dE), Wrapped_Box.Types.doubler);
-            ProjectileSet.Add(textBox_RadiousOfExplosion, nameof(Projectile.settings.Explosion_radius), Wrapped_Box.Types.doubler);
+            ProjectileSet.Add(textBox_ExplosiveChargeMass, nameof(Projectile.settings.Mc), Wrapped_Box.Types.doubler);
+            ProjectileSet.Add(textBox_ExplosiveFragmentalMass, nameof(Projectile.settings.Me), Wrapped_Box.Types.doubler);
+            ProjectileSet.Add(textBox_ExplosiveGeometricalConstant, nameof(Projectile.settings.K), Wrapped_Box.Types.doubler);
+            ProjectileSet.Add(textBox_ExplosiveHeatOfTheExplosion, nameof(Projectile.settings.dE), Wrapped_Box.Types.doubler);
+            ProjectileSet.Add(textBox_ExplosiveRadiousOfExplosion, nameof(Projectile.settings.Explosion_radius), Wrapped_Box.Types.doubler);
 
             StaticSet.Add(textBox_rangeofview, nameof(StaticSettings.S.RangeOfView), Wrapped_Box.Types.integer);
             StaticSet.Add(textBox_angleofview, nameof(StaticSettings.S.AngleOfView), Wrapped_Box.Types.floater);
