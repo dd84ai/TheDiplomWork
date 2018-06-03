@@ -182,6 +182,9 @@ namespace TheDiplomWork
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Orange, 10, "Time: " + Time.time.GetDayTime(), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Starting Velocity: " + vec3things.ToString(Projectile.jp.sd.Get_Starting_velocity()), 2.0f); place++;
                 CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Total Velocity: " + Projectile.jp.sd.StartingVelocity.ToString("G2"), 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "LPFM: " + vec3things.ToString(Projectile.jp.LastPositionForMeasurements), 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Total Range: " + Projectile.jp.TotalRangeZXForMeasurements, 2.0f); place++;
+                CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Total Arc Range: " + Projectile.jp.TotalFlyingDistanceInAnArcWay, 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "X: " + StaticCompass.C.Xangle.ToString("G2"), 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Z: " + StaticCompass.C.Zangle.ToString("G2"), 2.0f); place++;
                 //CF.Ultimate_DrawText(20, openGLControl.Height - 20 * place, System.Drawing.Color.Crimson, 10, "Z: " + (StaticCompass.C.Xangle / Math.PI * 180.0f).ToString("G3"), 2.0f); place++;

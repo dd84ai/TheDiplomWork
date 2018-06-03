@@ -268,6 +268,10 @@ namespace TheDiplomWork
                 Projectile.settings.cd,
                 Projectile.settings.windVx,
                 Projectile.settings.windVy);
+
+            public vec3 LastPositionForMeasurements = new vec3(0, 0, 0);
+            public float TotalRangeZXForMeasurements = 0;
+            public float TotalFlyingDistanceInAnArcWay = 0;
             public void ProcessStartingData()
             {
                 if (Loaded)
@@ -277,11 +281,43 @@ namespace TheDiplomWork
                     {
                         sd.Set_Starting_velocity(SR.ReturnTheThing());//Rotate(sd.default_velocity, PlayerAngles());
                         WP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.Get_Starting_velocity().x, sd.Get_Starting_velocity().z, sd.Get_Starting_velocity().y, 0);
+
+                        LastPositionForMeasurements.x = 0;
+                        LastPositionForMeasurements.y = 0;
+                        LastPositionForMeasurements.z = 0;
+
+                        TotalFlyingDistanceInAnArcWay = 0;
+                        TotalRangeZXForMeasurements = 0;
                     }
                     else
                     {
                         if (!(WP.getTime() > TimeOfExplosion) && !StaticAccess.FMOS.table_Menu_main.Visible)
+                        {
                             WP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
+
+                            //float test1 = Coordinates().y;
+                            //float test2 = sd.Get_Center().y;
+                            if (Coordinates().y > 0)
+                            {
+                                TotalFlyingDistanceInAnArcWay += (float)Math.Sqrt(
+                                      (Coordinates().x - LastPositionForMeasurements.x)
+                                    * (Coordinates().x - LastPositionForMeasurements.x)
+                                    + (Coordinates().y - LastPositionForMeasurements.y)
+                                    * (Coordinates().y - LastPositionForMeasurements.y)
+                                    + (Coordinates().z - LastPositionForMeasurements.z)
+                                    * (Coordinates().z - LastPositionForMeasurements.z));
+
+                                LastPositionForMeasurements.x = Coordinates().x;
+                                LastPositionForMeasurements.y = Coordinates().y;
+                                LastPositionForMeasurements.z = Coordinates().z;
+
+                                TotalRangeZXForMeasurements = (float)Math.Sqrt(
+                                    LastPositionForMeasurements.x * LastPositionForMeasurements.x
+                                    //+ LastPositionForMeasurements.y * LastPositionForMeasurements.y
+                                    + LastPositionForMeasurements.z * LastPositionForMeasurements.z);
+                            }
+
+                    }
 
                         //if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
                         if (!Exploded && TimeOfFlight() > 0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
