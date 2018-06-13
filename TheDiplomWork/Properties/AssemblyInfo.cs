@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("The Cubes")]
-[assembly: AssemblyDescription("The Cubes is a program to try myself in a voxel graphic. You can build here anything from cubes. Also you can select any explosive projectile and launch it to any target. For more info you should select 'FAQ' in the Menu.")]
+[assembly: AssemblyDescription("The Cubes is a program to try myself in a voxel graphic. You can build here anything from cubes. Also you can select any explosive projectile and launch it to any target. For more info you should select 'FAQ' in the Menu. The project located at: https://github.com/dd84ai/TheDiplomWork ")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("NSTU, 2018")]
 [assembly: AssemblyProduct("The Cubes")]
