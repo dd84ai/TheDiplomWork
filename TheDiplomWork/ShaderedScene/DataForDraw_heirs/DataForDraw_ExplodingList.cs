@@ -51,19 +51,21 @@ namespace TheDiplomWork
             END_initialization();
             base.LastCount = vertices.Count();
         }
+        public static double ExplosionVelocity = 0;
         public static void ForEachTemporalList(DataForDraw_angled Data, List<CubicalMemory.Cube> Temper, float cx, float cy, float cz, bool ShowAlways = false)
         {
             float x = 0, y = 0, z = 0;
             
-
             //Так по поводу взрыва. Давай все мерить в TNT эквиваленте.
-            float Me = 1.0f; //mass of the explosive charge
-            float Mc = 1.0f; //mass of the fragmenting casing
-            float K = 1 / 2; //Geometrical Constant
-            float dE = 2.157e+6f; // J/kg Heat of TNT Explosion
+            float Me = (float)Projectile.settings.Me; //mass of the fragmenting casing
+            float Mc = (float)Projectile.settings.Mc; //mass of the explosive charge
+            float K = (float)Projectile.settings.K; //Geometrical Constant for cube
+            float dE = (float)Projectile.settings.dE; // J/kg Heat of TNT Explosion
 
-            float V = (float)Math.Sqrt(2 * dE * ((Mc / Me) / (1 + K * (Mc / Me)))) / 10.0f;
+            double rightpart = (Mc / Me) / (1 + K * (Mc / Me));
 
+            float V = (float)Math.Sqrt(2 * dE * (rightpart));
+            ExplosionVelocity = V;
             foreach (var cube in Temper)
             {
                 ShaderedScene.CalculateFromMaptoGraphical(cube, ref x, ref y, ref z);

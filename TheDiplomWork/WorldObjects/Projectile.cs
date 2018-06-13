@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SharpGL;
 using GlmNet;
 using System.Windows.Forms;
+using System.IO;
 namespace TheDiplomWork
 {
     class Projectile : GeneralProgrammingStuff
@@ -24,6 +25,14 @@ namespace TheDiplomWork
             public double windVy { set; get; } = 0; //Ветер по Y
 
             public double timespeed { set; get; } = 1.0;
+
+
+            public double Me { set; get; } = 5e-2; //mass of the fragmenting casing//
+            public double Mc { set; get; } = 5e-4; //mass of the explosive charge
+            public double K { set; get; } = (double)1 / 2; //Geometrical Constant for cube
+            public double dE { set; get; } = 2.157e+6f; // J/kg Heat of TNT Explosion
+
+            public double Explosion_radius { set; get; } = 10.0f;
 
             public Settings()
             {
@@ -268,20 +277,66 @@ namespace TheDiplomWork
                 Projectile.settings.cd,
                 Projectile.settings.windVx,
                 Projectile.settings.windVy);
+
+            public vec3 LastPositionForMeasurements = new vec3(0, 0, 0);
+            public float TotalRangeZXForMeasurements = 0;
+            public float TotalFlyingDistanceInAnArcWay = 0;
             public void ProcessStartingData()
             {
                 if (Loaded)
                 {
+                    
+
                     FromShaderWithLove.ShaderRotator SR = new FromShaderWithLove.ShaderRotator(sd.Get_Center() + sd.Get_Default_Velosity());
                     if (!Launched)
                     {
                         sd.Set_Starting_velocity(SR.ReturnTheThing());//Rotate(sd.default_velocity, PlayerAngles());
                         WP.Reiniting_StartingPositionAndVelocity(0, 0, 0, sd.Get_Starting_velocity().x, sd.Get_Starting_velocity().z, sd.Get_Starting_velocity().y, 0);
+
+                        LastPositionForMeasurements.x = 0;
+                        LastPositionForMeasurements.y = 0;
+                        LastPositionForMeasurements.z = 0;
+
+                        TotalFlyingDistanceInAnArcWay = 0;
+                        TotalRangeZXForMeasurements = 0;
                     }
                     else
                     {
                         if (!(WP.getTime() > TimeOfExplosion) && !StaticAccess.FMOS.table_Menu_main.Visible)
+                        {
                             WP.updateLocationAndVelocity(Time.time.Get_TimeLastIncreasement());
+
+                            //float test1 = Coordinates().y;
+                            //float test2 = sd.Get_Center().y;
+                            if (Coordinates().y > 0)
+                            {
+                                TotalFlyingDistanceInAnArcWay += (float)Math.Sqrt(
+                                      (Coordinates().x - LastPositionForMeasurements.x)
+                                    * (Coordinates().x - LastPositionForMeasurements.x)
+                                    + (Coordinates().y - LastPositionForMeasurements.y)
+                                    * (Coordinates().y - LastPositionForMeasurements.y)
+                                    + (Coordinates().z - LastPositionForMeasurements.z)
+                                    * (Coordinates().z - LastPositionForMeasurements.z));
+
+                                LastPositionForMeasurements.x = Coordinates().x;
+                                LastPositionForMeasurements.y = Coordinates().y;
+                                LastPositionForMeasurements.z = Coordinates().z;
+
+                                TotalRangeZXForMeasurements = (float)Math.Sqrt(
+                                    LastPositionForMeasurements.x * LastPositionForMeasurements.x
+                                    //+ LastPositionForMeasurements.y * LastPositionForMeasurements.y
+                                    + LastPositionForMeasurements.z * LastPositionForMeasurements.z);
+                            }
+
+                        }
+                        else
+                        {
+                            if (WriteToFile)
+                            {
+                                SuperWriter();
+                                WriteToFile = false;
+                            }
+                        }
 
                         //if (!Exploded && TimeOfFlight()>0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
                         if (!Exploded && TimeOfFlight() > 0.01f && Scene.SS.env.player.coords.Reverse_presice_to_map_coords(AbsoluteEstimatedLocation_with_CoordinatesAtTimeAtHighPart()))
@@ -290,12 +345,99 @@ namespace TheDiplomWork
                             TimeOfExplosion = TimeOfFlight() + TimePauseUntilExplosion;
                             Keyboard.Wrapped_SINGLE_KeyPressed_Reaction('b');
                             Exploded = true;
+
+                            WriteToFile = true;
                         }
+
                         
                     }
                 }
 
             }
+
+            static string path = @"MyTest.txt";
+            public class Deleter
+            {
+                
+                public Deleter(string path)
+                {
+                    try
+                    {
+                        File.Delete(path);
+                    }
+                    catch (Exception)
+                    { }
+                }
+            }
+            Deleter deleter = new Deleter(path);
+            bool WriteToFile = false;
+            public string delimeter = "\t";
+            public void SuperWriter()
+            {
+                
+                // This text is added only once to the file.
+                if (!File.Exists(path))
+                {
+                    // Create a file to write to.
+                    using (StreamWriter sw = File.CreateText(path))
+                    {
+                        sw.Write("V0.x" + delimeter);
+                        sw.Write("V0.y" + delimeter);
+                        sw.Write("V0.z" + delimeter);
+                        sw.Write("V0" + delimeter);
+                        sw.Write("S.x" + delimeter);
+                        sw.Write("S.y" + delimeter);
+                        sw.Write("S.z" + delimeter);
+                        sw.Write("S.XZ" + delimeter);
+                        sw.Write("S.Arc" + delimeter);
+                        sw.Write("Time" + delimeter);
+                        sw.Write("WindVx" + delimeter);
+                        sw.Write("WindVy" + delimeter);
+                        sw.Write("WindVxy" + delimeter);
+                        sw.Write("mass" + delimeter);
+                        sw.Write("density" + delimeter);
+                        sw.Write("area" + delimeter);
+                        sw.Write("cd" + delimeter);
+                        sw.Write("Mass of Exp" + delimeter);
+                        sw.Write("Mass of Cas" + delimeter);
+                        sw.Write("Geom Const" + delimeter);
+                        sw.Write("Heat" + delimeter);
+                        sw.Write("Exp Velocity" + delimeter);
+                        sw.WriteLine("");
+                    }
+                }
+
+                // This text is always added, making the file longer over time
+                // if it is not deleted.
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.Write(sd.Get_Starting_velocity().x + delimeter);
+                    sw.Write(sd.Get_Starting_velocity().y + delimeter);
+                    sw.Write(sd.Get_Starting_velocity().z + delimeter);
+                    sw.Write(sd.StartingVelocity + delimeter);
+
+                    sw.Write(LastPositionForMeasurements.x + delimeter);
+                    sw.Write(LastPositionForMeasurements.y + delimeter);
+                    sw.Write(LastPositionForMeasurements.z + delimeter);
+                    sw.Write(TotalRangeZXForMeasurements + delimeter);
+                    sw.Write(TotalFlyingDistanceInAnArcWay + delimeter);
+                    sw.Write((TimeOfExplosion - TimePauseUntilExplosion) + delimeter);
+                    sw.Write(Projectile.settings.windVx + delimeter);
+                    sw.Write(Projectile.settings.windVy + delimeter);
+                    sw.Write(Math.Sqrt(Projectile.settings.windVx * Projectile.settings.windVx + Projectile.settings.windVy * Projectile.settings.windVy) + delimeter);
+                    sw.Write(Projectile.settings.mass + delimeter);
+                    sw.Write(Projectile.settings.density + delimeter);
+                    sw.Write(Projectile.settings.area + delimeter);
+                    sw.Write(Projectile.settings.cd + delimeter);
+                    sw.Write(Projectile.settings.Mc + delimeter);
+                    sw.Write(Projectile.settings.Me + delimeter);
+                    sw.Write(Projectile.settings.K + delimeter);
+                    sw.Write(Projectile.settings.dE + delimeter);
+                    sw.Write(DataForDraw_ExplodingList.ExplosionVelocity + delimeter);
+                    sw.WriteLine("");
+                }
+            }
+
             double AnalyzedTimeOfExplosion = 0;
             public void Launch()
             {
